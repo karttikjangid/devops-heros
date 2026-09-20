@@ -2,10 +2,10 @@
 ## Internet Protocol
 
 
-Class A:  1 - 127 
-Class B:  128 - 191
-Class C: 192-223
-Class D: 224-239
+Class A:  1 - 127 (127 addresses)
+Class B:  128 - 191 (62 addresses)
+Class C: 192-223 (31 addresses)
+Class D: 224-239 (16 addresses)
 
 0.0.0.0 - 255.255.255.255
 
