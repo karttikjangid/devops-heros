@@ -15,8 +15,8 @@ spec:
   template:
     metadata:
       labels:
-        # BUG: Label does not match selector.matchLabels above!
-        app: wrong-app-name
+        # FIXED: label now matches selector.matchLabels above
+        app: correct-app-name
     spec:
       containers:
         - name: nginx
