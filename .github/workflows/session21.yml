@@ -9,7 +9,7 @@ permissions:
   packages: write
 jobs:
   build-test-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: session21-python
@@ -36,14 +36,14 @@ jobs:
           docker build -t "$BACKEND" backend
           docker build -t "$FRONTEND" frontend
       - name: Scan backend
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ env.BACKEND }}
           severity: HIGH,CRITICAL
           exit-code: '1'
           output: session21-python/backend-scan.txt
       - name: Scan frontend
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ env.FRONTEND }}
           severity: HIGH,CRITICAL
