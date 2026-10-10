@@ -1,0 +1,101 @@
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/crash-broken.yaml
+pod/crash created
+
+Exit code: 0
+
+$ kubectl -n session14-lab get pod crash
+NAME    READY   STATUS    RESTARTS      AGE
+crash   1/1     Running   2 (17s ago)   18s
+
+Exit code: 0
+
+$ kubectl -n session14-lab logs crash --previous
+startup command failed
+
+Exit code: 0
+
+$ kubectl -n session14-lab describe pod crash
+Name:             crash
+Namespace:        session14-lab
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Sat, 10 Oct 2026 09:44:30 +0530
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.18
+IPs:
+  IP:  10.244.0.18
+Containers:
+  app:
+    Container ID:  containerd://2e5188fe79aa4368b060506a486bdf36c49f5684af5f0f046e2c7d1fe95a7d70
+    Image:         busybox:1.36
+    Image ID:      docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      echo "startup command failed"; exit 1
+    State:          Running
+      Started:      Sat, 10 Oct 2026 09:44:47 +0530
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Sat, 10 Oct 2026 09:44:31 +0530
+      Finished:     Sat, 10 Oct 2026 09:44:31 +0530
+    Ready:          True
+    Restart Count:  2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-x577r (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-x577r:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age               From               Message
+  ----     ------     ----              ----               -------
+  Normal   Scheduled  18s               default-scheduler  Successfully assigned session14-lab/crash to minikube
+  Warning  BackOff    16s               kubelet            spec.containers{app}: Back-off restarting failed container app in pod crash_session14-lab(ce393695-1adb-4e67-9fac-448c25bbf214)
+  Normal   Pulled     1s (x3 over 17s)  kubelet            spec.containers{app}: Container image "busybox:1.36" already present on machine and can be accessed by the pod
+  Normal   Created    1s (x3 over 17s)  kubelet            spec.containers{app}: Container created
+  Normal   Started    1s (x3 over 17s)  kubelet            spec.containers{app}: Container started
+
+Exit code: 0
+
+$ kubectl -n session14-lab delete pod crash --grace-period=1 --wait=false
+pod "crash" deleted from session14-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/crash-fixed.yaml
+pod/crash created
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/crash --for=condition=Ready --timeout=60s
+pod/crash condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab get pod crash
+NAME    READY   STATUS    RESTARTS   AGE
+crash   1/1     Running   0          2s
+
+Exit code: 0

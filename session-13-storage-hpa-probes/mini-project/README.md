@@ -1,3 +1,11 @@
+# Completed Session 13 mini project
+
+[Executed storage, HPA and probe workflow with real screenshots](../README.md)
+
+The implementation retains the supplied Nginx application, persistent `/data` volume, Service, 2–5 replica HPA and all three probes. CPU settings and scale-down timing are reduced for this local exercise. The original guide follows; its expected outputs are teaching examples.
+
+---
+
 # Mini Project: Production-Ready Kubernetes Web App
 
 ## 1. Project Overview
@@ -50,7 +58,7 @@ mini-project/
 ├── pvc.yaml             # 500Mi ReadWriteOnce storage claim
 ├── deployment.yaml      # 2 replicas, probes, volume mounts, resource limits
 ├── service.yaml         # ClusterIP service exposing port 80
-├── hpa.yaml             # Autoscaler (min: 2, max: 5, target: 50% CPU)
+├── hpa.yml             # Autoscaler (min: 2, max: 5, target: 50% CPU)
 └── README.md            # This documentation and assignment guide
 ```
 
@@ -100,7 +108,7 @@ web-app-7988df964b-fghij   1/1     Running   0          25s
 
 ### Step 5.4: Deploy Horizontal Pod Autoscaler
 ```bash
-kubectl apply -f hpa.yaml
+kubectl apply -f hpa.yml
 kubectl get hpa -n production-webapp
 ```
 Expected output:
@@ -227,6 +235,6 @@ kubectl get hpa -n production-webapp -w
 ---
 
 ## 9. Bonus Challenges for Fast Finishers
-1. **Challenge 1 (Target Tuning)**: Lower the HPA CPU threshold from `50%` to `30%` in `hpa.yaml`, reapply, and observe how much faster the workload scales out.
+1. **Challenge 1 (Target Tuning)**: Lower the HPA CPU threshold from `50%` to `30%` in `hpa.yml`, reapply, and observe how much faster the workload scales out.
 2. **Challenge 2 (Readiness Gating)**: Modify `readinessProbe.httpGet.path` to `/does-not-exist`. Run `kubectl get endpoints -n production-webapp web-service`. Notice that Pod status is `Running`, but `READY` is `0/1` and the endpoints list is completely empty!
 3. **Challenge 3 (Liveness Restart Loop)**: Modify `livenessProbe.httpGet.path` to `/crash`. Observe the `RESTARTS` count increment every 15 seconds in `kubectl get pods -w`.

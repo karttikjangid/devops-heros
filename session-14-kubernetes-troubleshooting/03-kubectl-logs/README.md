@@ -1,6 +1,6 @@
 # `kubectl logs`
 
-```bash
+```text
 kubectl logs
 ```
 
@@ -136,7 +136,7 @@ kubectl logs my-pod -c backend
 ```bash
 kubectl logs logs-demo
 kubectl logs -f logs-demo
-kubectl logs logs-demo --previous
+kubectl logs logs-demo --previous   # errors unless the container has restarted at least once
 kubectl logs logs-demo -c app
 ```
 
@@ -161,3 +161,8 @@ Logs are often the first place to look when an application is crashing or behavi
 
 * **Kubernetes Logging Architecture:**  
   https://kubernetes.io/docs/concepts/cluster-administration/logging/
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

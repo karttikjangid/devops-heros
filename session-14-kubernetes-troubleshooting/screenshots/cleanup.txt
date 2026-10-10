@@ -1,0 +1,15 @@
+$ kubectl delete namespace session14-lab; kubectl get namespaces
+UTC: 2026-10-10T04:23:01.146764+00:00
+
+namespace "session14-lab" deleted
+NAME                   STATUS   AGE
+default                Active   31d
+ingress-nginx          Active   21d
+kube-node-lease        Active   31d
+kube-public            Active   31d
+kube-system            Active   31d
+session15-lab          Active   12m
+session21              Active   3h56m
+session21-monitoring   Active   3h52m
+
+Exit code: 0

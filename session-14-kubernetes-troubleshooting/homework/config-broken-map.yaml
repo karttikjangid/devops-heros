@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: settings
+  namespace: session14-lab
+data:
+  OTHER: demo

@@ -1,3 +1,57 @@
+# Session 15 - Completed Helm Homework
+
+The Notes application was packaged as a small Helm chart and tested in the isolated local `session15-lab` namespace. The chart has a Deployment, Service and ConfigMap; values control replicas and page content.
+
+[Chart](mini-project/notes-chart/) · [Development values](mini-project/notes-chart/values.yaml) · [Production values](mini-project/notes-chart/values-prod.yaml)
+
+## Commands executed
+
+| Commands | Purpose | Actual output |
+| --- | --- | --- |
+| helm create | Generate a starter chart | [Output](screenshots/helm-create.txt) |
+| helm repo add/update/list; helm search repo | Register, refresh and search a chart repository | [Output](screenshots/helm-repo.txt) |
+| helm lint; helm install; helm list; helm status | Validate and install the chart, then inspect its release | [Output](screenshots/helm-install.txt) |
+| helm get values/manifest/all | Inspect deployed values and rendered resources | [Output](screenshots/helm-get.txt) |
+| helm upgrade | Apply a new values revision | [First upgrade](screenshots/helm-upgrade.txt), [second upgrade](screenshots/helm-upgrade-again.txt) |
+| helm history; helm rollback | Review revisions and restore revision 1 | [Output](screenshots/helm-rollback.txt), [verified page](screenshots/rollback-verified.txt) |
+| helm uninstall | Remove the release | [Output](screenshots/helm-uninstall.txt) |
+
+## Rollback workflow
+
+```text
+Install: revision 1, 1 replica, v1 development page
+    ↓
+Upgrade: revision 2, 2 replicas, v2 page
+    ↓
+Upgrade again: revision 3, 3 replicas, v3 production page
+    ↓
+Rollback to revision 1: new revision 4, 1 replica, v1 page restored
+```
+
+![Installation](screenshots/helm-install.png)
+
+![First upgrade](screenshots/helm-upgrade.png)
+
+![Second upgrade](screenshots/helm-upgrade-again.png)
+
+![Rollback history and restored page](screenshots/rollback-verified.png)
+
+A rollback creates a new release revision. It restores earlier configuration while retaining release history.
+
+## Mini project
+
+The Notes chart renders its page from a ConfigMap. A checksum annotation rolls the Pods when that content changes. Both replicas and content were checked after upgrades; the rollback HTTP response confirmed v1 was restored.
+
+One HTTP check initially used `localhost`, which resolved to IPv6 while this Nginx configuration listened on IPv4. The explicit `127.0.0.1` check succeeded. The failed attempt remains in the raw rollback transcript.
+
+[Mini-project commands and manifests](mini-project/README.md) · [Create screenshot](screenshots/helm-create.png) · [Repository/search screenshot](screenshots/helm-repo.png) · [Get output](screenshots/helm-get.txt)
+
+The demo release was uninstalled and its namespace removed. Existing releases in other namespaces were preserved.
+
+The original lesson notes follow.
+
+---
+
 # Session 15: Helm
 
 Managing many Kubernetes YAML files across multiple environments leads to copy-paste errors and configuration drift.

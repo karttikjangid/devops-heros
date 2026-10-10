@@ -1,0 +1,14 @@
+$ kubectl -n production-webapp exec volume-demo -- rm -f /node/note.txt; kubectl delete namespace production-webapp; kubectl wait pv/pvc-d06677b1-c644-48c3-b9a4-4a26289cd596 --for=delete --timeout=60s; kubectl get namespaces
+UTC: 2026-10-10T04:30:48.002027+00:00
+
+namespace "production-webapp" deleted
+NAME                   STATUS   AGE
+default                Active   31d
+ingress-nginx          Active   21d
+kube-node-lease        Active   31d
+kube-public            Active   31d
+kube-system            Active   31d
+session21              Active   4h3m
+session21-monitoring   Active   4h
+
+Exit code: 0

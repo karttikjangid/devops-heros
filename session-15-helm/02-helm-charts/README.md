@@ -166,3 +166,8 @@ helm uninstall = removes all resources created by the release
 ## Reference
 
 * **Helm Charts documentation:** https://helm.sh/docs/topics/charts/
+
+
+## Completed homework
+
+[Executed commands, upgrade/rollback screenshots and mini-project verification](../README.md)

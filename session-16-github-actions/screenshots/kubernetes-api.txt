@@ -1,0 +1,15 @@
+Real GitHub Actions CD output
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/session16-app   2/2     2            2           11s
+
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/session16-app-67f4cc548-ntnnr   1/1     Running   0          11s
+pod/session16-app-67f4cc548-pbgdk   1/1     Running   0          11s
+
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/session16-app   ClusterIP   10.96.250.243   <none>        80/TCP    11s
+
+GET /health
+{"status": "healthy"}
+Calculator API: 6 multiply 3
+{"result": 18.0}

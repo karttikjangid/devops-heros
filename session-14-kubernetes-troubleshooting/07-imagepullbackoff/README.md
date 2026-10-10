@@ -1,6 +1,6 @@
 # `ImagePullBackOff`
 
-```bash
+```text
 ImagePullBackOff
 ```
 
@@ -176,3 +176,8 @@ ImagePullBackOff
 
 * **Pull an Image from a Private Registry:**  
   https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/imagepull.txt) · [Screenshot](../screenshots/imagepull.png)

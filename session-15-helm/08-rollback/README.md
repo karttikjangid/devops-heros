@@ -165,3 +165,8 @@ helm rollback <release> N  = go back to revision N
 ## Reference
 
 * **Helm rollback:** https://helm.sh/docs/helm/helm_rollback/
+
+
+## Completed homework
+
+[Executed commands, upgrade/rollback screenshots and mini-project verification](../README.md)

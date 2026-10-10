@@ -184,11 +184,13 @@ service-name.namespace.svc.cluster.local
 
 Run:
 
+The `dns-test` image only has DNS tools (no `wget`/`curl`), so use a temporary BusyBox Pod:
+
 ```bash
-kubectl exec dns-test -- wget -qO- http://web-service
+kubectl run http-test --rm -it --restart=Never --image=busybox:1.36 -- wget -qO- http://web-service
 ```
 
-You should receive Nginx HTML output.
+You should receive Nginx HTML output. The Pod is deleted automatically afterwards.
 
 This proves:
 
@@ -404,7 +406,7 @@ kubectl exec dns-test -- nslookup web-service
 but this fails:
 
 ```bash
-kubectl exec dns-test -- wget -qO- http://web-service
+kubectl run http-test --rm -it --restart=Never --image=busybox:1.36 -- wget -qO- http://web-service
 ```
 
 then DNS may be working. The problem could be:
@@ -453,3 +455,8 @@ The official DNS troubleshooting guide also recommends checking DNS resolution f
   https://kubernetes.io/docs/concepts/services-networking/service/
 * **Debug Services:**  
   https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/service-mini-project.txt) · [Screenshot](../screenshots/service-mini-project.png)

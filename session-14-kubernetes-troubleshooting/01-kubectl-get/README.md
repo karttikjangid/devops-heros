@@ -1,6 +1,6 @@
 # `kubectl get`
 
-```bash
+```text
 kubectl get
 ```
 
@@ -149,7 +149,7 @@ This immediately tells us: **Something is wrong with the container.**
 
 But `kubectl get` only tells us **what** is happening. Next we need:
 
-```bash
+```text
 kubectl describe
 kubectl logs
 ```
@@ -191,3 +191,8 @@ It gives us the current state of Kubernetes resources.
 
 * **Kubernetes Command Line Tool (kubectl):**  
   https://kubernetes.io/docs/reference/kubectl/
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

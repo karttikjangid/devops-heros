@@ -1,0 +1,24 @@
+{
+  "relativeLinksChecked": 14,
+  "screenshots": [
+    {
+      "src": "github-actions.png",
+      "width": 1450,
+      "height": 1329,
+      "loaded": true
+    },
+    {
+      "src": "unit-tests.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "kubernetes-api.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

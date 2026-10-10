@@ -1,0 +1,42 @@
+{
+  "relativeLinksChecked": 20,
+  "screenshots": [
+    {
+      "src": "github-actions.png",
+      "width": 1450,
+      "height": 1329,
+      "loaded": true
+    },
+    {
+      "src": "unit-tests.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "security-summary.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "gates-reject-findings.png",
+      "width": 1450,
+      "height": 1505,
+      "loaded": true
+    },
+    {
+      "src": "kubernetes-api.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "application.png",
+      "width": 1300,
+      "height": 800,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

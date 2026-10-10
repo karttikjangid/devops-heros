@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mount
+  namespace: session14-lab
+spec:
+  containers:
+  - name: app
+    image: nginxinc/nginx-unprivileged:stable-alpine
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        cpu: 5m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+    volumeMounts:
+    - name: page
+      mountPath: /usr/share/nginx/html/index.html
+      subPath: index.html
+  volumes:
+  - name: page
+    configMap:
+      name: missing-page

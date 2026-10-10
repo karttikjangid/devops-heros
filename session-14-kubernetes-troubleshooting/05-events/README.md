@@ -162,3 +162,8 @@ What Kubernetes tried to do and what happened
 
 * **Kubernetes Events API:**  
   https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/event-v1/
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

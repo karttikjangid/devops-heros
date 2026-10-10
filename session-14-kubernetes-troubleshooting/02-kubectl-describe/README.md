@@ -1,6 +1,6 @@
 # `kubectl describe`
 
-```bash
+```text
 kubectl describe
 ```
 
@@ -15,7 +15,7 @@ If `kubectl get` tells us:
 ## 1. Create the Pod
 
 ```bash
-kubectl apply -f pod.yaml
+kubectl apply -f demo-pod.yaml
 ```
 
 Expected output:
@@ -180,3 +180,8 @@ kubectl describe
 
 * **Kubernetes Pod Lifecycle:**  
   https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

@@ -1,0 +1,43 @@
+$ helm lint work/publish/session-15-helm/mini-project/notes-chart; helm install notes work/publish/session-15-helm/mini-project/notes-chart -n session15-lab --wait --timeout 90s; helm list -n session15-lab; helm status notes -n session15-lab
+UTC: 2026-10-10T04:12:16.411451+00:00
+
+==> Linting work/publish/session-15-helm/mini-project/notes-chart
+[INFO] Chart.yaml: icon is recommended
+
+1 chart(s) linted, 0 chart(s) failed
+NAME: notes
+LAST DEPLOYED: Sat Oct 10 09:42:14 2026
+NAMESPACE: session15-lab
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+NAME 	NAMESPACE    	REVISION	UPDATED                             	STATUS  	CHART            	APP VERSION
+notes	session15-lab	1       	2026-10-10 09:42:14.124504 +0530 IST	deployed	notes-chart-0.1.0	1.0        
+NAME: notes
+LAST DEPLOYED: Sat Oct 10 09:42:14 2026
+NAMESPACE: session15-lab
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+RESOURCES:
+==> v1/ConfigMap
+NAME         DATA   AGE
+notes-page   1      2s
+
+==> v1/Service
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+notes   ClusterIP   10.110.66.254   <none>        80/TCP    2s
+
+==> v1/Deployment
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+notes   1/1     1            1           2s
+
+==> v1/Pod(related)
+NAME                    READY   STATUS    RESTARTS   AGE
+notes-6499c475b-bnqn4   1/1     Running   0          2s
+
+
+TEST SUITE: None
+
+Exit code: 0

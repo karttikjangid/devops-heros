@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.15/x64/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/work/devops-heros/devops-heros/session-16-github-actions/demo
+configfile: pytest.ini
+testpaths: tests
+collecting ... collected 5 items
+
+tests/test_calculator.py::test_add PASSED                                [ 20%]
+tests/test_calculator.py::test_subtract PASSED                           [ 40%]
+tests/test_calculator.py::test_multiply PASSED                           [ 60%]
+tests/test_calculator.py::test_divide PASSED                             [ 80%]
+tests/test_calculator.py::test_divide_by_zero PASSED                     [100%]
+
+============================== 5 passed in 0.01s ===============================

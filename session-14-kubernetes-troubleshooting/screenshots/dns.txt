@@ -1,0 +1,83 @@
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/dns-broken.yaml
+pod/dns created
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/dns --for=condition=Ready --timeout=60s
+pod/dns condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec dns -- cat /etc/resolv.conf
+nameserver 203.0.113.1
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec dns -- nslookup kubernetes.default.svc.cluster.local
+Server:		203.0.113.1
+Address:	203.0.113.1:53
+
+** server can't find kubernetes.default.svc.cluster.local: NXDOMAIN
+
+** server can't find kubernetes.default.svc.cluster.local: NXDOMAIN
+
+command terminated with exit code 1
+
+Exit code: 1
+
+$ kubectl -n session14-lab delete pod dns --grace-period=1 --wait=true --timeout=30s
+pod "dns" deleted from session14-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/dns-fixed.yaml
+pod/dns created
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/dns --for=condition=Ready --timeout=60s
+pod/dns condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec dns -- nslookup kubernetes.default.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+
+Name:	kubernetes.default.svc.cluster.local
+Address: 10.96.0.1
+
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec dns -- wget -T 3 -qO- http://web
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+Exit code: 0

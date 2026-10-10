@@ -1,0 +1,30 @@
+{
+  "relativeLinksChecked": 20,
+  "screenshots": [
+    {
+      "src": "helm-install.png",
+      "width": 1450,
+      "height": 1250,
+      "loaded": true
+    },
+    {
+      "src": "helm-upgrade.png",
+      "width": 1450,
+      "height": 1123,
+      "loaded": true
+    },
+    {
+      "src": "helm-upgrade-again.png",
+      "width": 1450,
+      "height": 1148,
+      "loaded": true
+    },
+    {
+      "src": "rollback-verified.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

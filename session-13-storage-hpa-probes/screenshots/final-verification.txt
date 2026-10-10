@@ -1,0 +1,41 @@
+$ kubectl -n production-webapp get pvc,pods,hpa; kubectl -n production-webapp exec volume-demo -- wget -qO- http://web-service; kubectl -n production-webapp get deployment web-app -o jsonpath="{.spec.template.spec.containers[0].startupProbe}{\"\\n\"}{.spec.template.spec.containers[0].readinessProbe}{\"\\n\"}{.spec.template.spec.containers[0].livenessProbe}{\"\\n\"}"
+UTC: 2026-10-10T04:29:57.228719+00:00
+
+NAME                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/web-data   Bound    pvc-d06677b1-c644-48c3-b9a4-4a26289cd596   500Mi      RWO            standard       <unset>                 5m48s
+
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/volume-demo               1/1     Running   0          2m48s
+pod/web-app-97ff666bf-d5sdr   1/1     Running   0          4m39s
+pod/web-app-97ff666bf-z76b6   1/1     Running   0          5m48s
+
+NAME                                              REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          5m48s
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+{"failureThreshold":30,"httpGet":{"path":"/","port":80,"scheme":"HTTP"},"periodSeconds":2,"successThreshold":1,"timeoutSeconds":1}
+{"failureThreshold":2,"httpGet":{"path":"/","port":80,"scheme":"HTTP"},"initialDelaySeconds":5,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":2}
+{"failureThreshold":3,"httpGet":{"path":"/","port":80,"scheme":"HTTP"},"initialDelaySeconds":5,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":2}
+
+Exit code: 0

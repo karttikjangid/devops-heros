@@ -338,3 +338,8 @@ All resources are gone.
 
 * **Helm best practices:** https://helm.sh/docs/chart_best_practices/
 * **Helm CLI reference:** https://helm.sh/docs/helm/
+
+
+## Completed homework
+
+[Executed commands, upgrade/rollback screenshots and mini-project verification](../README.md)

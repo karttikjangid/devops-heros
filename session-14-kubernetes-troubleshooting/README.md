@@ -1,3 +1,48 @@
+# Session 14 - Completed Kubernetes Troubleshooting Homework
+
+I used an isolated `session14-lab` namespace in local Minikube. The faults below were intentionally introduced, investigated and repaired. No cloud infrastructure was created.
+
+## Commands
+
+`kubectl get`, `describe`, `logs`, `exec`, `events`, `explain`, `top` and `get -o wide` were executed. Metrics Server was enabled so `top` could collect real CPU and memory samples.
+
+![Command practice and real resource metrics](screenshots/commands.png)
+
+[All command output](screenshots/commands.txt)
+
+## Faults and repairs
+
+- [CrashLoopBackOff: investigation, cause, fix and verification](homework/reports/crashloop.md)
+- [ErrImagePull / ImagePullBackOff: investigation, cause, fix and verification](homework/reports/imagepull.md)
+- [Pending: investigation, cause, fix and verification](homework/reports/pending.md)
+- [ContainerCreating: investigation, cause, fix and verification](homework/reports/containercreating.md)
+- [Configuration error: investigation, cause, fix and verification](homework/reports/configuration.md)
+- [DNS failure: investigation, cause, fix and verification](homework/reports/dns.md)
+- [Pod connectivity: investigation, cause, fix and verification](homework/reports/pod-networking.md)
+- [Service connectivity / mini project: investigation, cause, fix and verification](homework/reports/service-mini-project.md)
+
+[Reproducible manifests](homework/) include both broken configurations and their fixes. Run these only in the demo namespace.
+
+## Mini project
+
+The Nginx application was healthy, but its Service could not reach it. I repaired the selector first, then found and fixed the incorrect target port. The final request succeeded through the Service. [Full before/after report](homework/reports/service-mini-project.md).
+
+## Lessons from the exercises
+
+A Running container can still be starting its HTTP listener. I verified HTTP readiness before declaring the volume repair complete. Pod DNS fields are immutable, so the DNS fix required deleting the old Pod and waiting for deletion before recreating it.
+
+## Cleanup
+
+```bash
+kubectl delete namespace session14-lab
+```
+
+[Final verification](screenshots/final-verification.txt) · [Cleanup output](screenshots/cleanup.txt)
+
+The original lesson notes follow.
+
+---
+
 # Kubernetes Troubleshooting
 
 The goal is to learn how to answer:
@@ -33,8 +78,8 @@ We will cover:
 05-events
 06-crashloopbackoff
 07-imagepullbackoff
-08-pending-pod
-09-service-dns
+08-pending-pods
+09-service-dns-troubleshooting
 mini-project
 ```
 

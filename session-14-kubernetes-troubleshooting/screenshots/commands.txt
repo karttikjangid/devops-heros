@@ -1,0 +1,177 @@
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/deployment.yaml
+deployment.apps/web unchanged
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/service.yaml
+service/web unchanged
+
+Exit code: 0
+
+$ kubectl -n session14-lab rollout status deployment/web --timeout=60s
+deployment "web" successfully rolled out
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/client.yaml
+pod/client unchanged
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/client --for=condition=Ready --timeout=60s
+pod/client condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab get pods -o wide
+NAME                   READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+client                 1/1     Running   0          64s   10.244.0.17   minikube   <none>           <none>
+web-656bd54747-84x2n   1/1     Running   0          65s   10.244.0.16   minikube   <none>           <none>
+
+Exit code: 0
+
+$ kubectl -n session14-lab describe deployment web
+Name:                   web
+Namespace:              session14-lab
+CreationTimestamp:      Sat, 10 Oct 2026 09:43:25 +0530
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=web
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=web
+  Containers:
+   web:
+    Image:      nginxinc/nginx-unprivileged:stable-alpine
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     100m
+      memory:  64Mi
+    Requests:
+      cpu:         5m
+      memory:      16Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   web-656bd54747 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  65s   deployment-controller  Scaled up replica set web-656bd54747 from 0 to 1
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec client -- wget -T 3 -qO- http://web
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+Exit code: 0
+
+$ kubectl -n session14-lab logs deployment/web --tail=4
+2026/10/10 04:13:26 [notice] 1#1: start worker process 32
+2026/10/10 04:13:26 [notice] 1#1: start worker process 33
+10.244.0.17 - - [10/Oct/2026:04:13:27 +0000] "GET / HTTP/1.1" 200 896 "-" "Wget" "-"
+10.244.0.17 - - [10/Oct/2026:04:14:30 +0000] "GET / HTTP/1.1" 200 896 "-" "Wget" "-"
+
+Exit code: 0
+
+$ kubectl explain pod.spec.containers.resources
+KIND:       Pod
+VERSION:    v1
+
+FIELD: resources <ResourceRequirements>
+
+
+DESCRIPTION:
+    Compute Resources required by this container. Cannot be updated. More info:
+    https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+    ResourceRequirements describes the compute resource requirements.
+    
+FIELDS:
+  claims	<[]ResourceClaim>
+    Claims lists the names of resources, defined in spec.resourceClaims, that
+    are used by this container.
+    
+    This field depends on the DynamicResourceAllocation feature gate.
+    
+    This field is immutable. It can only be set for containers.
+
+  limits	<map[string]Quantity>
+    Limits describes the maximum amount of compute resources allowed. More info:
+    https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+  requests	<map[string]Quantity>
+    Requests describes the minimum amount of compute resources required. If
+    Requests is omitted for a container, it defaults to Limits if that is
+    explicitly specified, otherwise to an implementation-defined value. Requests
+    cannot exceed Limits. More info:
+    https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+
+
+Exit code: 0
+
+$ kubectl events -n session14-lab
+LAST SEEN   TYPE     REASON              OBJECT                      MESSAGE
+65s         Normal   Scheduled           Pod/web-656bd54747-84x2n    Successfully assigned session14-lab/web-656bd54747-84x2n to minikube
+65s         Normal   Pulled              Pod/web-656bd54747-84x2n    Container image "nginxinc/nginx-unprivileged:stable-alpine" already present on machine and can be accessed by the pod
+65s         Normal   Created             Pod/web-656bd54747-84x2n    Container created
+65s         Normal   SuccessfulCreate    ReplicaSet/web-656bd54747   Created pod: web-656bd54747-84x2n
+65s         Normal   ScalingReplicaSet   Deployment/web              Scaled up replica set web-656bd54747 from 0 to 1
+64s         Normal   Scheduled           Pod/client                  Successfully assigned session14-lab/client to minikube
+64s         Normal   Pulled              Pod/client                  Container image "busybox:1.36" already present on machine and can be accessed by the pod
+64s         Normal   Created             Pod/client                  Container created
+64s         Normal   Started             Pod/client                  Container started
+64s         Normal   Started             Pod/web-656bd54747-84x2n    Container started
+
+Exit code: 0
+
+$ kubectl top pods -n session14-lab
+NAME                   CPU(cores)   MEMORY(bytes)   
+client                 2m           0Mi             
+web-656bd54747-84x2n   2m           5Mi             
+
+Exit code: 0
+
+$ kubectl top nodes
+NAME       CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+minikube   211m         4%       972Mi           50%         
+
+Exit code: 0

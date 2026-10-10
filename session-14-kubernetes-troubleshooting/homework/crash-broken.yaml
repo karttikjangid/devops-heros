@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: crash
+  namespace: session14-lab
+spec:
+  containers:
+  - name: app
+    image: busybox:1.36
+    imagePullPolicy: IfNotPresent
+    command:
+    - sh
+    - -c
+    - echo "startup command failed"; exit 1

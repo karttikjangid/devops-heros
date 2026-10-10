@@ -1,0 +1,9 @@
+$ helm uninstall notes -n session15-lab --wait --timeout 60s; helm list -n session15-lab; kubectl -n session15-lab get all
+UTC: 2026-10-10T04:22:15.858994+00:00
+
+release "notes" uninstalled
+NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
+NAME                        READY   STATUS        RESTARTS   AGE
+pod/notes-6499c475b-f2ggn   1/1     Terminating   0          9m21s
+
+Exit code: 0

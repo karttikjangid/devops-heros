@@ -226,3 +226,8 @@ Always investigate instead of simply restarting the Pod.
   https://kubernetes.io/docs/tasks/debug/debug-application/
 * **Kubernetes Pod States:**  
   https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/crashloop.txt) · [Screenshot](../screenshots/crashloop.png)

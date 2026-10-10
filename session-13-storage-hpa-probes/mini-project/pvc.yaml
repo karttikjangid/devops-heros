@@ -5,7 +5,8 @@ metadata:
   namespace: production-webapp
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
       storage: 500Mi
+  storageClassName: standard

@@ -1,0 +1,343 @@
+$ kubectl apply -f work/publish/session-13-storage-hpa-probes/mini-project/load-generator.yaml
+pod/load-generator created
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:15.878665+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m6s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS              RESTARTS   AGE
+load-generator            0/1     ContainerCreating   0          1s
+web-app-97ff666bf-d5sdr   1/1     Running             0          58s
+web-app-97ff666bf-z76b6   1/1     Running             0          2m7s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:21.262723+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m12s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          6s
+web-app-97ff666bf-d5sdr   1/1     Running   0          63s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m12s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:26.814581+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m17s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          12s
+web-app-97ff666bf-d5sdr   1/1     Running   0          69s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m18s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:32.257107+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m23s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          17s
+web-app-97ff666bf-d5sdr   1/1     Running   0          74s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m23s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:37.532022+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m28s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          22s
+web-app-97ff666bf-d5sdr   1/1     Running   0          79s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m28s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:42.951217+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m34s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          28s
+web-app-97ff666bf-d5sdr   1/1     Running   0          85s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m34s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:48.355173+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m39s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          33s
+web-app-97ff666bf-d5sdr   1/1     Running   0          90s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m39s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:53.647024+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m44s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          38s
+web-app-97ff666bf-d5sdr   1/1     Running   0          95s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m44s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:26:58.993154+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m50s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          44s
+web-app-97ff666bf-d5sdr   1/1     Running   0          101s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m50s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:27:04.301404+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m55s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          49s
+web-app-97ff666bf-d5sdr   1/1     Running   0          106s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m55s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+load-generator            296m         4Mi             
+web-app-97ff666bf-d5sdr   8m           5Mi             
+web-app-97ff666bf-z76b6   9m           9Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:27:09.598234+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          3m
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          54s
+volume-demo               1/1     Running   0          0s
+web-app-97ff666bf-d5sdr   1/1     Running   0          111s
+web-app-97ff666bf-z76b6   1/1     Running   0          3m
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+load-generator            296m         4Mi             
+web-app-97ff666bf-d5sdr   8m           5Mi             
+web-app-97ff666bf-z76b6   9m           9Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:27:15.044954+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 85%/50%   2         5         2          3m6s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          60s
+volume-demo               1/1     Running   0          6s
+web-app-97ff666bf-bk2tl   0/1     Running   0          5s
+web-app-97ff666bf-d5sdr   1/1     Running   0          117s
+web-app-97ff666bf-vd4fj   0/1     Running   0          5s
+web-app-97ff666bf-z76b6   1/1     Running   0          3m6s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+load-generator            296m         4Mi             
+web-app-97ff666bf-d5sdr   8m           5Mi             
+web-app-97ff666bf-z76b6   9m           9Mi             
+
+Exit code: 0
+
+UTC: 2026-10-10T04:27:20.414485+00:00
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 85%/50%   2         5         2          3m11s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+load-generator            1/1     Running   0          65s
+volume-demo               1/1     Running   0          11s
+web-app-97ff666bf-bk2tl   1/1     Running   0          10s
+web-app-97ff666bf-d5sdr   1/1     Running   0          2m2s
+web-app-97ff666bf-vd4fj   1/1     Running   0          10s
+web-app-97ff666bf-z76b6   1/1     Running   0          3m11s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+load-generator            296m         4Mi             
+web-app-97ff666bf-d5sdr   8m           5Mi             
+web-app-97ff666bf-z76b6   9m           9Mi             
+
+Exit code: 0
+
+$ kubectl -n production-webapp describe hpa web-app-hpa
+Name:                                                  web-app-hpa
+Namespace:                                             production-webapp
+Labels:                                                <none>
+Annotations:                                           <none>
+CreationTimestamp:                                     Sat, 10 Oct 2026 09:54:09 +0530
+Reference:                                             Deployment/web-app
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  85% (8m) / 50%
+Min replicas:                                          2
+Max replicas:                                          5
+Behavior:
+  Scale Up:
+    Stabilization Window: 0 seconds
+    Select Policy: Max
+    Policies:
+      - Type: Pods     Value: 4    Period: 15 seconds
+      - Type: Percent  Value: 100  Period: 15 seconds
+  Scale Down:
+    Stabilization Window: 30 seconds
+    Select Policy: Max
+    Policies:
+      - Type: Percent  Value: 100  Period: 15 seconds
+Deployment pods:       2 current / 4 desired
+Conditions:
+  Type            Status  Reason              Message
+  ----            ------  ------              -------
+  AbleToScale     True    SucceededRescale    the HPA controller was able to update the target scale to 4
+  ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+  ScaledToZero    False   NotScaledToZero     the HPA controller did not scale the workload to zero
+Events:
+  Type     Reason                        Age                    From                       Message
+  ----     ------                        ----                   ----                       -------
+  Warning  FailedGetResourceMetric       2m26s (x4 over 3m11s)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+  Warning  FailedComputeMetricsReplicas  2m26s (x4 over 3m11s)  horizontal-pod-autoscaler  invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+  Warning  FailedGetResourceMetric       86s (x4 over 2m11s)    horizontal-pod-autoscaler  failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+  Warning  FailedComputeMetricsReplicas  86s (x4 over 2m11s)    horizontal-pod-autoscaler  invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+  Normal   SuccessfulRescale             10s                    horizontal-pod-autoscaler  New size: 4; reason: cpu resource utilization (percentage of request) above target
+
+Exit code: 0

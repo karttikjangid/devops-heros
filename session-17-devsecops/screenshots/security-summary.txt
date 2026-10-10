@@ -1,0 +1,8 @@
+Actual reports from GitHub Actions run 38023093690
+Bandit SAST: 0 findings
+pip-audit SCA: 0 known vulnerabilities
+Gitleaks: 0 secrets
+Trivy: 0 HIGH/CRITICAL findings
+Security gate: PASS
+CI: success
+CD: success

@@ -1,13 +1,5 @@
 replicaCount: 1
-
-image:
-  repository: nginx
-  tag: "1.24"
-
-service:
-  port: 80
-  nodePort: 30090
-
+image: nginxinc/nginx-unprivileged:stable-alpine
 app:
-  name: notes-app
   environment: development
+  message: Session 15 Notes v1

@@ -198,3 +198,8 @@ and especially the **Events** section.
 
 * **Kubernetes Scheduling:**  
   https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/pending.txt) · [Screenshot](../screenshots/pending.png)

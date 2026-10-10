@@ -1,0 +1,40 @@
+$ kubectl -n session14-lab get pods -o wide; kubectl top pods -n session14-lab; kubectl -n session14-lab exec client -- wget -qO- http://web; kubectl -n session14-lab get endpointslices -l kubernetes.io/service-name=web
+UTC: 2026-10-10T04:22:15.223179+00:00
+
+NAME                   READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+client                 1/1     Running   0          8m48s   10.244.0.17   minikube   <none>           <none>
+web-656bd54747-84x2n   1/1     Running   0          8m49s   10.244.0.16   minikube   <none>           <none>
+NAME                   CPU(cores)   MEMORY(bytes)   
+client                 0m           0Mi             
+web-656bd54747-84x2n   0m           5Mi             
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+NAME        ADDRESSTYPE   PORTS   ENDPOINTS     AGE
+web-nk69l   IPv4          8080    10.244.0.16   8m50s
+
+Exit code: 0

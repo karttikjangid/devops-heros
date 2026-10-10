@@ -1,0 +1,105 @@
+$ kubectl -n session14-lab delete pod crash --grace-period=1 --wait=false
+pod "crash" deleted from session14-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/image-broken.yaml
+pod/image created
+
+Exit code: 0
+
+$ kubectl -n session14-lab get pod image
+NAME    READY   STATUS         RESTARTS   AGE
+image   0/1     ErrImagePull   0          7s
+
+Exit code: 0
+
+$ kubectl -n session14-lab get pod image
+NAME    READY   STATUS             RESTARTS   AGE
+image   0/1     ImagePullBackOff   0          18s
+
+Exit code: 0
+
+$ kubectl -n session14-lab describe pod image
+Name:             image
+Namespace:        session14-lab
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Sat, 10 Oct 2026 09:44:54 +0530
+Labels:           <none>
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.20
+IPs:
+  IP:  10.244.0.20
+Containers:
+  app:
+    Container ID:   
+    Image:          nginxinc/nginx-unprivileged:session14-missing-tag
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  64Mi
+    Requests:
+      cpu:        5m
+      memory:     16Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-vwsp5 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-vwsp5:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age               From               Message
+  ----     ------     ----              ----               -------
+  Normal   Scheduled  18s               default-scheduler  Successfully assigned session14-lab/image to minikube
+  Normal   BackOff    13s               kubelet            spec.containers{app}: Back-off pulling image "nginxinc/nginx-unprivileged:session14-missing-tag"
+  Warning  Failed     13s               kubelet            spec.containers{app}: Error: ImagePullBackOff
+  Normal   Pulling    2s (x2 over 18s)  kubelet            spec.containers{app}: Pulling image "nginxinc/nginx-unprivileged:session14-missing-tag"
+  Warning  Failed     1s (x2 over 14s)  kubelet            spec.containers{app}: Failed to pull image "nginxinc/nginx-unprivileged:session14-missing-tag": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/nginxinc/nginx-unprivileged:session14-missing-tag": failed to resolve reference "docker.io/nginxinc/nginx-unprivileged:session14-missing-tag": docker.io/nginxinc/nginx-unprivileged:session14-missing-tag: not found
+  Warning  Failed     1s (x2 over 14s)  kubelet            spec.containers{app}: Error: ErrImagePull
+
+Exit code: 0
+
+$ kubectl -n session14-lab delete pod image --grace-period=1 --wait=false
+pod "image" deleted from session14-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/image-fixed.yaml
+pod/image created
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/image --for=condition=Ready --timeout=60s
+pod/image condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab get pod image
+NAME    READY   STATUS    RESTARTS   AGE
+image   1/1     Running   0          1s
+
+Exit code: 0

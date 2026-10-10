@@ -1,7 +1,7 @@
 # `kubectl exec`
 
 
-```bash
+```text
 kubectl exec
 ```
 
@@ -149,7 +149,7 @@ If the container is constantly crashing, `exec` may not be useful because there 
 
 For those cases, use:
 
-```bash
+```text
 kubectl logs
 kubectl describe
 kubectl debug
@@ -187,3 +187,8 @@ Kubernetes documentation also recommends `kubectl exec` for running commands ins
 
 * **Get a Shell to a Running Container:**  
   https://kubernetes.io/docs/tasks/debug/debug-application/get-shell-running-container/
+
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

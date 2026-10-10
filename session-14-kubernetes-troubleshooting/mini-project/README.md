@@ -324,7 +324,7 @@ Your final application should look like:
 
 After completing this project, you should be comfortable with:
 
-```bash
+```text
 kubectl get
 kubectl describe
 kubectl logs
@@ -371,3 +371,7 @@ VERIFY
 ```
 
 That is the basic Kubernetes troubleshooting mindset.
+
+## Completed homework evidence
+
+[Real commands and output](../screenshots/service-mini-project.txt) · [Screenshot](../screenshots/service-mini-project.png)

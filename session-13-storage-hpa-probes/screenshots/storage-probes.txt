@@ -1,0 +1,145 @@
+$ kubectl get storageclass; kubectl -n production-webapp get pvc,pods; kubectl -n production-webapp get deployment web-app -o yaml; kubectl -n production-webapp describe pvc web-data
+UTC: 2026-10-10T04:25:17.706743+00:00
+
+NAME                 PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+standard (default)   k8s.io/minikube-hostpath   Delete          Immediate           false                  31d
+NAME                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/web-data   Bound    pvc-d06677b1-c644-48c3-b9a4-4a26289cd596   500Mi      RWO            standard       <unset>                 68s
+
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/web-app-97ff666bf-bcw6z   1/1     Running   0          68s
+pod/web-app-97ff666bf-z76b6   1/1     Running   0          68s
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"web-app"},"name":"web-app","namespace":"production-webapp"},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"web-app"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"labels":{"app":"web-app"}},"spec":{"containers":[{"image":"nginx:1.27","imagePullPolicy":"IfNotPresent","livenessProbe":{"failureThreshold":3,"httpGet":{"path":"/","port":80},"initialDelaySeconds":5,"periodSeconds":5,"timeoutSeconds":2},"name":"nginx","ports":[{"containerPort":80}],"readinessProbe":{"failureThreshold":2,"httpGet":{"path":"/","port":80},"initialDelaySeconds":5,"periodSeconds":5,"timeoutSeconds":2},"resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},"startupProbe":{"failureThreshold":30,"httpGet":{"path":"/","port":80},"periodSeconds":2},"volumeMounts":[{"mountPath":"/data","name":"persistent-storage"}]}],"volumes":[{"name":"persistent-storage","persistentVolumeClaim":{"claimName":"web-data"}}]}}}}
+  creationTimestamp: "2026-10-10T04:24:09Z"
+  generation: 1
+  labels:
+    app: web-app
+  name: web-app
+  namespace: production-webapp
+  resourceVersion: "452495"
+  uid: 5ac29981-e3cd-48de-ba57-a5e4ca78aab0
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: web-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - image: nginx:1.27
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 2
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+        startupProbe:
+          failureThreshold: 30
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data
+          name: persistent-storage
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: web-data
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: "2026-10-10T04:24:18Z"
+    lastUpdateTime: "2026-10-10T04:24:18Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2026-10-10T04:24:09Z"
+    lastUpdateTime: "2026-10-10T04:24:18Z"
+    message: ReplicaSet "web-app-97ff666bf" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  readyReplicas: 2
+  replicas: 2
+  terminatingReplicas: 0
+  updatedReplicas: 2
+Name:          web-data
+Namespace:     production-webapp
+StorageClass:  standard
+Status:        Bound
+Volume:        pvc-d06677b1-c644-48c3-b9a4-4a26289cd596
+Labels:        <none>
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+               volume.beta.kubernetes.io/storage-provisioner: k8s.io/minikube-hostpath
+               volume.kubernetes.io/storage-provisioner: k8s.io/minikube-hostpath
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      500Mi
+Access Modes:  RWO
+VolumeMode:    Filesystem
+Used By:       web-app-97ff666bf-bcw6z
+               web-app-97ff666bf-z76b6
+Conditions:
+  Type     Status  LastProbeTime                     LastTransitionTime                Reason        Message
+  ----     ------  -----------------                 ------------------                ------        -------
+  Unused   False   Mon, 01 Jan 0001 00:00:00 +0000   Sat, 10 Oct 2026 09:54:09 +0530   PodUsingPVC   A pod is currently referencing this PVC
+Events:
+  Type    Reason                 Age   From                                                                    Message
+  ----    ------                 ----  ----                                                                    -------
+  Normal  ExternalProvisioning   68s   persistentvolume-controller                                             Waiting for a volume to be created either by the external provisioner 'k8s.io/minikube-hostpath' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+  Normal  Provisioning           68s   k8s.io/minikube-hostpath_minikube_f8fdf4f1-520d-4056-afcf-5986f0950c23  External provisioner is provisioning volume for claim "production-webapp/web-data"
+  Normal  ProvisioningSucceeded  68s   k8s.io/minikube-hostpath_minikube_f8fdf4f1-520d-4056-afcf-5986f0950c23  Successfully provisioned volume pvc-d06677b1-c644-48c3-b9a4-4a26289cd596
+
+Exit code: 0

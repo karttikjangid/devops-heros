@@ -1,0 +1,36 @@
+{
+  "relativeLinksChecked": 15,
+  "screenshots": [
+    {
+      "src": "hpa-before.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "hpa-load.png",
+      "width": 1450,
+      "height": 9079,
+      "loaded": true
+    },
+    {
+      "src": "hpa-recovery.png",
+      "width": 1450,
+      "height": 1735,
+      "loaded": true
+    },
+    {
+      "src": "persistence.png",
+      "width": 1450,
+      "height": 16066,
+      "loaded": true
+    },
+    {
+      "src": "storage-probes.png",
+      "width": 1450,
+      "height": 4259,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}
