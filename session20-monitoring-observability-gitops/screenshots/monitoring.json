@@ -1,0 +1,73 @@
+{
+  "cpu": {
+    "query": "100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\"}[1m])))",
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {},
+          "value": [
+            1791602365.902,
+            "22.251513553806145"
+          ]
+        }
+      ]
+    }
+  },
+  "memory": {
+    "query": "100 * (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)",
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "instance": "node-exporter:9100",
+            "job": "node"
+          },
+          "value": [
+            1791602365.918,
+            "48.988587961102624"
+          ]
+        }
+      ]
+    }
+  },
+  "health": {
+    "query": "probe_success{job=\"application\"}",
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "__name__": "probe_success",
+            "instance": "http://session20-web.session20.svc.cluster.local",
+            "job": "application"
+          },
+          "value": [
+            1791602365.924,
+            "1"
+          ]
+        }
+      ]
+    }
+  },
+  "alerts": {
+    "query": "ALERTS{alertname=\"ApplicationUnavailable\",alertstate=\"firing\"} or vector(0)",
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {},
+          "value": [
+            1791602365.931,
+            "0"
+          ]
+        }
+      ]
+    }
+  }
+}

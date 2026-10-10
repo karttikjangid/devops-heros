@@ -1,0 +1,20 @@
+$ kubectl -n session20-argocd get application session20-demo; kubectl -n session20 get deployment,pods; kubectl -n session20-monitoring get pods; curl -fsS http://127.0.0.1:9091/api/v1/targets | python3 -c 'import json,sys; print([(x["labels"]["job"], x["health"]) for x in json.load(sys.stdin)["data"]["activeTargets"]])'
+UTC: 2026-10-10T03:21:39.812104+00:00
+
+NAME             SYNC STATUS   HEALTH STATUS
+session20-demo   Synced        Healthy
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/session20-web   3/3     3            3           7m14s
+
+NAME                                 READY   STATUS    RESTARTS   AGE
+pod/session20-web-6cd4549f59-98gjv   1/1     Running   0          3m58s
+pod/session20-web-6cd4549f59-rqf76   1/1     Running   0          3m58s
+pod/session20-web-6cd4549f59-z8dh2   1/1     Running   0          3m58s
+NAME                                 READY   STATUS    RESTARTS      AGE
+blackbox-exporter-5688d476df-l4d5d   1/1     Running   0             8m59s
+grafana-85949b9848-9kh8m             1/1     Running   0             3m13s
+node-exporter-86f6fd5679-vr6vm       1/1     Running   1 (11m ago)   18m
+prometheus-8fb694c66-hnmm8           1/1     Running   0             18m
+[('application', 'up'), ('node', 'up'), ('prometheus', 'up')]
+
+Exit code: 0

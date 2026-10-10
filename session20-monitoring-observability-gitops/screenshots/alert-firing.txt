@@ -1,0 +1,28 @@
+$ curl -fsS http://127.0.0.1:9091/api/v1/alerts | python3 -m json.tool; kubectl -n session20 get deployment session20-web
+UTC: 2026-10-10T03:17:22.021927+00:00
+
+{
+    "status": "success",
+    "data": {
+        "alerts": [
+            {
+                "labels": {
+                    "alertname": "ApplicationUnavailable",
+                    "instance": "http://session20-web.session20.svc.cluster.local",
+                    "job": "application",
+                    "severity": "warning"
+                },
+                "annotations": {
+                    "summary": "Session 20 application is unavailable"
+                },
+                "state": "firing",
+                "activeAt": "2026-10-10T03:16:48.970640515Z",
+                "value": "0e+00"
+            }
+        ]
+    }
+}
+NAME            READY   UP-TO-DATE   AVAILABLE   AGE
+session20-web   0/0     0            0           2m57s
+
+Exit code: 0

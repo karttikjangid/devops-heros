@@ -1,0 +1,17 @@
+$ kubectl -n session20-argocd delete application session20-demo; kubectl delete namespace session20 session20-monitoring session20-argocd; kubectl get namespaces
+UTC: 2026-10-10T03:22:20.378166+00:00
+
+application.argoproj.io "session20-demo" deleted from session20-argocd namespace
+namespace "session20" deleted
+namespace "session20-monitoring" deleted
+namespace "session20-argocd" deleted
+NAME                   STATUS   AGE
+default                Active   31d
+ingress-nginx          Active   21d
+kube-node-lease        Active   31d
+kube-public            Active   31d
+kube-system            Active   31d
+session21              Active   175m
+session21-monitoring   Active   172m
+
+Exit code: 0

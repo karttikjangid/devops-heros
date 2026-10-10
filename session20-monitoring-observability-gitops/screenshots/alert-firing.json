@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "ApplicationUnavailable",
+          "instance": "http://session20-web.session20.svc.cluster.local",
+          "job": "application",
+          "severity": "warning"
+        },
+        "annotations": {
+          "summary": "Session 20 application is unavailable"
+        },
+        "state": "firing",
+        "activeAt": "2026-10-10T03:16:48.970640515Z",
+        "value": "0e+00"
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+[{"src":"monitoring.png","width":1450,"height":1000,"loaded":true},{"src":"alert-firing.png","width":1450,"height":900,"loaded":true},{"src":"recovery.png","width":1450,"height":900,"loaded":true},{"src":"logs-health.png","width":1450,"height":1735,"loaded":true},{"src":"gitops-initial.png","width":1450,"height":900,"loaded":true},{"src":"gitops-synced.png","width":1450,"height":900,"loaded":true},{"src":"self-healing.png","width":1450,"height":900,"loaded":true}]
+{
+  "relativeLinksChecked": 29,
+  "screenshots": [
+    {
+      "src": "monitoring.png",
+      "width": 1450,
+      "height": 1000,
+      "loaded": true
+    },
+    {
+      "src": "alert-firing.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "recovery.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "logs-health.png",
+      "width": 1450,
+      "height": 1735,
+      "loaded": true
+    },
+    {
+      "src": "gitops-initial.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "gitops-synced.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "self-healing.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

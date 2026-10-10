@@ -189,7 +189,7 @@ spec:
             cpu: 10m
             memory: 24Mi
           limits:
-            cpu: 300m
+            cpu: 500m
             memory: 192Mi
         volumeMounts:
         - name: provision
@@ -207,6 +207,8 @@ spec:
           value: 'true'
         - name: GF_ANALYTICS_REPORTING_ENABLED
           value: 'false'
+        - name: GF_PLUGINS_PREINSTALL_DISABLED
+          value: 'true'
         imagePullPolicy: IfNotPresent
       volumes:
       - name: provision

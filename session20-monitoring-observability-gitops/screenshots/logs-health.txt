@@ -1,0 +1,60 @@
+$ curl -i http://127.0.0.1:8081/; kubectl -n session20 logs deployment/session20-web --tail=8; kubectl -n session20 get pods
+UTC: 2026-10-10T03:19:27.822178+00:00
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   896  100   896    0     0   177k      0 --:--:-- --:--:-- --:--:--  218k
+HTTP/1.1 200 OK
+Server: nginx/1.30.5
+Date: Sat, 10 Oct 2026 03:19:27 GMT
+Content-Type: text/html
+Content-Length: 896
+Last-Modified: Tue, 15 Sep 2026 15:16:39 GMT
+Connection: keep-alive
+ETag: "6aa96157-380"
+Accept-Ranges: bytes
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy, 
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional 
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+Found 3 pods, using pod/session20-web-6cd4549f59-98gjv
+10.244.0.1 - - [10/Oct/2026:03:19:12 +0000] "GET / HTTP/1.1" 200 896 "-" "kube-probe/1.37" "-"
+10.244.0.17 - - [10/Oct/2026:03:19:13 +0000] "GET / HTTP/1.1" 200 896 "-" "Blackbox Exporter/0.27.0" "-"
+10.244.0.1 - - [10/Oct/2026:03:19:21 +0000] "GET / HTTP/1.1" 200 896 "-" "kube-probe/1.37" "-"
+10.244.0.1 - - [10/Oct/2026:03:19:22 +0000] "GET / HTTP/1.1" 200 896 "-" "kube-probe/1.37" "-"
+127.0.0.1 - - [10/Oct/2026:03:19:27 +0000] "GET / HTTP/1.1" 200 896 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36" "-"
+127.0.0.1 - - [10/Oct/2026:03:19:27 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://127.0.0.1:8081/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36" "-"
+2026/10/10 03:19:27 [error] 30#30: *30 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1:8081", referrer: "http://127.0.0.1:8081/"
+127.0.0.1 - - [10/Oct/2026:03:19:27 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.7.1" "-"
+NAME                             READY   STATUS    RESTARTS   AGE
+session20-web-6cd4549f59-98gjv   1/1     Running   0          106s
+session20-web-6cd4549f59-rqf76   1/1     Running   0          106s
+session20-web-6cd4549f59-z8dh2   1/1     Running   0          106s
+
+Exit code: 0
