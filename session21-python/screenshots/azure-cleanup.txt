@@ -1,0 +1,3 @@
+$ az group exists --name session21-homework
+false
+Exit status: 0

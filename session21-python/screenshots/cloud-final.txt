@@ -1,0 +1,32 @@
+Captured: 2026-10-10T01:45:32.495095+00:00
+$ set -e; kubectl -n session21 get pods,svc,ingress,hpa,pvc; kubectl -n session21-monitoring get pods; curl -fsS http://20.198.80.51/api/tasks; kubectl -n session21 exec deployment/postgres -- psql -U taskboard -d taskboard -c "SELECT id,title,status FROM tasks;"
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/homework-backend-5fbbf94d9-dlw78     1/1     Running   0          25s
+pod/homework-backend-5fbbf94d9-vfxk2     1/1     Running   0          55s
+pod/homework-frontend-5f597f9957-nnmwg   1/1     Running   0          39s
+pod/homework-frontend-5f597f9957-vqbpk   1/1     Running   0          55s
+pod/postgres-cf49944ff-78rlm             1/1     Running   0          15m
+
+NAME                        TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/backend             ClusterIP   10.43.103.28   <none>        8000/TCP   15m
+service/homework-frontend   ClusterIP   10.43.11.116   <none>        80/TCP     15m
+service/postgres            ClusterIP   10.43.125.52   <none>        5432/TCP   15m
+
+NAME                                 CLASS     HOSTS   ADDRESS     PORTS   AGE
+ingress.networking.k8s.io/homework   traefik   *       10.21.1.4   80      16m
+
+NAME                                                   REFERENCE                     TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/homework-backend   Deployment/homework-backend   cpu: 6%/60%   2         4         2          16m
+
+NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/postgres-data   Bound    pvc-30b1af7e-67e2-4a82-a0b9-026b0318116f   1Gi        RWO            local-path     <unset>                 16m
+NAME                                           READY   STATUS    RESTARTS   AGE
+session21-grafana-7475ff949d-dn5mg             1/1     Running   0          14m
+session21-prometheus-server-66575b87cb-zn7hw   2/2     Running   0          14m
+[{"title":"Azure Session 21 assignment","description":"Created through the real frontend and stored in PostgreSQL.","priority":"LOW","status":"IN_PROGRESS","assignee":"Kartik","id":1,"created_at":"2026-10-10T01:37:00.114032Z"}] id |            title            |   status    
+----+-----------------------------+-------------
+  1 | Azure Session 21 assignment | IN_PROGRESS
+(1 row)
+
+
+Exit status: 0

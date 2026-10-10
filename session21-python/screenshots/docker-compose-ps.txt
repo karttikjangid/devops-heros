@@ -1,8 +1,8 @@
-Captured: 2026-10-10T00:12:22.232102+00:00
+Captured: 2026-10-10T01:57:20.282479+00:00
 $ docker compose ps
 NAME                          IMAGE                                                COMMAND                  SERVICE    CREATED          STATUS          PORTS
-session21-python-backend-1    docker.io/library/session21-python-backend:latest    "sh -c alembic upgra…"   backend    24 seconds ago   Up 17 seconds   127.0.0.1:8000->8000/tcp
-session21-python-frontend-1   docker.io/library/session21-python-frontend:latest   "nginx -g daemon off;"   frontend   24 seconds ago   Up 2 seconds    127.0.0.1:3000->80/tcp
-session21-python-postgres-1   docker.io/library/postgres:16-alpine                 "postgres"               postgres   24 seconds ago   Up 23 seconds   127.0.0.1:5432->5432/tcp
+session21-python-backend-1    docker.io/library/session21-python-backend:latest    "sh -c alembic upgra…"   backend    20 seconds ago   Up 14 seconds   127.0.0.1:8000->8000/tcp
+session21-python-frontend-1   docker.io/library/session21-python-frontend:latest   "nginx -g daemon off;"   frontend   20 seconds ago   Up 3 seconds    127.0.0.1:3000->8080/tcp
+session21-python-postgres-1   docker.io/library/postgres:16-alpine                 "postgres"               postgres   20 seconds ago   Up 18 seconds   127.0.0.1:5432->5432/tcp
 
 Exit status: 0

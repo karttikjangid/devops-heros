@@ -1,0 +1,34 @@
+$ terraform -chdir=work/azure-terraform apply
+azurerm_resource_group.homework: Creating...
+azurerm_resource_group.homework: Still creating... [00m10s elapsed]
+azurerm_resource_group.homework: Still creating... [00m20s elapsed]
+azurerm_resource_group.homework: Creation complete after 28s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework]
+azurerm_virtual_network.homework: Creating...
+azurerm_public_ip.homework: Creating...
+azurerm_network_security_group.homework: Creating...
+azurerm_network_security_group.homework: Creation complete after 8s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg]
+azurerm_public_ip.homework: Creation complete after 9s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/publicIPAddresses/homework-ip]
+azurerm_virtual_network.homework: Still creating... [00m10s elapsed]
+azurerm_virtual_network.homework: Creation complete after 13s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/virtualNetworks/homework-vnet]
+azurerm_subnet.spare: Creating...
+azurerm_subnet.nodes: Creating...
+azurerm_subnet.nodes: Creation complete after 6s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/virtualNetworks/homework-vnet/subnets/nodes]
+azurerm_network_interface.homework: Creating...
+azurerm_subnet.spare: Still creating... [00m10s elapsed]
+azurerm_subnet.spare: Creation complete after 11s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/virtualNetworks/homework-vnet/subnets/spare]
+azurerm_network_interface.homework: Creation complete after 7s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/networkInterfaces/homework-nic]
+azurerm_network_interface_security_group_association.homework: Creating...
+azurerm_network_interface_security_group_association.homework: Creation complete after 3s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/networkInterfaces/homework-nic|/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg]
+azurerm_linux_virtual_machine.homework: Creating...
+azurerm_linux_virtual_machine.homework: Still creating... [00m10s elapsed]
+azurerm_linux_virtual_machine.homework: Still creating... [00m20s elapsed]
+azurerm_linux_virtual_machine.homework: Still creating... [00m31s elapsed]
+azurerm_linux_virtual_machine.homework: Still creating... [00m41s elapsed]
+azurerm_linux_virtual_machine.homework: Creation complete after 50s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Compute/virtualMachines/session21-homework]
+
+Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+public_ip = "20.198.80.51"
+resource_group = "session21-homework"

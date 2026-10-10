@@ -1,0 +1,12 @@
+Captured: 2026-10-10T01:29:29.743969+00:00
+$ helm upgrade --install homework ./helm/taskboard -n session21 --create-namespace --set backend.tag=eb5ff921594a6a094d4c3d9161bde6e62f68867e --set frontend.tag=eb5ff921594a6a094d4c3d9161bde6e62f68867e --set ingress.className=traefik --set ingress.host='' --wait --timeout 300s
+Release "homework" does not exist. Installing it now.
+NAME: homework
+LAST DEPLOYED: Sat Oct 10 06:59:30 2026
+NAMESPACE: session21
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+
+Exit status: 0

@@ -1,7 +1,7 @@
 {
   "url": "http://127.0.0.1:5173",
   "http": 200,
-  "created": "Manual browser verified",
+  "created": "Final manual assignment check",
   "updated": "IN_PROGRESS",
   "persistedAfterReload": true,
   "pageErrors": []

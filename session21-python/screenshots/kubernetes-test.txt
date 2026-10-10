@@ -1,0 +1,26 @@
+Captured: 2026-10-10T00:28:47.036214+00:00
+$ kubectl -n session21 get pods,svc,ingress,hpa,pvc; helm list -n session21
+NAME                                     READY   STATUS    RESTARTS       AGE
+pod/homework-backend-6c67774877-7sv74    1/1     Running   1 (105s ago)   113s
+pod/homework-backend-6c67774877-blhv7    1/1     Running   1 (105s ago)   113s
+pod/homework-frontend-75f647bd77-dgbdd   1/1     Running   0              113s
+pod/homework-frontend-75f647bd77-gfqg7   1/1     Running   0              113s
+pod/postgres-7989d56484-7kgn9            1/1     Running   0              113s
+
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/backend             ClusterIP   10.97.122.217    <none>        8000/TCP   113s
+service/homework-frontend   ClusterIP   10.97.175.191    <none>        80/TCP     113s
+service/postgres            ClusterIP   10.105.110.227   <none>        5432/TCP   113s
+
+NAME                                 CLASS   HOSTS            ADDRESS        PORTS   AGE
+ingress.networking.k8s.io/homework   nginx   homework.local   192.168.49.2   80      113s
+
+NAME                                                   REFERENCE                     TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/homework-backend   Deployment/homework-backend   cpu: <unknown>/60%   2         4         2          113s
+
+NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/postgres-data   Bound    pvc-03ca0c27-9bfb-4a86-b379-01cffe38a4a5   1Gi        RWO            standard       <unset>                 113s
+NAME    	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART                 	APP VERSION
+homework	session21	1       	2026-10-10 05:56:54.007661 +0530 IST	deployed	homework-tracker-1.1.0	1.1.0      
+
+Exit status: 0

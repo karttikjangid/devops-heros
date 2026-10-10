@@ -1,0 +1,28 @@
+Captured: 2026-10-10T01:30:34.576258+00:00
+$ kubectl -n session21 get pods,svc,ingress,hpa,pvc; helm list -n session21; kubectl get nodes
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/homework-backend-7cd8868889-462gp    1/1     Running   0          62s
+pod/homework-backend-7cd8868889-dbsbh    1/1     Running   0          62s
+pod/homework-frontend-5bc795bf45-5gw24   1/1     Running   0          62s
+pod/homework-frontend-5bc795bf45-wrhg5   1/1     Running   0          62s
+pod/postgres-cf49944ff-78rlm             1/1     Running   0          62s
+
+NAME                        TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/backend             ClusterIP   10.43.103.28   <none>        8000/TCP   62s
+service/homework-frontend   ClusterIP   10.43.11.116   <none>        80/TCP     62s
+service/postgres            ClusterIP   10.43.125.52   <none>        5432/TCP   62s
+
+NAME                                 CLASS     HOSTS   ADDRESS     PORTS   AGE
+ingress.networking.k8s.io/homework   traefik   *       10.21.1.4   80      62s
+
+NAME                                                   REFERENCE                     TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/homework-backend   Deployment/homework-backend   cpu: <unknown>/60%   2         4         2          62s
+
+NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/postgres-data   Bound    pvc-30b1af7e-67e2-4a82-a0b9-026b0318116f   1Gi        RWO            local-path     <unset>                 62s
+NAME    	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART                 	APP VERSION
+homework	session21	1       	2026-10-10 06:59:30.503976 +0530 IST	deployed	homework-tracker-1.1.0	1.1.0      
+NAME                 STATUS   ROLES           AGE     VERSION
+session21-homework   Ready    control-plane   7m11s   v1.36.5+k3s1
+
+Exit status: 0

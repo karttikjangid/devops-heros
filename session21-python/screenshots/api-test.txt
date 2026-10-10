@@ -1,86 +1,96 @@
-Captured: 2026-10-10T00:12:41.913358+00:00
+Captured: 2026-10-10T01:46:05.939309+00:00
 $ bash /Users/kartik/Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/api-test.sh
 
 $ curl -fsS -i http://localhost:8000/health
 HTTP/1.1 200 OK
-date: Sat, 10 Oct 2026 00:12:42 GMT
+date: Sat, 10 Oct 2026 01:46:05 GMT
 server: uvicorn
 content-length: 15
 content-type: application/json
+vary: Origin
 
 {"status":"UP"}
 
 $ curl -fsS -i http://localhost:8000/ready
 HTTP/1.1 200 OK
-date: Sat, 10 Oct 2026 00:12:42 GMT
+date: Sat, 10 Oct 2026 01:46:05 GMT
 server: uvicorn
 content-length: 18
 content-type: application/json
+vary: Origin
 
 {"status":"READY"}
 
 $ curl -fsS -i -X POST http://localhost:8000/api/tasks -H Content-Type:\ application/json -d \{\"title\":\"Session\ 21\ API\ verification\"\,\"description\":\"Created\ by\ curl\ and\ checked\ in\ PostgreSQL\"\,\"priority\":\"HIGH\"\,\"assignee\":\"Kartik\"\}
 HTTP/1.1 201 Created
-date: Sat, 10 Oct 2026 00:12:42 GMT
+date: Sat, 10 Oct 2026 01:46:05 GMT
 server: uvicorn
 content-length: 201
 content-type: application/json
+vary: Origin
 
-{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","status":"TODO","assignee":"Kartik","id":1,"created_at":"2026-10-10T00:12:42.255118Z"}
+{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","status":"TODO","assignee":"Kartik","id":5,"created_at":"2026-10-10T01:46:06.141979Z"}
 
-$ curl -fsS -i http://localhost:8000/api/tasks/1
+$ curl -fsS -i http://localhost:8000/api/tasks/5
 HTTP/1.1 200 OK
-date: Sat, 10 Oct 2026 00:12:42 GMT
+date: Sat, 10 Oct 2026 01:46:06 GMT
 server: uvicorn
 content-length: 201
 content-type: application/json
+vary: Origin
 
-{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","status":"TODO","assignee":"Kartik","id":1,"created_at":"2026-10-10T00:12:42.255118Z"}
+{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","status":"TODO","assignee":"Kartik","id":5,"created_at":"2026-10-10T01:46:06.141979Z"}
 
-$ curl -fsS -i -X PUT http://localhost:8000/api/tasks/1 -H Content-Type:\ application/json -d \{\"status\":\"DONE\"\}
+$ curl -fsS -i -X PUT http://localhost:8000/api/tasks/5 -H Content-Type:\ application/json -d \{\"status\":\"DONE\"\}
 HTTP/1.1 200 OK
-date: Sat, 10 Oct 2026 00:12:42 GMT
+date: Sat, 10 Oct 2026 01:46:06 GMT
 server: uvicorn
 content-length: 201
 content-type: application/json
+vary: Origin
 
-{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","status":"DONE","assignee":"Kartik","id":1,"created_at":"2026-10-10T00:12:42.255118Z"}
+{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","status":"DONE","assignee":"Kartik","id":5,"created_at":"2026-10-10T01:46:06.141979Z"}
 
 $ curl -fsS -i http://localhost:8000/api/tasks/stats
 HTTP/1.1 200 OK
-date: Sat, 10 Oct 2026 00:12:42 GMT
+date: Sat, 10 Oct 2026 01:46:06 GMT
 server: uvicorn
 content-length: 44
 content-type: application/json
+vary: Origin
 
-{"total":1,"todo":0,"inProgress":0,"done":1}
+{"total":3,"todo":0,"inProgress":2,"done":1}
 
 $ curl -fsS -i http://localhost:3000/api/tasks
 HTTP/1.1 200 OK
-Server: nginx/1.27.5
-Date: Sat, 10 Oct 2026 00:12:42 GMT
+Server: nginx/1.30.5
+Date: Sat, 10 Oct 2026 01:46:06 GMT
 Content-Type: application/json
-Content-Length: 203
+Content-Length: 664
 Connection: keep-alive
+vary: Origin
 
-[{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","status":"DONE","assignee":"Kartik","id":1,"created_at":"2026-10-10T00:12:42.255118Z"}]
+[{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","status":"DONE","assignee":"Kartik","id":5,"created_at":"2026-10-10T01:46:06.141979Z"},{"title":"Session 21 homework verification","description":"Created through the real frontend and stored in PostgreSQL.","priority":"LOW","status":"IN_PROGRESS","assignee":"Kartik","id":4,"created_at":"2026-10-10T00:24:28.237754Z"},{"title":"Session 21 browser verification","description":"Created through the real frontend and stored in PostgreSQL.","priority":"LOW","status":"IN_PROGRESS","assignee":"Kartik","id":2,"created_at":"2026-10-10T00:12:48.816582Z"}]
 
 $ docker compose exec -T postgres psql -U taskboard -d taskboard -c "SELECT id, title, status FROM tasks ORDER BY id;"
- id |            title            | status 
-----+-----------------------------+--------
-  1 | Session 21 API verification | DONE
-(1 row)
+ id |              title               |   status    
+----+----------------------------------+-------------
+  2 | Session 21 browser verification  | IN_PROGRESS
+  4 | Session 21 homework verification | IN_PROGRESS
+  5 | Session 21 API verification      | DONE
+(3 rows)
 
 
-$ curl -fsS -i -X DELETE http://localhost:8000/api/tasks/1
+$ curl -fsS -i -X DELETE http://localhost:8000/api/tasks/5
 HTTP/1.1 204 No Content
-date: Sat, 10 Oct 2026 00:12:43 GMT
+date: Sat, 10 Oct 2026 01:46:07 GMT
 server: uvicorn
 content-type: application/json
+vary: Origin
 
 
 
-$ curl -sS -o /private/tmp/session21-deleted.json -w "%{http_code}" http://localhost:8000/api/tasks/1
+$ curl -sS -o /private/tmp/session21-deleted.json -w "%{http_code}" http://localhost:8000/api/tasks/5
 404
 {"detail":"Task not found"}
 

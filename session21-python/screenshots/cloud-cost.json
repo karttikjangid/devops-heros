@@ -1,0 +1,12 @@
+{
+  "budget_ceiling_usd": 2,
+  "vm_size": "Standard_B2als_v2",
+  "region": "centralindia",
+  "retail_compute_usd_per_hour": 0.0246,
+  "usage_window_hours_upper_bound": 0.6568194844325383,
+  "compute_cost_usd_upper_bound_estimate": 0.016157759317040443,
+  "assumptions": "Conservative window from saved plan to completed destroy; includes time before VM creation and after deallocation. This is compute-only, excludes disk/IP/network/tax, and is not a bill.",
+  "actual_total_billing": "Not yet posted; Azure billing is delayed.",
+  "resources_destroyed": 9,
+  "pricing_source": "https://prices.azure.com/api/retail/prices?%24filter=serviceName+eq+%27Virtual+Machines%27+and+priceType+eq+%27Consumption%27+and+%28armSkuName+eq+%27Standard_B2s%27+or+armSkuName+eq+%27Standard_B2als_v2%27+or+armSkuName+eq+%27Standard_B2ls_v2%27%29+and+armRegionName+eq+%27centralindia%27&currencyCode=USD"
+}

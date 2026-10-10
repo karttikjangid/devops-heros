@@ -1,0 +1,12 @@
+Captured: 2026-10-10T00:26:53.865187+00:00
+$ helm upgrade --install homework ./helm/taskboard -n session21 --create-namespace --set backend.image=docker.io/library/session21-python-backend --set frontend.image=docker.io/library/session21-python-frontend --wait --timeout 180s
+Release "homework" does not exist. Installing it now.
+NAME: homework
+LAST DEPLOYED: Sat Oct 10 05:56:54 2026
+NAMESPACE: session21
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+
+Exit status: 0

@@ -1,18 +1,23 @@
 # Session 21 - Homework Tracker
 
-## Project Overview
-
-Homework Tracker keeps course assignments and their progress. I adapted the TaskBoard starter for my coursework using React/Vite, FastAPI and PostgreSQL.
+I adapted the provided TaskBoard starter to track course assignments. The app has a React frontend, FastAPI backend and PostgreSQL database.
 
 ## Architecture
 
 ```text
-Browser → Frontend (3000, Nginx) → /api → Backend (8000, FastAPI) → PostgreSQL (5432)
+GitHub → Actions: test, build, scan → GHCR images tagged with the commit SHA
+                                      ↓
+                               Kubernetes + Helm
+Browser → Ingress → Frontend → Backend → PostgreSQL
+                                 ↓
+                            Prometheus → Grafana
 ```
 
-## Running Manually
+Technologies: React/Vite, Python/FastAPI, PostgreSQL, Alembic, Docker Compose, GitHub Actions, Trivy, Helm, Terraform, K3s, Prometheus and Grafana.
 
-From `session21-python/`, start PostgreSQL:
+## Running manually
+
+Start PostgreSQL from `session21-python/`:
 
 ```bash
 docker run -d --name session21-manual-postgres \
@@ -21,7 +26,7 @@ docker run -d --name session21-manual-postgres \
 docker exec session21-manual-postgres pg_isready -U taskboard -d taskboard
 ```
 
-Once PostgreSQL accepts connections, start the backend:
+Start the backend after the database is ready:
 
 ```bash
 cd backend
@@ -33,7 +38,7 @@ alembic upgrade head
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-In another terminal (Node.js 22.12+):
+In another terminal:
 
 ```bash
 cd frontend
@@ -41,69 +46,42 @@ npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
-Open [manual frontend](http://localhost:5173). Vite sends `/api` requests to port 8000. I ran the frontend and backend directly on my Mac, with PostgreSQL in a separate container using `podman run`. [Manual API/database output](screenshots/manual-test.txt) and [browser verification](screenshots/manual-browser-test.txt).
+Open [localhost:5173](http://localhost:5173). Vite forwards `/api` to port 8000. I ran the frontend/backend as host processes and PostgreSQL separately with Podman. Stop these manual processes before Compose to free their ports.
 
-![Manual frontend after creating and updating a task](screenshots/manual-frontend.png)
+[Manual API/database output](screenshots/manual-test.txt) · [Browser check](screenshots/manual-browser-test.txt)
 
-Before Compose, stop both host processes with Ctrl+C and remove the temporary database:
+![Manual application](screenshots/manual-frontend.png)
 
-```bash
-docker stop session21-manual-postgres
-docker rm session21-manual-postgres
-```
+## Dockerfiles and Compose
 
-## Dockerfiles
+[Frontend Dockerfile](frontend/Dockerfile): Node 22 builds with `npm ci`; non-root Nginx runs as UID 101 on port 8080. [Backend Dockerfile](backend/Dockerfile): Python 3.12 Alpine runs as UID 10001 and applies migrations before Uvicorn starts.
 
-- [Frontend Dockerfile](frontend/Dockerfile): Node 22 builds with `npm ci`. Non-root Nginx (UID 101) serves the frontend on port 8080 and forwards `/api` to `backend:8000`.
-- [Backend Dockerfile](backend/Dockerfile): Python 3.12 runs as a non-root user. It applies Alembic migrations before starting Uvicorn.
-
-## Docker Compose
-
-The [Compose file](docker-compose.yml) starts all three services. The backend waits for PostgreSQL to be ready, then the frontend starts. PostgreSQL stores data in a named volume. Ports are local only; `taskboard` is the local homework password.
+[Compose](docker-compose.yml) keeps PostgreSQL data in a named volume and waits for service readiness. The `taskboard` credentials are local demo defaults.
 
 ```bash
 docker compose down
 docker compose up -d --build
 docker compose up -d --wait --wait-timeout 120
-```
-
-I used Docker CLI 28.5.1 and Compose 2.39.4 with Podman 6.1.0 on macOS. [Runtime versions](screenshots/runtime.txt).
-
-For Podman, connect the Docker CLI to its API socket:
-
-```bash
-export DOCKER_HOST="unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
-export DOCKER_BUILDKIT=0
-export COMPOSE_BAKE=false
-```
-
-I downloaded the Docker CLI and Compose plugin into a temporary folder. With Docker installed normally, skip the Podman variables above.
-
-![Compose build and startup output](screenshots/docker-compose-build.png)
-
-[Full build output](screenshots/docker-compose-build.txt), [clean shutdown](screenshots/clean-down.txt) and [readiness check](screenshots/services-ready.txt). The screenshot shows the final build lines.
-
-## Running Containers
-
-```bash
 docker compose ps
 ```
 
-![All three Compose services running and healthy](screenshots/docker-compose-ps.png)
+I used Docker CLI/Compose with the installed Podman engine on macOS. [Runtime versions](screenshots/runtime.txt).
 
-[Exact output](screenshots/docker-compose-ps.txt).
+![Build and startup](screenshots/docker-compose-build.png)
 
-## Application Test
+[Full build output](screenshots/docker-compose-build.txt) · [Clean shutdown](screenshots/clean-down.txt) · [Readiness](screenshots/services-ready.txt)
 
-Open [frontend](http://localhost:3000) and [backend API docs](http://localhost:8000/docs). I created a task in the browser, changed it to IN_PROGRESS and refreshed. It stayed saved in PostgreSQL. The starter sidebar and recent-activity panel are static.
+![docker compose ps](screenshots/docker-compose-ps.png)
 
-![Running frontend with the task created through the browser](screenshots/frontend-running.png)
+## Application and API tests
 
-[Browser test result](screenshots/frontend-browser-test.txt).
+Local URLs: [frontend](http://localhost:3000) · [API docs](http://localhost:8000/docs).
 
-## Backend API Testing
+The browser check creates an assignment, advances its status and reloads the page. The saved assignment remains in PostgreSQL.
 
-The [API transcript](screenshots/api-test.txt) has the exact commands and responses. Creation returned 201, reads and updates returned 200, deletion returned 204, and reading the deleted task returned 404.
+![Local frontend](screenshots/frontend-running.png)
+
+These curl requests test health, creation, reading, updates, statistics and deletion. Use the ID returned by POST for `TASK_ID`.
 
 ```bash
 curl -fsS -i http://localhost:8000/health
@@ -111,64 +89,130 @@ curl -fsS -i http://localhost:8000/ready
 curl -fsS -i -X POST http://localhost:8000/api/tasks \
   -H 'Content-Type: application/json' \
   -d '{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","assignee":"Kartik"}'
-# TASK_ID is the id returned by POST (see the exact transcript).
 curl -fsS -i "http://localhost:8000/api/tasks/$TASK_ID"
 curl -fsS -i -X PUT "http://localhost:8000/api/tasks/$TASK_ID" \
   -H 'Content-Type: application/json' -d '{"status":"DONE"}'
 curl -fsS -i http://localhost:8000/api/tasks/stats
 curl -fsS -i http://localhost:3000/api/tasks
-docker compose exec -T postgres psql -U taskboard -d taskboard \
-  -c 'SELECT id, title, status FROM tasks ORDER BY id;'
 curl -fsS -i -X DELETE "http://localhost:8000/api/tasks/$TASK_ID"
-curl -sS -o /private/tmp/session21-deleted.json -w '%{http_code}' \
-  "http://localhost:8000/api/tasks/$TASK_ID"
 ```
 
-![Real successful API output](screenshots/api-test.png)
+[Exact executed commands and responses](screenshots/api-test.txt): POST 201, GET/PUT 200, DELETE 204, then 404 for the deleted task.
 
-![PostgreSQL confirms the browser task is stored](screenshots/database-test.png)
+![API results](screenshots/api-test.png)
 
-[Database output](screenshots/database-test.txt). I deleted the API test task and kept the browser task.
-
-All 5 backend tests passed:
+All five API tests pass using a temporary SQLite database:
 
 ```bash
 cd backend
-python -m pytest -p no:cacheprovider tests
+python -m pytest -v tests
 ```
 
-[Captured test output](screenshots/backend-tests.txt).
+![Five passing tests](screenshots/backend-tests.png)
 
-![Five passing API tests](screenshots/backend-tests.png)
+![Non-root application containers](screenshots/non-root-test.png)
 
-![Both application containers run as non-root](screenshots/non-root-test.png)
+## Kubernetes and Helm
+
+The [chart](helm/taskboard/) has two frontend replicas, two backend replicas, PostgreSQL storage, ConfigMap, Secret, Ingress, HPA and probes. The backend waits for PostgreSQL before starting. [Rendered manifests](k8s/application.yaml).
+
+On K3s, use Traefik and an empty hostname to access the VM's public IP:
+
+```bash
+helm upgrade --install homework ./helm/taskboard -n session21 --create-namespace \
+  --set backend.tag=<commit-sha> --set frontend.tag=<commit-sha> \
+  --set ingress.className=traefik --set ingress.host='' --wait
+kubectl -n session21 get pods,svc,ingress,hpa,pvc
+helm list -n session21
+```
+
+![Azure Kubernetes deployment](screenshots/cloud-kubernetes.png)
+
+![Azure frontend](screenshots/cloud-frontend.png)
+
+![PostgreSQL contains the assignment created through the Azure frontend](screenshots/cloud-database.png)
+
+[Helm output](screenshots/cloud-deploy.txt) · [Cloud browser test](screenshots/cloud-browser-test.txt) · [Cloud API output](screenshots/cloud-api.txt)
+
+## Terraform infrastructure
+
+I used one Azure VM with K3s, as requested, instead of the rubric's AWS/EKS setup. The Azure for Students quota could not support the current AKS minimum. This is an Azure/self-managed Kubernetes variant.
+
+[Terraform files](terraform/) create a VNet with two subnets, the VM, NSG, network interface and public IP. `Standard_B2als_v2` in Central India has 2 vCPUs and 4 GB RAM. SSH is restricted to my IP; port 80 is for the frontend.
+
+```bash
+cd terraform
+cp terraform.tfvars.example terraform.tfvars
+# Fill in the subscription ID, public SSH key path and your IP.
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+```
+
+![Terraform plan](screenshots/terraform-plan.png)
+
+![Terraform apply](screenshots/terraform-apply.png)
+
+![Real Azure VM state](screenshots/azure-vm.png)
+
+This is real Azure CLI evidence. The portal screenshot needs a separate browser sign-in and is not included.
+
+![Terraform destroy](screenshots/terraform-destroy.png)
+
+[Destroy output](screenshots/terraform-destroy.txt) · [Cleanup verification](screenshots/azure-cleanup.txt)
+
+The cloud resources were destroyed after the demo. State, private keys and personal variable files are excluded from Git. [Cost estimate and runtime](screenshots/cloud-cost.json).
+
+## CI/CD and security
+
+[Workflow](../.github/workflows/session21.yml) runs on Session 21 code pushes to `main`: tests, frontend build, Docker builds, Trivy scans, GHCR pushes, Helm deployment into an isolated CI Kubernetes cluster and monitoring checks. Images use the commit SHA. Azure deployment uses the same chart and images.
+
+![Successful GitHub Actions run](screenshots/github-actions.png)
+
+![GHCR image package](screenshots/registry-backend.png)
+
+Trivy scans both application images and blocks HIGH/CRITICAL findings. It flagged old Starlette dependencies and a vulnerable `tiff` package. Updating the framework, changing the backend to Alpine and upgrading `tiff` removed those findings; the final scans passed without ignoring them.
+
+[Backend scan](screenshots/backend-scan.txt) · [Frontend scan](screenshots/frontend-scan.txt)
+
+## Monitoring
+
+Prometheus scrapes the backend's `/metrics` endpoint. Grafana shows the live HTTP request counter. I used self-hosted monitoring to keep Azure costs low.
+
+![Prometheus target UP](screenshots/prometheus-targets.png)
+
+![Grafana live request counter](screenshots/grafana-dashboard.png)
+
+[Target status](screenshots/prometheus-targets.json) · [Saved metric query](screenshots/prometheus-query.json) · [Backend metrics](screenshots/cloud-metrics.txt)
 
 ## Troubleshooting
 
 | Issue | Cause | Fix |
 | --- | --- | --- |
-| Docker command missing | Only Podman was installed | Downloaded Docker CLI/Compose and connected to Podman |
-| Backend migration refused connection | PostgreSQL was still starting | Waited for `pg_isready`, then restarted the backend |
-| Wrong manual proxy port | Vite used 8080; Uvicorn uses 8000 | Changed the proxy to 8000 and checked `/api/tasks` |
-| Task form stayed open after saving | `currentTarget` was read after the API request | Saved the form reference before awaiting |
-| Tests failed with `no such table: tasks` | TestClient did not run startup | Used a context-managed fixture and temporary SQLite database |
-| Compose could not bind 5432 | Manual PostgreSQL still occupied the port | Stopped the manual app and database, then reran Compose |
-| Existing Git merge was unfinished | Earlier sessions had staged changes and conflicts | Committed this homework from a separate checkout of `origin/main` |
+| Wrong manual proxy port | Vite used 8080; backend uses 8000 | Corrected the proxy port |
+| Task form stayed open after saving | Event reference was read after awaiting the API | Saved the form reference first |
+| Tests reported no tasks table | TestClient did not run startup | Used a context-managed fixture and temporary database |
+| Compose could not bind 5432 | Manual PostgreSQL still occupied the port | Stopped the manual app before Compose |
+| Helm backend initially restarted | PostgreSQL was not ready | Added a database readiness init container |
+| CI could not resolve Trivy | Action tag missed its `v` prefix | Used the published tag |
+| Security gate failed | Vulnerable framework/base packages | Updated the affected packages and rebuilt |
+| Framework update caused a dependency conflict | Old metrics plugin required Starlette below 1.0 | Updated the plugin with the framework |
+| Local monitoring timed out | The shared local VM had too little memory; logs showed OOM kills | Verified it in CI and on the 4 GB Azure VM |
+| AKS could not fit the quota | Required system-node capacity exceeded the student quota | Used the requested small VM with K3s |
+| Upstream sync had conflicts | Local homework and instructor files differed | Preserved completed homework while merging upstream |
 
-[Failed first Compose attempt](screenshots/build-first-attempt.txt).
+[First failed Compose run](screenshots/build-first-attempt.txt). I documented actual failures and did not introduce artificial incidents.
 
-## Lessons Learned
+## Demo and lessons
 
-I learned to wait for database readiness and check the frontend proxy port. Testing the form in the browser caught a bug that curl tests missed.
+[Recorded walkthrough](screenshots/session21-demo.webm) shows the application, CI run and updated cloud deployment.
 
-## Final Verification
+I learned to check database readiness, test the browser form as well as the APIs, scan before pushing images and remove cloud resources after collecting evidence.
 
-I checked a clean Compose start, all services, API CRUD, frontend updates and PostgreSQL data. The screenshots load in the README. Terminal screenshots use the saved command output.
+## Final checks
 
-[Final service/API/database/log checks](screenshots/final-verification.txt).
+Clean Compose start, all services, API CRUD, browser persistence, PostgreSQL data, non-root users, five tests, CI/security, Kubernetes/Helm, monitoring, Terraform cleanup and README image/link checks passed. Upstream is synchronized and the Session 21 files are committed and pushed.
 
-## Capstone progress
-
-Application, tests and Docker are verified locally. The full rubric also requires a green CI pipeline, registry images, Kubernetes/Helm, monitoring, real cloud infrastructure and a demo. Those checks are in progress; this is not yet a full-rubric PASS.
-
-The provided rubric specifies AWS VPC/EKS. An Azure VNet/AKS deployment needs instructor approval.
+[Final local checks](screenshots/final-verification.txt) · [Cloud checks](screenshots/cloud-final.txt) · [Commit history](screenshots/git-history.png)
