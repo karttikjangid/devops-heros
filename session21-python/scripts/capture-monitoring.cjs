@@ -1,0 +1,27 @@
+const {chromium}=require('playwright');
+const fs=require('fs');
+(async()=>{
+ const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome'});
+ const page=await browser.newPage({viewport:{width:1440,height:1000}});
+ await page.goto('http://localhost:9090/targets');
+ await page.getByText('homework',{exact:false}).first().waitFor();
+ await page.screenshot({path:'screenshots/prometheus-targets.png',fullPage:true});
+ const targets=await(await fetch('http://localhost:9090/api/v1/targets')).json();
+ const up=targets.data.activeTargets.find(t=>t.labels.job==='homework');
+ if(!up||up.health!=='up')throw Error('Homework target is not UP');
+ fs.writeFileSync('screenshots/prometheus-targets.json',JSON.stringify(targets,null,2));
+ const metrics=await(await fetch('http://localhost:9090/api/v1/query?query='+encodeURIComponent('sum(http_requests_total{job="homework"})'))).json();
+ if(!metrics.data.result.length||Number(metrics.data.result[0].value[1])<1)throw Error('No live requests metric');
+ fs.writeFileSync('screenshots/prometheus-query.json',JSON.stringify(metrics,null,2));
+ await page.goto('http://localhost:3005/login');
+ await page.locator('input[name=user]').fill('admin');
+ await page.locator('input[name=password]').fill(process.env.GRAFANA_PASSWORD);
+ await page.getByRole('button',{name:'Log in',exact:false}).click();
+ await page.waitForURL(url=>!url.pathname.includes('/login'));
+ await page.goto('http://localhost:3005/d/session21');
+ await page.getByText('Backend requests',{exact:false}).first().waitFor();
+ await page.waitForTimeout(5000);
+ await page.screenshot({path:'screenshots/grafana-dashboard.png',fullPage:true});
+ console.log('Prometheus target UP; live request metric recorded; Grafana dashboard captured.');
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

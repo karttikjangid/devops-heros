@@ -72,6 +72,29 @@ jobs:
           kubectl -n session21 port-forward service/backend 8000:8000 > /tmp/session21-forward.log 2>&1 &
           sleep 3
           curl --fail --retry 5 --retry-connrefused http://localhost:8000/ready
+      - name: Monitoring
+        run: |
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo update
+          helm upgrade --install session21-prometheus prometheus-community/prometheus -n session21-monitoring --create-namespace -f monitoring/prometheus-values.yaml --wait --timeout 300s
+          helm upgrade --install session21-grafana grafana/grafana -n session21-monitoring -f monitoring/grafana-values.yaml --wait --timeout 300s
+          kubectl -n session21-monitoring port-forward svc/session21-prometheus-server 9090:80 > /tmp/prometheus-forward.log 2>&1 &
+          kubectl -n session21-monitoring port-forward svc/session21-grafana 3005:80 > /tmp/grafana-forward.log 2>&1 &
+          sleep 5
+          curl --fail http://localhost:8000/api/tasks
+      - name: Capture monitoring evidence
+        run: |
+          npm install --prefix /tmp/session21-browser playwright
+          GRAFANA_PASSWORD=$(kubectl -n session21-monitoring get secret session21-grafana -o jsonpath='{.data.admin-password}' | base64 -d) NODE_PATH=/tmp/session21-browser/node_modules node scripts/capture-monitoring.cjs
+      - name: Save monitoring evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: session21-monitoring
+          path: |
+            session21-python/screenshots/prometheus-*
+            session21-python/screenshots/grafana-dashboard.png
       - name: Save test and scan evidence
         if: always()
         uses: actions/upload-artifact@v4
