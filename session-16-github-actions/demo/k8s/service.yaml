@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: session16-app
+  namespace: session16
+spec:
+  selector:
+    app: session16-app
+  ports:
+  - port: 80
+    targetPort: 8000

@@ -1,0 +1,133 @@
+name: Session 17 CI/CD and DevSecOps
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - session-17-devsecops/demo/app/**
+    - session-17-devsecops/demo/tests/**
+    - session-17-devsecops/demo/k8s/**
+    - session-17-devsecops/demo/Dockerfile
+    - session-17-devsecops/demo/requirements*.txt
+    - session-17-devsecops/demo/pyproject.toml
+    - session-17-devsecops/demo/security/*.toml
+    - .github/workflows/session17.yml
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  packages: write
+jobs:
+  ci:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: session-17-devsecops/demo
+    env:
+      IMAGE: ghcr.io/${{ github.repository_owner }}/session17-devsecops:${{ github.sha }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install dependencies
+      run: pip install -r requirements.txt -r requirements-dev.txt
+    - name: Application build
+      run: python -m build
+    - name: Unit tests
+      run: python -m pytest -v | tee unit-tests.txt
+    - name: SAST - Bandit
+      run: bandit -r app -f json -o security/bandit-report.json
+    - name: SCA - pip-audit
+      run: pip-audit -r requirements.txt --format json --output security/sca-report.json
+    - name: Install Gitleaks
+      run: curl -fsSL https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz | tar
+        -xz -C /tmp gitleaks
+    - name: Secret scan - Gitleaks
+      run: /tmp/gitleaks dir . --config security/gitleaks.toml --report-format json --report-path security/gitleaks-report.json
+        --redact
+    - name: Docker image build
+      run: docker build -t "$IMAGE" .
+    - name: Container image scan - Trivy
+      uses: aquasecurity/trivy-action@v0.36.0
+      with:
+        image-ref: ${{ env.IMAGE }}
+        severity: HIGH,CRITICAL
+        exit-code: '1'
+        format: json
+        output: session-17-devsecops/demo/security/container-report.json
+    - name: Security gate
+      run: 'echo "PASS: SAST, SCA, secret scan and container scan completed with no blocking findings."'
+    - name: Registry login
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push image
+      run: docker push "$IMAGE"
+    - name: Upload build and evidence
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: session17-ci-evidence
+        path: 'session-17-devsecops/demo/dist/
+
+          session-17-devsecops/demo/unit-tests.txt
+
+          session-17-devsecops/demo/security/*report.json'
+  cd:
+    needs: ci
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: read
+    defaults:
+      run:
+        working-directory: session-17-devsecops/demo
+    env:
+      IMAGE: ghcr.io/${{ github.repository_owner }}/session17-devsecops:${{ github.sha }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Registry login
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create Kubernetes cluster
+      uses: helm/kind-action@v1.15.1
+    - name: Deploy and test Kubernetes
+      run: 'docker pull "$IMAGE"
+
+        kind load docker-image "$IMAGE" --name chart-testing
+
+        kubectl apply -f k8s/namespace.yaml
+
+        sed "s|__IMAGE__|$IMAGE|" k8s/deployment.yaml | kubectl apply -f -
+
+        kubectl apply -f k8s/service.yaml
+
+        kubectl -n session17 rollout status deployment/session17-app --timeout=120s
+
+        kubectl -n session17 get deployment,pods,service | tee deployment.txt
+
+        kubectl -n session17 port-forward service/session17-app 8080:80 >/tmp/session17-forward.log 2>&1 &
+
+        sleep 3
+
+        curl --fail --retry 5 --retry-connrefused http://localhost:8080/health | tee health.json
+
+        curl --fail -X POST http://localhost:8080/api/calculate -H "Content-Type: application/json" -d ''{"a":6,"b":3,"operation":"multiply"}''
+        | tee api.json
+
+        '
+    - name: Upload deployment evidence
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: session17-cd-evidence
+        path: 'session-17-devsecops/demo/deployment.txt
+
+          session-17-devsecops/demo/health.json
+
+          session-17-devsecops/demo/api.json'

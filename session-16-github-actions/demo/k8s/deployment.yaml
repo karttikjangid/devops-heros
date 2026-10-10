@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: session16-app
+  namespace: session16
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: session16-app
+  template:
+    metadata:
+      labels:
+        app: session16-app
+    spec:
+      containers:
+      - name: app
+        image: __IMAGE__
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: 10m
+            memory: 24Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10001

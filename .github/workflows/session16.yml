@@ -1,0 +1,112 @@
+name: Session 16 CI/CD calculator
+'on':
+  push:
+    branches:
+    - main
+    paths:
+    - session-16-github-actions/demo/app/**
+    - session-16-github-actions/demo/tests/**
+    - session-16-github-actions/demo/k8s/**
+    - session-16-github-actions/demo/Dockerfile
+    - session-16-github-actions/demo/requirements*.txt
+    - session-16-github-actions/demo/pyproject.toml
+    - session-16-github-actions/demo/security/*.toml
+    - .github/workflows/session16.yml
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  packages: write
+jobs:
+  ci:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: session-16-github-actions/demo
+    env:
+      IMAGE: ghcr.io/${{ github.repository_owner }}/session16-calculator:${{ github.sha }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install dependencies
+      run: pip install -r requirements-dev.txt
+    - name: Application build
+      run: python -m build
+    - name: Unit tests
+      run: python -m pytest -v | tee unit-tests.txt
+    - name: Docker image build
+      run: docker build -t "$IMAGE" .
+    - name: Registry login
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push image
+      run: docker push "$IMAGE"
+    - name: Upload build and evidence
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: session16-ci-evidence
+        path: 'session-16-github-actions/demo/dist/
+
+          session-16-github-actions/demo/unit-tests.txt
+
+          '
+  cd:
+    needs: ci
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: read
+    defaults:
+      run:
+        working-directory: session-16-github-actions/demo
+    env:
+      IMAGE: ghcr.io/${{ github.repository_owner }}/session16-calculator:${{ github.sha }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Registry login
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create Kubernetes cluster
+      uses: helm/kind-action@v1.15.1
+    - name: Deploy and test Kubernetes
+      run: 'docker pull "$IMAGE"
+
+        kind load docker-image "$IMAGE" --name chart-testing
+
+        kubectl apply -f k8s/namespace.yaml
+
+        sed "s|__IMAGE__|$IMAGE|" k8s/deployment.yaml | kubectl apply -f -
+
+        kubectl apply -f k8s/service.yaml
+
+        kubectl -n session16 rollout status deployment/session16-app --timeout=120s
+
+        kubectl -n session16 get deployment,pods,service | tee deployment.txt
+
+        kubectl -n session16 port-forward service/session16-app 8080:80 >/tmp/session16-forward.log 2>&1 &
+
+        sleep 3
+
+        curl --fail --retry 5 --retry-connrefused http://localhost:8080/health | tee health.json
+
+        curl --fail "http://localhost:8080/api/calculate?a=6&b=3&operation=multiply" | tee api.json
+
+        '
+    - name: Upload deployment evidence
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: session16-cd-evidence
+        path: 'session-16-github-actions/demo/deployment.txt
+
+          session-16-github-actions/demo/health.json
+
+          session-16-github-actions/demo/api.json'
