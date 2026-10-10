@@ -1,0 +1,395 @@
+$ terraform -chdir=work/azure-session19 destroy -auto-approve -no-color
+
+azurerm_resource_group.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework]
+azurerm_virtual_network.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet]
+azurerm_public_ip.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/publicIPAddresses/homework-ip]
+azurerm_network_security_group.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg]
+azurerm_storage_account.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970]
+azurerm_subnet.nodes: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet/subnets/nodes]
+azurerm_network_interface.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic]
+azurerm_network_interface_security_group_association.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic|/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg]
+azurerm_linux_virtual_machine.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/virtualMachines/session19-web]
+azurerm_storage_container.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970/blobServices/default/containers/homework]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # azurerm_linux_virtual_machine.homework will be destroyed
+  - resource "azurerm_linux_virtual_machine" "homework" {
+      - admin_username                                         = "student" -> null
+      - allow_extension_operations                             = true -> null
+      - bypass_platform_safety_checks_on_user_schedule_enabled = false -> null
+      - computer_name                                          = "session19-web" -> null
+      - custom_data                                            = (sensitive value) -> null
+      - disable_password_authentication                        = true -> null
+      - disk_controller_type                                   = "SCSI" -> null
+      - encryption_at_host_enabled                             = false -> null
+      - extensions_time_budget                                 = "PT1H30M" -> null
+      - id                                                     = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/virtualMachines/session19-web" -> null
+      - location                                               = "centralindia" -> null
+      - max_bid_price                                          = -1 -> null
+      - name                                                   = "session19-web" -> null
+      - network_interface_ids                                  = [
+          - "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic",
+        ] -> null
+      - os_managed_disk_id                                     = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/disks/session19-web_disk1_9a311614c0c04f1ca666b4569634b059" -> null
+      - patch_assessment_mode                                  = "ImageDefault" -> null
+      - patch_mode                                             = "ImageDefault" -> null
+      - platform_fault_domain                                  = -1 -> null
+      - priority                                               = "Regular" -> null
+      - private_ip_address                                     = "10.19.1.4" -> null
+      - private_ip_addresses                                   = [
+          - "10.19.1.4",
+        ] -> null
+      - provision_vm_agent                                     = true -> null
+      - public_ip_address                                      = "20.219.14.152" -> null
+      - public_ip_addresses                                    = [
+          - "20.219.14.152",
+        ] -> null
+      - resource_group_name                                    = "session19-homework" -> null
+      - secure_boot_enabled                                    = false -> null
+      - size                                                   = "Standard_B2als_v2" -> null
+      - tags                                                   = {} -> null
+      - virtual_machine_id                                     = "d738e925-a7fc-49fa-9e5c-e20066beab9f" -> null
+      - vm_agent_platform_updates_enabled                      = true -> null
+      - vtpm_enabled                                           = false -> null
+        # (13 unchanged attributes hidden)
+
+      - admin_ssh_key {
+          - public_key = <<-EOT
+                ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDwxnUi07bH5bz2PvW5tF+e2B6nCYIFZ1YMqT//N9ptS7/H/3FAKOI0EK0907xiVI7XV8nGs1MtDNRB4kshJaJO7d3sKMVoEZDwOKvzDD0KpLaNvqJCSKyySWRJjyQFGLim9VO3qZqPfGaYn3aItBI43RiddmaW4wnFd4wiokGGbTruu4Q7hXWHc8ueB248tK9hMNIqwcioulq0c/RLnCX0iz/+VrOqu4Dq1vc8lprhca3dGJJGDkJSNSj3Rj7tRNgAsZC9WcBX5lI+FDwzTPWu/z9RC4E/l+mgf4FO5L8WQa0KWOaqmOVc1jOWvclRqSAOIxMV2Bo95nqhN+AnW9CF0y1JdcayYD/UT4icYE7BPq9FXsN+epu8ZSxZn7j/ZoEXL4zRkSxk2j8kbhGdDLnDsUUbwrhHFyK909m4WapGxGnuLporRoJ1PepWb7Snzv13ptlv+IrPte1Ysw5tJQLWg5P8URNuGmErrYH5EmI3TtZAp9SUiPX7dotkO0CWGUU= session21
+            EOT -> null
+          - username   = "student" -> null
+        }
+
+      - os_disk {
+          - caching                          = "ReadWrite" -> null
+          - disk_size_gb                     = 32 -> null
+          - id                               = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/disks/session19-web_disk1_9a311614c0c04f1ca666b4569634b059" -> null
+          - name                             = "session19-web_disk1_9a311614c0c04f1ca666b4569634b059" -> null
+          - storage_account_type             = "Standard_LRS" -> null
+          - write_accelerator_enabled        = false -> null
+            # (3 unchanged attributes hidden)
+        }
+
+      - source_image_reference {
+          - offer     = "0001-com-ubuntu-server-jammy" -> null
+          - publisher = "Canonical" -> null
+          - sku       = "22_04-lts-gen2" -> null
+          - version   = "latest" -> null
+        }
+    }
+
+  # azurerm_network_interface.homework will be destroyed
+  - resource "azurerm_network_interface" "homework" {
+      - accelerated_networking_enabled = false -> null
+      - applied_dns_servers            = [] -> null
+      - dns_servers                    = [] -> null
+      - id                             = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic" -> null
+      - internal_domain_name_suffix    = "2yqfz5lgpjrefkx0ok0urdvmlf.rx.internal.cloudapp.net" -> null
+      - ip_forwarding_enabled          = false -> null
+      - location                       = "centralindia" -> null
+      - mac_address                    = "7C-ED-8D-9F-FD-9B" -> null
+      - name                           = "homework-nic" -> null
+      - private_ip_address             = "10.19.1.4" -> null
+      - private_ip_addresses           = [
+          - "10.19.1.4",
+        ] -> null
+      - resource_group_name            = "session19-homework" -> null
+      - tags                           = {} -> null
+      - virtual_machine_id             = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/virtualMachines/session19-web" -> null
+        # (4 unchanged attributes hidden)
+
+      - ip_configuration {
+          - name                                               = "primary" -> null
+          - primary                                            = true -> null
+          - private_ip_address                                 = "10.19.1.4" -> null
+          - private_ip_address_allocation                      = "Dynamic" -> null
+          - private_ip_address_version                         = "IPv4" -> null
+          - public_ip_address_id                               = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/publicIPAddresses/homework-ip" -> null
+          - subnet_id                                          = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet/subnets/nodes" -> null
+            # (1 unchanged attribute hidden)
+        }
+    }
+
+  # azurerm_network_interface_security_group_association.homework will be destroyed
+  - resource "azurerm_network_interface_security_group_association" "homework" {
+      - id                        = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic|/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg" -> null
+      - network_interface_id      = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic" -> null
+      - network_security_group_id = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg" -> null
+    }
+
+  # azurerm_network_security_group.homework will be destroyed
+  - resource "azurerm_network_security_group" "homework" {
+      - id                  = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg" -> null
+      - location            = "centralindia" -> null
+      - name                = "homework-nsg" -> null
+      - resource_group_name = "session19-homework" -> null
+      - security_rule       = [
+          - {
+              - access                                     = "Allow"
+              - destination_address_prefix                 = "*"
+              - destination_address_prefixes               = []
+              - destination_application_security_group_ids = []
+              - destination_port_range                     = "22"
+              - destination_port_ranges                    = []
+              - direction                                  = "Inbound"
+              - name                                       = "SSH"
+              - priority                                   = 100
+              - protocol                                   = "Tcp"
+              - source_address_prefix                      = "202.131.133.37/32"
+              - source_address_prefixes                    = []
+              - source_application_security_group_ids      = []
+              - source_port_range                          = "*"
+              - source_port_ranges                         = []
+                # (1 unchanged attribute hidden)
+            },
+          - {
+              - access                                     = "Allow"
+              - destination_address_prefix                 = "*"
+              - destination_address_prefixes               = []
+              - destination_application_security_group_ids = []
+              - destination_port_range                     = "80"
+              - destination_port_ranges                    = []
+              - direction                                  = "Inbound"
+              - name                                       = "Frontend"
+              - priority                                   = 110
+              - protocol                                   = "Tcp"
+              - source_address_prefix                      = "*"
+              - source_address_prefixes                    = []
+              - source_application_security_group_ids      = []
+              - source_port_range                          = "*"
+              - source_port_ranges                         = []
+                # (1 unchanged attribute hidden)
+            },
+        ] -> null
+      - tags                = {} -> null
+    }
+
+  # azurerm_public_ip.homework will be destroyed
+  - resource "azurerm_public_ip" "homework" {
+      - allocation_method       = "Static" -> null
+      - ddos_protection_mode    = "VirtualNetworkInherited" -> null
+      - id                      = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/publicIPAddresses/homework-ip" -> null
+      - idle_timeout_in_minutes = 4 -> null
+      - ip_address              = "20.219.14.152" -> null
+      - ip_tags                 = {} -> null
+      - ip_version              = "IPv4" -> null
+      - location                = "centralindia" -> null
+      - name                    = "homework-ip" -> null
+      - resource_group_name     = "session19-homework" -> null
+      - sku                     = "Standard" -> null
+      - sku_tier                = "Regional" -> null
+      - tags                    = {} -> null
+      - zones                   = [] -> null
+        # (5 unchanged attributes hidden)
+    }
+
+  # azurerm_resource_group.homework will be destroyed
+  - resource "azurerm_resource_group" "homework" {
+      - id         = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework" -> null
+      - location   = "centralindia" -> null
+      - name       = "session19-homework" -> null
+      - tags       = {
+          - "managed_by" = "Terraform"
+          - "session"    = "19"
+        } -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # azurerm_storage_account.homework will be destroyed
+  - resource "azurerm_storage_account" "homework" {
+      - access_tier                        = "Hot" -> null
+      - account_kind                       = "StorageV2" -> null
+      - account_replication_type           = "LRS" -> null
+      - account_tier                       = "Standard" -> null
+      - allow_nested_items_to_be_public    = false -> null
+      - cross_tenant_replication_enabled   = false -> null
+      - default_to_oauth_authentication    = false -> null
+      - dns_endpoint_type                  = "Standard" -> null
+      - https_traffic_only_enabled         = true -> null
+      - id                                 = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970" -> null
+      - infrastructure_encryption_enabled  = false -> null
+      - is_hns_enabled                     = false -> null
+      - large_file_share_enabled           = false -> null
+      - local_user_enabled                 = true -> null
+      - location                           = "centralindia" -> null
+      - min_tls_version                    = "TLS1_2" -> null
+      - name                               = "kt19demo7d2ca970" -> null
+      - nfsv3_enabled                      = false -> null
+      - primary_access_key                 = (sensitive value) -> null
+      - primary_blob_connection_string     = (sensitive value) -> null
+      - primary_blob_endpoint              = "https://kt19demo7d2ca970.blob.core.windows.net/" -> null
+      - primary_blob_host                  = "kt19demo7d2ca970.blob.core.windows.net" -> null
+      - primary_connection_string          = (sensitive value) -> null
+      - primary_dfs_endpoint               = "https://kt19demo7d2ca970.dfs.core.windows.net/" -> null
+      - primary_dfs_host                   = "kt19demo7d2ca970.dfs.core.windows.net" -> null
+      - primary_file_endpoint              = "https://kt19demo7d2ca970.file.core.windows.net/" -> null
+      - primary_file_host                  = "kt19demo7d2ca970.file.core.windows.net" -> null
+      - primary_location                   = "centralindia" -> null
+      - primary_queue_endpoint             = "https://kt19demo7d2ca970.queue.core.windows.net/" -> null
+      - primary_queue_host                 = "kt19demo7d2ca970.queue.core.windows.net" -> null
+      - primary_table_endpoint             = "https://kt19demo7d2ca970.table.core.windows.net/" -> null
+      - primary_table_host                 = "kt19demo7d2ca970.table.core.windows.net" -> null
+      - primary_web_endpoint               = "https://kt19demo7d2ca970.z29.web.core.windows.net/" -> null
+      - primary_web_host                   = "kt19demo7d2ca970.z29.web.core.windows.net" -> null
+      - public_network_access_enabled      = true -> null
+      - queue_encryption_key_type          = "Service" -> null
+      - resource_group_name                = "session19-homework" -> null
+      - secondary_access_key               = (sensitive value) -> null
+      - secondary_connection_string        = (sensitive value) -> null
+      - sftp_enabled                       = false -> null
+      - shared_access_key_enabled          = true -> null
+      - table_encryption_key_type          = "Service" -> null
+      - tags                               = {} -> null
+        # (57 unchanged attributes hidden)
+
+      - blob_properties {
+          - change_feed_enabled           = false -> null
+          - change_feed_retention_in_days = 0 -> null
+          - last_access_time_enabled      = false -> null
+          - versioning_enabled            = false -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - queue_properties {
+          - hour_metrics {
+              - enabled               = false -> null
+              - include_apis          = false -> null
+              - retention_policy_days = 0 -> null
+              - version               = "1.0" -> null
+            }
+          - logging {
+              - delete                = false -> null
+              - read                  = false -> null
+              - retention_policy_days = 0 -> null
+              - version               = "1.0" -> null
+              - write                 = false -> null
+            }
+          - minute_metrics {
+              - enabled               = false -> null
+              - include_apis          = false -> null
+              - retention_policy_days = 0 -> null
+              - version               = "1.0" -> null
+            }
+        }
+
+      - share_properties {
+          - retention_policy {
+              - days = 7 -> null
+            }
+        }
+    }
+
+  # azurerm_storage_container.homework will be destroyed
+  - resource "azurerm_storage_container" "homework" {
+      - container_access_type             = "private" -> null
+      - default_encryption_scope          = "$account-encryption-key" -> null
+      - encryption_scope_override_enabled = true -> null
+      - has_immutability_policy           = false -> null
+      - has_legal_hold                    = false -> null
+      - id                                = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970/blobServices/default/containers/homework" -> null
+      - metadata                          = {} -> null
+      - name                              = "homework" -> null
+      - resource_manager_id               = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970/blobServices/default/containers/homework" -> null
+      - storage_account_id                = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970" -> null
+      - url                               = "https://kt19demo7d2ca970.blob.core.windows.net/homework" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # azurerm_subnet.nodes will be destroyed
+  - resource "azurerm_subnet" "nodes" {
+      - address_prefixes                              = [
+          - "10.19.1.0/24",
+        ] -> null
+      - default_outbound_access_enabled               = true -> null
+      - id                                            = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet/subnets/nodes" -> null
+      - name                                          = "nodes" -> null
+      - private_endpoint_network_policies             = "Disabled" -> null
+      - private_link_service_network_policies_enabled = true -> null
+      - resource_group_name                           = "session19-homework" -> null
+      - service_endpoint_policy_ids                   = [] -> null
+      - service_endpoints                             = [] -> null
+      - virtual_network_name                          = "session19-vnet" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # azurerm_virtual_network.homework will be destroyed
+  - resource "azurerm_virtual_network" "homework" {
+      - address_space                  = [
+          - "10.19.0.0/16",
+        ] -> null
+      - dns_servers                    = [] -> null
+      - flow_timeout_in_minutes        = 0 -> null
+      - guid                           = "fd5c20e6-7a66-4262-aafa-72b5488eac5d" -> null
+      - id                             = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet" -> null
+      - location                       = "centralindia" -> null
+      - name                           = "session19-vnet" -> null
+      - private_endpoint_vnet_policies = "Disabled" -> null
+      - resource_group_name            = "session19-homework" -> null
+      - subnet                         = [
+          - {
+              - address_prefixes                              = [
+                  - "10.19.1.0/24",
+                ]
+              - default_outbound_access_enabled               = true
+              - delegation                                    = []
+              - id                                            = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet/subnets/nodes"
+              - name                                          = "nodes"
+              - private_endpoint_network_policies             = "Disabled"
+              - private_link_service_network_policies_enabled = true
+              - service_endpoint_policy_ids                   = []
+              - service_endpoints                             = []
+                # (2 unchanged attributes hidden)
+            },
+        ] -> null
+      - tags                           = {} -> null
+        # (2 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 0 to change, 10 to destroy.
+
+Changes to Outputs:
+  - container       = "homework" -> null
+  - public_ip       = "20.219.14.152" -> null
+  - resource_group  = "session19-homework" -> null
+  - storage_account = "kt19demo7d2ca970" -> null
+  - vnet_id         = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet" -> null
+  - web_url         = "http://20.219.14.152" -> null
+azurerm_storage_container.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970/blobServices/default/containers/homework]
+azurerm_linux_virtual_machine.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/virtualMachines/session19-web]
+azurerm_storage_container.homework: Destruction complete after 0s
+azurerm_storage_account.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970]
+azurerm_storage_account.homework: Destruction complete after 4s
+azurerm_linux_virtual_machine.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-....Compute/virtualMachines/session19-web, 00m10s elapsed]
+azurerm_linux_virtual_machine.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-....Compute/virtualMachines/session19-web, 00m20s elapsed]
+azurerm_linux_virtual_machine.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-....Compute/virtualMachines/session19-web, 00m30s elapsed]
+azurerm_linux_virtual_machine.homework: Destruction complete after 33s
+azurerm_network_interface_security_group_association.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic|/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg]
+azurerm_network_interface_security_group_association.homework: Destruction complete after 2s
+azurerm_network_interface.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic]
+azurerm_network_security_group.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg]
+azurerm_network_security_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...ork/networkSecurityGroups/homework-nsg, 00m10s elapsed]
+azurerm_network_interface.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...Network/networkInterfaces/homework-nic, 00m10s elapsed]
+azurerm_network_interface.homework: Destruction complete after 13s
+azurerm_network_security_group.homework: Destruction complete after 13s
+azurerm_public_ip.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/publicIPAddresses/homework-ip]
+azurerm_subnet.nodes: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet/subnets/nodes]
+azurerm_public_ip.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-....Network/publicIPAddresses/homework-ip, 00m10s elapsed]
+azurerm_subnet.nodes: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...lNetworks/session19-vnet/subnets/nodes, 00m10s elapsed]
+azurerm_subnet.nodes: Destruction complete after 10s
+azurerm_virtual_network.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet]
+azurerm_public_ip.homework: Destruction complete after 10s
+azurerm_virtual_network.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...Network/virtualNetworks/session19-vnet, 00m10s elapsed]
+azurerm_virtual_network.homework: Destruction complete after 11s
+azurerm_resource_group.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework]
+azurerm_resource_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...9009/resourceGroups/session19-homework, 00m10s elapsed]
+azurerm_resource_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...9009/resourceGroups/session19-homework, 00m20s elapsed]
+azurerm_resource_group.homework: Destruction complete after 21s
+
+Destroy complete! Resources: 10 destroyed.
+
+Exit code: 0

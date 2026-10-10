@@ -1,16 +1,6 @@
-variable "aws_region" {
-  description = "AWS region for the project."
-  type        = string
-  default     = "ap-south-1"
-}
-
-variable "instance_type" {
-  description = "Small Arm instance for this short demo."
-  type        = string
-  default     = "t4g.nano"
-}
-
-variable "bucket_prefix" {
-  type    = string
-  default = "kartik-session19-"
-}
+variable "subscription_id" { type = string }
+variable "storage_account_name" { type = string }
+variable "location" { default = "centralindia" }
+variable "ssh_public_key_path" { type = string }
+variable "admin_cidr" { type = string }
+variable "vm_size" { default = "Standard_B2als_v2" }

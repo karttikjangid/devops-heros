@@ -1,0 +1,142 @@
+$ terraform -chdir=work/azure-session18 destroy -auto-approve -no-color
+
+azurerm_resource_group.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework]
+azurerm_storage_account.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9]
+azurerm_storage_container.homework: Refreshing state... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9/blobServices/default/containers/homework]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # azurerm_resource_group.homework will be destroyed
+  - resource "azurerm_resource_group" "homework" {
+      - id         = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework" -> null
+      - location   = "centralindia" -> null
+      - name       = "session18-homework" -> null
+      - tags       = {
+          - "managed_by" = "Terraform"
+          - "session"    = "18"
+        } -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # azurerm_storage_account.homework will be destroyed
+  - resource "azurerm_storage_account" "homework" {
+      - access_tier                        = "Hot" -> null
+      - account_kind                       = "StorageV2" -> null
+      - account_replication_type           = "LRS" -> null
+      - account_tier                       = "Standard" -> null
+      - allow_nested_items_to_be_public    = false -> null
+      - cross_tenant_replication_enabled   = false -> null
+      - default_to_oauth_authentication    = false -> null
+      - dns_endpoint_type                  = "Standard" -> null
+      - https_traffic_only_enabled         = true -> null
+      - id                                 = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9" -> null
+      - infrastructure_encryption_enabled  = false -> null
+      - is_hns_enabled                     = false -> null
+      - large_file_share_enabled           = false -> null
+      - local_user_enabled                 = true -> null
+      - location                           = "centralindia" -> null
+      - min_tls_version                    = "TLS1_2" -> null
+      - name                               = "kt18demo9320cad9" -> null
+      - nfsv3_enabled                      = false -> null
+      - primary_access_key                 = (sensitive value) -> null
+      - primary_blob_connection_string     = (sensitive value) -> null
+      - primary_blob_endpoint              = "https://kt18demo9320cad9.blob.core.windows.net/" -> null
+      - primary_blob_host                  = "kt18demo9320cad9.blob.core.windows.net" -> null
+      - primary_connection_string          = (sensitive value) -> null
+      - primary_dfs_endpoint               = "https://kt18demo9320cad9.dfs.core.windows.net/" -> null
+      - primary_dfs_host                   = "kt18demo9320cad9.dfs.core.windows.net" -> null
+      - primary_file_endpoint              = "https://kt18demo9320cad9.file.core.windows.net/" -> null
+      - primary_file_host                  = "kt18demo9320cad9.file.core.windows.net" -> null
+      - primary_location                   = "centralindia" -> null
+      - primary_queue_endpoint             = "https://kt18demo9320cad9.queue.core.windows.net/" -> null
+      - primary_queue_host                 = "kt18demo9320cad9.queue.core.windows.net" -> null
+      - primary_table_endpoint             = "https://kt18demo9320cad9.table.core.windows.net/" -> null
+      - primary_table_host                 = "kt18demo9320cad9.table.core.windows.net" -> null
+      - primary_web_endpoint               = "https://kt18demo9320cad9.z29.web.core.windows.net/" -> null
+      - primary_web_host                   = "kt18demo9320cad9.z29.web.core.windows.net" -> null
+      - public_network_access_enabled      = true -> null
+      - queue_encryption_key_type          = "Service" -> null
+      - resource_group_name                = "session18-homework" -> null
+      - secondary_access_key               = (sensitive value) -> null
+      - secondary_connection_string        = (sensitive value) -> null
+      - sftp_enabled                       = false -> null
+      - shared_access_key_enabled          = true -> null
+      - table_encryption_key_type          = "Service" -> null
+      - tags                               = {} -> null
+        # (57 unchanged attributes hidden)
+
+      - blob_properties {
+          - change_feed_enabled           = false -> null
+          - change_feed_retention_in_days = 0 -> null
+          - last_access_time_enabled      = false -> null
+          - versioning_enabled            = false -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - queue_properties {
+          - hour_metrics {
+              - enabled               = false -> null
+              - include_apis          = false -> null
+              - retention_policy_days = 0 -> null
+              - version               = "1.0" -> null
+            }
+          - logging {
+              - delete                = false -> null
+              - read                  = false -> null
+              - retention_policy_days = 0 -> null
+              - version               = "1.0" -> null
+              - write                 = false -> null
+            }
+          - minute_metrics {
+              - enabled               = false -> null
+              - include_apis          = false -> null
+              - retention_policy_days = 0 -> null
+              - version               = "1.0" -> null
+            }
+        }
+
+      - share_properties {
+          - retention_policy {
+              - days = 7 -> null
+            }
+        }
+    }
+
+  # azurerm_storage_container.homework will be destroyed
+  - resource "azurerm_storage_container" "homework" {
+      - container_access_type             = "private" -> null
+      - default_encryption_scope          = "$account-encryption-key" -> null
+      - encryption_scope_override_enabled = true -> null
+      - has_immutability_policy           = false -> null
+      - has_legal_hold                    = false -> null
+      - id                                = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9/blobServices/default/containers/homework" -> null
+      - metadata                          = {} -> null
+      - name                              = "homework" -> null
+      - resource_manager_id               = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9/blobServices/default/containers/homework" -> null
+      - storage_account_id                = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9" -> null
+      - url                               = "https://kt18demo9320cad9.blob.core.windows.net/homework" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+Plan: 0 to add, 0 to change, 3 to destroy.
+
+Changes to Outputs:
+  - container       = "homework" -> null
+  - resource_group  = "session18-homework" -> null
+  - storage_account = "kt18demo9320cad9" -> null
+azurerm_storage_container.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9/blobServices/default/containers/homework]
+azurerm_storage_container.homework: Destruction complete after 0s
+azurerm_storage_account.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9]
+azurerm_storage_account.homework: Destruction complete after 4s
+azurerm_resource_group.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework]
+azurerm_resource_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...9009/resourceGroups/session18-homework, 00m10s elapsed]
+azurerm_resource_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...9009/resourceGroups/session18-homework, 00m20s elapsed]
+azurerm_resource_group.homework: Destruction complete after 21s
+
+Destroy complete! Resources: 3 destroyed.
+
+Exit code: 0

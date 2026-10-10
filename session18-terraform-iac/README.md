@@ -1,10 +1,12 @@
 # Session 18 - Terraform & Infrastructure as Code
 
-- [Terraform S3 demo and commands](terraform-s3-demo/README.md)
-- [IAM - Governance](aws-services/01-iam/README.md)
-- [EC2 - Compute](aws-services/02-ec2/README.md)
-- [S3 - Storage](aws-services/03-s3/README.md)
-- [VPC - Networking](aws-services/04-vpc/README.md)
-- [DynamoDB & RDS](aws-services/05-dynamodb-rds/README.md)
+Completed using Azure equivalents in place of AWS, as requested.
 
-The Terraform project initializes and validates locally. The real AWS deployment and cleanup remain pending AWS login. The original lesson folders are preserved.
+- [Terraform object-storage demo, screenshots and cleanup](terraform-storage-demo/README.md)
+- [Identity & RBAC](azure-services/01-identity-rbac/README.md)
+- [Virtual Machines](azure-services/02-virtual-machines/README.md)
+- [Blob Storage](azure-services/03-blob-storage/README.md)
+- [Virtual Network](azure-services/04-virtual-network/README.md)
+- [Cosmos DB & managed relational databases](azure-services/05-cosmos-sql/README.md)
+
+The real Terraform plan, apply, state inspection and destroy were verified. The original lessons and AWS reference notes are preserved.

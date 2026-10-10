@@ -1,0 +1,30 @@
+$ terraform -chdir=work/azure-session18 apply -input=false -no-color demo.tfplan
+
+azurerm_resource_group.homework: Creating...
+azurerm_resource_group.homework: Still creating... [00m10s elapsed]
+azurerm_resource_group.homework: Still creating... [00m20s elapsed]
+azurerm_resource_group.homework: Creation complete after 26s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework]
+azurerm_storage_account.homework: Creating...
+azurerm_storage_account.homework: Still creating... [00m10s elapsed]
+azurerm_storage_account.homework: Still creating... [00m20s elapsed]
+azurerm_storage_account.homework: Still creating... [00m30s elapsed]
+azurerm_storage_account.homework: Still creating... [00m40s elapsed]
+azurerm_storage_account.homework: Still creating... [00m50s elapsed]
+azurerm_storage_account.homework: Still creating... [01m00s elapsed]
+azurerm_storage_account.homework: Still creating... [01m10s elapsed]
+azurerm_storage_account.homework: Still creating... [01m20s elapsed]
+azurerm_storage_account.homework: Still creating... [01m30s elapsed]
+azurerm_storage_account.homework: Creation complete after 1m32s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9]
+azurerm_storage_container.homework: Creating...
+azurerm_storage_container.homework: Still creating... [00m10s elapsed]
+azurerm_storage_container.homework: Creation complete after 12s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9/blobServices/default/containers/homework]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+container = "homework"
+resource_group = "session18-homework"
+storage_account = "kt18demo9320cad9"
+
+Exit code: 0

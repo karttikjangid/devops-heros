@@ -1,168 +1,110 @@
-data "aws_availability_zones" "available" {
-  state = "available"
+resource "azurerm_resource_group" "homework" {
+  name     = "session19-homework"
+  location = var.location
+  tags     = { session = "19", managed_by = "Terraform" }
 }
 
-resource "aws_vpc" "main" {
-  cidr_block           = "10.20.0.0/16"
-  enable_dns_support   = true
-  enable_dns_hostnames = true
-
-  tags = {
-    Name      = "session19-mini-vpc"
-    Session   = "19"
-    ManagedBy = "Terraform"
-  }
+resource "azurerm_storage_account" "homework" {
+  name                            = var.storage_account_name
+  resource_group_name             = azurerm_resource_group.homework.name
+  location                        = azurerm_resource_group.homework.location
+  account_tier                    = "Standard"
+  account_replication_type        = "LRS"
+  account_kind                    = "StorageV2"
+  access_tier                     = "Hot"
+  min_tls_version                 = "TLS1_2"
+  allow_nested_items_to_be_public = false
 }
 
-resource "aws_subnet" "public" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.20.1.0/24"
-  availability_zone       = data.aws_availability_zones.available.names[0]
-  map_public_ip_on_launch = true
-
-  tags = {
-    Name      = "session19-mini-public-subnet"
-    Session   = "19"
-    ManagedBy = "Terraform"
-  }
+resource "azurerm_storage_container" "homework" {
+  name                  = "homework"
+  storage_account_id    = azurerm_storage_account.homework.id
+  container_access_type = "private"
 }
 
-resource "aws_internet_gateway" "main" {
-  vpc_id = aws_vpc.main.id
-
-  tags = {
-    Name      = "session19-mini-igw"
-    Session   = "19"
-    ManagedBy = "Terraform"
+resource "azurerm_virtual_network" "homework" {
+  name                = "session19-vnet"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.homework.name
+  address_space       = ["10.19.0.0/16"]
+}
+resource "azurerm_subnet" "nodes" {
+  name                 = "nodes"
+  resource_group_name  = azurerm_resource_group.homework.name
+  virtual_network_name = azurerm_virtual_network.homework.name
+  address_prefixes     = ["10.19.1.0/24"]
+}
+resource "azurerm_network_security_group" "homework" {
+  name                = "homework-nsg"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.homework.name
+  security_rule {
+    name                       = "SSH"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = var.admin_cidr
+    destination_address_prefix = "*"
+  }
+  security_rule {
+    name                       = "Frontend"
+    priority                   = 110
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
   }
 }
-
-resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.main.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.main.id
-  }
-
-  tags = {
-    Name      = "session19-mini-public-rt"
-    Session   = "19"
-    ManagedBy = "Terraform"
+resource "azurerm_public_ip" "homework" {
+  name                = "homework-ip"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.homework.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+resource "azurerm_network_interface" "homework" {
+  name                = "homework-nic"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.homework.name
+  ip_configuration {
+    name                          = "primary"
+    subnet_id                     = azurerm_subnet.nodes.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.homework.id
   }
 }
-
-resource "aws_route_table_association" "public" {
-  subnet_id      = aws_subnet.public.id
-  route_table_id = aws_route_table.public.id
+resource "azurerm_network_interface_security_group_association" "homework" {
+  network_interface_id      = azurerm_network_interface.homework.id
+  network_security_group_id = azurerm_network_security_group.homework.id
 }
-
-resource "aws_security_group" "web" {
-  name        = "session19-mini-web-sg"
-  description = "Allow HTTP for Session 19"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    description = "HTTP"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+resource "azurerm_linux_virtual_machine" "homework" {
+  name                  = "session19-web"
+  location              = var.location
+  resource_group_name   = azurerm_resource_group.homework.name
+  size                  = var.vm_size
+  admin_username        = "student"
+  network_interface_ids = [azurerm_network_interface.homework.id]
+  admin_ssh_key {
+    username   = "student"
+    public_key = file(var.ssh_public_key_path)
   }
-
-  egress {
-    description = "Allow outbound IPv4"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+    disk_size_gb         = 32
   }
-
-  tags = {
-    Name      = "session19-mini-web-sg"
-    Session   = "19"
-    ManagedBy = "Terraform"
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
+    version   = "latest"
   }
-}
-
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
-  filter {
-    name   = "name"
-    values = ["al2023-ami-*-kernel-6.1-arm64"]
-  }
-  filter {
-    name   = "architecture"
-    values = ["arm64"]
-  }
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
-
-resource "aws_instance" "web" {
-  ami                         = data.aws_ami.amazon_linux.id
-  instance_type               = var.instance_type
-  subnet_id                   = aws_subnet.public.id
-  vpc_security_group_ids      = [aws_security_group.web.id]
-  associate_public_ip_address = true
-  depends_on                  = [aws_route_table_association.public]
-  user_data                   = file("${path.module}/user-data.sh")
-
-  root_block_device {
-    volume_size           = 8
-    volume_type           = "gp3"
-    encrypted             = true
-    delete_on_termination = true
-  }
-  credit_specification {
-    cpu_credits = "standard"
-  }
-  metadata_options {
-    http_tokens = "required"
-  }
-  tags = {
-    Name      = "session19-web"
-    Session   = "19"
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_s3_bucket" "demo" {
-  bucket_prefix = var.bucket_prefix
-  force_destroy = false
-  tags = {
-    Project   = "Session19"
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_s3_bucket_public_access_block" "demo" {
-  bucket                  = aws_s3_bucket.demo.id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
-
-resource "aws_s3_bucket_ownership_controls" "demo" {
-  bucket = aws_s3_bucket.demo.id
-  rule {
-    object_ownership = "BucketOwnerEnforced"
-  }
-}
-
-resource "aws_s3_bucket_server_side_encryption_configuration" "demo" {
-  bucket = aws_s3_bucket.demo.id
-  rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
-    }
-  }
+  custom_data = base64encode(file("${path.module}/cloud-init.yaml"))
+  depends_on  = [azurerm_network_interface_security_group_association.homework]
 }

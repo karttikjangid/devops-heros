@@ -1,0 +1,43 @@
+[{"src":"azure-local-checks.png","width":1450,"height":900,"loaded":true},{"src":"azure-plan.png","width":1450,"height":1301,"loaded":true},{"src":"azure-apply.png","width":1450,"height":995,"loaded":true},{"src":"azure-resources.png","width":1450,"height":900,"loaded":true},{"src":"azure-state.png","width":1450,"height":900,"loaded":true},{"src":"azure-destroy.png","width":1450,"height":1480,"loaded":true}]
+{
+  "relativeLinksChecked": 15,
+  "screenshots": [
+    {
+      "src": "azure-local-checks.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "azure-plan.png",
+      "width": 1450,
+      "height": 1301,
+      "loaded": true
+    },
+    {
+      "src": "azure-apply.png",
+      "width": 1450,
+      "height": 995,
+      "loaded": true
+    },
+    {
+      "src": "azure-resources.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "azure-state.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "azure-destroy.png",
+      "width": 1450,
+      "height": 1480,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

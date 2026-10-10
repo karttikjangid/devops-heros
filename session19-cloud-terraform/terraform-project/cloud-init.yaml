@@ -1,0 +1,6 @@
+#cloud-config
+packages:
+  - nginx
+runcmd:
+  - [sh, -c, 'echo "<h1>Session 19: Azure &amp; Terraform</h1><p>Kartik | VM provisioned with Terraform.</p>" > /var/www/html/index.html']
+  - [systemctl, enable, --now, nginx]

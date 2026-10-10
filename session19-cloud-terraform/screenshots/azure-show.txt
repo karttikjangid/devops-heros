@@ -1,0 +1,399 @@
+$ terraform -chdir=work/azure-session19 show -no-color
+UTC: 2026-10-10T03:50:24.730061+00:00
+
+# azurerm_linux_virtual_machine.homework:
+resource "azurerm_linux_virtual_machine" "homework" {
+    admin_username                                         = "student"
+    allow_extension_operations                             = true
+    availability_set_id                                    = null
+    bypass_platform_safety_checks_on_user_schedule_enabled = false
+    capacity_reservation_group_id                          = null
+    computer_name                                          = "session19-web"
+    custom_data                                            = (sensitive value)
+    dedicated_host_group_id                                = null
+    dedicated_host_id                                      = null
+    disable_password_authentication                        = true
+    disk_controller_type                                   = "SCSI"
+    edge_zone                                              = null
+    encryption_at_host_enabled                             = false
+    eviction_policy                                        = null
+    extensions_time_budget                                 = "PT1H30M"
+    id                                                     = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/virtualMachines/session19-web"
+    license_type                                           = null
+    location                                               = "centralindia"
+    max_bid_price                                          = -1
+    name                                                   = "session19-web"
+    network_interface_ids                                  = [
+        "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic",
+    ]
+    os_managed_disk_id                                     = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/disks/session19-web_disk1_9a311614c0c04f1ca666b4569634b059"
+    patch_assessment_mode                                  = "ImageDefault"
+    patch_mode                                             = "ImageDefault"
+    platform_fault_domain                                  = -1
+    priority                                               = "Regular"
+    private_ip_address                                     = "10.19.1.4"
+    private_ip_addresses                                   = [
+        "10.19.1.4",
+    ]
+    provision_vm_agent                                     = true
+    proximity_placement_group_id                           = null
+    public_ip_address                                      = "20.219.14.152"
+    public_ip_addresses                                    = [
+        "20.219.14.152",
+    ]
+    reboot_setting                                         = null
+    resource_group_name                                    = "session19-homework"
+    secure_boot_enabled                                    = false
+    size                                                   = "Standard_B2als_v2"
+    source_image_id                                        = null
+    user_data                                              = null
+    virtual_machine_id                                     = "d738e925-a7fc-49fa-9e5c-e20066beab9f"
+    virtual_machine_scale_set_id                           = null
+    vm_agent_platform_updates_enabled                      = true
+    vtpm_enabled                                           = false
+    zone                                                   = null
+
+    admin_ssh_key {
+        public_key = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDwxnUi07bH5bz2PvW5tF+e2B6nCYIFZ1YMqT//N9ptS7/H/3FAKOI0EK0907xiVI7XV8nGs1MtDNRB4kshJaJO7d3sKMVoEZDwOKvzDD0KpLaNvqJCSKyySWRJjyQFGLim9VO3qZqPfGaYn3aItBI43RiddmaW4wnFd4wiokGGbTruu4Q7hXWHc8ueB248tK9hMNIqwcioulq0c/RLnCX0iz/+VrOqu4Dq1vc8lprhca3dGJJGDkJSNSj3Rj7tRNgAsZC9WcBX5lI+FDwzTPWu/z9RC4E/l+mgf4FO5L8WQa0KWOaqmOVc1jOWvclRqSAOIxMV2Bo95nqhN+AnW9CF0y1JdcayYD/UT4icYE7BPq9FXsN+epu8ZSxZn7j/ZoEXL4zRkSxk2j8kbhGdDLnDsUUbwrhHFyK909m4WapGxGnuLporRoJ1PepWb7Snzv13ptlv+IrPte1Ysw5tJQLWg5P8URNuGmErrYH5EmI3TtZAp9SUiPX7dotkO0CWGUU= session21
+        EOT
+        username   = "student"
+    }
+
+    os_disk {
+        caching                          = "ReadWrite"
+        disk_encryption_set_id           = null
+        disk_size_gb                     = 32
+        id                               = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Compute/disks/session19-web_disk1_9a311614c0c04f1ca666b4569634b059"
+        name                             = "session19-web_disk1_9a311614c0c04f1ca666b4569634b059"
+        secure_vm_disk_encryption_set_id = null
+        security_encryption_type         = null
+        storage_account_type             = "Standard_LRS"
+        write_accelerator_enabled        = false
+    }
+
+    source_image_reference {
+        offer     = "0001-com-ubuntu-server-jammy"
+        publisher = "Canonical"
+        sku       = "22_04-lts-gen2"
+        version   = "latest"
+    }
+}
+
+# azurerm_network_interface.homework:
+resource "azurerm_network_interface" "homework" {
+    accelerated_networking_enabled = false
+    applied_dns_servers            = []
+    auxiliary_mode                 = null
+    auxiliary_sku                  = null
+    edge_zone                      = null
+    id                             = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic"
+    internal_dns_name_label        = null
+    internal_domain_name_suffix    = "2yqfz5lgpjrefkx0ok0urdvmlf.rx.internal.cloudapp.net"
+    ip_forwarding_enabled          = false
+    location                       = "centralindia"
+    mac_address                    = null
+    name                           = "homework-nic"
+    private_ip_address             = "10.19.1.4"
+    private_ip_addresses           = [
+        "10.19.1.4",
+    ]
+    resource_group_name            = "session19-homework"
+    virtual_machine_id             = null
+
+    ip_configuration {
+        gateway_load_balancer_frontend_ip_configuration_id = null
+        name                                               = "primary"
+        primary                                            = true
+        private_ip_address                                 = "10.19.1.4"
+        private_ip_address_allocation                      = "Dynamic"
+        private_ip_address_version                         = "IPv4"
+        public_ip_address_id                               = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/publicIPAddresses/homework-ip"
+        subnet_id                                          = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet/subnets/nodes"
+    }
+}
+
+# azurerm_network_interface_security_group_association.homework:
+resource "azurerm_network_interface_security_group_association" "homework" {
+    id                        = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic|/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg"
+    network_interface_id      = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkInterfaces/homework-nic"
+    network_security_group_id = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg"
+}
+
+# azurerm_network_security_group.homework:
+resource "azurerm_network_security_group" "homework" {
+    id                  = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/networkSecurityGroups/homework-nsg"
+    location            = "centralindia"
+    name                = "homework-nsg"
+    resource_group_name = "session19-homework"
+    security_rule       = [
+        {
+            access                                     = "Allow"
+            description                                = null
+            destination_address_prefix                 = "*"
+            destination_address_prefixes               = []
+            destination_application_security_group_ids = []
+            destination_port_range                     = "22"
+            destination_port_ranges                    = []
+            direction                                  = "Inbound"
+            name                                       = "SSH"
+            priority                                   = 100
+            protocol                                   = "Tcp"
+            source_address_prefix                      = "202.131.133.37/32"
+            source_address_prefixes                    = []
+            source_application_security_group_ids      = []
+            source_port_range                          = "*"
+            source_port_ranges                         = []
+        },
+        {
+            access                                     = "Allow"
+            description                                = null
+            destination_address_prefix                 = "*"
+            destination_address_prefixes               = []
+            destination_application_security_group_ids = []
+            destination_port_range                     = "80"
+            destination_port_ranges                    = []
+            direction                                  = "Inbound"
+            name                                       = "Frontend"
+            priority                                   = 110
+            protocol                                   = "Tcp"
+            source_address_prefix                      = "*"
+            source_address_prefixes                    = []
+            source_application_security_group_ids      = []
+            source_port_range                          = "*"
+            source_port_ranges                         = []
+        },
+    ]
+}
+
+# azurerm_public_ip.homework:
+resource "azurerm_public_ip" "homework" {
+    allocation_method       = "Static"
+    ddos_protection_mode    = "VirtualNetworkInherited"
+    domain_name_label       = null
+    domain_name_label_scope = null
+    edge_zone               = null
+    fqdn                    = null
+    id                      = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/publicIPAddresses/homework-ip"
+    idle_timeout_in_minutes = 4
+    ip_address              = "20.219.14.152"
+    ip_version              = "IPv4"
+    location                = "centralindia"
+    name                    = "homework-ip"
+    resource_group_name     = "session19-homework"
+    reverse_fqdn            = null
+    sku                     = "Standard"
+    sku_tier                = "Regional"
+}
+
+# azurerm_resource_group.homework:
+resource "azurerm_resource_group" "homework" {
+    id         = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework"
+    location   = "centralindia"
+    managed_by = null
+    name       = "session19-homework"
+    tags       = {
+        "managed_by" = "Terraform"
+        "session"    = "19"
+    }
+}
+
+# azurerm_storage_account.homework:
+resource "azurerm_storage_account" "homework" {
+    access_tier                        = "Hot"
+    account_kind                       = "StorageV2"
+    account_replication_type           = "LRS"
+    account_tier                       = "Standard"
+    allow_nested_items_to_be_public    = false
+    allowed_copy_scope                 = null
+    cross_tenant_replication_enabled   = false
+    default_to_oauth_authentication    = false
+    dns_endpoint_type                  = "Standard"
+    edge_zone                          = null
+    https_traffic_only_enabled         = true
+    id                                 = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970"
+    infrastructure_encryption_enabled  = false
+    is_hns_enabled                     = false
+    large_file_share_enabled           = false
+    local_user_enabled                 = true
+    location                           = "centralindia"
+    min_tls_version                    = "TLS1_2"
+    name                               = "kt19demo7d2ca970"
+    nfsv3_enabled                      = false
+    primary_access_key                 = (sensitive value)
+    primary_blob_connection_string     = (sensitive value)
+    primary_blob_endpoint              = "https://kt19demo7d2ca970.blob.core.windows.net/"
+    primary_blob_host                  = "kt19demo7d2ca970.blob.core.windows.net"
+    primary_blob_internet_endpoint     = null
+    primary_blob_internet_host         = null
+    primary_blob_microsoft_endpoint    = null
+    primary_blob_microsoft_host        = null
+    primary_connection_string          = (sensitive value)
+    primary_dfs_endpoint               = "https://kt19demo7d2ca970.dfs.core.windows.net/"
+    primary_dfs_host                   = "kt19demo7d2ca970.dfs.core.windows.net"
+    primary_dfs_internet_endpoint      = null
+    primary_dfs_internet_host          = null
+    primary_dfs_microsoft_endpoint     = null
+    primary_dfs_microsoft_host         = null
+    primary_file_endpoint              = "https://kt19demo7d2ca970.file.core.windows.net/"
+    primary_file_host                  = "kt19demo7d2ca970.file.core.windows.net"
+    primary_file_internet_endpoint     = null
+    primary_file_internet_host         = null
+    primary_file_microsoft_endpoint    = null
+    primary_file_microsoft_host        = null
+    primary_location                   = "centralindia"
+    primary_queue_endpoint             = "https://kt19demo7d2ca970.queue.core.windows.net/"
+    primary_queue_host                 = "kt19demo7d2ca970.queue.core.windows.net"
+    primary_queue_microsoft_endpoint   = null
+    primary_queue_microsoft_host       = null
+    primary_table_endpoint             = "https://kt19demo7d2ca970.table.core.windows.net/"
+    primary_table_host                 = "kt19demo7d2ca970.table.core.windows.net"
+    primary_table_microsoft_endpoint   = null
+    primary_table_microsoft_host       = null
+    primary_web_endpoint               = "https://kt19demo7d2ca970.z29.web.core.windows.net/"
+    primary_web_host                   = "kt19demo7d2ca970.z29.web.core.windows.net"
+    primary_web_internet_endpoint      = null
+    primary_web_internet_host          = null
+    primary_web_microsoft_endpoint     = null
+    primary_web_microsoft_host         = null
+    provisioned_billing_model_version  = null
+    public_network_access_enabled      = true
+    queue_encryption_key_type          = "Service"
+    resource_group_name                = "session19-homework"
+    secondary_access_key               = (sensitive value)
+    secondary_blob_connection_string   = (sensitive value)
+    secondary_blob_endpoint            = null
+    secondary_blob_host                = null
+    secondary_blob_internet_endpoint   = null
+    secondary_blob_internet_host       = null
+    secondary_blob_microsoft_endpoint  = null
+    secondary_blob_microsoft_host      = null
+    secondary_connection_string        = (sensitive value)
+    secondary_dfs_endpoint             = null
+    secondary_dfs_host                 = null
+    secondary_dfs_internet_endpoint    = null
+    secondary_dfs_internet_host        = null
+    secondary_dfs_microsoft_endpoint   = null
+    secondary_dfs_microsoft_host       = null
+    secondary_file_endpoint            = null
+    secondary_file_host                = null
+    secondary_file_internet_endpoint   = null
+    secondary_file_internet_host       = null
+    secondary_file_microsoft_endpoint  = null
+    secondary_file_microsoft_host      = null
+    secondary_location                 = null
+    secondary_queue_endpoint           = null
+    secondary_queue_host               = null
+    secondary_queue_microsoft_endpoint = null
+    secondary_queue_microsoft_host     = null
+    secondary_table_endpoint           = null
+    secondary_table_host               = null
+    secondary_table_microsoft_endpoint = null
+    secondary_table_microsoft_host     = null
+    secondary_web_endpoint             = null
+    secondary_web_host                 = null
+    secondary_web_internet_endpoint    = null
+    secondary_web_internet_host        = null
+    secondary_web_microsoft_endpoint   = null
+    secondary_web_microsoft_host       = null
+    sftp_enabled                       = false
+    shared_access_key_enabled          = true
+    table_encryption_key_type          = "Service"
+
+    blob_properties {
+        change_feed_enabled           = false
+        change_feed_retention_in_days = 0
+        default_service_version       = null
+        last_access_time_enabled      = false
+        versioning_enabled            = false
+    }
+
+    queue_properties {
+        hour_metrics {
+            enabled               = false
+            include_apis          = false
+            retention_policy_days = 0
+            version               = "1.0"
+        }
+        logging {
+            delete                = false
+            read                  = false
+            retention_policy_days = 0
+            version               = "1.0"
+            write                 = false
+        }
+        minute_metrics {
+            enabled               = false
+            include_apis          = false
+            retention_policy_days = 0
+            version               = "1.0"
+        }
+    }
+
+    share_properties {
+        retention_policy {
+            days = 7
+        }
+    }
+}
+
+# azurerm_storage_container.homework:
+resource "azurerm_storage_container" "homework" {
+    container_access_type             = "private"
+    default_encryption_scope          = "$account-encryption-key"
+    encryption_scope_override_enabled = true
+    has_immutability_policy           = false
+    has_legal_hold                    = false
+    id                                = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970/blobServices/default/containers/homework"
+    metadata                          = {}
+    name                              = "homework"
+    resource_manager_id               = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970/blobServices/default/containers/homework"
+    storage_account_id                = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970"
+    storage_account_name              = null
+    url                               = "https://kt19demo7d2ca970.blob.core.windows.net/homework"
+}
+
+# azurerm_subnet.nodes:
+resource "azurerm_subnet" "nodes" {
+    address_prefixes                              = [
+        "10.19.1.0/24",
+    ]
+    default_outbound_access_enabled               = true
+    id                                            = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet/subnets/nodes"
+    name                                          = "nodes"
+    private_endpoint_network_policies             = "Disabled"
+    private_link_service_network_policies_enabled = true
+    resource_group_name                           = "session19-homework"
+    sharing_scope                                 = null
+    virtual_network_name                          = "session19-vnet"
+}
+
+# azurerm_virtual_network.homework:
+resource "azurerm_virtual_network" "homework" {
+    address_space                  = [
+        "10.19.0.0/16",
+    ]
+    bgp_community                  = null
+    dns_servers                    = []
+    edge_zone                      = null
+    flow_timeout_in_minutes        = 0
+    guid                           = "fd5c20e6-7a66-4262-aafa-72b5488eac5d"
+    id                             = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet"
+    location                       = "centralindia"
+    name                           = "session19-vnet"
+    private_endpoint_vnet_policies = "Disabled"
+    resource_group_name            = "session19-homework"
+    subnet                         = []
+}
+
+
+Outputs:
+
+container = "homework"
+public_ip = "20.219.14.152"
+resource_group = "session19-homework"
+storage_account = "kt19demo7d2ca970"
+vnet_id = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet"
+web_url = "http://20.219.14.152"
+
+Exit code: 0

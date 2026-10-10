@@ -1,0 +1,24 @@
+$ az resource list -g session19-homework --query "[].{name:name,type:type}" -o table; az vm show -g session19-homework -n session19-web --show-details --query "{name:name,size:hardwareProfile.vmSize,state:powerState,publicIp:publicIps}" -o json; az storage container-rm show -g session19-homework --storage-account "$(terraform -chdir=work/azure-session19 output -raw storage_account)" -n homework --query "{name:name,publicAccess:publicAccess}" -o json
+UTC: 2026-10-10T03:50:30.741008+00:00
+
+Name
+----------------------------------------------------
+homework-ip
+homework-nsg
+session19-vnet
+kt19demo7d2ca970
+homework-nic
+session19-web
+session19-web_disk1_9a311614c0c04f1ca666b4569634b059
+{
+  "name": "session19-web",
+  "publicIp": "20.219.14.152",
+  "size": "Standard_B2als_v2",
+  "state": "VM running"
+}
+{
+  "name": "homework",
+  "publicAccess": "None"
+}
+
+Exit code: 0

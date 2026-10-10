@@ -1,18 +1,6 @@
-output "vpc_id" {
-  value = aws_vpc.main.id
-}
-output "subnet_id" {
-  value = aws_subnet.public.id
-}
-output "security_group_id" {
-  value = aws_security_group.web.id
-}
-output "instance_id" {
-  value = aws_instance.web.id
-}
-output "web_url" {
-  value = "http://${aws_instance.web.public_ip}"
-}
-output "bucket_name" {
-  value = aws_s3_bucket.demo.bucket
-}
+output "resource_group" { value = azurerm_resource_group.homework.name }
+output "storage_account" { value = azurerm_storage_account.homework.name }
+output "container" { value = azurerm_storage_container.homework.name }
+output "public_ip" { value = azurerm_public_ip.homework.ip_address }
+output "web_url" { value = "http://${azurerm_public_ip.homework.ip_address}" }
+output "vnet_id" { value = azurerm_virtual_network.homework.id }

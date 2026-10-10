@@ -1,0 +1,3 @@
+subscription_id      = "YOUR_AZURE_SUBSCRIPTION_ID"
+location             = "centralindia"
+storage_account_name = "YOUR_UNIQUE_LOWERCASE_NAME"

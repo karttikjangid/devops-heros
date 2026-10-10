@@ -1,0 +1,55 @@
+[{"src":"azure-local-checks.png","width":1450,"height":900,"loaded":true},{"src":"azure-plan.png","width":1450,"height":1301,"loaded":true},{"src":"azure-apply.png","width":1450,"height":1607,"loaded":true},{"src":"azure-resources.png","width":1450,"height":900,"loaded":true},{"src":"azure-http.png","width":1450,"height":900,"loaded":true},{"src":"azure-frontend.png","width":1300,"height":800,"loaded":true},{"src":"azure-state.png","width":1450,"height":900,"loaded":true},{"src":"azure-destroy.png","width":1450,"height":1837,"loaded":true}]
+{
+  "relativeLinksChecked": 19,
+  "screenshots": [
+    {
+      "src": "azure-local-checks.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "azure-plan.png",
+      "width": 1450,
+      "height": 1301,
+      "loaded": true
+    },
+    {
+      "src": "azure-apply.png",
+      "width": 1450,
+      "height": 1607,
+      "loaded": true
+    },
+    {
+      "src": "azure-resources.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "azure-http.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "azure-frontend.png",
+      "width": 1300,
+      "height": 800,
+      "loaded": true
+    },
+    {
+      "src": "azure-state.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "azure-destroy.png",
+      "width": 1450,
+      "height": 1837,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

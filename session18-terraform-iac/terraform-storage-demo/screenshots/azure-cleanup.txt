@@ -1,0 +1,6 @@
+$ terraform -chdir=work/azure-session18 state list; az group exists --name session18-homework
+UTC: 2026-10-10T03:52:18.465265+00:00
+
+false
+
+Exit code: 0

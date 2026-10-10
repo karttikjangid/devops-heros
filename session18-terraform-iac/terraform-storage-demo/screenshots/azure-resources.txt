@@ -1,0 +1,15 @@
+$ az storage account show -g session18-homework -n "$(terraform -chdir=work/azure-session18 output -raw storage_account)" --query "{name:name,sku:sku.name,publicBlobAccess:allowBlobPublicAccess,blobEncryption:encryption.services.blob.enabled}" -o json; az storage container-rm show -g session18-homework --storage-account "$(terraform -chdir=work/azure-session18 output -raw storage_account)" -n homework --query "{name:name,publicAccess:publicAccess}" -o json
+UTC: 2026-10-10T03:49:59.966295+00:00
+
+{
+  "blobEncryption": true,
+  "name": "kt18demo9320cad9",
+  "publicBlobAccess": false,
+  "sku": "Standard_LRS"
+}
+{
+  "name": "homework",
+  "publicAccess": "None"
+}
+
+Exit code: 0

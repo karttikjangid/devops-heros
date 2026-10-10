@@ -1,0 +1,21 @@
+$ terraform -chdir=work/azure-session19 output; terraform -chdir=work/azure-session19 state list
+UTC: 2026-10-10T03:50:23.712599+00:00
+
+container = "homework"
+public_ip = "20.219.14.152"
+resource_group = "session19-homework"
+storage_account = "kt19demo7d2ca970"
+vnet_id = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet"
+web_url = "http://20.219.14.152"
+azurerm_linux_virtual_machine.homework
+azurerm_network_interface.homework
+azurerm_network_interface_security_group_association.homework
+azurerm_network_security_group.homework
+azurerm_public_ip.homework
+azurerm_resource_group.homework
+azurerm_storage_account.homework
+azurerm_storage_container.homework
+azurerm_subnet.nodes
+azurerm_virtual_network.homework
+
+Exit code: 0
