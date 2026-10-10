@@ -1,10 +1,11 @@
 variable "aws_region" {
+  description = "AWS region for the demo."
   type        = string
-  description = "AWS region where the S3 bucket will be created."
   default     = "ap-south-1"
 }
-variable "bucket_name" {
+
+variable "bucket_prefix" {
+  description = "Terraform adds a unique suffix to this bucket prefix."
   type        = string
-  description = "Name of the S3 bucket."
-  default     = "yatri1107"
+  default     = "kartik-session18-"
 }

@@ -1,0 +1,20 @@
+
+Changes to Outputs:
+  + bucket_region = "ap-south-1"
+
+You can apply this plan to save these new output values to the Terraform
+state, without changing any real infrastructure.
+
+Error: No valid credential sources found
+
+  with provider["registry.terraform.io/hashicorp/aws"],
+  on provider.tf line 11, in provider "aws":
+  11: provider "aws" {
+
+Please see https://registry.terraform.io/providers/hashicorp/aws
+for more information about providing credentials.
+
+Error: failed to refresh cached credentials, no EC2 IMDS role found,
+operation error ec2imds: GetMetadata, access disabled to EC2 IMDS via client
+option, or "AWS_EC2_METADATA_DISABLED" environment variable
+

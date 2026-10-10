@@ -1,256 +1,62 @@
-# Terraform S3 Bucket Demo
+# Session 18 - Terraform S3 Demo
 
-## Project Structure
+This project creates one private S3 bucket with a unique Terraform-generated name, blocked public access, bucket-owner-enforced ownership and SSE-S3 encryption.
 
-```text
-terraform-s3-demo/
-|
-|-- README.md
-|-- terraform.tf
-|-- providers.tf
-|-- variables.tf
-|-- terraform.tfvars
-|-- main.tf
-|-- outputs.tf
-|-- .gitignore
-```
-
-## Architecture
+Status: Terraform initialization, formatting and validation passed locally. AWS credentials are not configured yet, so cloud plan, apply, show, output and destroy are not verified.
 
 ```text
-terraform.tf
-     |
-     v
-Provider Configuration
-     |
-     v
-variables.tf
-     |
-     v
-terraform.tfvars
-     |
-     v
-main.tf
-     |
-     v
-aws_s3_bucket.demo
-     |
-     v
-AWS S3 Bucket
-     |
-     v
-outputs.tf
+Terraform → AWS provider → S3 bucket
+                           ├── Public access blocked
+                           ├── Bucket ownership enforced
+                           └── Default encryption
 ```
 
-## Prerequisites
+## Files
 
-Install:
+- `provider.tf`: Terraform version, AWS provider and Region.
+- `variables.tf`: Region and bucket-name prefix.
+- `terraform.tfvars`: public demo settings; contains no credentials.
+- `main.tf`: bucket and its configuration resources.
+- `outputs.tf`: bucket name, ARN and Region.
+- `.terraform.lock.hcl`: selected provider version and checksums.
 
-* Terraform
-* AWS CLI
+## Workflow
 
-Configure AWS:
-
-```bash
-aws configure
-```
-
-Verify:
+Configure an AWS CLI profile locally and verify it before deploying:
 
 ```bash
+export AWS_PROFILE=homework
 aws sts get-caller-identity
-```
-
-## Terraform Workflow
-
-### 1. Initialize
-
-```bash
-terraform init
-```
-
-Expected:
-
-```text
-Initializing the provider plugins...
-Terraform has been successfully initialized!
-```
-
-### 2. Format
-
-```bash
-terraform fmt
-```
-
-### 3. Validate
-
-```bash
-terraform validate
-```
-
-Expected:
-
-```text
-Success! The configuration is valid.
-```
-
-### 4. Plan
-
-```bash
-terraform plan
-```
-
-Expected:
-
-```text
-Plan: 1 to add, 0 to change, 0 to destroy.
-```
-
-### 5. Apply
-
-```bash
-terraform apply
-```
-
-Terraform asks:
-
-```text
-Do you want to perform these actions?
-  Only 'yes' will be accepted to approve.
-Enter a value:
-```
-
-Enter:
-
-```text
-yes
-```
-
-Expected:
-
-```text
-Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
-Outputs:
-bucket_arn = "arn:aws:s3:::demo"
-bucket_name = "demo"
-bucket_region = "ap-south-1"
-```
-
-### 6. Check State
-
-```bash
-terraform state list
-```
-
-Expected:
-
-```text
-aws_s3_bucket.demo
-```
-
-Inspect the resource:
-
-```bash
-terraform state show aws_s3_bucket.demo
-```
-
-### 7. Check Output
-
-```bash
-terraform output
-```
-
-Or:
-
-```bash
-terraform output bucket_name
-```
-
-Expected:
-
-```text
-"demo"
-```
-
-### 8. Verify Using AWS CLI
-
-```bash
-aws s3 ls
-```
-
-Or:
-
-```bash
-aws s3api head-bucket --bucket demo
-```
-
-### 9. Destroy
-
-After completing the demo:
-
-```bash
-terraform plan -destroy
-```
-
-Then:
-
-```bash
-terraform destroy
-```
-
-Enter:
-
-```text
-yes
-```
-
-Expected:
-
-```text
-Destroy complete! Resources: 1 destroyed.
-```
-
-## Complete Demo
-
-Run:
-
-```bash
-aws sts get-caller-identity
+cd session18-terraform-iac/terraform-s3-demo
 terraform init
 terraform fmt
 terraform validate
-terraform plan
-terraform apply
+terraform plan -out=demo.tfplan
+terraform apply demo.tfplan
+terraform show
 terraform output
 terraform state list
-terraform state show aws_s3_bucket.demo
-terraform plan -destroy
+aws s3api head-bucket --bucket "$(terraform output -raw bucket_name)"
 terraform destroy
+terraform state list
 ```
 
-## Terraform Lifecycle
+`init` installs the provider. `fmt` formats the files; `validate` checks the configuration. `plan` previews changes and saves the proposed deployment; `apply` creates it. `show` displays the current state, while `output` prints declared values. `destroy` removes resources managed by this project's state.
 
-```text
-              .tf files
-                  |
-                  v
-          terraform init
-                  |
-                  v
-          terraform validate
-                  |
-                  v
-            terraform plan
-                  |
-                  v
-           terraform apply
-                  |
-                  v
-             AWS S3
-                  |
-                  v
-          terraform state
-                  |
-                  v
-          terraform destroy
-```
+Terraform state maps configuration addresses to real AWS resources. Keep state and plan files out of Git; they can contain sensitive values. Keep the state available until cleanup is confirmed. The bucket starts empty, and `force_destroy = false` prevents accidentally discarding objects added later.
+
+## Captured local checks
+
+![Real Terraform initialization and validation](screenshots/local-checks.png)
+
+[Command output](screenshots/local-checks.txt)
+
+## AWS verification pending
+
+The real plan attempt failed with `No valid credential sources found`. [Plan output](screenshots/plan-attempt.txt). No AWS bucket has been created for this run. Successful cloud screenshots will be added after AWS access is available. Expected output examples are not presented as completed evidence.
+
+## Research
+
+[Five AWS service notes](../aws-services/) cover IAM, EC2, S3, VPC, DynamoDB and RDS.
+
+Reference: [Terraform AWS S3 bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket).

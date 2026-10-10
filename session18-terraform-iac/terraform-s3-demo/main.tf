@@ -1,10 +1,32 @@
-resource "aws_s3_bucket" "devops553" {
-  bucket        = var.bucket_name
-  force_destroy = true
+resource "aws_s3_bucket" "demo" {
+  bucket_prefix = var.bucket_prefix
+  force_destroy = false
   tags = {
-    Name        = var.bucket_name
-    Environment = "dev"
-    ManagedBy   = "Terraform"
-    Project     = "Session18"
+    Project   = "Session18"
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "demo" {
+  bucket                  = aws_s3_bucket.demo.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_ownership_controls" "demo" {
+  bucket = aws_s3_bucket.demo.id
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "demo" {
+  bucket = aws_s3_bucket.demo.id
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
   }
 }
