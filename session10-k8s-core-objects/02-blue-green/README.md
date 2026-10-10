@@ -198,3 +198,10 @@ kubectl delete -f 02-blue-green/service-blue.yaml
 kubectl delete -f 02-blue-green/deployment-blue.yaml
 kubectl delete -f 02-blue-green/deployment-green.yaml
 ```
+
+
+## Completed execution
+
+![Real strategy output](../screenshots/02-blue-green.png)
+
+[Full commands and output](../screenshots/02-blue-green.txt)

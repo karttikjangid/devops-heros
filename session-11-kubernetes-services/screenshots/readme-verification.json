@@ -1,0 +1,42 @@
+{
+  "relativeLinksChecked": 15,
+  "screenshots": [
+    {
+      "src": "clusterip.png",
+      "width": 1450,
+      "height": 970,
+      "loaded": true
+    },
+    {
+      "src": "nodeport.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "loadbalancer.png",
+      "width": 1450,
+      "height": 1276,
+      "loaded": true
+    },
+    {
+      "src": "externalname.png",
+      "width": 1450,
+      "height": 1123,
+      "loaded": true
+    },
+    {
+      "src": "headless.png",
+      "width": 1450,
+      "height": 1250,
+      "loaded": true
+    },
+    {
+      "src": "coredns.png",
+      "width": 1450,
+      "height": 1556,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

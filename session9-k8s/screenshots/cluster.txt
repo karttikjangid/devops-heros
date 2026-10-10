@@ -1,0 +1,32 @@
+$ minikube version; kubectl version --client; minikube status; kubectl get nodes -o wide; kubectl cluster-info; kubectl get pods -n kube-system
+UTC: 2026-10-10T12:08:23.398963+00:00
+
+minikube version: v1.39.0
+commit: 7a9f6a841470a207de8cf4bafcccee0969d8ba10
+Client Version: v1.37.0
+Kustomize Version: v5.8.1
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION                   CONTAINER-RUNTIME
+minikube   Ready    control-plane   32d   v1.37.0   192.168.49.2   <none>        Debian GNU/Linux 12 (bookworm)   7.1.4-200.fc44.aarch64 (arm64)   containerd://2.3.4
+Kubernetes control plane is running at https://127.0.0.1:36457
+CoreDNS is running at https://127.0.0.1:36457/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+NAME                               READY   STATUS    RESTARTS      AGE
+coredns-559f6c778d-zrnvp           1/1     Running   7 (8h ago)    32d
+etcd-minikube                      1/1     Running   7 (8h ago)    32d
+kindnet-l9knr                      1/1     Running   7 (8h ago)    32d
+kube-apiserver-minikube            1/1     Running   7 (8h ago)    32d
+kube-controller-manager-minikube   1/1     Running   7 (8h ago)    32d
+kube-proxy-xl4tc                   1/1     Running   0             8h
+kube-scheduler-minikube            1/1     Running   7 (8h ago)    32d
+metrics-server-768f9f6999-2dmwx    1/1     Running   0             7h59m
+storage-provisioner                1/1     Running   26 (8h ago)   32d
+
+Exit code: 0

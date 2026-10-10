@@ -1,0 +1,267 @@
+$ kubectl -n session10-lab delete pod lifecycle-liveness --grace-period=1 --wait=true --timeout=30s
+pod "lifecycle-liveness" deleted from session10-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session10-k8s-core-objects/homework/pod-lifecycle/08-liveness.yaml
+pod/lifecycle-liveness created
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS              RESTARTS   AGE
+lifecycle-liveness   0/1     ContainerCreating   0          0s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS              RESTARTS   AGE
+lifecycle-liveness   0/1     ContainerCreating   0          0s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          2s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          5s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          7s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          9s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          11s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          14s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          16s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          18s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          20s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          23s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          25s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          27s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          29s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          31s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          34s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          36s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          38s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          40s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          42s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          45s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          47s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          49s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          51s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          53s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          56s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          58s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS   AGE
+lifecycle-liveness   1/1     Running   0          60s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness
+NAME                 READY   STATUS    RESTARTS     AGE
+lifecycle-liveness   1/1     Running   1 (2s ago)   62s
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-liveness -o wide
+NAME                 READY   STATUS    RESTARTS     AGE   IP             NODE       NOMINATED NODE   READINESS GATES
+lifecycle-liveness   1/1     Running   1 (2s ago)   62s   10.244.0.102   minikube   <none>           <none>
+
+Exit code: 0
+
+$ kubectl -n session10-lab describe pod lifecycle-liveness
+Name:             lifecycle-liveness
+Namespace:        session10-lab
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Sat, 10 Oct 2026 17:47:39 +0530
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.102
+IPs:
+  IP:  10.244.0.102
+Containers:
+  app:
+    Container ID:  containerd://ec881e770cfc85e59b3077721c3aedcd86f226297b8272af39eb0eed5222a67f
+    Image:         busybox:1.36
+    Image ID:      docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      echo 'App started'; touch /tmp/healthy; sleep 20; rm /tmp/healthy; echo 'Health file removed'; sleep 300
+    State:          Running
+      Started:      Sat, 10 Oct 2026 17:48:39 +0530
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    137
+      Started:      Sat, 10 Oct 2026 17:47:40 +0530
+      Finished:     Sat, 10 Oct 2026 17:48:39 +0530
+    Ready:          True
+    Restart Count:  1
+    Liveness:       exec [sh -c test -f /tmp/healthy] delay=5s timeout=1s period=5s successThreshold=1 failureThreshold=2
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-sc6jl (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-sc6jl:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  62s                default-scheduler  Successfully assigned session10-lab/lifecycle-liveness to minikube
+  Warning  Unhealthy  32s (x2 over 37s)  kubelet            spec.containers{app}: Liveness probe failed:
+  Normal   Killing    32s                kubelet            spec.containers{app}: Container app failed liveness probe, will be restarted
+  Normal   Pulled     2s (x2 over 62s)   kubelet            spec.containers{app}: Container image "busybox:1.36" already present on machine and can be accessed by the pod
+  Normal   Created    2s (x2 over 62s)   kubelet            spec.containers{app}: Container created
+  Normal   Started    2s (x2 over 61s)   kubelet            spec.containers{app}: Container started
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-liveness --all-containers --tail=12
+App started
+
+Exit code: 0

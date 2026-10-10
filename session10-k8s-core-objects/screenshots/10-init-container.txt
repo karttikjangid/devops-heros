@@ -1,0 +1,129 @@
+$ kubectl -n session10-lab delete pod lifecycle-init --grace-period=1 --wait=true --timeout=30s
+pod "lifecycle-init" deleted from session10-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session10-k8s-core-objects/homework/pod-lifecycle/10-init-container.yaml
+pod/lifecycle-init created
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-init
+NAME             READY   STATUS     RESTARTS   AGE
+lifecycle-init   0/1     Init:0/1   0          0s
+
+Exit code: 0
+
+$ kubectl -n session10-lab wait pod/lifecycle-init --for=condition=Ready --timeout=60s
+pod/lifecycle-init condition met
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-init -o wide
+NAME             READY   STATUS    RESTARTS   AGE   IP             NODE       NOMINATED NODE   READINESS GATES
+lifecycle-init   1/1     Running   0          11s   10.244.0.105   minikube   <none>           <none>
+
+Exit code: 0
+
+$ kubectl -n session10-lab describe pod lifecycle-init
+Name:             lifecycle-init
+Namespace:        session10-lab
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Sat, 10 Oct 2026 17:49:23 +0530
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.105
+IPs:
+  IP:  10.244.0.105
+Init Containers:
+  setup:
+    Container ID:  containerd://eb528c262ed9604742672ea8fa967be29d3efdea98197f4a001bd4a226c34253
+    Image:         busybox:1.36
+    Image ID:      docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      echo 'Init container running'; sleep 10; echo 'Init complete'
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Sat, 10 Oct 2026 17:49:24 +0530
+      Finished:     Sat, 10 Oct 2026 17:49:34 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-5jcxf (ro)
+Containers:
+  app:
+    Container ID:   containerd://7e562c7682045e283b9bc31746b76baa663ff00714693a343802215f6adf44c8
+    Image:          nginx:1.27
+    Image ID:       docker.io/library/nginx@sha256:6784fb0834aa7dbbe12e3d7471e69c290df3e6ba810dc38b34ae33d3c1c05f7d
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Sat, 10 Oct 2026 17:49:34 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-5jcxf (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-5jcxf:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  11s   default-scheduler  Successfully assigned session10-lab/lifecycle-init to minikube
+  Normal  Pulled     10s   kubelet            spec.initContainers{setup}: Container image "busybox:1.36" already present on machine and can be accessed by the pod
+  Normal  Created    10s   kubelet            spec.initContainers{setup}: Container created
+  Normal  Started    10s   kubelet            spec.initContainers{setup}: Container started
+  Normal  Pulled     0s    kubelet            spec.containers{app}: Container image "nginx:1.27" already present on machine and can be accessed by the pod
+  Normal  Created    0s    kubelet            spec.containers{app}: Container created
+  Normal  Started    0s    kubelet            spec.containers{app}: Container started
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-init --all-containers --tail=12
+Init container running
+Init complete
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/10/10 12:19:34 [notice] 1#1: using the "epoll" event method
+2026/10/10 12:19:34 [notice] 1#1: nginx/1.27.5
+2026/10/10 12:19:34 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2026/10/10 12:19:34 [notice] 1#1: OS: Linux 7.1.4-200.fc44.aarch64
+2026/10/10 12:19:34 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/10/10 12:19:34 [notice] 1#1: start worker processes
+2026/10/10 12:19:34 [notice] 1#1: start worker process 29
+2026/10/10 12:19:34 [notice] 1#1: start worker process 30
+2026/10/10 12:19:34 [notice] 1#1: start worker process 31
+2026/10/10 12:19:34 [notice] 1#1: start worker process 32
+2026/10/10 12:19:34 [notice] 1#1: start worker process 33
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-init -c setup
+Init container running
+Init complete
+
+Exit code: 0

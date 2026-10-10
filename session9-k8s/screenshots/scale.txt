@@ -1,0 +1,15 @@
+$ kubectl -n session9-lab scale deployment tutorial-web --replicas=3; kubectl -n session9-lab rollout status deployment/tutorial-web --timeout=60s; kubectl -n session9-lab get pods -o wide
+UTC: 2026-10-10T12:08:29.018289+00:00
+
+deployment.apps/tutorial-web scaled
+Waiting for deployment "tutorial-web" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "tutorial-web" rollout to finish: 1 of 3 updated replicas are available...
+Waiting for deployment "tutorial-web" rollout to finish: 2 of 3 updated replicas are available...
+deployment "tutorial-web" successfully rolled out
+NAME                          READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+tutorial-client               1/1     Running   0          3s    10.244.0.41   minikube   <none>           <none>
+tutorial-web-bb745df8-7s8d9   1/1     Running   0          6s    10.244.0.40   minikube   <none>           <none>
+tutorial-web-bb745df8-dlbqw   1/1     Running   0          2s    10.244.0.42   minikube   <none>           <none>
+tutorial-web-bb745df8-jdq55   1/1     Running   0          2s    10.244.0.43   minikube   <none>           <none>
+
+Exit code: 0

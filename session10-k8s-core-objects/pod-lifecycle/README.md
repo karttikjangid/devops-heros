@@ -1,3 +1,105 @@
+# Completed lifecycle homework
+
+Each YAML was applied and inspected with get, describe and logs. Expected failures are part of the exercise.
+
+## 01-running
+
+Nginx reached Running and Ready.
+
+![Real output](../screenshots/01-running.png)
+
+[Full commands and output](../screenshots/01-running.txt) · [Executed YAML](../homework/pod-lifecycle/01-running.yaml)
+
+## 02-pending
+
+The 9Gi memory request could not be scheduled on the small node.
+
+![Real output](../screenshots/02-pending.png)
+
+[Full commands and output](../screenshots/02-pending.txt) · [Executed YAML](../homework/pod-lifecycle/02-pending.yaml)
+
+## 03-succeeded
+
+The task exited 0; kubectl showed Completed and the Pod phase was Succeeded.
+
+![Real output](../screenshots/03-succeeded.png)
+
+[Full commands and output](../screenshots/03-succeeded.txt) · [Executed YAML](../homework/pod-lifecycle/03-succeeded.yaml)
+
+## 04-failed
+
+The task exited 1; kubectl showed Error and the Pod phase was Failed.
+
+![Real output](../screenshots/04-failed.png)
+
+[Full commands and output](../screenshots/04-failed.txt) · [Executed YAML](../homework/pod-lifecycle/04-failed.yaml)
+
+## 05-crashloopbackoff
+
+The application repeatedly exited 1 and Kubernetes restarted it.
+
+![Real output](../screenshots/05-crashloopbackoff.png)
+
+[Full commands and output](../screenshots/05-crashloopbackoff.txt) · [Executed YAML](../homework/pod-lifecycle/05-crashloopbackoff.yaml)
+
+## 06-imagepullbackoff
+
+The unavailable image produced pull errors/backoff events; no container started.
+
+![Real output](../screenshots/06-imagepullbackoff.png)
+
+[Full commands and output](../screenshots/06-imagepullbackoff.txt) · [Executed YAML](../homework/pod-lifecycle/06-imagepullbackoff.yaml)
+
+## 07-readiness
+
+Readiness checked HTTP before the Pod became eligible for traffic.
+
+![Real output](../screenshots/07-readiness.png)
+
+[Full commands and output](../screenshots/07-readiness.txt) · [Executed YAML](../homework/pod-lifecycle/07-readiness.yaml)
+
+## 08-liveness
+
+Removing the health file caused failed probes and an actual container restart.
+
+![Real output](../screenshots/08-liveness.png)
+
+[Full commands and output](../screenshots/08-liveness.txt) · [Executed YAML](../homework/pod-lifecycle/08-liveness.yaml)
+
+## 09-startup
+
+The startup probe allowed the 30-second initialization before the container became Ready.
+
+![Real output](../screenshots/09-startup.png)
+
+[Full commands and output](../screenshots/09-startup.txt) · [Executed YAML](../homework/pod-lifecycle/09-startup.yaml)
+
+## 10-init-container
+
+The setup container completed before the main Nginx container ran.
+
+![Real output](../screenshots/10-init-container.png)
+
+[Full commands and output](../screenshots/10-init-container.txt) · [Executed YAML](../homework/pod-lifecycle/10-init-container.yaml)
+
+## 11-multi-container
+
+Both containers ran in one Pod; separate container logs were inspected.
+
+![Real output](../screenshots/11-multi-container.png)
+
+[Full commands and output](../screenshots/11-multi-container.txt) · [Executed YAML](../homework/pod-lifecycle/11-multi-container.yaml)
+
+## 12-termination
+
+The SIGTERM trap printed cleanup messages before the Pod was deleted.
+
+![Real output](../screenshots/12-termination.png)
+
+[Full commands and output](../screenshots/12-termination.txt) · [Executed YAML](../homework/pod-lifecycle/12-termination.yaml)
+
+---
+
 # Kubernetes Pod Lifecycle Lab
 
 This lab demonstrates the major Pod lifecycle situations using small, independent YAML files.

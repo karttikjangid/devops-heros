@@ -200,3 +200,10 @@ kubectl get pods -l app=app-rolling --show-labels
 kubectl delete -f 01-rolling-update/service.yaml
 kubectl delete -f 01-rolling-update/deployment-v1.yaml
 ```
+
+
+## Completed execution
+
+![Real strategy output](../screenshots/01-rolling-update.png)
+
+[Full commands and output](../screenshots/01-rolling-update.txt)

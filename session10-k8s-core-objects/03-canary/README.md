@@ -216,3 +216,10 @@ kubectl delete -f 03-canary/service.yaml
 kubectl delete -f 03-canary/deployment-canary.yaml
 kubectl delete -f 03-canary/deployment-stable.yaml
 ```
+
+
+## Completed execution
+
+![Real strategy output](../screenshots/03-canary.png)
+
+[Full commands and output](../screenshots/03-canary.txt)

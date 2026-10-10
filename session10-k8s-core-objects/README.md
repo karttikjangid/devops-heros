@@ -1,6 +1,41 @@
+# Session 10 - Pods, ReplicaSets & Deployments
+
+All four deployment strategies and all twelve lifecycle YAML examples were executed in the isolated local `session10-lab` namespace. Screenshots below come from saved command output.
+
+## Deployment strategies
+
+| Strategy | Verified behavior | Output |
+| --- | --- | --- |
+| Rolling update | Gradual v1→v2 Pod replacement with maxSurge=1 and maxUnavailable=0 | [Output](screenshots/01-rolling-update.txt) |
+| Blue-green | Both versions ran; switching the Service selector changed the returned page from blue to green | [Output](screenshots/02-blue-green.txt) |
+| Canary | Nine stable Pods and one canary shared a Service; requests reached both versions | [Output](screenshots/03-canary.txt) |
+| Recreate | Old Pods terminated before replacement v2 Pods started | [Output](screenshots/04-recreate.txt) |
+
+![Rolling update](screenshots/01-rolling-update.png)
+
+![Blue-green traffic switch](screenshots/02-blue-green.png)
+
+![Canary traffic sample](screenshots/03-canary.png)
+
+![Recreate ordering](screenshots/04-recreate.png)
+
+The 100-request canary sample returned 90 stable and 10 canary responses. Pod ratio approximates traffic distribution; a fixed percentage is not guaranteed for every sample. The runtime copies use ClusterIP Services for in-cluster testing and preserve the supplied Pod labels and update strategies.
+
+## Pod lifecycle
+
+[Per-YAML status, details, logs, screenshots and observations](pod-lifecycle/README.md)
+
+[Executed namespaced YAML copies](homework/) · [Cleanup output](screenshots/cleanup.txt)
+
+Official Pod phases are Pending, Running, Succeeded, Failed and Unknown. CrashLoopBackOff and ImagePullBackOff are container waiting reasons shown by kubectl; Terminating reflects deletion. Running does not necessarily mean Ready.
+
+The original command notes follow as historical reference.
+
+---
+
 # Session 10 — Kubernetes Core Objects
 
-> Screenshot evidence is unavailable; command outputs are recorded below.
+> Earlier command notes; fresh screenshot evidence is linked above.
 
 ## Task 1: Cluster Health Verification & Baseline Environment Checks
 

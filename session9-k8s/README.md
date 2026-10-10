@@ -1,112 +1,44 @@
-# Session 9: Kubernetes Fundamentals & Cluster Architecture
+# Session 9 - Kubernetes Fundamentals
 
-> Screenshot evidence is unavailable; command outputs are recorded below.
+Minikube and kubectl were already installed. I verified their versions, checked the existing cluster and completed all six Kubernetes Basics modules in isolated local namespaces. I used Nginx images suitable for this Arm-based Mac.
 
-## Task 1: Minikube & CLI Installation Verification
-```bash
-mkdir -p session9-k8s/screenshots
-minikube version
-kubectl version --client
-```
+| Module | What I did | Actual output |
+| --- | --- | --- |
+| Create/check cluster | Verified Minikube, node health and control-plane components | [Output](screenshots/cluster.txt) |
+| Deploy app | Created a Deployment and inspected its ReplicaSet/Pods | [Output](screenshots/deploy-explore.txt) |
+| Explore app | Used describe and logs | [Output](screenshots/deploy-explore.txt) |
+| Expose app | Created/tested a Service, then a NodePort accessed from the Mac through Minikube | [Internal](screenshots/expose.txt), [public](screenshots/public-access.txt) |
+| Scale app | Scaled from one to three ready replicas | [Output](screenshots/scale.txt) |
+| Update app | Updated Nginx 1.24-alpine to 1.25-alpine and verified the page | [Output](screenshots/update-verified.txt) |
 
-Output:
-```text
-minikube version: v1.39.0
-commit: 7a9f6a841470a207de8cf4bafcccee0969d8ba10
-Client Version: v1.37.0
-Kustomize Version: v5.8.1
-```
+## Screenshots
 
-## Task 2: Starting the Minikube Kubernetes Cluster
+![Minikube and cluster verification](screenshots/cluster.png)
 
-```bash
-minikube start --driver=podman
-```
+![Application deployment and inspection](screenshots/deploy-explore.png)
 
-Output:
-```text
-minikube v1.39.0 on Darwin 26.6.2 (arm64)
-Using the podman (experimental) driver based on existing profile
-Starting "minikube" primary control-plane node in "minikube" cluster
-Pulling base image v0.0.51 ...
-E0918 16:40:03.876465   36817 cache.go:238] Error downloading kic artifacts:  not yet implemented, see issue #8426
-Updating the running podman "minikube" container ...
-Preparing Kubernetes v1.37.0 on containerd 2.3.4 ...
-Verifying Kubernetes components...
-    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
-Enabled addons: storage-provisioner, default-storageclass
-Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
-```
-Note: The warning regarding kic artifacts is normal for the podman driver.
+![Service connectivity](screenshots/expose.png)
 
-## Task 3: Verifying Cluster Status & Node Health
+![Public NodePort access from the Mac](screenshots/public-access.png)
 
-```bash
-minikube status
-kubectl get nodes -o wide
-```
+![Scaling to three replicas](screenshots/scale.png)
 
-Output:
-```text
-minikube
-type: Control Plane
-host: Running
-kubelet: Running
-apiserver: Running
-kubeconfig: Configured
+![Updated application verified](screenshots/update-verified.png)
 
-NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION                   CONTAINER-RUNTIME
-minikube   Ready    control-plane   9d    v1.37.0   192.168.49.2   <none>        Debian GNU/Linux 12 (bookworm)   7.1.4-200.fc44.aarch64 (arm64)   containerd://2.3.4
-```
+A request immediately after the update timed out. A later check returned the page successfully; [the first attempt](screenshots/update.txt) is retained alongside the successful verification.
 
-## Task 4: Stopping the Minikube Cluster
+## Architecture notes
 
-```bash
-minikube stop
-minikube status
-```
+The API server accepts Kubernetes requests; etcd stores cluster state. The scheduler assigns Pods to nodes, and controllers reconcile desired state. The kubelet runs containers through the container runtime. kube-proxy programs Service traffic rules; CoreDNS provides name discovery.
 
-Output:
-```text
-Stopping node "minikube"  ...
-Powering off "minikube" via SSH ...
-1 node stopped.
-minikube
-type: Control Plane
-host: Stopped
-kubelet: Stopped
-apiserver: Stopped
-kubeconfig: Stopped
-```
-
-## Task 5: Kubernetes Cluster Architecture & Component Analysis
-
-Control Plane Components:
-* kube-apiserver: The front door of the control plane; the only component that communicates directly with etcd.
-* etcd: A highly available key-value store containing the cluster state.
-* kube-scheduler: Watches for newly created Pods without an assigned node and schedules them.
-* kube-controller-manager: Runs control loops (e.g., node controller, replicaset controller) to drive the current state towards the desired state.
-
-Worker Node Components:
-* kubelet: An agent that runs on each node to ensure containers are running in a Pod and reports health to the control plane.
-* kube-proxy: Maintains network routing and iptables rules on nodes to allow network communication to Pods.
-* Container Runtime: Software like containerd or CRI-O responsible for running the containers.
-* Pod: The smallest deployable unit in Kubernetes that encapsulates one or more containers.
+A Deployment manages application releases through ReplicaSets. A ReplicaSet maintains Pod count. Pods run containers, and Services supply stable endpoints for reaching them.
 
 ```text
-+---------------------------------------+
-|            Control Plane              |
-| [API Server] <------> [etcd]          |
-|    |     |                            |
-| [Scheduler] [Controller Manager]      |
-+---------------------------------------+
-                 ^
-                 | (API Calls)
-                 v
-+---------------------------------------+
-|             Worker Node               |
-| [kubelet] <--------> [Container       |
-|    |                 Runtime] -> Pods |
-| [kube-proxy] (Network/iptables)       |
-+---------------------------------------+
+kubectl → API server → controllers/scheduler → node kubelet → containers
+             ↕                                  ↑
+            etcd                         Service network / CoreDNS
 ```
+
+The existing shared cluster was reused and kept running. Only the homework namespaces were removed after testing. [Cleanup output](screenshots/cleanup.txt).
+
+Reference: [Kubernetes Basics tutorial](https://kubernetes.io/docs/tutorials/kubernetes-basics/).

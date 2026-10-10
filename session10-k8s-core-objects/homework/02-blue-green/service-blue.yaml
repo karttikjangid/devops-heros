@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+  labels:
+    app: myapp
+  namespace: session10-lab
+spec:
+  type: ClusterIP
+  selector:
+    app: myapp
+    slot: blue
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP

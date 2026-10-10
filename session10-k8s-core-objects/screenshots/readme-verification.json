@@ -1,0 +1,30 @@
+{
+  "relativeLinksChecked": 11,
+  "screenshots": [
+    {
+      "src": "01-rolling-update.png",
+      "width": 1450,
+      "height": 11960,
+      "loaded": true
+    },
+    {
+      "src": "02-blue-green.png",
+      "width": 1450,
+      "height": 2474,
+      "loaded": true
+    },
+    {
+      "src": "03-canary.png",
+      "width": 1450,
+      "height": 2398,
+      "loaded": true
+    },
+    {
+      "src": "04-recreate.png",
+      "width": 1450,
+      "height": 3902,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

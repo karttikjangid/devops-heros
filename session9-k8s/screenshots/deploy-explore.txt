@@ -1,0 +1,59 @@
+$ kubectl -n session9-lab create deployment tutorial-web --image=nginx:1.24-alpine; kubectl -n session9-lab rollout status deployment/tutorial-web --timeout=60s; kubectl -n session9-lab get deployment,replicaset,pods; kubectl -n session9-lab describe deployment tutorial-web; kubectl -n session9-lab logs deployment/tutorial-web --tail=8
+UTC: 2026-10-10T12:08:25.514117+00:00
+
+deployment.apps/tutorial-web created
+Waiting for deployment spec update to be observed...
+Waiting for deployment "tutorial-web" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "tutorial-web" rollout to finish: 0 of 1 updated replicas are available...
+deployment "tutorial-web" successfully rolled out
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/tutorial-web   1/1     1            1           2s
+
+NAME                                    DESIRED   CURRENT   READY   AGE
+replicaset.apps/tutorial-web-bb745df8   1         1         1       2s
+
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/tutorial-web-bb745df8-7s8d9   1/1     Running   0          2s
+Name:                   tutorial-web
+Namespace:              session9-lab
+CreationTimestamp:      Sat, 10 Oct 2026 17:38:23 +0530
+Labels:                 app=tutorial-web
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=tutorial-web
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=tutorial-web
+  Containers:
+   nginx:
+    Image:         nginx:1.24-alpine
+    Port:          <none>
+    Host Port:     <none>
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   tutorial-web-bb745df8 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  2s    deployment-controller  Scaled up replica set tutorial-web-bb745df8 from 0 to 1
+2026/10/10 12:08:25 [notice] 1#1: OS: Linux 7.1.4-200.fc44.aarch64
+2026/10/10 12:08:25 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/10/10 12:08:25 [notice] 1#1: start worker processes
+2026/10/10 12:08:25 [notice] 1#1: start worker process 30
+2026/10/10 12:08:25 [notice] 1#1: start worker process 31
+2026/10/10 12:08:25 [notice] 1#1: start worker process 32
+2026/10/10 12:08:25 [notice] 1#1: start worker process 33
+2026/10/10 12:08:25 [notice] 1#1: start worker process 34
+
+Exit code: 0

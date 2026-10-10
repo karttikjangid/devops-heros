@@ -1,0 +1,128 @@
+$ kubectl -n session10-lab delete deployment app-rolling
+deployment.apps "app-rolling" deleted from session10-lab namespace
+
+Exit code: 0
+
+$ kubectl -n session10-lab delete service app-rolling-service
+service "app-rolling-service" deleted from session10-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session10-k8s-core-objects/homework/04-recreate/deployment-v1.yaml
+deployment.apps/app-recreate created
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session10-k8s-core-objects/homework/04-recreate/service.yaml
+service/app-recreate-service created
+
+Exit code: 0
+
+$ kubectl -n session10-lab rollout status deployment/app-recreate --timeout=90s
+Waiting for deployment "app-recreate" rollout to finish: 0 of 3 updated replicas are available...
+Waiting for deployment "app-recreate" rollout to finish: 1 of 3 updated replicas are available...
+Waiting for deployment "app-recreate" rollout to finish: 2 of 3 updated replicas are available...
+deployment "app-recreate" successfully rolled out
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pods -o wide --show-labels
+NAME                            READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES   LABELS
+app-recreate-6c78cb55bb-jdssk   1/1     Running   0          1s      10.244.0.69   minikube   <none>           <none>            app=app-recreate,pod-template-hash=6c78cb55bb,version=v1
+app-recreate-6c78cb55bb-l9xgx   1/1     Running   0          1s      10.244.0.70   minikube   <none>           <none>            app=app-recreate,pod-template-hash=6c78cb55bb,version=v1
+app-recreate-6c78cb55bb-nhbjh   1/1     Running   0          1s      10.244.0.71   minikube   <none>           <none>            app=app-recreate,pod-template-hash=6c78cb55bb,version=v1
+client                          1/1     Running   0          5m11s   10.244.0.47   minikube   <none>           <none>            run=client
+
+Exit code: 0
+
+$ kubectl -n session10-lab exec client -- sh -c 'for attempt in 1 2 3 4 5 6; do wget -T 5 -qO- http://app-recreate-service && exit 0; sleep 2; done; exit 1' | grep -o 'VERSION: [^<]*'
+VERSION: v1
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session10-k8s-core-objects/homework/04-recreate/deployment-v2.yaml
+deployment.apps/app-recreate configured
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pods -o wide --show-labels
+NAME                            READY   STATUS        RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES   LABELS
+app-recreate-6c78cb55bb-jdssk   1/1     Terminating   0          3s      10.244.0.69   minikube   <none>           <none>            app=app-recreate,pod-template-hash=6c78cb55bb,version=v1
+app-recreate-6c78cb55bb-l9xgx   1/1     Terminating   0          3s      10.244.0.70   minikube   <none>           <none>            app=app-recreate,pod-template-hash=6c78cb55bb,version=v1
+app-recreate-6c78cb55bb-nhbjh   1/1     Terminating   0          3s      10.244.0.71   minikube   <none>           <none>            app=app-recreate,pod-template-hash=6c78cb55bb,version=v1
+client                          1/1     Running       0          5m13s   10.244.0.47   minikube   <none>           <none>            run=client
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pods -o wide --show-labels
+NAME                            READY   STATUS              RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES   LABELS
+app-recreate-7bd8d89b8b-bqq2w   1/1     Running             0          1s      10.244.0.73   minikube   <none>           <none>            app=app-recreate,pod-template-hash=7bd8d89b8b,version=v2
+app-recreate-7bd8d89b8b-qrrl8   0/1     ContainerCreating   0          1s      <none>        minikube   <none>           <none>            app=app-recreate,pod-template-hash=7bd8d89b8b,version=v2
+app-recreate-7bd8d89b8b-wnnbg   0/1     ContainerCreating   0          1s      <none>        minikube   <none>           <none>            app=app-recreate,pod-template-hash=7bd8d89b8b,version=v2
+client                          1/1     Running             0          5m14s   10.244.0.47   minikube   <none>           <none>            run=client
+
+Exit code: 0
+
+$ kubectl -n session10-lab rollout status deployment/app-recreate --timeout=90s
+deployment "app-recreate" successfully rolled out
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pods -o wide --show-labels
+NAME                            READY   STATUS    RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES   LABELS
+app-recreate-7bd8d89b8b-bqq2w   1/1     Running   0          1s      10.244.0.73   minikube   <none>           <none>            app=app-recreate,pod-template-hash=7bd8d89b8b,version=v2
+app-recreate-7bd8d89b8b-qrrl8   1/1     Running   0          1s      10.244.0.74   minikube   <none>           <none>            app=app-recreate,pod-template-hash=7bd8d89b8b,version=v2
+app-recreate-7bd8d89b8b-wnnbg   1/1     Running   0          1s      10.244.0.72   minikube   <none>           <none>            app=app-recreate,pod-template-hash=7bd8d89b8b,version=v2
+client                          1/1     Running   0          5m14s   10.244.0.47   minikube   <none>           <none>            run=client
+
+Exit code: 0
+
+$ kubectl -n session10-lab exec client -- sh -c 'for attempt in 1 2 3 4 5 6; do wget -T 5 -qO- http://app-recreate-service && exit 0; sleep 2; done; exit 1' | grep -o 'VERSION: [^<]*'
+VERSION: v2 (UPGRADED)
+
+Exit code: 0
+
+$ kubectl -n session10-lab describe deployment app-recreate
+Name:               app-recreate
+Namespace:          session10-lab
+CreationTimestamp:  Sat, 10 Oct 2026 17:44:53 +0530
+Labels:             app=app-recreate
+Annotations:        deployment.kubernetes.io/revision: 2
+Selector:           app=app-recreate
+Replicas:           3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:       Recreate
+MinReadySeconds:    0
+Pod Template:
+  Labels:  app=app-recreate
+           version=v2
+  Containers:
+   web:
+    Image:      nginx:1.25-alpine
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     100m
+      memory:  64Mi
+    Requests:
+      cpu:         30m
+      memory:      32Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  app-recreate-6c78cb55bb (0/0 replicas created)
+NewReplicaSet:   app-recreate-7bd8d89b8b (3/3 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  5s    deployment-controller  Scaled up replica set app-recreate-6c78cb55bb from 0 to 3
+  Normal  ScalingReplicaSet  3s    deployment-controller  Scaled down replica set app-recreate-6c78cb55bb from 3 to 0
+  Normal  ScalingReplicaSet  2s    deployment-controller  Scaled up replica set app-recreate-7bd8d89b8b from 0 to 3
+
+Exit code: 0

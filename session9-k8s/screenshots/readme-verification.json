@@ -1,0 +1,42 @@
+{
+  "relativeLinksChecked": 15,
+  "screenshots": [
+    {
+      "src": "cluster.png",
+      "width": 1450,
+      "height": 1021,
+      "loaded": true
+    },
+    {
+      "src": "deploy-explore.png",
+      "width": 1450,
+      "height": 1684,
+      "loaded": true
+    },
+    {
+      "src": "expose.png",
+      "width": 1450,
+      "height": 1046,
+      "loaded": true
+    },
+    {
+      "src": "public-access.png",
+      "width": 1450,
+      "height": 1276,
+      "loaded": true
+    },
+    {
+      "src": "scale.png",
+      "width": 1450,
+      "height": 900,
+      "loaded": true
+    },
+    {
+      "src": "update-verified.png",
+      "width": 1450,
+      "height": 1072,
+      "loaded": true
+    }
+  ],
+  "README": "PASS"
+}

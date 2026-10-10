@@ -1,0 +1,33 @@
+$ kubectl -n session9-lab expose deployment tutorial-web --port=80 --target-port=80; kubectl -n session9-lab run tutorial-client --image=busybox:1.36 --restart=Never --command -- sleep 3600; kubectl -n session9-lab wait pod/tutorial-client --for=condition=Ready --timeout=60s; kubectl -n session9-lab get service tutorial-web; kubectl -n session9-lab exec tutorial-client -- wget -qO- http://tutorial-web
+UTC: 2026-10-10T12:08:27.638582+00:00
+
+service/tutorial-web exposed
+pod/tutorial-client created
+pod/tutorial-client condition met
+NAME           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+tutorial-web   ClusterIP   10.105.115.181   <none>        80/TCP    2s
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+Exit code: 0

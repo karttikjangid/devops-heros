@@ -1,0 +1,36 @@
+$ kubectl -n session9-lab get deployment,pods; kubectl -n session9-lab get deployment tutorial-web -o jsonpath="{.spec.template.spec.containers[0].image}"; kubectl -n session9-lab exec tutorial-client -- wget -T 5 -qO- http://tutorial-web
+UTC: 2026-10-10T12:12:41.155345+00:00
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/tutorial-web   3/3     3            3           4m17s
+
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/tutorial-client                 1/1     Running   0          4m14s
+pod/tutorial-web-6898b44475-5rtd8   1/1     Running   0          4m10s
+pod/tutorial-web-6898b44475-6l2wk   1/1     Running   0          4m11s
+pod/tutorial-web-6898b44475-9jkr2   1/1     Running   0          4m10s
+nginx:1.25-alpine<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+Exit code: 0

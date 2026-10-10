@@ -1,0 +1,55 @@
+$ kubectl -n kube-system get pods -l k8s-app=kube-dns; kubectl -n kube-system get configmap coredns -o yaml; kubectl -n session11-lab exec client -- cat /etc/resolv.conf; kubectl -n session11-lab exec client -- nslookup web-clusterip.session11-lab.svc.cluster.local
+UTC: 2026-10-10T12:13:49.096974+00:00
+
+NAME                       READY   STATUS    RESTARTS     AGE
+coredns-559f6c778d-zrnvp   1/1     Running   7 (8h ago)   32d
+apiVersion: v1
+data:
+  Corefile: |
+    .:53 {
+        log
+        errors
+        health {
+           lameduck 5s
+        }
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+           pods insecure
+           fallthrough in-addr.arpa ip6.arpa
+           ttl 30
+        }
+        prometheus :9153
+        hosts {
+           192.168.127.254 host.minikube.internal
+           fallthrough
+        }
+        forward . /etc/resolv.conf {
+           max_concurrent 1000
+        }
+        cache 30 {
+           disable success cluster.local
+           disable denial cluster.local
+        }
+        loop
+        reload
+        loadbalance
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2026-09-08T12:01:52Z"
+  name: coredns
+  namespace: kube-system
+  resourceVersion: "286"
+  uid: e92f7086-5c54-4038-ab95-1118e6aa1214
+search session11-lab.svc.cluster.local svc.cluster.local cluster.local dns.podman
+nameserver 10.96.0.10
+options ndots:5
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+
+Name:	web-clusterip.session11-lab.svc.cluster.local
+Address: 10.101.205.90
+
+
+Exit code: 0

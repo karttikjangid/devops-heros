@@ -217,3 +217,10 @@ deployment "app-recreate" successfully rolled out
 kubectl delete -f 04-recreate/service.yaml
 kubectl delete -f 04-recreate/deployment-v2.yaml
 ```
+
+
+## Completed execution
+
+![Real strategy output](../screenshots/04-recreate.png)
+
+[Full commands and output](../screenshots/04-recreate.txt)
