@@ -1,0 +1,10 @@
+groups:
+  - name: session20
+    rules:
+      - alert: ApplicationUnavailable
+        expr: probe_success{job="application"} == 0
+        for: 10s
+        labels:
+          severity: warning
+        annotations:
+          summary: Session 20 application is unavailable
