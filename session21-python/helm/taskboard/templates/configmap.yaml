@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: {name: homework-config}
+data:
+  APP_NAME: Homework Tracker API
+---
+apiVersion: v1
+kind: Secret
+metadata: {name: homework-database}
+type: Opaque
+stringData:
+  DATABASE_URL: "postgresql+psycopg://{{ .Values.postgres.username }}:{{ .Values.postgres.password }}@{{ .Values.postgres.host }}:5432/{{ .Values.postgres.database }}"

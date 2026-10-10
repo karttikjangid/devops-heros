@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: homework-frontend, labels: {app: homework-frontend}}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector: {matchLabels: {app: homework-frontend}}
+  template:
+    metadata: {labels: {app: homework-frontend}}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      containers:
+      - name: frontend
+        image: "{{ .Values.frontend.image }}:{{ .Values.frontend.tag }}"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 101
+          allowPrivilegeEscalation: false
+        imagePullPolicy: IfNotPresent
+        ports: [{containerPort: 8080}]
+        readinessProbe: {httpGet: {path: /, port: 8080}, initialDelaySeconds: 5}
+        livenessProbe: {httpGet: {path: /, port: 8080}, initialDelaySeconds: 10}
+        resources: {requests: {cpu: 50m, memory: 64Mi}, limits: {cpu: 200m, memory: 96Mi}}

@@ -1,0 +1,13 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: {name: homework}
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - {path: /api, pathType: Prefix, backend: {service: {name: homework-backend, port: {number: 8000}}}}
+      - {path: /, pathType: Prefix, backend: {service: {name: homework-frontend, port: {number: 80}}}}
+{{- end }}

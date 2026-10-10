@@ -1,0 +1,80 @@
+name: Session 21 homework tracker
+on:
+  push:
+    branches: [main]
+    paths: ['session21-python/**', '.github/workflows/session21.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: session21-python
+    env:
+      BACKEND: ghcr.io/${{ github.repository_owner }}/session21-backend:${{ github.sha }}
+      FRONTEND: ghcr.io/${{ github.repository_owner }}/session21-frontend:${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Backend tests
+        run: |
+          pip install -r backend/requirements.txt
+          python -m pytest -v backend/tests
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Frontend build
+        run: npm ci && npm run build
+        working-directory: session21-python/frontend
+      - name: Docker build
+        run: |
+          docker build -t "$BACKEND" backend
+          docker build -t "$FRONTEND" frontend
+      - name: Scan backend
+        uses: aquasecurity/trivy-action@0.36.0
+        with:
+          image-ref: ${{ env.BACKEND }}
+          severity: HIGH,CRITICAL
+          exit-code: '1'
+          output: session21-python/backend-scan.txt
+      - name: Scan frontend
+        uses: aquasecurity/trivy-action@0.36.0
+        with:
+          image-ref: ${{ env.FRONTEND }}
+          severity: HIGH,CRITICAL
+          exit-code: '1'
+          output: session21-python/frontend-scan.txt
+      - name: Registry login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push SHA-tagged images
+        run: |
+          docker push "$BACKEND"
+          docker push "$FRONTEND"
+      - name: Start Kubernetes test cluster
+        uses: helm/kind-action@v1.15.1
+      - uses: azure/setup-helm@v4
+      - name: Deploy with Helm
+        run: |
+          kind load docker-image "$BACKEND" "$FRONTEND" --name chart-testing
+          helm upgrade --install homework ./helm/taskboard -n session21 --create-namespace \
+            --set backend.tag="${{ github.sha }}" --set frontend.tag="${{ github.sha }}" \
+            --set ingress.enabled=false --set hpa.enabled=false --wait --timeout 180s
+          kubectl -n session21 get pods,svc
+          kubectl -n session21 port-forward service/backend 8000:8000 > /tmp/session21-forward.log 2>&1 &
+          sleep 3
+          curl --fail --retry 5 --retry-connrefused http://localhost:8000/ready
+      - name: Save test and scan evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: session21-scans
+          path: session21-python/*-scan.txt

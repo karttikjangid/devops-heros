@@ -1,0 +1,181 @@
+---
+# Source: homework-tracker/templates/configmap.yaml
+apiVersion: v1
+kind: Secret
+metadata: {name: homework-database}
+type: Opaque
+stringData:
+  DATABASE_URL: "postgresql+psycopg://taskboard:taskboard@postgres:5432/taskboard"
+
+---
+# Source: homework-tracker/templates/postgres.yaml
+apiVersion: v1
+kind: Secret
+metadata: {name: postgres}
+type: Opaque
+stringData:
+  username: "taskboard"
+  password: "taskboard"
+
+---
+# Source: homework-tracker/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: {name: homework-config}
+data:
+  APP_NAME: Homework Tracker API
+
+---
+# Source: homework-tracker/templates/postgres.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: {name: postgres-data}
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: {requests: {storage: 1Gi}}
+
+---
+# Source: homework-tracker/templates/backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  labels: {app: taskboard-backend}
+spec:
+  selector: {app: taskboard-backend}
+  ports:
+    - port: 8000
+      targetPort: 8000
+      name: http
+
+---
+# Source: homework-tracker/templates/frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata: {name: homework-frontend}
+spec:
+  selector: {app: homework-frontend}
+  ports: [{port: 80, targetPort: 8080}]
+
+---
+# Source: homework-tracker/templates/postgres.yaml
+apiVersion: v1
+kind: Service
+metadata: {name: postgres}
+spec:
+  selector: {app: postgres}
+  ports: [{port: 5432, targetPort: 5432}]
+
+---
+# Source: homework-tracker/templates/backend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: taskboard-backend}
+  template:
+    metadata:
+      labels: {app: taskboard-backend}
+    spec:
+      containers:
+        - name: backend
+          image: "ghcr.io/karttikjangid/session21-backend:latest"
+          imagePullPolicy: IfNotPresent
+          ports: [{containerPort: 8000}]
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            allowPrivilegeEscalation: false
+          envFrom:
+            - configMapRef: {name: homework-config}
+            - secretRef: {name: homework-database}
+          readinessProbe:
+            httpGet: {path: /ready, port: 8000}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: {path: /health, port: 8000}
+            initialDelaySeconds: 20
+            periodSeconds: 15
+          resources:
+            limits:
+              cpu: 300m
+              memory: 192Mi
+            requests:
+              cpu: 50m
+              memory: 96Mi
+
+---
+# Source: homework-tracker/templates/frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: homework-frontend, labels: {app: homework-frontend}}
+spec:
+  replicas: 2
+  selector: {matchLabels: {app: homework-frontend}}
+  template:
+    metadata: {labels: {app: homework-frontend}}
+    spec:
+      containers:
+      - name: frontend
+        image: "ghcr.io/karttikjangid/session21-frontend:latest"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 101
+          allowPrivilegeEscalation: false
+        imagePullPolicy: IfNotPresent
+        ports: [{containerPort: 8080}]
+        readinessProbe: {httpGet: {path: /, port: 8080}, initialDelaySeconds: 5}
+        livenessProbe: {httpGet: {path: /, port: 8080}, initialDelaySeconds: 10}
+        resources: {requests: {cpu: 50m, memory: 64Mi}, limits: {cpu: 200m, memory: 96Mi}}
+
+---
+# Source: homework-tracker/templates/postgres.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: postgres}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: postgres}}
+  template:
+    metadata: {labels: {app: postgres}}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16-alpine
+        ports: [{containerPort: 5432}]
+        env:
+        - {name: POSTGRES_DB, value: "taskboard"}
+        - {name: POSTGRES_USER, valueFrom: {secretKeyRef: {name: postgres, key: username}}}
+        - {name: POSTGRES_PASSWORD, valueFrom: {secretKeyRef: {name: postgres, key: password}}}
+        readinessProbe: {exec: {command: ["sh","-c","pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]}, initialDelaySeconds: 5, periodSeconds: 10}
+        volumeMounts: [{name: data, mountPath: /var/lib/postgresql/data}]
+      volumes: [{name: data, persistentVolumeClaim: {claimName: postgres-data}}]
+
+---
+# Source: homework-tracker/templates/hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: {name: homework-backend}
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: homework-backend}
+  minReplicas: 2
+  maxReplicas: 4
+  metrics: [{type: Resource, resource: {name: cpu, target: {type: Utilization, averageUtilization: 60}}}]
+
+---
+# Source: homework-tracker/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: {name: homework}
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: homework.local
+    http:
+      paths:
+      - {path: /api, pathType: Prefix, backend: {service: {name: homework-backend, port: {number: 8000}}}}
+      - {path: /, pathType: Prefix, backend: {service: {name: homework-frontend, port: {number: 80}}}}

@@ -1,0 +1,26 @@
+frontend:
+  image: ghcr.io/karttikjangid/session21-frontend
+  tag: latest
+backend:
+  image: ghcr.io/karttikjangid/session21-backend
+  tag: latest
+replicaCount: 2
+postgres:
+  host: postgres
+  database: taskboard
+  username: taskboard
+  password: taskboard
+ingress:
+  enabled: true
+  host: homework.local
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 60
+resources:
+  requests: {cpu: 50m, memory: 96Mi}
+  limits: {cpu: 300m, memory: 192Mi}
+monitoring:
+  serviceMonitor:
+    enabled: false

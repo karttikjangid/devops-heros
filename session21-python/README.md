@@ -1,8 +1,8 @@
-# Session 21 - Docker Compose Application
+# Session 21 - Homework Tracker
 
 ## Project Overview
 
-I used the TaskBoard starter: React/Vite, FastAPI and PostgreSQL. I tested task creation, updates, listing, statistics and deletion.
+Homework Tracker keeps course assignments and their progress. I adapted the TaskBoard starter for my coursework using React/Vite, FastAPI and PostgreSQL.
 
 ## Architecture
 
@@ -54,7 +54,7 @@ docker rm session21-manual-postgres
 
 ## Dockerfiles
 
-- [Frontend Dockerfile](frontend/Dockerfile): Node 22 builds with `npm ci`. Nginx serves the frontend and forwards `/api` to `backend:8000`.
+- [Frontend Dockerfile](frontend/Dockerfile): Node 22 builds with `npm ci`. Non-root Nginx (UID 101) serves the frontend on port 8080 and forwards `/api` to `backend:8000`.
 - [Backend Dockerfile](backend/Dockerfile): Python 3.12 runs as a non-root user. It applies Alembic migrations before starting Uvicorn.
 
 ## Docker Compose
@@ -130,7 +130,7 @@ curl -sS -o /private/tmp/session21-deleted.json -w '%{http_code}' \
 
 [Database output](screenshots/database-test.txt). I deleted the API test task and kept the browser task.
 
-All 3 backend tests passed:
+All 5 backend tests passed:
 
 ```bash
 cd backend
@@ -138,6 +138,10 @@ python -m pytest -p no:cacheprovider tests
 ```
 
 [Captured test output](screenshots/backend-tests.txt).
+
+![Five passing API tests](screenshots/backend-tests.png)
+
+![Both application containers run as non-root](screenshots/non-root-test.png)
 
 ## Troubleshooting
 
@@ -159,6 +163,12 @@ I learned to wait for database readiness and check the frontend proxy port. Test
 
 ## Final Verification
 
-I checked a clean Compose start, all services, API CRUD, frontend updates and PostgreSQL data. All six screenshots load in the README. Terminal screenshots use the saved command output.
+I checked a clean Compose start, all services, API CRUD, frontend updates and PostgreSQL data. The screenshots load in the README. Terminal screenshots use the saved command output.
 
 [Final service/API/database/log checks](screenshots/final-verification.txt).
+
+## Capstone progress
+
+Application, tests and Docker are verified locally. The full rubric also requires a green CI pipeline, registry images, Kubernetes/Helm, monitoring, real cloud infrastructure and a demo. Those checks are in progress; this is not yet a full-rubric PASS.
+
+The provided rubric specifies AWS VPC/EKS. An Azure VNet/AKS deployment needs instructor approval.
