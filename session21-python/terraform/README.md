@@ -1,17 +1,22 @@
-# Terraform lab
+# Azure homework infrastructure
 
-This folder teaches Infrastructure as Code by provisioning the AWS VPC and EKS cluster used by the production-style TaskBoard deployment.
+One Ubuntu VM runs K3s. Terraform creates a VNet with two subnets, the VM, its network interface, a public IP and an NSG. SSH is restricted to `admin_cidr`; port 80 is for the frontend.
 
-The module-based approach keeps the lesson focused on Terraform concepts: providers, variables, modules, state, plan/apply, outputs and dependency graphs.
+The selected VM is `Standard_B2als_v2` in Central India (2 vCPUs, 4 GB RAM). This is the requested Azure/K3s alternative to the original AWS/EKS rubric.
 
-> Cost warning: an EKS cluster and NAT gateway can incur AWS charges. Destroy classroom infrastructure when finished.
+Copy `terraform.tfvars.example` to `terraform.tfvars` and fill in your subscription, public SSH key path and public IP. Sign in with `az login`, then run:
 
 ```bash
 terraform init
-terraform fmt -recursive
 terraform validate
 terraform plan
 terraform apply
-aws eks update-kubeconfig --region ap-south-1 --name taskboard-eks
+```
+
+After the demo:
+
+```bash
 terraform destroy
 ```
+
+State files, keys and personal variable files stay out of Git.

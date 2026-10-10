@@ -80,6 +80,10 @@ spec:
     metadata:
       labels: {app: taskboard-backend}
     spec:
+      initContainers:
+        - name: wait-postgres
+          image: postgres:16-alpine
+          command: ["sh", "-c", "until pg_isready -h postgres -U taskboard -d taskboard; do sleep 2; done"]
       containers:
         - name: backend
           image: "ghcr.io/karttikjangid/session21-backend:latest"
@@ -174,8 +178,9 @@ metadata: {name: homework}
 spec:
   ingressClassName: nginx
   rules:
-  - host: homework.local
+  -
+    host: homework.local
     http:
       paths:
-      - {path: /api, pathType: Prefix, backend: {service: {name: homework-backend, port: {number: 8000}}}}
+      - {path: /api, pathType: Prefix, backend: {service: {name: backend, port: {number: 8000}}}}
       - {path: /, pathType: Prefix, backend: {service: {name: homework-frontend, port: {number: 80}}}}

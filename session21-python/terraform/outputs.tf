@@ -1,3 +1,2 @@
-output "cluster_name" { value = module.eks.cluster_name }
-output "cluster_endpoint" { value = module.eks.cluster_endpoint }
-output "vpc_id" { value = module.vpc.vpc_id }
+output "resource_group" { value = azurerm_resource_group.homework.name }
+output "public_ip" { value = azurerm_public_ip.homework.ip_address }

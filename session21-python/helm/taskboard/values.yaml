@@ -11,6 +11,7 @@ postgres:
   username: taskboard
   password: taskboard
 ingress:
+  className: nginx
   enabled: true
   host: homework.local
 hpa:

@@ -2,7 +2,16 @@ name: Session 21 homework tracker
 on:
   push:
     branches: [main]
-    paths: ['session21-python/**', '.github/workflows/session21.yml']
+    paths:
+      - 'session21-python/backend/**'
+      - 'session21-python/frontend/**'
+      - 'session21-python/helm/**'
+      - 'session21-python/monitoring/**'
+      - 'session21-python/terraform/**'
+      - 'session21-python/k8s/**'
+      - 'session21-python/scripts/**'
+      - 'session21-python/docker-compose.yml'
+      - '.github/workflows/session21.yml' 
   workflow_dispatch:
 permissions:
   contents: read

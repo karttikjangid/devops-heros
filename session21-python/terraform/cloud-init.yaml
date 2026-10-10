@@ -1,0 +1,5 @@
+#cloud-config
+package_update: true
+packages: [curl, ca-certificates]
+runcmd:
+  - [sh, -c, 'curl -sfL https://get.k3s.io | sh -']

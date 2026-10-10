@@ -3,11 +3,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata: {name: homework}
 spec:
-  ingressClassName: nginx
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
-  - host: {{ .Values.ingress.host }}
+  - {{- if .Values.ingress.host }}
+    host: {{ .Values.ingress.host }}
+    {{- end }}
     http:
       paths:
-      - {path: /api, pathType: Prefix, backend: {service: {name: homework-backend, port: {number: 8000}}}}
+      - {path: /api, pathType: Prefix, backend: {service: {name: backend, port: {number: 8000}}}}
       - {path: /, pathType: Prefix, backend: {service: {name: homework-frontend, port: {number: 80}}}}
 {{- end }}
