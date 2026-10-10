@@ -4,7 +4,7 @@ metadata:
   name: session20-demo
   namespace: session20-argocd
 spec:
-  project: default
+  project: session20
   source:
     repoURL: https://github.com/karttikjangid/devops-heros.git
     targetRevision: main

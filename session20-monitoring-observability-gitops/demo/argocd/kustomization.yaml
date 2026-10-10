@@ -1,0 +1,36 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: session20-argocd
+resources:
+- https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.4/manifests/core-install.yaml
+patches:
+- target:
+    kind: Deployment
+    name: argocd-applicationset-controller
+  patch: "- op: replace\n  path: /spec/replicas\n  value: 0"
+- target:
+    kind: ConfigMap
+    name: argocd-cm
+  patch: "- op: add\n  path: /data\n  value:\n    timeout.reconciliation: 10s\n  \
+    \  timeout.reconciliation.jitter: 0s"
+- target:
+    kind: StatefulSet
+    name: argocd-application-controller
+  patch: "- op: add\n  path: /spec/template/spec/containers/0/resources\n  value:\n\
+    \    requests:\n      cpu: 20m\n      memory: 64Mi\n    limits:\n      cpu: 400m\n\
+    \      memory: 384Mi\n- op: replace\n  path: /spec/template/spec/containers/0/imagePullPolicy\n\
+    \  value: IfNotPresent\n"
+- target:
+    kind: Deployment
+    name: argocd-repo-server
+  patch: "- op: add\n  path: /spec/template/spec/containers/0/resources\n  value:\n\
+    \    requests:\n      cpu: 20m\n      memory: 64Mi\n    limits:\n      cpu: 400m\n\
+    \      memory: 192Mi\n- op: replace\n  path: /spec/template/spec/containers/0/imagePullPolicy\n\
+    \  value: IfNotPresent\n"
+- target:
+    kind: Deployment
+    name: argocd-redis
+  patch: "- op: add\n  path: /spec/template/spec/containers/0/resources\n  value:\n\
+    \    requests:\n      cpu: 20m\n      memory: 64Mi\n    limits:\n      cpu: 400m\n\
+    \      memory: 128Mi\n- op: replace\n  path: /spec/template/spec/containers/0/imagePullPolicy\n\
+    \  value: IfNotPresent\n"
