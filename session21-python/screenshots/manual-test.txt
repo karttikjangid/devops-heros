@@ -1,0 +1,23 @@
+Captured: 2026-10-10T00:09:32.715297+00:00
+$ set -e; curl -fsS -i http://localhost:8000/ready; curl -fsS -i http://localhost:5173/api/tasks; podman exec session21-manual-postgres psql -U taskboard -d taskboard -c "SELECT version();"
+HTTP/1.1 200 OK
+date: Sat, 10 Oct 2026 00:09:32 GMT
+server: uvicorn
+content-length: 18
+content-type: application/json
+
+{"status":"READY"}HTTP/1.1 200 OK
+Vary: Origin
+date: Sat, 10 Oct 2026 00:09:32 GMT
+server: uvicorn
+content-length: 2
+content-type: application/json
+connection: close
+
+[]                                            version                                             
+------------------------------------------------------------------------------------------------
+ PostgreSQL 16.15 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+(1 row)
+
+
+Exit status: 0

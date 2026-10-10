@@ -1,0 +1,17 @@
+Captured: 2026-10-10T00:12:20.032053+00:00
+$ docker compose up -d --wait --wait-timeout 120
+ Container session21-python-postgres-1  Running
+ Container session21-python-backend-1  Running
+ Container session21-python-frontend-1  Running
+ Container session21-python-postgres-1  Waiting
+ Container session21-python-postgres-1  Healthy
+ Container session21-python-backend-1  Waiting
+ Container session21-python-backend-1  Healthy
+ Container session21-python-frontend-1  Waiting
+ Container session21-python-postgres-1  Waiting
+ Container session21-python-backend-1  Waiting
+ Container session21-python-postgres-1  Healthy
+ Container session21-python-frontend-1  Healthy
+ Container session21-python-backend-1  Healthy
+
+Exit status: 0

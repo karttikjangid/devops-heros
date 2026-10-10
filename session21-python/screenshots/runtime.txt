@@ -1,0 +1,44 @@
+Captured: 2026-10-10T00:08:42.001779+00:00
+$ docker version; docker compose version
+Client:
+ Version:           28.5.1
+ API version:       1.44 (downgraded from 1.51)
+ Go version:        go1.24.8
+ Git commit:        e180ab8
+ Built:             Wed Oct  8 12:16:17 2025
+ OS/Arch:           darwin/arm64
+ Context:           default
+
+Server: linux/arm64/fedora-44
+ Podman Engine:
+  Version:          6.1.0
+  APIVersion:       6.1.0
+  Arch:             arm64
+  BuildTime:        2026-08-12T05:30:00+05:30
+  Experimental:     false
+  GitCommit:        cade97a52ebdf9dbf9e81de8009015776837a074
+  GoVersion:        go1.26.5-X:nodwarf5
+  KernelVersion:    7.1.4-200.fc44.aarch64
+  MinAPIVersion:    4.0.0
+  Os:               linux
+ Conmon:
+  Version:          conmon version 2.2.1, commit: 
+  Package:          conmon-2.2.1-2.fc44.aarch64
+ OCI Runtime (crun):
+  Version:          crun version 1.29
+commit: d66af6a0fc2ab5fabd951b427a292344632ce074
+rundir: /run/crun
+spec: 1.0.0
++SYSTEMD +SELINUX +APPARMOR +CAP +SECCOMP +EBPF +CRIU +LIBKRUN +WASM:wasmedge +JSON_C
+  Package:          crun-1.29-1.fc44.aarch64
+ Engine:
+  Version:          6.1.0
+  API version:      1.44 (minimum version 1.24)
+  Go version:       go1.26.5-X:nodwarf5
+  Git commit:       cade97a52ebdf9dbf9e81de8009015776837a074
+  Built:            Wed Aug 12 05:30:00 2026
+  OS/Arch:          linux/arm64
+  Experimental:     false
+Docker Compose version v2.39.4
+
+Exit status: 0

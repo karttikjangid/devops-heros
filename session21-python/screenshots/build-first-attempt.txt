@@ -1,0 +1,251 @@
+Captured: 2026-10-10T00:08:49.943882+00:00
+$ docker compose up -d --build
+time="2026-10-10T05:38:50+05:30" level=warning msg="COMPOSE_BAKE=false is deprecated, support for internal compose builder will be removed in next release"
+ Service backend  Building
+Sending build context to Docker daemon  11.21kB
+
+STEP 1/12: FROM python:3.12-slim
+Resolving %!q(<nil>) to docker.io (enforced by caller)
+Trying to pull docker.io/library/python:3.12-slim...
+Getting image source signatures
+Copying blob sha256:6e2fcafe72a4c4e812d11805d3f8f7b8fddd43ac39a29aadbe0a93b079d60e18
+Copying blob sha256:bbeda6b4abb749f743f4547ef5a28070a14de8caef211daa5afb78d5b5fa21ba
+Copying blob sha256:387b25ff7b944c188f58f0e8633fb93428b7418b9af0549618f96ce8fd56da5f
+Copying blob sha256:4dbdca1a513d31094476a7f745c8278b0ca94c30b9bc66ec65b9faebff263a16
+Copying config sha256:ce9a404c2c0138e747a43e6ea022d2f7e670ed868df35d627a663ba7fb940ea9
+Writing manifest to image destination
+STEP 2/12: WORKDIR /app
+--> 41dc8ff076bd
+STEP 3/12: ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+--> 3870fc950a03
+STEP 4/12: COPY requirements.txt .
+--> 095b09856f0a
+STEP 5/12: RUN pip install --no-cache-dir -r requirements.txt && useradd --create-home --uid 10001 appuser
+Collecting fastapi==0.115.6 (from -r requirements.txt (line 1))
+  Downloading fastapi-0.115.6-py3-none-any.whl.metadata (27 kB)
+Collecting uvicorn==0.34.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+  Downloading uvicorn-0.34.0-py3-none-any.whl.metadata (6.5 kB)
+Collecting sqlalchemy==2.0.36 (from -r requirements.txt (line 3))
+  Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (9.7 kB)
+Collecting psycopg==3.2.3 (from psycopg[binary]==3.2.3->-r requirements.txt (line 4))
+  Downloading psycopg-3.2.3-py3-none-any.whl.metadata (4.3 kB)
+Collecting pydantic-settings==2.7.1 (from -r requirements.txt (line 5))
+  Downloading pydantic_settings-2.7.1-py3-none-any.whl.metadata (3.5 kB)
+Collecting prometheus-fastapi-instrumentator==7.0.2 (from -r requirements.txt (line 6))
+  Downloading prometheus_fastapi_instrumentator-7.0.2-py3-none-any.whl.metadata (13 kB)
+Collecting alembic==1.14.0 (from -r requirements.txt (line 7))
+  Downloading alembic-1.14.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting pytest==8.3.4 (from -r requirements.txt (line 8))
+  Downloading pytest-8.3.4-py3-none-any.whl.metadata (7.5 kB)
+Collecting httpx==0.28.1 (from -r requirements.txt (line 9))
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting starlette<0.42.0,>=0.40.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+  Downloading starlette-0.41.3-py3-none-any.whl.metadata (6.0 kB)
+Collecting pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 (from fastapi==0.115.6->-r requirements.txt (line 1))
+  Downloading pydantic-2.14.0-py3-none-any.whl.metadata (131 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi==0.115.6->-r requirements.txt (line 1))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting click>=7.0 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+  Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting h11>=0.8 (from uvicorn==0.34.0->uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting greenlet!=0.4.17 (from sqlalchemy==2.0.36->-r requirements.txt (line 3))
+  Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl.metadata (3.8 kB)
+Collecting python-dotenv>=0.21.0 (from pydantic-settings==2.7.1->-r requirements.txt (line 5))
+  Downloading python_dotenv-1.2.4-py3-none-any.whl.metadata (29 kB)
+Collecting prometheus-client<1.0.0,>=0.8.0 (from prometheus-fastapi-instrumentator==7.0.2->-r requirements.txt (line 6))
+  Downloading prometheus_client-0.26.0-py3-none-any.whl.metadata (2.1 kB)
+Collecting Mako (from alembic==1.14.0->-r requirements.txt (line 7))
+  Downloading mako-1.4.3-py3-none-any.whl.metadata (2.9 kB)
+Collecting iniconfig (from pytest==8.3.4->-r requirements.txt (line 8))
+  Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting packaging (from pytest==8.3.4->-r requirements.txt (line 8))
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.3.4->-r requirements.txt (line 8))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting anyio (from httpx==0.28.1->-r requirements.txt (line 9))
+  Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+Collecting certifi (from httpx==0.28.1->-r requirements.txt (line 9))
+  Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx==0.28.1->-r requirements.txt (line 9))
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx==0.28.1->-r requirements.txt (line 9))
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting psycopg-binary==3.2.3 (from psycopg[binary]==3.2.3->-r requirements.txt (line 4))
+  Downloading psycopg_binary-3.2.3-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (2.8 kB)
+Collecting httptools>=0.6.3 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+  Downloading httptools-0.9.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (3.5 kB)
+Collecting pyyaml>=5.1 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.4 kB)
+Collecting uvloop!=0.15.0,!=0.15.1,>=0.14.0 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+  Downloading uvloop-0.23.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (5.1 kB)
+Collecting watchfiles>=0.13 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+  Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (4.9 kB)
+Collecting websockets>=10.4 (from uvicorn[standard]==0.34.0->-r requirements.txt (line 2))
+  Downloading websockets-17.2-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (6.3 kB)
+Collecting annotated-types>=0.6.0 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.50.0 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+  Downloading pydantic_core-2.50.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (6.5 kB)
+Collecting typing-inspection>=0.4.4 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi==0.115.6->-r requirements.txt (line 1))
+  Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting MarkupSafe>=2.0 (from Mako->alembic==1.14.0->-r requirements.txt (line 7))
+  Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.7 kB)
+Downloading fastapi-0.115.6-py3-none-any.whl (94 kB)
+Downloading uvicorn-0.34.0-py3-none-any.whl (62 kB)
+Downloading SQLAlchemy-2.0.36-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (3.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 2.5 MB/s eta 0:00:00
+Downloading psycopg-3.2.3-py3-none-any.whl (197 kB)
+Downloading pydantic_settings-2.7.1-py3-none-any.whl (29 kB)
+Downloading prometheus_fastapi_instrumentator-7.0.2-py3-none-any.whl (18 kB)
+Downloading alembic-1.14.0-py3-none-any.whl (233 kB)
+Downloading pytest-8.3.4-py3-none-any.whl (343 kB)
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading psycopg_binary-3.2.3-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (4.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 2.5 MB/s eta 0:00:00
+Downloading click-8.5.0-py3-none-any.whl (125 kB)
+Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl (611 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 611.7/611.7 kB 2.9 MB/s eta 0:00:00
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading httptools-0.9.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (549 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 549.2/549.2 kB 2.3 MB/s eta 0:00:00
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading prometheus_client-0.26.0-py3-none-any.whl (64 kB)
+Downloading pydantic-2.14.0-py3-none-any.whl (487 kB)
+Downloading pydantic_core-2.50.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 2.5 MB/s eta 0:00:00
+Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (775 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 775.1/775.1 kB 2.4 MB/s eta 0:00:00
+Downloading starlette-0.41.3-py3-none-any.whl (73 kB)
+Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading uvloop-0.23.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (4.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 2.5 MB/s eta 0:00:00
+Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (454 kB)
+Downloading websockets-17.2-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (226 kB)
+Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Downloading mako-1.4.3-py3-none-any.whl (80 kB)
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading markupsafe-3.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (24 kB)
+Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Installing collected packages: websockets, uvloop, typing-extensions, pyyaml, python-dotenv, psycopg-binary, prometheus-client, pluggy, packaging, MarkupSafe, iniconfig, idna, httptools, h11, greenlet, click, certifi, annotated-types, uvicorn, typing-inspection, sqlalchemy, pytest, pydantic-core, psycopg, Mako, httpcore, anyio, watchfiles, starlette, pydantic, httpx, alembic, pydantic-settings, prometheus-fastapi-instrumentator, fastapi
+Successfully installed Mako-1.4.3 MarkupSafe-3.0.4 alembic-1.14.0 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 click-8.5.0 fastapi-0.115.6 greenlet-3.5.6 h11-0.16.0 httpcore-1.0.9 httptools-0.9.0 httpx-0.28.1 idna-3.20 iniconfig-2.3.1 packaging-26.3 pluggy-1.6.0 prometheus-client-0.26.0 prometheus-fastapi-instrumentator-7.0.2 psycopg-3.2.3 psycopg-binary-3.2.3 pydantic-2.14.0 pydantic-core-2.50.0 pydantic-settings-2.7.1 pytest-8.3.4 python-dotenv-1.2.4 pyyaml-6.0.3 sqlalchemy-2.0.36 starlette-0.41.3 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.34.0 uvloop-0.23.0 watchfiles-1.3.0 websockets-17.2
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: pip install --upgrade pip
+--> 1eb6931ce36f
+STEP 6/12: COPY alembic.ini ./
+--> 7f89386bd306
+STEP 7/12: COPY alembic ./alembic
+--> a31cc30a7251
+STEP 8/12: COPY app ./app
+--> aa3ee692b195
+STEP 9/12: USER 10001
+--> cd9e67852ab8
+STEP 10/12: EXPOSE 8000
+--> 8817486ba118
+STEP 11/12: CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+--> fb8909b7259c
+STEP 12/12: LABEL "com.docker.compose.image.builder"="classic"
+COMMIT docker.io/library/session21-python-backend
+--> c3c5000235be
+Successfully tagged docker.io/library/session21-python-backend:latest
+c3c5000235beb899b86044f27564380fd855c34d4f838481c33c3c925be52cc2
+Successfully built c3c5000235be
+Successfully tagged session21-python-backend
+ Service backend  Built
+ Service frontend  Building
+Sending build context to Docker daemon  11.16kB
+
+[1/2] STEP 1/6: FROM node:22-alpine AS build
+Resolving %!q(<nil>) to docker.io (enforced by caller)
+Trying to pull docker.io/library/node:22-alpine...
+Getting image source signatures
+Copying blob sha256:66fa63c7a061939c4346f9c3c1ada45434b276dd4e4274721d6bf13cb8adec6e
+Copying blob sha256:87919ed734a39bc185155d715bdcf2ce6c52d112ff642650d9e0e35502b481e9
+Copying blob sha256:a9986cd6f37dbddae7862a6d4be71683472e7c2ea708e87db14f8a6393c00f00
+Copying blob sha256:74849c662da757b89cfe8b5406d7beaaf491727ea6843cbba85b8889d1543956
+Copying config sha256:0d459d0765f0e55925663ba63fad229237ea06ad6ba4fa38658e7c5b5308a0b9
+Writing manifest to image destination
+[1/2] STEP 2/6: WORKDIR /app
+--> 19d6582254ad
+[1/2] STEP 3/6: COPY package*.json ./
+--> 8c27823c0072
+[1/2] STEP 4/6: RUN npm ci
+
+added 21 packages, and audited 22 packages in 13s
+
+9 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm notice
+npm notice New major version of npm available! 10.9.9 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+--> fd335ba02b4b
+[1/2] STEP 5/6: COPY . .
+--> 768a3ef4a366
+[1/2] STEP 6/6: RUN npm run build
+
+> taskboard-frontend@1.0.0 build
+> vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 15 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.34 kB │ gzip:  0.25 kB
+dist/assets/index-DkMuKOF6.css    6.40 kB │ gzip:  2.04 kB
+dist/assets/index-BmfppIyD.js   227.21 kB │ gzip: 70.89 kB
+
+✓ built in 205ms
+--> b2c1a8ccc8ad
+[2/2] STEP 1/5: FROM nginx:1.27-alpine
+Resolving %!q(<nil>) to docker.io (enforced by caller)
+Trying to pull docker.io/library/nginx:1.27-alpine...
+Getting image source signatures
+Copying blob sha256:c60e446e49a0b607fd79968afdc54cedce67644990a3930925add6caf577779d
+Copying blob sha256:1ab010a063387e697fc32bb43022532c0e275d2e51fb65c2ac541e082e610a33
+Copying blob sha256:e6557c42ebeaea010d8a8883fdacdc5a17dea1221416d0d980e206dd42dc7e29
+Copying blob sha256:d3282d7e6b7633cf153dce0ca1c72b6ea574edb0b34351f848fb16b7d13c851f
+Copying blob sha256:6e771e15690e2fabf2332d3a3b744495411d6e0b00b2aea64419b58b0066cf81
+Copying blob sha256:a4ce1202d74643d4e4ce15787afc2402a18802e3d7bfd0f6bf60c912b57eec1f
+Copying blob sha256:37aca2470cdaf48d251d9308c09dc8735b45ebcbefada46537c9989991b3fe6d
+Copying blob sha256:9994ea1088e3f1d0eb3dea855f32e7e63742b2644c8611c124ba81bc3453047e
+Copying config sha256:96868d9fa38f469a86d2f25787e43ee9ad330339d30be260aa9f5a338bb03751
+Writing manifest to image destination
+[2/2] STEP 2/5: COPY --from=build /app/dist /usr/share/nginx/html
+--> 5648ba4a5e5f
+[2/2] STEP 3/5: COPY nginx.conf /etc/nginx/conf.d/default.conf
+--> fa76316608d2
+[2/2] STEP 4/5: EXPOSE 80
+--> 7f0c663d5337
+[2/2] STEP 5/5: LABEL "com.docker.compose.image.builder"="classic"
+[2/2] COMMIT docker.io/library/session21-python-frontend
+--> afed6fe60cf5
+Successfully tagged docker.io/library/session21-python-frontend:latest
+afed6fe60cf525e8eb10d67477397edf30a987aff27b86070c5499969a2cbf4d
+Successfully built afed6fe60cf5
+Successfully tagged session21-python-frontend
+ Service frontend  Built
+ backend  Built
+ frontend  Built
+ Container session21-python-postgres-1  Creating
+ Container session21-python-postgres-1  Created
+ Container session21-python-backend-1  Creating
+ Container session21-python-backend-1  Created
+ Container session21-python-frontend-1  Creating
+ Container session21-python-frontend-1  Created
+ Container session21-python-postgres-1  Starting
+Error response from daemon: cannot bind tcp port :5432: address already in use
+
+Exit status: 1

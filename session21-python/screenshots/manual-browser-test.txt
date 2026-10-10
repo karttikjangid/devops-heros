@@ -1,0 +1,8 @@
+{
+  "url": "http://127.0.0.1:5173",
+  "http": 200,
+  "created": "Manual browser verified",
+  "updated": "IN_PROGRESS",
+  "persistedAfterReload": true,
+  "pageErrors": []
+}

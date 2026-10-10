@@ -1,0 +1,38 @@
+Captured: 2026-10-10T00:11:11.795271+00:00
+$ /Users/kartik/Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/manual-venv/bin/python -m pytest -p no:cacheprovider backend/tests
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-8.3.4, pluggy-1.6.0
+rootdir: /Users/kartik/Projects/Docker/devops-heros/session21-python/backend
+configfile: pytest.ini
+plugins: anyio-4.15.1
+collected 3 items
+
+backend/tests/test_api.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+../../../../Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/manual-venv/lib/python3.12/site-packages/starlette/testclient.py:40
+  /Users/kartik/Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/manual-venv/lib/python3.12/site-packages/starlette/testclient.py:40: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+backend/app/main.py:16
+  /Users/kartik/Projects/Docker/devops-heros/session21-python/backend/app/main.py:16: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+../../../../Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/manual-venv/lib/python3.12/site-packages/fastapi/applications.py:4495
+  /Users/kartik/Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/manual-venv/lib/python3.12/site-packages/fastapi/applications.py:4495: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 3 passed, 3 warnings in 2.85s =========================
+
+Exit status: 0
