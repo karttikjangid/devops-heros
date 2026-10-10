@@ -4,7 +4,7 @@ metadata:
   name: session20-web
   namespace: session20
 spec:
-  replicas: 3
+  replicas: 0
   selector:
     matchLabels: {app: session20-web}
   template:
