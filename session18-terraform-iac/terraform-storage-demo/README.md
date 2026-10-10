@@ -1,6 +1,6 @@
 # Session 18 - Terraform Object Storage on Azure
 
-I used Azure Blob Storage in place of AWS S3, as requested. Terraform creates a resource group, a Standard LRS storage account and a private container. The account blocks public blob access and requires TLS 1.2.
+Used Azure Blob Storage for the object-storage exercise instead of AWS S3. Terraform creates a resource group, a Standard LRS storage account and a private container. The account blocks public blob access and requires TLS 1.2.
 
 ```text
 Terraform → AzureRM provider → Resource group
@@ -40,7 +40,7 @@ The references from container to storage account and from account to resource gr
 
 State maps resource addresses to Azure IDs and can contain sensitive values. State, plans, personal variable files and private keys are excluded from Git. The provider lockfile is committed.
 
-## Real evidence
+## Output and screenshots
 
 ![Azure initialization and validation](screenshots/azure-local-checks.png)
 
@@ -58,10 +58,10 @@ Full output: [init and validation](screenshots/azure-local-checks.txt), [plan](s
 
 ## Result
 
-Three resources were created, the container was verified private, and all three resources were destroyed. The final state is empty and Azure confirms the resource group is absent.
+Created three resources and checked that the container was private. Ran destroy after the demo. The state list was empty and the resource-group check returned false.
 
 ## Service research
 
-[Azure service notes](../azure-services/) cover identity/RBAC, VMs, Blob Storage, VNet, Cosmos DB and managed relational databases. The earlier AWS notes remain as reference material. This submission uses Azure equivalents.
+[Azure service notes](../azure-services/) cover identity/RBAC, VMs, Blob Storage, VNet, Cosmos DB and managed relational databases. The AWS notes are included for comparison. Used Azure services for the deployed demo.
 
 Reference: [AzureRM storage container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container).

@@ -1,6 +1,6 @@
 # Session 18 - Terraform & Infrastructure as Code
 
-Completed using Azure equivalents in place of AWS, as requested.
+Used Azure for the cloud exercises in this session.
 
 - [Terraform object-storage demo, screenshots and cleanup](terraform-storage-demo/README.md)
 - [Identity & RBAC](azure-services/01-identity-rbac/README.md)
@@ -9,4 +9,4 @@ Completed using Azure equivalents in place of AWS, as requested.
 - [Virtual Network](azure-services/04-virtual-network/README.md)
 - [Cosmos DB & managed relational databases](azure-services/05-cosmos-sql/README.md)
 
-The real Terraform plan, apply, state inspection and destroy were verified. The original lessons and AWS reference notes are preserved.
+Ran Terraform plan, apply, state inspection and destroy. The folder also contains the original lesson examples and AWS reference notes.

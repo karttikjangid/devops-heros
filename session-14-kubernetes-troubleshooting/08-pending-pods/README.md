@@ -200,6 +200,6 @@ and especially the **Events** section.
   https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/
 
 
-## Completed homework evidence
+## Homework output
 
-[Real commands and output](../screenshots/pending.txt) · [Screenshot](../screenshots/pending.png)
+[Commands and output](../screenshots/pending.txt) · [Screenshot](../screenshots/pending.png)

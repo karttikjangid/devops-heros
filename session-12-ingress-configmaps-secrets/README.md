@@ -1,6 +1,6 @@
 # Session 12: Ingress, ConfigMaps, and Secrets
 
-> Screenshot evidence is unavailable; command outputs are recorded below.
+> Screenshots have not been added for this session yet. The recorded commands and outputs are below.
 
 ## Task 1: ConfigMaps
 
@@ -230,7 +230,7 @@ ingress-nginx-controller-admission   ClusterIP   10.96.249.125    <none>        
 MINIKUBE_IP=$(minikube ip)
 echo "Minikube IP is: ${MINIKUBE_IP}"
 ```
-Note: To actually test this, run `echo "192.168.49.2 yatri.local" | sudo tee -a /etc/hosts` manually. I skipped doing this programmatically because it prompts for a sudo password. Also, due to macOS podman networking, `minikube tunnel` is required to reach the VM IP.
+The host-file command is `echo "192.168.49.2 yatri.local" | sudo tee -a /etc/hosts`. Did not edit `/etc/hosts`; used the tunnel with a Host header for the later checks. Direct access to the VM IP did not work from this Mac.
 
 ## Task 10: Path-Based Routing
 

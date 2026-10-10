@@ -1,6 +1,6 @@
 # Session 20 - Monitoring, Observability & GitOps
 
-I used the existing local Minikube cluster for this homework. The demo has an Nginx application, Prometheus, Grafana, Node Exporter, Blackbox Exporter and Argo CD Core. No cloud resources are needed.
+Used the local Minikube cluster for monitoring and GitOps. Ran Nginx with Prometheus, Grafana, Node Exporter, Blackbox Exporter and Argo CD Core.
 
 ```text
 GitHub manifests → Argo CD → Kubernetes Deployment + Service
@@ -21,11 +21,11 @@ Monitoring checks whether a system is healthy using measurements, logs and alert
 | Logs | Nginx access logs showing real HTTP requests |
 | Alerts | `ApplicationUnavailable` fires after failed probes persist for 10 seconds |
 
-The CPU and memory panels measure the Linux Minikube node, which runs inside the local Podman VM. They are not measurements of the Mac's total resources. The short alert duration is for the classroom demo.
+The CPU and memory panels show usage inside the Linux Minikube node, not total Mac usage. Used a short alert duration to test it locally.
 
 ### Run locally
 
-Requirements: Git, kubectl, Minikube and a container runtime. I used a 4 GB local Podman VM and a 3 GB Minikube container. On an existing cluster, run `minikube start` and check its capacity first; avoid deleting a shared cluster to resize it.
+Used Git, kubectl, Minikube and Podman. The VM needed 4 GB of memory for the test, with 3 GB available to Minikube. For an existing cluster, `minikube start` reuses it.
 
 ```bash
 minikube start --cpus=4 --memory=3072
@@ -62,7 +62,7 @@ ALERTS{alertname="ApplicationUnavailable",alertstate="firing"}
 
 [Prometheus configuration](demo/monitoring/prometheus.yml) · [Alert rule](demo/monitoring/alerts.yml) · [Dashboard](demo/monitoring/dashboard.json)
 
-### Captured results
+### Results
 
 The saved dashboard shows CPU **22.25%**, memory **48.99%**, application health **1** and the recovered alert value **0**. These values belong to the capture, not a permanent baseline.
 
@@ -70,7 +70,7 @@ The saved dashboard shows CPU **22.25%**, memory **48.99%**, application health 
 
 [Metric queries and results](screenshots/monitoring.json)
 
-I temporarily committed zero replicas. The real HTTP probe failed and `ApplicationUnavailable` entered `firing`. Restoring three replicas through Git recovered the application and cleared the alert.
+Committed zero replicas to test the alert. The HTTP probe failed and `ApplicationUnavailable` started firing. Committed three replicas again; the application recovered and the alert cleared.
 
 ![Firing alert and zero replicas](screenshots/alert-firing.png)
 
@@ -127,11 +127,11 @@ kubectl -n session20 scale deployment session20-web --replicas=1
 kubectl -n session20 get deployment session20-web -w
 ```
 
-Argo CD restores three replicas because the manual change conflicts with Git. For the alert test, I commit zero replicas briefly, wait for the HTTP failure alert, then commit three replicas again. This deliberately tests the alert and recovery; it is not an accidental troubleshooting incident.
+Argo CD restored three replicas because that was the value in Git. Tested the alert separately by committing zero replicas, waiting for it to fire, then committing three replicas again.
 
-### Captured GitOps results
+### GitOps results
 
-Argo CD synchronized the initial two replicas, picked up the commit changing them to three, and repaired a manual scale to one. I did not run `kubectl apply` on the workload manifests during these tests.
+Started with two replicas in Git, changed them to three and pushed. Argo CD applied the change. Then manually scaled to one; it restored three again without running `kubectl apply` on the workload files.
 
 ![Initial Git sync with two replicas](screenshots/gitops-initial.png)
 
@@ -161,7 +161,7 @@ kubectl -n session20-argocd delete application session20-demo
 kubectl delete namespace session20 session20-monitoring session20-argocd
 ```
 
-This removes only the demo namespaces. Do not delete a shared cluster or other sessions' resources. I removed these namespaces after capturing the evidence and restored the local VM settings. [Cleanup output](screenshots/cleanup.txt).
+Deleted the demo namespaces after testing and restored the local VM settings. [Cleanup output](screenshots/cleanup.txt).
 
 ## References
 
@@ -170,7 +170,7 @@ This removes only the demo namespaces. Do not delete a shared cluster or other s
 - [Prometheus alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
 - [OpenTelemetry signals](https://opentelemetry.io/docs/concepts/signals/)
 
-## Final verification
+## Checks before cleanup
 
 All three Prometheus targets were UP, the application returned HTTP 200, three replicas were ready, Argo CD reported Synced/Healthy, and the alert cleared. The setup script was rerun successfully. README links and embedded images were checked in a browser.
 
@@ -178,4 +178,4 @@ All three Prometheus targets were UP, the application returned HTTP 200, three r
 
 ## Submission
 
-Submit the GitHub URL of this README in your section's form linked from the [repository README](../README.md). The instructor's original lesson folders remain alongside the completed demo.
+This README is the submission link. The section forms are linked from the [repository README](../README.md).

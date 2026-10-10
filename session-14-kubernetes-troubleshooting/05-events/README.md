@@ -164,6 +164,6 @@ What Kubernetes tried to do and what happened
   https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/event-v1/
 
 
-## Completed homework evidence
+## Homework output
 
-[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)
+[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

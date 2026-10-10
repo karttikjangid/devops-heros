@@ -202,8 +202,8 @@ kubectl delete -f 01-rolling-update/deployment-v1.yaml
 ```
 
 
-## Completed execution
+## Output
 
-![Real strategy output](../screenshots/01-rolling-update.png)
+![Strategy output](../screenshots/01-rolling-update.png)
 
 [Full commands and output](../screenshots/01-rolling-update.txt)

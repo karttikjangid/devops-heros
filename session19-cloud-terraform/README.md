@@ -1,6 +1,6 @@
 # Session 19 - Azure Cloud & Terraform in Action
 
-I used Azure in place of AWS, as requested. Terraform provisions one Ubuntu web-server VM, VNet, subnet, NSG, public IP, network interface and private Blob Storage. The original lesson folders are preserved.
+Used Azure for this project instead of AWS. Terraform provisions one Ubuntu web-server VM, VNet, subnet, NSG, public IP, network interface and private Blob Storage. The lesson examples are also included in this folder.
 
 ## Architecture
 
@@ -54,7 +54,7 @@ az group exists --name session19-homework
 
 The VM's cloud-init installs Nginx and serves the Session 19 page. Wait for startup before testing HTTP. State and plans can contain sensitive values; personal settings and private keys are also excluded from Git.
 
-## Real evidence
+## Output and screenshots
 
 ![Terraform initialization and validation](screenshots/azure-local-checks.png)
 
@@ -62,11 +62,11 @@ The VM's cloud-init installs Nginx and serves the Session 19 page. Wait for star
 
 ![Terraform apply](screenshots/azure-apply.png)
 
-![Real Azure resources and VM running state](screenshots/azure-resources.png)
+![Azure resources and VM state](screenshots/azure-resources.png)
 
 ![HTTP test](screenshots/azure-http.png)
 
-![Live cloud frontend](screenshots/azure-frontend.png)
+![Cloud frontend](screenshots/azure-frontend.png)
 
 ![State and outputs](screenshots/azure-state.png)
 
@@ -78,10 +78,10 @@ Full output: [local checks](screenshots/azure-local-checks.txt), [plan](screensh
 
 B1 sizes were unavailable for this student subscription in Central India. I used one permitted `Standard_B2als_v2` VM, Standard LRS disk and Hot/LRS storage. There is no NAT Gateway, load balancer, Kubernetes cluster or database.
 
-The Azure Retail Prices API lists Linux compute at USD 0.0246/hour for this size and Region. That is a compute rate, not the total bill; disks, public IP, storage, network and taxes are separate. Resources were deleted immediately after evidence collection. Azure confirms the resource group is absent, and Terraform state is empty.
+The saved Azure Retail Prices response lists Linux compute at USD 0.0246/hour. Disk, public IP, storage, network and taxes are separate. Deleted the resources after testing; the resource-group check returned false and the Terraform state was empty.
 
 [Pricing evidence](screenshots/azure-retail-prices.json)
 
-Ten resources were created and destroyed. VM running state, private storage, HTTP 200 and the browser page were verified. This is an Azure version of the original AWS assignment.
+Created ten resources, checked the running VM and private container, then tested the web page. It returned HTTP 200. Ran destroy after the demo to remove all ten resources. Used Azure for this version of the assignment.
 
 Reference: [Azure VM billing states](https://learn.microsoft.com/en-us/azure/virtual-machines/states-billing), [AzureRM provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs).

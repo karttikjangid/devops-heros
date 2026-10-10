@@ -1,10 +1,10 @@
 # Session 11 - Kubernetes Networking & Services
 
-I deployed and tested all five Service types in the isolated local `session11-lab` namespace. Nginx served the test page. A client Pod verified internal connectivity; Minikube's tunnel exposed the LoadBalancer on a non-privileged host port.
+Deployed the five Service types in `session11-lab` using Nginx. Tested internal access from a client Pod and used a Minikube tunnel to access the LoadBalancer from my Mac.
 
 ## Services
 
-| Service | Verified behavior | Evidence |
+| Service | What happened | Evidence |
 | --- | --- | --- |
 | ClusterIP | Internal Service DNS and ClusterIP returned the page | [Output](screenshots/clusterip.txt) |
 | NodePort | Request to the node IP and allocated NodePort returned the page | [Output](screenshots/nodeport.txt) |
@@ -25,7 +25,7 @@ curl http://127.0.0.1:8086
 
 ExternalName points to a controlled Service FQDN for this reproducible exercise. It creates a DNS alias, not a proxy or a new ClusterIP. An external domain can be used instead.
 
-The LoadBalancer uses port 8086 to avoid privileged-port binding. The tunnel also detected unrelated existing Ingress objects and requested sudo for their ports. I did not enter a password or change those objects; the homework LoadBalancer endpoint worked independently.
+Used port 8086 for the LoadBalancer to avoid binding to a privileged port. The tunnel asked for sudo for other Ingress objects, but the LoadBalancer page worked on 8086 without it.
 
 ![ClusterIP connectivity](screenshots/clusterip.png)
 
@@ -68,7 +68,7 @@ A ReplicaSet maintains Pod count and replaces missing Pods. A Service supplies a
 
 ## DNS and CoreDNS
 
-[FQDN documentation](fqdn/README.md) · [CoreDNS documentation and actual configuration](coredns/README.md)
+[FQDN documentation](fqdn/README.md) · [CoreDNS notes and configuration](coredns/README.md)
 
 ![CoreDNS configuration and successful lookup](screenshots/coredns.png)
 
@@ -78,4 +78,4 @@ A ReplicaSet maintains Pod count and replaces missing Pods. A Service supplies a
 kubectl delete namespace session11-lab
 ```
 
-The homework namespace was deleted and its tunnel stopped. Existing resources in other namespaces were preserved. [Cleanup output](screenshots/cleanup.txt).
+Stopped the tunnel and deleted the homework namespace after testing. [Cleanup output](screenshots/cleanup.txt).

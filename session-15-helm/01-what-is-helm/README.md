@@ -176,6 +176,6 @@ helm uninstall <release-name>
 * **Helm Charts:** https://helm.sh/docs/topics/charts/
 
 
-## Completed homework
+## Homework
 
-[Executed commands, upgrade/rollback screenshots and mini-project verification](../README.md)
+[Commands, upgrade/rollback screenshots and mini-project verification](../README.md)

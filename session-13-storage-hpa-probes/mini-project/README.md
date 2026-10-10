@@ -1,8 +1,8 @@
-# Completed Session 13 mini project
+# Session 13 mini project
 
-[Executed storage, HPA and probe workflow with real screenshots](../README.md)
+[Storage, HPA and probe commands and screenshots](../README.md)
 
-The implementation retains the supplied Nginx application, persistent `/data` volume, Service, 2–5 replica HPA and all three probes. CPU settings and scale-down timing are reduced for this local exercise. The original guide follows; its expected outputs are teaching examples.
+Used the Nginx mini project with persistent `/data`, a Service, HPA and all three probes. Reduced the CPU settings and scale-down timing for the local test. The setup guide below also contains expected-output examples.
 
 ---
 

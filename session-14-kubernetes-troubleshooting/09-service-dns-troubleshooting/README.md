@@ -457,6 +457,6 @@ The official DNS troubleshooting guide also recommends checking DNS resolution f
   https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/
 
 
-## Completed homework evidence
+## Homework output
 
-[Real commands and output](../screenshots/service-mini-project.txt) · [Screenshot](../screenshots/service-mini-project.png)
+[Commands and output](../screenshots/service-mini-project.txt) · [Screenshot](../screenshots/service-mini-project.png)

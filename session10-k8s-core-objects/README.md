@@ -1,10 +1,10 @@
 # Session 10 - Pods, ReplicaSets & Deployments
 
-All four deployment strategies and all twelve lifecycle YAML examples were executed in the isolated local `session10-lab` namespace. Screenshots below come from saved command output.
+Ran the four deployment strategies and all twelve Pod lifecycle examples in `session10-lab`. The commands, outputs and screenshots are below.
 
 ## Deployment strategies
 
-| Strategy | Verified behavior | Output |
+| Strategy | What happened | Output |
 | --- | --- | --- |
 | Rolling update | Gradual v1→v2 Pod replacement with maxSurge=1 and maxUnavailable=0 | [Output](screenshots/01-rolling-update.txt) |
 | Blue-green | Both versions ran; switching the Service selector changed the returned page from blue to green | [Output](screenshots/02-blue-green.txt) |
@@ -29,7 +29,7 @@ The 100-request canary sample returned 90 stable and 10 canary responses. Pod ra
 
 Official Pod phases are Pending, Running, Succeeded, Failed and Unknown. CrashLoopBackOff and ImagePullBackOff are container waiting reasons shown by kubectl; Terminating reflects deletion. Running does not necessarily mean Ready.
 
-The original command notes follow as historical reference.
+Earlier command notes are below.
 
 ---
 

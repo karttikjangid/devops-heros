@@ -1,6 +1,6 @@
 # Session 17 - Complete CI/CD & DevSecOps
 
-The application is a small Flask calculator adapted from the provided starter. The page performs real calculations; CI/CD evidence comes from GitHub Actions.
+Used the Flask starter to make a calculator. The form sends requests to the API, and GitHub Actions builds, tests, scans and deploys the application.
 
 ```text
 Code → Application build → Unit tests → SAST → SCA → Secret scan
@@ -18,9 +18,9 @@ Code → Application build → Unit tests → SAST → SCA → Secret scan
 | Secret scan | Gitleaks, [default-rule configuration](demo/security/gitleaks.toml) | Any detected secret fails CI |
 | Image scan | Trivy scans the built image | HIGH or CRITICAL findings fail CI |
 
-Every scanner must exit successfully before image publishing. A failed CI job prevents the CD job. Diagnostic artifacts are uploaded with `always()` so a failed scan can still be investigated; that does not allow deployment.
+Every scanner must exit successfully before image publishing. A failed CI job prevents the CD job. Used `always()` to save the reports even if a scan fails. Publishing and deployment still need the scans to pass.
 
-No scanner findings were ignored. I also tested Bandit with an unsafe shell-command fixture and Gitleaks with a generated dummy token outside the repository. Both returned exit code 1 and were rejected. The dummy token was redacted from evidence.
+Tested the gates with an unsafe shell command and a generated dummy token in temporary files. Bandit and Gitleaks both returned exit code 1. The token was redacted from the output.
 
 The application has eight unit tests, a non-root image and Kubernetes readiness/liveness probes. Images are tagged with the commit SHA and published to `ghcr.io/karttikjangid/session17-devsecops`. GitHub's built-in token provides registry access. CD pulls the published image, deploys two replicas into an isolated Kind cluster and tests `/health` and the calculator API.
 
@@ -49,18 +49,18 @@ docker run --rm -p 5001:5001 session17-devsecops
 
 ![Eight unit tests](screenshots/unit-tests.png)
 
-![Actual security scan results](screenshots/security-summary.png)
+![Security scan results](screenshots/security-summary.png)
 
 ![Unsafe fixtures rejected by the gates](screenshots/gates-reject-findings.png)
 
-![Real Kubernetes deployment and API tests](screenshots/kubernetes-api.png)
+![Kubernetes deployment and API tests](screenshots/kubernetes-api.png)
 
 ![Working calculator](screenshots/application.png)
 
 [Pipeline output](screenshots/pipeline.txt) · [CI tests](screenshots/ci-unit-tests.txt) · [Bandit report](screenshots/bandit-report.json) · [SCA report](screenshots/sca-report.json) · [Gitleaks report](screenshots/gitleaks-report.json) · [Trivy report](screenshots/container-report.json) · [Gate rejection output](screenshots/gates-reject-findings.txt) · [Kubernetes output](screenshots/deployment.txt)
 
-CI and CD succeeded. SAST, SCA and secret scans reported zero findings; Trivy reported no HIGH/CRITICAL findings. Kubernetes had two ready replicas and the calculator returned 18 for 6 × 3. The Kind cluster is temporary and is removed when the job finishes.
+CI and CD passed. SAST, SCA and secret scans reported zero findings; Trivy reported no HIGH/CRITICAL findings. Kubernetes had two ready replicas and the calculator returned 18 for 6 × 3. The Kind cluster is temporary and is removed when the job finishes.
 
-## Actual fixes
+## Problems and fixes
 
 The starter contained a malformed Flask dependency line. I corrected it and pinned the runtime dependencies. The starter enabled debug mode and displayed simulated pipeline results; the deployed app now runs under Gunicorn and the README links to actual pipeline evidence.

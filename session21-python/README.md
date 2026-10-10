@@ -1,6 +1,6 @@
 # Session 21 - Homework Tracker
 
-I adapted the provided TaskBoard starter to track course assignments. The app has a React frontend, FastAPI backend and PostgreSQL database.
+Changed the TaskBoard starter into a tracker for course assignments. The app has a React frontend, FastAPI backend and PostgreSQL database.
 
 ## Architecture
 
@@ -136,7 +136,7 @@ helm list -n session21
 
 ## Terraform infrastructure
 
-I used one Azure VM with K3s, as requested, instead of the rubric's AWS/EKS setup. The Azure for Students quota could not support the current AKS minimum. This is an Azure/self-managed Kubernetes variant.
+Used one Azure VM with K3s for the cloud deployment instead of AWS/EKS. AKS did not fit the available student quota, so Kubernetes ran on the VM.
 
 [Terraform files](terraform/) create a VNet with two subnets, the VM, NSG, network interface and public IP. `Standard_B2als_v2` in Central India has 2 vCPUs and 4 GB RAM. SSH is restricted to my IP; port 80 is for the frontend.
 
@@ -155,15 +155,15 @@ terraform destroy
 
 ![Terraform apply](screenshots/terraform-apply.png)
 
-![Real Azure VM state](screenshots/azure-vm.png)
+![Azure VM state](screenshots/azure-vm.png)
 
-This is real Azure CLI evidence. The portal screenshot needs a separate browser sign-in and is not included.
+The screenshot shows the VM state from Azure CLI. A portal screenshot is not included.
 
 ![Terraform destroy](screenshots/terraform-destroy.png)
 
 [Destroy output](screenshots/terraform-destroy.txt) · [Cleanup verification](screenshots/azure-cleanup.txt)
 
-The cloud resources were destroyed after the demo. State, private keys and personal variable files are excluded from Git. [Cost estimate and runtime](screenshots/cloud-cost.json).
+Destroyed the cloud resources after the demo. Kept state, private keys and personal variable files out of Git. [Cost estimate and runtime](screenshots/cloud-cost.json).
 
 ## CI/CD and security
 
@@ -200,10 +200,10 @@ Prometheus scrapes the backend's `/metrics` endpoint. Grafana shows the live HTT
 | Security gate failed | Vulnerable framework/base packages | Updated the affected packages and rebuilt |
 | Framework update caused a dependency conflict | Old metrics plugin required Starlette below 1.0 | Updated the plugin with the framework |
 | Local monitoring timed out | The shared local VM had too little memory; logs showed OOM kills | Verified it in CI and on the 4 GB Azure VM |
-| AKS could not fit the quota | Required system-node capacity exceeded the student quota | Used the requested small VM with K3s |
-| Upstream sync had conflicts | Local homework and instructor files differed | Preserved completed homework while merging upstream |
+| AKS could not fit the quota | Required system-node capacity exceeded the student quota | Used a small VM with K3s |
+| Upstream sync had conflicts | Local homework and instructor files differed | Merged upstream and kept the homework changes |
 
-[First failed Compose run](screenshots/build-first-attempt.txt). I documented actual failures and did not introduce artificial incidents.
+[First failed Compose run](screenshots/build-first-attempt.txt). The troubleshooting table covers the problems encountered during setup.
 
 ## Demo and lessons
 
@@ -211,8 +211,8 @@ Prometheus scrapes the backend's `/metrics` endpoint. Grafana shows the live HTT
 
 I learned to check database readiness, test the browser form as well as the APIs, scan before pushing images and remove cloud resources after collecting evidence.
 
-## Final checks
+## Checks before cleanup
 
-Clean Compose start, all services, API CRUD, browser persistence, PostgreSQL data, non-root users, five tests, CI/security, Kubernetes/Helm, monitoring, Terraform cleanup and README image/link checks passed. Upstream is synchronized and the Session 21 files are committed and pushed.
+Started Compose from a clean state and checked the frontend, API CRUD and PostgreSQL data. The five tests, CI scans, Helm deployment and monitoring checks passed. Destroyed the cloud resources after the demo and checked the README links and screenshots before pushing.
 
 [Final local checks](screenshots/final-verification.txt) · [Cloud checks](screenshots/cloud-final.txt) · [Commit history](screenshots/git-history.png)

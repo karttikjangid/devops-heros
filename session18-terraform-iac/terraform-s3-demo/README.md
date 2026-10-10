@@ -45,7 +45,7 @@ terraform state list
 
 Terraform state maps configuration addresses to real AWS resources. Keep state and plan files out of Git; they can contain sensitive values. Keep the state available until cleanup is confirmed. The bucket starts empty, and `force_destroy = false` prevents accidentally discarding objects added later.
 
-## Captured local checks
+## Local checks
 
 ![Real Terraform initialization and validation](screenshots/local-checks.png)
 
@@ -53,7 +53,7 @@ Terraform state maps configuration addresses to real AWS resources. Keep state a
 
 ## AWS verification pending
 
-The real plan attempt failed with `No valid credential sources found`. [Plan output](screenshots/plan-attempt.txt). No AWS bucket has been created for this run. Successful cloud screenshots will be added after AWS access is available. Expected output examples are not presented as completed evidence.
+The AWS plan failed with `No valid credential sources found`. [Plan output](screenshots/plan-attempt.txt). This AWS version was not deployed. The completed Azure version is linked from the session README.
 
 ## Research
 

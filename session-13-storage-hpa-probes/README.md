@@ -1,6 +1,6 @@
 # Session 13 - Kubernetes Storage, HPA & Probes
 
-I completed the supplied Nginx mini-project in local Minikube, using the `production-webapp` namespace. It combines persistent storage, a Service, CPU autoscaling and startup/readiness/liveness probes.
+Deployed the Nginx mini project in `production-webapp`. Added persistent storage, a Service, HPA and startup/readiness/liveness probes.
 
 [Volume documentation and examples](01-kubernetes-volumes/README.md) · [Mini-project manifests](mini-project/) · [HPA YAML](mini-project/hpa.yml) · [Load generator](mini-project/load-generator.yaml)
 
@@ -19,7 +19,7 @@ kubectl -n production-webapp get pvc,pods,hpa
 
 The 500Mi claim uses the `standard` StorageClass. All application Pods mount it at `/data`. The HPA targets 50% CPU utilization relative to the CPU request and allows 2–5 replicas.
 
-For the small local demo, I used a 10m CPU request and a 100m limit per Nginx container. The scale-down stabilization window is shortened to 30 seconds for the exercise. These are demonstration settings, not production sizing.
+Used a 10m CPU request and 100m limit per Nginx container for this local exercise. Set the scale-down window to 30 seconds so I could observe scaling back down. These values would need sizing again for production.
 
 ## HPA test
 
@@ -39,7 +39,7 @@ The generator runs eight HTTP workers with a 300m CPU limit. The captured output
 
 ![Before load](screenshots/hpa-before.png)
 
-![Real CPU load and HPA scale-out](screenshots/hpa-load.png)
+![CPU load and HPA scaling](screenshots/hpa-load.png)
 
 ![Scale-down after stopping load](screenshots/hpa-recovery.png)
 
@@ -57,7 +57,7 @@ Startup probes allow initialization to finish before other checks run. Readiness
 
 [Storage/probe output](screenshots/storage-probes.txt) · [Final Service and Pod checks](screenshots/final-verification.txt)
 
-An initial HPA value of `<unknown>` appeared before new Pods had metrics samples. Once Metrics Server collected samples, the HPA reported real CPU utilization and scaled. No values from the instructor's expected-output examples were used as measured evidence.
+HPA initially showed `<unknown>` because metrics were not available yet. After Metrics Server collected samples, CPU usage appeared and scaling started.
 
 ## Cleanup
 
@@ -65,4 +65,4 @@ An initial HPA value of `<unknown>` appeared before new Pods had metrics samples
 kubectl delete namespace production-webapp
 ```
 
-The demo namespace and its dynamically provisioned PV were removed after verification. Existing workloads were preserved. [Cleanup output](screenshots/cleanup.txt).
+Deleted the demo namespace and its dynamically provisioned PV after testing. [Cleanup output](screenshots/cleanup.txt).

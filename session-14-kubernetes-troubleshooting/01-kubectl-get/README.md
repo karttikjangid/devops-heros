@@ -193,6 +193,6 @@ It gives us the current state of Kubernetes resources.
   https://kubernetes.io/docs/reference/kubectl/
 
 
-## Completed homework evidence
+## Homework output
 
-[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)
+[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

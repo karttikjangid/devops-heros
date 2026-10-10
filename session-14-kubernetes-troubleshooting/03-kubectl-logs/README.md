@@ -163,6 +163,6 @@ Logs are often the first place to look when an application is crashing or behavi
   https://kubernetes.io/docs/concepts/cluster-administration/logging/
 
 
-## Completed homework evidence
+## Homework output
 
-[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)
+[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

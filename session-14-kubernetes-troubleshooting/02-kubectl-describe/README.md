@@ -182,6 +182,6 @@ kubectl describe
   https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
 
 
-## Completed homework evidence
+## Homework output
 
-[Real commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)
+[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)

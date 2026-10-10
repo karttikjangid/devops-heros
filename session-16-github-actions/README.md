@@ -1,6 +1,6 @@
 # Session 16 - CI/CD & GitHub Actions
 
-I adapted the calculator from `10-final-cicd-pipeline` into a small HTTP application. Its five unit tests cover the four arithmetic operations and division by zero.
+Used the calculator from `10-final-cicd-pipeline` and added an HTTP API. The five tests cover arithmetic operations and division by zero.
 
 ```text
 Push to main → CI: build package → unit tests → Docker build → GHCR push
@@ -12,7 +12,7 @@ Push to main → CI: build package → unit tests → Docker build → GHCR push
 
 [Source](demo/app/) · [Tests](demo/tests/) · [Dockerfile](demo/Dockerfile) · [Kubernetes manifests](demo/k8s/) · [Active workflow](../.github/workflows/session16.yml)
 
-The instructor's example is preserved in [10-final-cicd-pipeline](session-16-github-actions/10-final-cicd-pipeline/README.md).
+The calculator example used for this project is in [10-final-cicd-pipeline](session-16-github-actions/10-final-cicd-pipeline/README.md).
 
 ## Concepts demonstrated
 
@@ -50,7 +50,7 @@ docker build -t session16-calculator .
 docker run --rm -p 8082:8000 session16-calculator
 ```
 
-## Real pipeline evidence
+## Pipeline output
 
 [Successful CI/CD run](https://github.com/karttikjangid/devops-heros/actions/runs/38023093697)
 
@@ -62,4 +62,4 @@ docker run --rm -p 8082:8000 session16-calculator
 
 [Pipeline output](screenshots/pipeline.txt) · [CI tests](screenshots/ci-unit-tests.txt) · [Deployment](screenshots/deployment.txt) · [Health response](screenshots/health.json) · [Calculator response](screenshots/api.json)
 
-Both jobs succeeded. The deployed calculator returned 18 for 6 × 3. Downloadable build and deployment artifacts are attached to the run.
+Both jobs passed. The deployed calculator returned 18 for 6 × 3. Downloadable build and deployment artifacts are attached to the run.

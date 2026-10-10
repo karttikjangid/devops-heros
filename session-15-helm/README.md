@@ -1,12 +1,12 @@
-# Session 15 - Completed Helm Homework
+# Session 15 - Helm Homework
 
-The Notes application was packaged as a small Helm chart and tested in the isolated local `session15-lab` namespace. The chart has a Deployment, Service and ConfigMap; values control replicas and page content.
+Packaged the Notes app as a Helm chart and deployed it in `session15-lab`. Used values to change the replicas and page content, then rolled back to the first revision.
 
 [Chart](mini-project/notes-chart/) · [Development values](mini-project/notes-chart/values.yaml) · [Production values](mini-project/notes-chart/values-prod.yaml)
 
 ## Commands executed
 
-| Commands | Purpose | Actual output |
+| Commands | Purpose | Output |
 | --- | --- | --- |
 | helm create | Generate a starter chart | [Output](screenshots/helm-create.txt) |
 | helm repo add/update/list; helm search repo | Register, refresh and search a chart repository | [Output](screenshots/helm-repo.txt) |
@@ -46,9 +46,9 @@ One HTTP check initially used `localhost`, which resolved to IPv6 while this Ngi
 
 [Mini-project commands and manifests](mini-project/README.md) · [Create screenshot](screenshots/helm-create.png) · [Repository/search screenshot](screenshots/helm-repo.png) · [Get output](screenshots/helm-get.txt)
 
-The demo release was uninstalled and its namespace removed. Existing releases in other namespaces were preserved.
+Uninstalled the demo release and removed its namespace after testing.
 
-The original lesson notes follow.
+Lesson notes are below.
 
 ---
 

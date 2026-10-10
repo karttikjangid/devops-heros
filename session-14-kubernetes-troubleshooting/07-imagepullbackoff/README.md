@@ -178,6 +178,6 @@ ImagePullBackOff
   https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 
 
-## Completed homework evidence
+## Homework output
 
-[Real commands and output](../screenshots/imagepull.txt) · [Screenshot](../screenshots/imagepull.png)
+[Commands and output](../screenshots/imagepull.txt) · [Screenshot](../screenshots/imagepull.png)

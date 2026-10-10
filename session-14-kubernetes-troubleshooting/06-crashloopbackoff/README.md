@@ -228,6 +228,6 @@ Always investigate instead of simply restarting the Pod.
   https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase
 
 
-## Completed homework evidence
+## Homework output
 
-[Real commands and output](../screenshots/crashloop.txt) · [Screenshot](../screenshots/crashloop.png)
+[Commands and output](../screenshots/crashloop.txt) · [Screenshot](../screenshots/crashloop.png)

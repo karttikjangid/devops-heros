@@ -1,12 +1,12 @@
-# Session 14 - Completed Kubernetes Troubleshooting Homework
+# Session 14 - Kubernetes Troubleshooting
 
-I used an isolated `session14-lab` namespace in local Minikube. The faults below were intentionally introduced, investigated and repaired. No cloud infrastructure was created.
+Used `session14-lab` in Minikube for this homework. Introduced each fault, checked the status, logs and events, then fixed it and tested again.
 
 ## Commands
 
-`kubectl get`, `describe`, `logs`, `exec`, `events`, `explain`, `top` and `get -o wide` were executed. Metrics Server was enabled so `top` could collect real CPU and memory samples.
+Practiced `kubectl get`, `describe`, `logs`, `exec`, `events`, `explain`, `top` and `get -o wide`. Enabled Metrics Server to check CPU and memory with `top`.
 
-![Command practice and real resource metrics](screenshots/commands.png)
+![Commands and CPU/memory usage](screenshots/commands.png)
 
 [All command output](screenshots/commands.txt)
 
@@ -25,11 +25,11 @@ I used an isolated `session14-lab` namespace in local Minikube. The faults below
 
 ## Mini project
 
-The Nginx application was healthy, but its Service could not reach it. I repaired the selector first, then found and fixed the incorrect target port. The final request succeeded through the Service. [Full before/after report](homework/reports/service-mini-project.md).
+Nginx was running, but the Service request failed. Fixed the selector first, then corrected the target port. The request worked after both changes. [Before and after output](homework/reports/service-mini-project.md).
 
 ## Lessons from the exercises
 
-A Running container can still be starting its HTTP listener. I verified HTTP readiness before declaring the volume repair complete. Pod DNS fields are immutable, so the DNS fix required deleting the old Pod and waiting for deletion before recreating it.
+The container showed Running before Nginx was ready to serve requests, so checked HTTP again before marking the fix done. For the DNS change, had to delete the Pod first because those fields cannot be changed on an existing Pod.
 
 ## Cleanup
 
@@ -39,7 +39,7 @@ kubectl delete namespace session14-lab
 
 [Final verification](screenshots/final-verification.txt) · [Cleanup output](screenshots/cleanup.txt)
 
-The original lesson notes follow.
+Lesson notes are below.
 
 ---
 

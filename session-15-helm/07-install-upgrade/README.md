@@ -192,6 +192,6 @@ Every install or upgrade creates a new revision. This enables rollback.
 * **Helm upgrade:** https://helm.sh/docs/helm/helm_upgrade/
 
 
-## Completed homework
+## Homework
 
-[Executed commands, upgrade/rollback screenshots and mini-project verification](../README.md)
+[Commands, upgrade/rollback screenshots and mini-project verification](../README.md)

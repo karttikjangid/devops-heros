@@ -1,8 +1,8 @@
 # Session 9 - Kubernetes Fundamentals
 
-Minikube and kubectl were already installed. I verified their versions, checked the existing cluster and completed all six Kubernetes Basics modules in isolated local namespaces. I used Nginx images suitable for this Arm-based Mac.
+Used the existing Minikube cluster for the six Kubernetes Basics exercises. Checked the versions and cluster status first, then deployed, exposed, scaled and updated Nginx. Used images that work on my Arm-based Mac.
 
-| Module | What I did | Actual output |
+| Module | What I did | Output |
 | --- | --- | --- |
 | Create/check cluster | Verified Minikube, node health and control-plane components | [Output](screenshots/cluster.txt) |
 | Deploy app | Created a Deployment and inspected its ReplicaSet/Pods | [Output](screenshots/deploy-explore.txt) |

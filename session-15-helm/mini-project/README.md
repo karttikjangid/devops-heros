@@ -340,6 +340,6 @@ All resources are gone.
 * **Helm CLI reference:** https://helm.sh/docs/helm/
 
 
-## Completed homework
+## Homework
 
-[Executed commands, upgrade/rollback screenshots and mini-project verification](../README.md)
+[Commands, upgrade/rollback screenshots and mini-project verification](../README.md)

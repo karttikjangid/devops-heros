@@ -265,6 +265,6 @@ All resources (Deployment, Service, ConfigMap) are deleted automatically.
 * **Helm best practices:** https://helm.sh/docs/chart_best_practices/
 
 
-## Completed homework
+## Homework
 
-[Executed commands, upgrade/rollback screenshots and mini-project verification](../README.md)
+[Commands, upgrade/rollback screenshots and mini-project verification](../README.md)
