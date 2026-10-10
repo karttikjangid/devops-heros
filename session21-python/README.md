@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-TaskBoard is the starter React/Vite frontend with a FastAPI backend and PostgreSQL database. I verified task creation, updates, listing, statistics and deletion locally.
+I used the TaskBoard starter: React/Vite, FastAPI and PostgreSQL. I tested task creation, updates, listing, statistics and deletion.
 
 ## Architecture
 
@@ -12,7 +12,7 @@ Browser → Frontend (3000, Nginx) → /api → Backend (8000, FastAPI) → Post
 
 ## Running Manually
 
-From `session21-python/`, start PostgreSQL separately:
+From `session21-python/`, start PostgreSQL:
 
 ```bash
 docker run -d --name session21-manual-postgres \
@@ -21,7 +21,7 @@ docker run -d --name session21-manual-postgres \
 docker exec session21-manual-postgres pg_isready -U taskboard -d taskboard
 ```
 
-Start the backend after PostgreSQL reports that it accepts connections:
+Once PostgreSQL accepts connections, start the backend:
 
 ```bash
 cd backend
@@ -41,11 +41,11 @@ npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
-Open [manual frontend](http://localhost:5173). Vite proxies `/api` to port 8000. The backend and frontend ran as host processes; PostgreSQL ran separately in a container. The actual database launch used `podman run` with the same arguments. [Manual API/database output](screenshots/manual-test.txt) and [browser verification](screenshots/manual-browser-test.txt).
+Open [manual frontend](http://localhost:5173). Vite sends `/api` requests to port 8000. I ran the frontend and backend directly on my Mac, with PostgreSQL in a separate container using `podman run`. [Manual API/database output](screenshots/manual-test.txt) and [browser verification](screenshots/manual-browser-test.txt).
 
 ![Manual frontend after creating and updating a task](screenshots/manual-frontend.png)
 
-Stop the two host processes with Ctrl+C and remove only the temporary database before Compose:
+Before Compose, stop both host processes with Ctrl+C and remove the temporary database:
 
 ```bash
 docker stop session21-manual-postgres
@@ -54,12 +54,12 @@ docker rm session21-manual-postgres
 
 ## Dockerfiles
 
-- [Frontend Dockerfile](frontend/Dockerfile): Node 22 builds the locked dependencies with `npm ci`; Nginx serves the compiled frontend and proxies `/api` to `backend:8000`.
-- [Backend Dockerfile](backend/Dockerfile): Python 3.12 installs the pinned requirements, runs as a non-root user, applies Alembic migrations and starts Uvicorn.
+- [Frontend Dockerfile](frontend/Dockerfile): Node 22 builds with `npm ci`. Nginx serves the frontend and forwards `/api` to `backend:8000`.
+- [Backend Dockerfile](backend/Dockerfile): Python 3.12 runs as a non-root user. It applies Alembic migrations before starting Uvicorn.
 
 ## Docker Compose
 
-[Compose file](docker-compose.yml) starts three services with readiness checks. PostgreSQL keeps data in a named volume; backend waits for PostgreSQL, and frontend waits for the backend. Ports bind to localhost. The `taskboard` credentials are local homework defaults.
+The [Compose file](docker-compose.yml) starts all three services. The backend waits for PostgreSQL to be ready, then the frontend starts. PostgreSQL stores data in a named volume. Ports are local only; `taskboard` is the local homework password.
 
 ```bash
 docker compose down
@@ -67,9 +67,9 @@ docker compose up -d --build
 docker compose up -d --wait --wait-timeout 120
 ```
 
-Verified with Docker CLI 28.5.1 and Docker Compose 2.39.4 against the installed Podman 6.1.0 Docker-compatible API on macOS. This run did not use Docker Desktop. [Runtime versions](screenshots/runtime.txt).
+I used Docker CLI 28.5.1 and Compose 2.39.4 with Podman 6.1.0 on macOS. [Runtime versions](screenshots/runtime.txt).
 
-For the installed Podman machine, point the Docker CLI at its API socket:
+For Podman, connect the Docker CLI to its API socket:
 
 ```bash
 export DOCKER_HOST="unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
@@ -77,11 +77,11 @@ export DOCKER_BUILDKIT=0
 export COMPOSE_BAKE=false
 ```
 
-The CLI and Compose plugin used for verification were downloaded into the agent's temporary work directory; a normal Docker installation needs no Podman environment variables.
+I downloaded the Docker CLI and Compose plugin into a temporary folder. With Docker installed normally, skip the Podman variables above.
 
 ![Compose build and startup output](screenshots/docker-compose-build.png)
 
-[Full build transcript](screenshots/docker-compose-build.txt), [clean shutdown](screenshots/clean-down.txt) and [readiness verification](screenshots/services-ready.txt). The build screenshot is a clearly labeled excerpt of the final lines; the full transcript is retained.
+[Full build output](screenshots/docker-compose-build.txt), [clean shutdown](screenshots/clean-down.txt) and [readiness check](screenshots/services-ready.txt). The screenshot shows the final build lines.
 
 ## Running Containers
 
@@ -95,7 +95,7 @@ docker compose ps
 
 ## Application Test
 
-Open [frontend](http://localhost:3000) and [backend API docs](http://localhost:8000/docs). The browser test created a task, advanced its status to IN_PROGRESS and reloaded the page to verify persistence. The task also appears in PostgreSQL. The starter sidebar and recent-activity panel are static demonstration content.
+Open [frontend](http://localhost:3000) and [backend API docs](http://localhost:8000/docs). I created a task in the browser, changed it to IN_PROGRESS and refreshed. It stayed saved in PostgreSQL. The starter sidebar and recent-activity panel are static.
 
 ![Running frontend with the task created through the browser](screenshots/frontend-running.png)
 
@@ -103,7 +103,7 @@ Open [frontend](http://localhost:3000) and [backend API docs](http://localhost:8
 
 ## Backend API Testing
 
-The exact executed curl commands, headers, response bodies and task ID are in the [API transcript](screenshots/api-test.txt). These requests covered health/readiness, create, read, update, statistics, the frontend proxy, delete and a 404 after deletion.
+The [API transcript](screenshots/api-test.txt) has the exact commands and responses. Creation returned 201, reads and updates returned 200, deletion returned 204, and reading the deleted task returned 404.
 
 ```bash
 curl -fsS -i http://localhost:8000/health
@@ -128,9 +128,9 @@ curl -sS -o /private/tmp/session21-deleted.json -w '%{http_code}' \
 
 ![PostgreSQL confirms the browser task is stored](screenshots/database-test.png)
 
-[Database output](screenshots/database-test.txt). The API task was deleted after its database check; the browser task remains visible.
+[Database output](screenshots/database-test.txt). I deleted the API test task and kept the browser task.
 
-The existing backend tests also passed (3 tests):
+All 3 backend tests passed:
 
 ```bash
 cd backend
@@ -141,26 +141,24 @@ python -m pytest -p no:cacheprovider tests
 
 ## Troubleshooting
 
-Only issues actually encountered:
-
 | Issue | Cause | Fix |
 | --- | --- | --- |
-| Docker command missing | This Mac had Podman but no Docker CLI/Compose plugin | Used downloaded official Docker CLI/Compose with Podman's existing API socket |
-| Manual backend migration refused connection | PostgreSQL had not finished downloading/starting | Waited for `pg_isready`, then reran migration and Uvicorn |
-| Manual proxy pointed at the wrong port | Starter Vite configuration used 8080 while Uvicorn uses 8000 | Changed the proxy to 8000 and verified `/api/tasks` through Vite |
-| Create-task form stayed open after saving | React event `currentTarget` was accessed after an awaited request | Saved the form reference before awaiting; creation and update passed in the browser |
-| Backend test failed with `no such table: tasks` | TestClient was created without entering its startup context | Added a context-managed fixture and temporary SQLite database; all 3 tests passed |
-| First Compose startup could not bind 5432 | The temporary manual PostgreSQL container still occupied the port | Stopped/removed only that container and stopped manual host processes, then ran Compose cleanly |
-| Main checkout could not support an isolated normal commit | An existing unfinished merge included unrelated staged files/conflicts | Published only this homework from a separate checkout of existing `origin/main`; preserved the original index/merge |
+| Docker command missing | Only Podman was installed | Downloaded Docker CLI/Compose and connected to Podman |
+| Backend migration refused connection | PostgreSQL was still starting | Waited for `pg_isready`, then restarted the backend |
+| Wrong manual proxy port | Vite used 8080; Uvicorn uses 8000 | Changed the proxy to 8000 and checked `/api/tasks` |
+| Task form stayed open after saving | `currentTarget` was read after the API request | Saved the form reference before awaiting |
+| Tests failed with `no such table: tasks` | TestClient did not run startup | Used a context-managed fixture and temporary SQLite database |
+| Compose could not bind 5432 | Manual PostgreSQL still occupied the port | Stopped the manual app and database, then reran Compose |
+| Existing Git merge was unfinished | Earlier sessions had staged changes and conflicts | Committed this homework from a separate checkout of `origin/main` |
 
-[Original failed Compose attempt](screenshots/build-first-attempt.txt) is retained. No intentional troubleshooting incidents were introduced.
+[Failed first Compose attempt](screenshots/build-first-attempt.txt).
 
 ## Lessons Learned
 
-Service startup order needs readiness checks, and frontend proxy ports must match the backend. A successful API response alone does not prove the browser workflow works, so I tested real task creation and updates too.
+I learned to wait for database readiness and check the frontend proxy port. Testing the form in the browser caught a bug that curl tests missed.
 
 ## Final Verification
 
-Clean Compose shutdown/build/start, healthy services, API CRUD, browser persistence, PostgreSQL rows, screenshot rendering and README relative links were verified. Evidence is captured from this application; terminal images are rendered from saved real command output.
+I checked a clean Compose start, all services, API CRUD, frontend updates and PostgreSQL data. All six screenshots load in the README. Terminal screenshots use the saved command output.
 
 [Final service/API/database/log checks](screenshots/final-verification.txt).
