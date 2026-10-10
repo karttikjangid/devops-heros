@@ -34,3 +34,7 @@ patches:
     \    requests:\n      cpu: 20m\n      memory: 64Mi\n    limits:\n      cpu: 400m\n\
     \      memory: 128Mi\n- op: replace\n  path: /spec/template/spec/containers/0/imagePullPolicy\n\
     \  value: IfNotPresent\n"
+images:
+- name: public.ecr.aws/docker/library/redis
+  newName: docker.io/library/redis
+  newTag: 8.2.3-alpine
