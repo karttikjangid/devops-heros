@@ -88,13 +88,21 @@ jobs:
       - name: Start Kubernetes test cluster
         uses: helm/kind-action@v1.15.1
       - uses: azure/setup-helm@v4
+      - name: Install Ingress and CPU metrics
+        run: |
+          helm repo add traefik https://traefik.github.io/charts
+          helm upgrade --install traefik traefik/traefik -n ingress-system --create-namespace --wait --timeout 180s
+          kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.9.0/components.yaml
+          # Kind has self-signed kubelet certificates; this flag is limited to the disposable CI cluster.
+          kubectl -n kube-system patch deployment metrics-server --type=json -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'
+          kubectl -n kube-system rollout status deployment/metrics-server --timeout=180s
       - name: Deploy with Helm
         run: |
           helm lint ./helm/taskboard
           kind load docker-image "$BACKEND" "$FRONTEND" --name chart-testing
           helm upgrade --install homework ./helm/taskboard -n session21 --create-namespace \
             --set backend.tag="${{ github.sha }}" --set frontend.tag="${{ github.sha }}" \
-            --set ingress.enabled=false --set hpa.enabled=false --wait --timeout 180s
+            --set ingress.className=traefik --set ingress.host='' --wait --timeout 180s
           kubectl -n session21 get pods,svc
           kubectl -n session21 port-forward service/backend 8000:8000 > /tmp/session21-forward.log 2>&1 &
           sleep 3
@@ -107,7 +115,11 @@ jobs:
           kubectl -n session21 exec deployment/postgres -- psql -U taskboard -d taskboard -c 'SELECT version_num FROM alembic_version;'
           npm install --prefix /tmp/session21-browser playwright
           node /tmp/session21-browser/node_modules/playwright/cli.js install --with-deps chromium
-          NODE_PATH=/tmp/session21-browser/node_modules node scripts/test-frontend.cjs
+          kubectl -n ingress-system port-forward service/traefik 8088:80 > /tmp/ingress-forward.log 2>&1 &
+          curl --fail --retry 10 --retry-connrefused http://localhost:8088/api/tasks
+          APP_URL=http://localhost:8088 NODE_PATH=/tmp/session21-browser/node_modules node scripts/test-frontend.cjs
+      - name: Autoscaling under HTTP load
+        run: bash scripts/test-hpa.sh 2>&1 | tee screenshots/review-hpa.txt
       - name: Troubleshooting exercise
         run: bash scripts/troubleshoot.sh 2>&1 | tee screenshots/review-troubleshooting.txt
       - name: Monitoring
@@ -158,4 +170,5 @@ jobs:
             session21-python/screenshots/review-tests.txt
             session21-python/screenshots/review-gitops.*
             session21-python/screenshots/review-troubleshooting.txt
+            session21-python/screenshots/review-hpa.txt
             session21-python/screenshots/review-frontend*.png

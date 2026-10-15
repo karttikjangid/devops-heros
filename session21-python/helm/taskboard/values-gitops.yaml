@@ -6,3 +6,6 @@ backend:
 ingress:
   className: traefik
   host: ""
+# The small GitOps exercise verifies reconciliation without a Metrics Server.
+hpa:
+  enabled: false

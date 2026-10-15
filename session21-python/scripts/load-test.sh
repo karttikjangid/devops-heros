@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
-URL="${URL:-http://taskboard.local/api/health}"
-for i in $(seq 1 500); do curl -s "$URL" >/dev/null || true; done
-echo "Load test completed"
+URL="${URL:-http://homework.local/api/tasks}"
+WORKERS="${WORKERS:-8}"
+REQUESTS="${REQUESTS:-200}"
+pids=()
+for ((worker=0; worker<WORKERS; worker++)); do
+  (
+    for ((request=0; request<REQUESTS; request++)); do
+      curl --fail --silent --show-error --max-time 10 "$URL" > /dev/null
+    done
+  ) &
+  pids+=("$!")
+done
+for pid in "${pids[@]}"; do wait "$pid"; done
+echo "Completed $((WORKERS * REQUESTS)) successful requests to $URL"

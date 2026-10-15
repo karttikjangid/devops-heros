@@ -1,6 +1,8 @@
-# Session 21 - Homework Tracker
+# Session 21 capstone - Homework Tracker
 
-Changed the TaskBoard starter into a tracker for course assignments. The app has a React frontend, FastAPI backend and PostgreSQL database.
+A course-assignment tracker with a React frontend, FastAPI backend and PostgreSQL database. Assignments have a course session, due date, assignee, priority and status. The UI supports creating, filtering, advancing and deleting assignments.
+
+Based on the instructor's [TaskBoard starter](https://github.com/Nency-Ravaliya/devops-heros/tree/main/session21-python). The assignment fields, second migration, validation tests, save-error handling and delivery checks extend that reference. See [submission checks](SUBMISSION.md) and the [evidence index](screenshots/README.md).
 
 ## Architecture
 
@@ -32,7 +34,7 @@ Start the backend after the database is ready:
 cd backend
 python3.12 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 export DATABASE_URL=postgresql+psycopg://taskboard:taskboard@localhost:5432/taskboard
 alembic upgrade head
 uvicorn app.main:app --host 127.0.0.1 --port 8000
@@ -79,16 +81,18 @@ Local URLs: [frontend](http://localhost:3000) · [API docs](http://localhost:800
 
 The browser check creates an assignment, advances its status and reloads the page. The saved assignment remains in PostgreSQL.
 
-![Local frontend](screenshots/frontend-running.png)
+![Assignment tracker after browser creation, status update and reload](screenshots/review-frontend.png)
 
-These curl requests test health, creation, reading, updates, statistics and deletion. Use the ID returned by POST for `TASK_ID`.
+[Browser test](scripts/test-frontend.cjs) also checks a rejected save without losing form data and deletion. [Mobile view](screenshots/review-frontend-mobile.png).
+
+These curl requests test health, creation, reading, updates, statistics and deletion. Set `TASK_ID` to the ID returned by POST, for example `TASK_ID=1`.
 
 ```bash
 curl -fsS -i http://localhost:8000/health
 curl -fsS -i http://localhost:8000/ready
 curl -fsS -i -X POST http://localhost:8000/api/tasks \
   -H 'Content-Type: application/json' \
-  -d '{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","assignee":"Kartik"}'
+  -d '{"title":"Session 21 API verification","description":"Created by curl and checked in PostgreSQL","priority":"HIGH","assignee":"Kartik","session_number":21,"due_date":"2026-10-31"}'
 curl -fsS -i "http://localhost:8000/api/tasks/$TASK_ID"
 curl -fsS -i -X PUT "http://localhost:8000/api/tasks/$TASK_ID" \
   -H 'Content-Type: application/json' -d '{"status":"DONE"}'
@@ -101,20 +105,20 @@ curl -fsS -i -X DELETE "http://localhost:8000/api/tasks/$TASK_ID"
 
 ![API results](screenshots/api-test.png)
 
-All five API tests pass using a temporary SQLite database:
+The review has eleven API and migration tests. Each API test starts with clean SQLite tables; the migration test upgrades an existing assignment without losing its data:
 
 ```bash
 cd backend
 python -m pytest -v tests
 ```
 
-![Five passing tests](screenshots/backend-tests.png)
+[Review test output](screenshots/review-tests.txt). The older five-test output is retained as historical evidence.
 
 ![Non-root application containers](screenshots/non-root-test.png)
 
 ## Kubernetes and Helm
 
-The [chart](helm/taskboard/) has two frontend replicas, two backend replicas, PostgreSQL storage, ConfigMap, Secret, Ingress, HPA and probes. The backend waits for PostgreSQL before starting. [Rendered manifests](k8s/application.yaml).
+The [chart](helm/taskboard/) has two frontend replicas, two backend replicas, PostgreSQL storage, ConfigMap, Secret, Ingress, HPA and probes. The backend waits for PostgreSQL before starting. PostgreSQL advisory locks serialize Alembic migrations when replicas start together; the application does not create tables outside migrations. The chart defaults to a published SHA tag. Pass the successful pipeline SHA to deploy a new release. [Rendered manifests](k8s/application.yaml).
 
 On K3s, use Traefik and an empty hostname to access the VM's public IP:
 
@@ -134,9 +138,9 @@ helm list -n session21
 
 [Helm output](screenshots/cloud-deploy.txt) · [Cloud browser test](screenshots/cloud-browser-test.txt) · [Cloud API output](screenshots/cloud-api.txt)
 
-## Terraform infrastructure
+## Terraform infrastructure (Azure demo: 10 October 2026)
 
-Used one Azure VM with K3s for the cloud deployment instead of AWS/EKS. AKS did not fit the available student quota, so Kubernetes ran on the VM.
+Used one Azure VM with K3s for the cloud deployment instead of AWS/EKS. This is a deliberate change from the instructor rubric, which specifically names AWS/EKS; equivalence has not been confirmed by the instructor. AKS did not fit the available student quota, so Kubernetes ran on the VM.
 
 [Terraform files](terraform/) create a VNet with two subnets, the VM, NSG, network interface and public IP. `Standard_B2als_v2` in Central India has 2 vCPUs and 4 GB RAM. SSH is restricted to my IP; port 80 is for the frontend.
 
@@ -167,9 +171,11 @@ Destroyed the cloud resources after the demo. Kept state, private keys and perso
 
 ## CI/CD and security
 
-[Workflow](../.github/workflows/session21.yml) runs on Session 21 code pushes to `main`: tests, frontend build, Docker builds, Trivy scans, GHCR pushes, Helm deployment into an isolated CI Kubernetes cluster and monitoring checks. Images use the commit SHA. Azure deployment uses the same chart and images.
+[Workflow](../.github/workflows/session21.yml) runs on Session 21 code pushes to `main`: eleven tests, Bandit SAST, pip-audit dependency checks, Trivy secret scanning, frontend build/npm audit, Docker builds, Trivy image scans, GHCR pushes, Helm deployment into an isolated CI Kubernetes cluster, browser checks, failure/recovery exercises, monitoring and Argo CD reconciliation checks. Images use the commit SHA. Azure deployment uses the same chart and images.
 
-![Successful GitHub Actions run](screenshots/github-actions.png)
+[Capstone review pipeline](https://github.com/karttikjangid/devops-heros/actions/runs/38735507512). The historical successful run and registry screenshots below are from 10 October.
+
+![Earlier successful GitHub Actions run](screenshots/github-actions.png)
 
 ![GHCR image package](screenshots/registry-backend.png)
 
@@ -186,6 +192,28 @@ Prometheus scrapes the backend's `/metrics` endpoint. Grafana shows the live HTT
 ![Grafana live request counter](screenshots/grafana-dashboard.png)
 
 [Target status](screenshots/prometheus-targets.json) · [Saved metric query](screenshots/prometheus-query.json) · [Backend metrics](screenshots/cloud-metrics.txt)
+
+## GitOps
+
+[Argo CD Application](gitops/application.yaml) reads the Helm chart and [release values](helm/taskboard/values-gitops.yaml) from Git. Automatic sync, pruning and self-healing are enabled. The CI exercise uses a separate namespace to avoid two controllers managing the same release.
+
+To use GitOps on K3s, install Argo CD first, then apply the Application. Use either Argo CD or manual Helm ownership for the application, not both. Promote only images from a successful pipeline by changing the SHA tags in `values-gitops.yaml` and committing the file. Revert that commit to request a rollback.
+
+```bash
+kubectl apply -f gitops/application.yaml
+kubectl -n argocd get application session21
+```
+
+The small reconciliation profile disables HPA. The normal chart enables it; verify CPU metrics before load testing:
+
+```bash
+kubectl -n session21 get hpa
+kubectl -n session21 top pods
+URL=http://<ingress-address>/api/tasks bash scripts/load-test.sh
+kubectl -n session21 get hpa,pods
+```
+
+The load script fails if requests fail. Configuring an HPA alone does not prove scaling; capture replica changes during the presentation.
 
 ## Troubleshooting
 
@@ -205,14 +233,16 @@ Prometheus scrapes the backend's `/metrics` endpoint. Grafana shows the live HTT
 
 [First failed Compose run](screenshots/build-first-attempt.txt). The troubleshooting table covers the problems encountered during setup.
 
+The CI failure exercise runs [these commands](scripts/troubleshoot.sh): it observes a nonexistent image tag, checks Pod events, fixes the image, then diagnoses and fixes a Service selector with no endpoints. It deletes only its two temporary resources afterward.
+
 ## Demo and lessons
 
-[Recorded walkthrough](screenshots/session21-demo.webm) shows the application, CI run and updated cloud deployment.
+[Earlier walkthrough](screenshots/session21-demo.webm) shows the 10 October application and deployment. It predates the assignment-field changes and does not replace the required final presentation. Follow the [presentation checklist](SUBMISSION.md).
 
 I learned to check database readiness, test the browser form as well as the APIs, scan before pushing images and remove cloud resources after collecting evidence.
 
-## Checks before cleanup
+## Earlier checks before cloud cleanup
 
-Started Compose from a clean state and checked the frontend, API CRUD and PostgreSQL data. The five tests, CI scans, Helm deployment and monitoring checks passed. Destroyed the cloud resources after the demo and checked the README links and screenshots before pushing.
+Started Compose from a clean state and checked the frontend, API CRUD and PostgreSQL data. The then-current five tests, CI scans, Helm deployment and monitoring checks passed on 10 October. Destroyed the cloud resources after the demo and checked the README links and screenshots before pushing.
 
 [Final local checks](screenshots/final-verification.txt) · [Cloud checks](screenshots/cloud-final.txt) · [Commit history](screenshots/git-history.png)
