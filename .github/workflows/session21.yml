@@ -154,6 +154,8 @@ jobs:
           kubectl -n session21-gitops scale deployment/homework-frontend --replicas=1
           kubectl -n session21-gitops wait deployment/homework-frontend --for=jsonpath='{.spec.replicas}'=2 --timeout=90s
           kubectl -n session21-gitops rollout status deployment/homework-frontend --timeout=120s
+          kubectl -n argocd wait application/session21 --for=jsonpath='{.status.sync.status}'=Synced --timeout=90s
+          kubectl -n argocd wait application/session21 --for=jsonpath='{.status.health.status}'=Healthy --timeout=180s
           kubectl -n argocd get application/session21 -o yaml > screenshots/review-gitops.yaml
           kubectl -n session21-gitops get pods,svc > screenshots/review-gitops.txt
       - name: Save monitoring evidence
