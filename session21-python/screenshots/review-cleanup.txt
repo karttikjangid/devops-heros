@@ -1,0 +1,21 @@
+NAME                                   IMAGE                                                         COMMAND                  SERVICE    CREATED         STATUS         PORTS
+session21-capstone-review-backend-1    docker.io/library/session21-capstone-review-backend:latest    "sh -c alembic upgra…"   backend    8 minutes ago   Up 2 minutes   127.0.0.1:8000->8000/tcp
+session21-capstone-review-frontend-1   docker.io/library/session21-capstone-review-frontend:latest   "nginx -g daemon off;"   frontend   8 minutes ago   Up 2 minutes   127.0.0.1:3000->8080/tcp
+session21-capstone-review-postgres-1   docker.io/library/postgres:16-alpine                          "postgres"               postgres   8 minutes ago   Up 8 minutes   127.0.0.1:5432->5432/tcp
+ Container session21-capstone-review-frontend-1  Stopping
+ Container session21-capstone-review-frontend-1  Stopped
+ Container session21-capstone-review-frontend-1  Removing
+ Container session21-capstone-review-frontend-1  Removed
+ Container session21-capstone-review-backend-1  Stopping
+ Container session21-capstone-review-backend-1  Stopped
+ Container session21-capstone-review-backend-1  Removing
+ Container session21-capstone-review-backend-1  Removed
+ Container session21-capstone-review-postgres-1  Stopping
+ Container session21-capstone-review-postgres-1  Stopped
+ Container session21-capstone-review-postgres-1  Removing
+ Container session21-capstone-review-postgres-1  Removed
+ Volume session21-capstone-review_postgres-data  Removing
+ Network session21-capstone-review_default  Removing
+ Network session21-capstone-review_default  Removed
+ Volume session21-capstone-review_postgres-data  Removed
+Machine "podman-machine-default" stopped successfully

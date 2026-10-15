@@ -10,12 +10,15 @@ Based on the instructor's [TaskBoard starter](https://github.com/Nency-Ravaliya/
 GitHub → Actions: test, build, scan → GHCR images tagged with the commit SHA
                                       ↓
                                Kubernetes + Helm
-Browser → Ingress → Frontend → Backend → PostgreSQL
+Browser → Ingress → Frontend
+              └── /api → Backend → PostgreSQL
                                  ↓
                             Prometheus → Grafana
 ```
 
 Technologies: React/Vite, Python/FastAPI, PostgreSQL, Alembic, Docker Compose, GitHub Actions, Trivy, Helm, Terraform, K3s, Prometheus and Grafana.
+
+Prerequisites: Docker Engine with Compose v2, Python 3.12, Node 22, kubectl, Helm, Terraform and Azure CLI. For a Podman-backed Mac, configure the Docker client to use its socket first; `docker info` and `docker compose version` should both succeed.
 
 ## Running manually
 
@@ -48,9 +51,9 @@ npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
-Open [localhost:5173](http://localhost:5173). Vite forwards `/api` to port 8000. I ran the frontend/backend as host processes and PostgreSQL separately with Podman. Stop these manual processes before Compose to free their ports.
+Open [localhost:5173](http://localhost:5173). Vite forwards `/api` to port 8000. I ran the frontend/backend as host processes and PostgreSQL separately with Podman. Stop FastAPI and Vite with Ctrl+C, then run `docker stop session21-manual-postgres` before Compose to free port 5432. The stopped manual database container is retained.
 
-[Manual API/database output](screenshots/manual-test.txt) · [Browser check](screenshots/manual-browser-test.txt)
+[Earlier manual API/database output](screenshots/manual-test.txt) · [15 October manual startup](screenshots/review-manual.txt). The same browser checks also passed against host-run Vite and FastAPI after stopping the review app containers.
 
 ![Manual application](screenshots/manual-frontend.png)
 
@@ -130,6 +133,8 @@ kubectl -n session21 get pods,svc,ingress,hpa,pvc
 helm list -n session21
 ```
 
+For Swagger through a connected cluster, run `kubectl -n session21 port-forward svc/backend 8000:8000` and open [localhost:8000/docs](http://localhost:8000/docs).
+
 ![Azure Kubernetes deployment](screenshots/cloud-kubernetes.png)
 
 ![Azure frontend](screenshots/cloud-frontend.png)
@@ -142,7 +147,7 @@ helm list -n session21
 
 Used one Azure VM with K3s for the cloud deployment instead of AWS/EKS. This is a deliberate change from the instructor rubric, which specifically names AWS/EKS; equivalence has not been confirmed by the instructor. AKS did not fit the available student quota, so Kubernetes ran on the VM.
 
-[Terraform files](terraform/) create a VNet with two subnets, the VM, NSG, network interface and public IP. `Standard_B2als_v2` in Central India has 2 vCPUs and 4 GB RAM. SSH is restricted to my IP; port 80 is for the frontend.
+[Terraform files](terraform/) create a VNet with two subnets, the VM, NSG, network interface and public IP. `Standard_B2als_v2` in Central India has 2 vCPUs and 4 GB RAM. SSH is restricted to my IP; port 80 is for the frontend. [Connection and replay steps](terraform/README.md) use an SSH tunnel for Kubernetes access.
 
 ```bash
 cd terraform
@@ -173,36 +178,62 @@ Destroyed the cloud resources after the demo. Kept state, private keys and perso
 
 [Workflow](../.github/workflows/session21.yml) runs on Session 21 code pushes to `main`: eleven tests, Bandit SAST, pip-audit dependency checks, Trivy secret scanning, frontend build/npm audit, Docker builds, Trivy image scans, GHCR pushes, Helm deployment into an isolated CI Kubernetes cluster, browser checks, failure/recovery exercises, monitoring and Argo CD reconciliation checks. Images use the commit SHA. Azure deployment uses the same chart and images.
 
-[Capstone review pipeline](https://github.com/karttikjangid/devops-heros/actions/runs/38735507512). The historical successful run and registry screenshots below are from 10 October.
+[Capstone review pipeline](https://github.com/karttikjangid/devops-heros/actions/runs/38743325335). Verified source/image SHA: `b48655f110d63c42b61c8b12a8d11a6946ddbe23`. The chart values pin this approved release; the documentation/promotion commit may have a later Git SHA.
 
-![Earlier successful GitHub Actions run](screenshots/github-actions.png)
+![Verified strict GitHub Actions run](screenshots/review-github-actions.png)
 
-![GHCR image package](screenshots/registry-backend.png)
+![Backend SHA-tagged image package](screenshots/review-registry-backend.png)
+
+![Frontend SHA-tagged image package](screenshots/review-registry-frontend.png)
 
 Trivy scans both application images and blocks HIGH/CRITICAL findings. It flagged old Starlette dependencies and a vulnerable `tiff` package. Updating the framework, changing the backend to Alpine and upgrading `tiff` removed those findings; the final scans passed without ignoring them.
 
-[Backend scan](screenshots/backend-scan.txt) · [Frontend scan](screenshots/frontend-scan.txt)
+[Final backend scan](screenshots/review-ci-backend-scan.txt) · [Final frontend scan](screenshots/review-ci-frontend-scan.txt)
 
 ## Monitoring
 
 Prometheus scrapes the backend's `/metrics` endpoint. Grafana shows the live HTTP request counter. I used self-hosted monitoring to keep Azure costs low.
 
-![Prometheus target UP](screenshots/prometheus-targets.png)
+![Prometheus target UP during the final CI run](screenshots/review-prometheus-targets.png)
 
-![Grafana live request counter](screenshots/grafana-dashboard.png)
+![Grafana live request counter during the final CI run](screenshots/review-grafana-dashboard.png)
 
-[Target status](screenshots/prometheus-targets.json) · [Saved metric query](screenshots/prometheus-query.json) · [Backend metrics](screenshots/cloud-metrics.txt)
+[Final target status](screenshots/review-prometheus-targets.json) · [Final metric query](screenshots/review-prometheus-query.json) · [Backend metrics](screenshots/cloud-metrics.txt)
+
+To replay monitoring on the connected K3s cluster:
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+helm upgrade --install session21-prometheus prometheus-community/prometheus \
+  -n session21-monitoring --create-namespace -f monitoring/prometheus-values.yaml --wait
+helm upgrade --install session21-grafana grafana/grafana \
+  -n session21-monitoring -f monitoring/grafana-values.yaml --wait
+kubectl -n session21-monitoring port-forward svc/session21-prometheus-server 9090:80
+# In another terminal using the same KUBECONFIG:
+kubectl -n session21-monitoring port-forward svc/session21-grafana 3005:80
+```
+
+Open Prometheus on port 9090 and Grafana on port 3005. Grafana's admin password is in the `session21-grafana` Secret; retrieve it locally without saving it in the repository. The values file provisions the datasource and request-count dashboard.
 
 ## GitOps
 
-[Argo CD Application](gitops/application.yaml) reads the Helm chart and [release values](helm/taskboard/values-gitops.yaml) from Git. Automatic sync, pruning and self-healing are enabled. The CI exercise uses a separate namespace to avoid two controllers managing the same release.
+[Argo CD Application](gitops/application.yaml) reads the Helm chart and [release values](helm/taskboard/values-gitops.yaml) from Git. Automatic sync, pruning and self-healing are enabled. The CI exercise uses a separate namespace to avoid two controllers managing the same release. It overlays `values-ci.yaml` for internal Services; the main release separately tests Ingress over HTTP and HPA under load.
 
-To use GitOps on K3s, install Argo CD first, then apply the Application. Use either Argo CD or manual Helm ownership for the application, not both. Promote only images from a successful pipeline by changing the SHA tags in `values-gitops.yaml` and committing the file. Revert that commit to request a rollback.
+To use GitOps on K3s, install Argo CD core mode (controllers without a web UI), then apply the project and Application. Use either Argo CD or manual Helm ownership for the application, not both. Promote only images from a successful pipeline by changing the SHA tags in `values-gitops.yaml` and committing the file. Revert that commit to request a rollback.
 
 ```bash
+kubectl create namespace argocd
+kubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/core-install.yaml
+kubectl -n argocd rollout status statefulset/argocd-application-controller --timeout=180s
+kubectl -n argocd rollout status deployment/argocd-repo-server --timeout=180s
+kubectl apply -f gitops/project.yaml
 kubectl apply -f gitops/application.yaml
 kubectl -n argocd get application session21
 ```
+
+[Final GitOps state](screenshots/review-gitops.yaml) is Synced/Healthy; [all five Pods were ready](screenshots/review-gitops.txt). The CI reconciliation rehearsal used the previous approved image; the release values now promote the final verified SHA.
 
 The small reconciliation profile disables HPA. The normal chart enables it; verify CPU metrics before load testing:
 
@@ -213,7 +244,7 @@ URL=http://<ingress-address>/api/tasks bash scripts/load-test.sh
 kubectl -n session21 get hpa,pods
 ```
 
-The load script fails if requests fail. Configuring an HPA alone does not prove scaling; capture replica changes during the presentation.
+The load script fails if requests fail. CI installs Metrics Server in its disposable Kind cluster and uses [a bounded HTTP load exercise](scripts/test-hpa.sh) to require more than two backend replicas. [The final CI output](screenshots/review-hpa.txt) shows a scale-up from two to four backend replicas. Capture the live CPU metrics and replica changes during the presentation too.
 
 ## Troubleshooting
 
@@ -229,9 +260,16 @@ The load script fails if requests fail. Configuring an HPA alone does not prove 
 | Framework update caused a dependency conflict | Old metrics plugin required Starlette below 1.0 | Updated the plugin with the framework |
 | Local monitoring timed out | The shared local VM had too little memory; logs showed OOM kills | Verified it in CI and on the 4 GB Azure VM |
 | AKS could not fit the quota | Required system-node capacity exceeded the student quota | Used a small VM with K3s |
+| GitOps timed out waiting for Synced | The core install had no explicitly declared project; the API server normally creates the default project | Added a repository-scoped AppProject before the Application |
+| Argo synced but stayed Progressing | Its Ingress health check expected a load-balancer address; the Kind controller uses an internal Service | Added a separate CI GitOps values file; the main release still tests HTTP Ingress |
+| A green CI run contained a failed migration test | The test used a relative Alembic path, and `tee` masked pytest’s exit status under the implicit shell | Set the subprocess working directory explicitly and enabled Bash pipefail for all run steps |
 | Upstream sync had conflicts | Local homework and instructor files differed | Merged upstream and kept the homework changes |
 
 [First failed Compose run](screenshots/build-first-attempt.txt). The troubleshooting table covers the problems encountered during setup.
+
+[First GitOps log](screenshots/review-gitops-first-attempt.txt) and [Ingress health diagnosis](screenshots/review-gitops-health-attempt.txt) record the failed checks; the final pipeline verifies the fix.
+
+[Final troubleshooting output](screenshots/review-troubleshooting.txt) records both fixes and verification.
 
 The CI failure exercise runs [these commands](scripts/troubleshoot.sh): it observes a nonexistent image tag, checks Pod events, fixes the image, then diagnoses and fixes a Service selector with no endpoints. It deletes only its two temporary resources afterward.
 
@@ -240,6 +278,18 @@ The CI failure exercise runs [these commands](scripts/troubleshoot.sh): it obser
 [Earlier walkthrough](screenshots/session21-demo.webm) shows the 10 October application and deployment. It predates the assignment-field changes and does not replace the required final presentation. Follow the [presentation checklist](SUBMISSION.md).
 
 I learned to check database readiness, test the browser form as well as the APIs, scan before pushing images and remove cloud resources after collecting evidence.
+
+## Review checks (15 October 2026)
+
+Eleven API/migration tests passed. The clean Compose build started all three services, Alembic reached `0002_assignment_details`, and the application containers used UIDs 10001 and 101. API checks covered CRUD, statistics and rejection of null required fields. A PostgreSQL assignment survived a backend restart and full container recreation with its named volume retained.
+
+[Compose](screenshots/review-compose.txt) · [API](screenshots/review-api.txt) · [Persistence](screenshots/review-persistence.txt) · [Concurrent migrations](screenshots/review-concurrent-migrations.txt) · [Browser checks](screenshots/review-browser.txt) · [Helm lint](screenshots/review-helm.txt) · [Terraform validation](screenshots/review-terraform.txt)
+
+Removed the disposable review containers and their test volume afterward, then restored the local VM to its stopped state. The capstone Azure resource group was also absent in the read-only check.
+
+Bandit reported no findings; pip-audit reported no known runtime dependency vulnerabilities. These checks do not establish production security. This is a classroom app without authentication; use demo assignments and local/restricted access.
+
+GitHub reports non-blocking action-runtime deprecation and checkout-cleanup warnings. The latter comes from the pre-existing Session 16 gitlink without a `.gitmodules` URL; that earlier work was left untouched. All capstone steps passed under Bash pipefail, and the saved test output contains eleven passes.
 
 ## Earlier checks before cloud cleanup
 

@@ -2,13 +2,13 @@
 
 Deadline in the course notice: **16 October 2026, 11:59 PM**. Use the course timezone if the instructor specifies one.
 
-Submit once through the [official Google Form](https://forms.gle/XWAP1vAumDJgAPM1A), signed in with the official SST email. Check every link first; the notice says resubmissions are not accepted. This repository has not been submitted through the form.
+Submit once through the [official Google Form](https://forms.gle/XWAP1vAumDJgAPM1A), signed in with the official SST email. Check every link first; the notice says resubmissions are not accepted. This repository has not been submitted through the form. An unauthenticated check returned HTTP 401; form fields could not be verified.
 
 ## Links
 
 - [Project README](https://github.com/karttikjangid/devops-heros/blob/main/session21-python/README.md)
 - [Source code](https://github.com/karttikjangid/devops-heros/tree/main/session21-python)
-- [Review pipeline](https://github.com/karttikjangid/devops-heros/actions/runs/38735507512)
+- [Review pipeline](https://github.com/karttikjangid/devops-heros/actions/runs/38743325335)
 - [Backend image](https://github.com/users/karttikjangid/packages/container/package/session21-backend)
 - [Frontend image](https://github.com/users/karttikjangid/packages/container/package/session21-frontend)
 - [Evidence index](screenshots/README.md)
@@ -22,7 +22,8 @@ The current upstream directory contains README.md and GRADING.md. The student-gu
 - [ ] Confirm the instructor accepts Azure/K3s in place of the rubric's AWS VPC/EKS. Azure is used here by choice; approval is not recorded.
 - [ ] Review the course policy on outside assistance. The project extends the supplied TaskBoard reference and was developed with coding-assistant support; do not claim it was built unaided.
 - [ ] Open the GitHub README, pipeline and both image links while signed out, or verify instructor access.
-- [ ] Check the review pipeline's final result and scan artifacts.
+- [x] Review pipeline passed, with eleven passing tests and scan artifacts verified.
+- [ ] Capture the required command output directly in a terminal (pytest, Compose, kubectl and Helm). The existing terminal images are formatted transcripts; native Terminal capture was unavailable during this review.
 - [ ] Complete the presentation or record an updated walkthrough of the final application.
 - [ ] Submit the verified links using the official SST email through the form, once.
 

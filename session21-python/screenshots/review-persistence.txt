@@ -1,0 +1,72 @@
++work/review/persistence.sh:9> curl --fail --silent --show-error -X POST http://localhost:8000/api/tasks -H 'Content-Type: application/json' -d '{"title":"Persistence review","session_number":21,"due_date":"2026-10-31"}'
+{"title":"Persistence review","description":"","priority":"MEDIUM","status":"TODO","assignee":"Unassigned","session_number":21,"due_date":"2026-10-31","id":3,"created_at":"2026-10-15T12:39:35.797866Z"}+work/review/persistence.sh:10> docker compose -p session21-capstone-review exec -T postgres psql -U taskboard -d taskboard -c 'SELECT title,session_number,due_date FROM tasks;'
+       title        | session_number |  due_date  
+--------------------+----------------+------------
+ Persistence review |             21 | 2026-10-31
+(1 row)
+
++work/review/persistence.sh:11> docker compose -p session21-capstone-review restart backend
+ Container session21-capstone-review-backend-1  Restarting
+ Container session21-capstone-review-backend-1  Started
++work/review/persistence.sh:12> docker compose -p session21-capstone-review up -d --wait --wait-timeout 120
+ Container session21-capstone-review-postgres-1  Running
+ Container session21-capstone-review-backend-1  Running
+ Container session21-capstone-review-frontend-1  Running
+ Container session21-capstone-review-postgres-1  Waiting
+ Container session21-capstone-review-postgres-1  Healthy
+ Container session21-capstone-review-backend-1  Waiting
+ Container session21-capstone-review-backend-1  Healthy
+ Container session21-capstone-review-postgres-1  Waiting
+ Container session21-capstone-review-backend-1  Waiting
+ Container session21-capstone-review-frontend-1  Waiting
+ Container session21-capstone-review-backend-1  Healthy
+ Container session21-capstone-review-postgres-1  Healthy
+ Container session21-capstone-review-frontend-1  Healthy
++work/review/persistence.sh:13> curl --fail --silent --show-error http://localhost:8000/api/tasks
+[{"title":"Persistence review","description":"","priority":"MEDIUM","status":"TODO","assignee":"Unassigned","session_number":21,"due_date":"2026-10-31","id":3,"created_at":"2026-10-15T12:39:35.797866Z"}]+work/review/persistence.sh:15> docker compose -p session21-capstone-review down
+ Container session21-capstone-review-frontend-1  Stopping
+ Container session21-capstone-review-frontend-1  Stopped
+ Container session21-capstone-review-frontend-1  Removing
+ Container session21-capstone-review-frontend-1  Removed
+ Container session21-capstone-review-backend-1  Stopping
+ Container session21-capstone-review-backend-1  Stopped
+ Container session21-capstone-review-backend-1  Removing
+ Container session21-capstone-review-backend-1  Removed
+ Container session21-capstone-review-postgres-1  Stopping
+ Container session21-capstone-review-postgres-1  Stopped
+ Container session21-capstone-review-postgres-1  Removing
+ Container session21-capstone-review-postgres-1  Removed
+ Network session21-capstone-review_default  Removing
+ Network session21-capstone-review_default  Removed
++work/review/persistence.sh:16> docker compose -p session21-capstone-review up -d --wait --wait-timeout 120
+ Network session21-capstone-review_default  Creating
+ Network session21-capstone-review_default  Created
+ Container session21-capstone-review-postgres-1  Creating
+ Container session21-capstone-review-postgres-1  Created
+ Container session21-capstone-review-backend-1  Creating
+ Container session21-capstone-review-backend-1  Created
+ Container session21-capstone-review-frontend-1  Creating
+ Container session21-capstone-review-frontend-1  Created
+ Container session21-capstone-review-postgres-1  Starting
+ Container session21-capstone-review-postgres-1  Started
+ Container session21-capstone-review-postgres-1  Waiting
+ Container session21-capstone-review-postgres-1  Healthy
+ Container session21-capstone-review-backend-1  Starting
+ Container session21-capstone-review-backend-1  Started
+ Container session21-capstone-review-backend-1  Waiting
+ Container session21-capstone-review-backend-1  Healthy
+ Container session21-capstone-review-frontend-1  Starting
+ Container session21-capstone-review-frontend-1  Started
+ Container session21-capstone-review-postgres-1  Waiting
+ Container session21-capstone-review-backend-1  Waiting
+ Container session21-capstone-review-frontend-1  Waiting
+ Container session21-capstone-review-backend-1  Healthy
+ Container session21-capstone-review-postgres-1  Healthy
+ Container session21-capstone-review-frontend-1  Healthy
++work/review/persistence.sh:17> curl --fail --silent --show-error http://localhost:8000/api/tasks
+[{"title":"Persistence review","description":"","priority":"MEDIUM","status":"TODO","assignee":"Unassigned","session_number":21,"due_date":"2026-10-31","id":3,"created_at":"2026-10-15T12:39:35.797866Z"}]+work/review/persistence.sh:18> docker compose -p session21-capstone-review exec -T postgres psql -U taskboard -d taskboard -c 'SELECT title,session_number,due_date FROM tasks;'
+       title        | session_number |  due_date  
+--------------------+----------------+------------
+ Persistence review |             21 | 2026-10-31
+(1 row)
+

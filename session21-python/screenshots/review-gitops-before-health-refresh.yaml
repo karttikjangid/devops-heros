@@ -1,0 +1,184 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"argoproj.io/v1alpha1","kind":"Application","metadata":{"annotations":{},"name":"session21","namespace":"argocd"},"spec":{"destination":{"namespace":"session21-gitops","server":"https://kubernetes.default.svc"},"project":"session21","source":{"helm":{"releaseName":"homework","valueFiles":["values-gitops.yaml","values-ci.yaml"]},"path":"session21-python/helm/taskboard","repoURL":"https://github.com/karttikjangid/devops-heros.git","targetRevision":"main"},"syncPolicy":{"automated":{"prune":true,"selfHeal":true},"syncOptions":["CreateNamespace=true"]}}}
+  creationTimestamp: "2026-10-15T13:15:27Z"
+  generation: 20
+  name: session21
+  namespace: argocd
+  resourceVersion: "2227"
+  uid: 36d0439e-fec2-4963-bdc8-ba253b855c46
+spec:
+  destination:
+    namespace: session21-gitops
+    server: https://kubernetes.default.svc
+  project: session21
+  source:
+    helm:
+      releaseName: homework
+      valueFiles:
+      - values-gitops.yaml
+      - values-ci.yaml
+    path: session21-python/helm/taskboard
+    repoURL: https://github.com/karttikjangid/devops-heros.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+status:
+  controllerNamespace: argocd
+  health:
+    lastTransitionTime: "2026-10-15T13:16:13Z"
+    status: Progressing
+  history:
+  - deployStartedAt: "2026-10-15T13:15:31Z"
+    deployedAt: "2026-10-15T13:15:32Z"
+    id: 0
+    initiatedBy:
+      automated: true
+    revision: 20f7daa8cf43c74abf790338e81c39abbd4db55c
+    source:
+      helm:
+        releaseName: homework
+        valueFiles:
+        - values-gitops.yaml
+        - values-ci.yaml
+      path: session21-python/helm/taskboard
+      repoURL: https://github.com/karttikjangid/devops-heros.git
+      targetRevision: main
+  operationState:
+    finishedAt: "2026-10-15T13:16:13Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        autoHealAttemptsCount: 1
+        prune: true
+        resources:
+        - group: apps
+          kind: Deployment
+          name: homework-frontend
+        revision: 20f7daa8cf43c74abf790338e81c39abbd4db55c
+        source:
+          helm:
+            releaseName: homework
+            valueFiles:
+            - values-gitops.yaml
+            - values-ci.yaml
+          path: session21-python/helm/taskboard
+          repoURL: https://github.com/karttikjangid/devops-heros.git
+          targetRevision: main
+        syncOptions:
+        - CreateNamespace=true
+    phase: Succeeded
+    startedAt: "2026-10-15T13:16:13Z"
+    syncResult:
+      resources:
+      - group: apps
+        hookPhase: Running
+        images:
+        - ghcr.io/karttikjangid/session21-frontend:afe53aae014bbdcee642acdd366511636c06b6ad
+        kind: Deployment
+        message: deployment.apps/homework-frontend configured
+        name: homework-frontend
+        namespace: session21-gitops
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: 20f7daa8cf43c74abf790338e81c39abbd4db55c
+      source:
+        helm:
+          releaseName: homework
+          valueFiles:
+          - values-gitops.yaml
+          - values-ci.yaml
+        path: session21-python/helm/taskboard
+        repoURL: https://github.com/karttikjangid/devops-heros.git
+        targetRevision: main
+  reconciledAt: "2026-10-15T13:16:15Z"
+  resourceHealthSource: appTree
+  resources:
+  - kind: ConfigMap
+    name: homework-config
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - kind: PersistentVolumeClaim
+    name: postgres-data
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - kind: Secret
+    name: homework-database
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - kind: Secret
+    name: postgres
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - kind: Service
+    name: backend
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - kind: Service
+    name: homework-frontend
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - kind: Service
+    name: postgres
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: homework-backend
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: homework-frontend
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: postgres
+    namespace: session21-gitops
+    status: Synced
+    version: v1
+  sourceHydrator: {}
+  sourceType: Helm
+  summary:
+    images:
+    - ghcr.io/karttikjangid/session21-backend:afe53aae014bbdcee642acdd366511636c06b6ad
+    - ghcr.io/karttikjangid/session21-frontend:afe53aae014bbdcee642acdd366511636c06b6ad
+    - postgres:16-alpine
+  sync:
+    comparedTo:
+      destination:
+        namespace: session21-gitops
+        server: https://kubernetes.default.svc
+      source:
+        helm:
+          releaseName: homework
+          valueFiles:
+          - values-gitops.yaml
+          - values-ci.yaml
+        path: session21-python/helm/taskboard
+        repoURL: https://github.com/karttikjangid/devops-heros.git
+        targetRevision: main
+    revision: 20f7daa8cf43c74abf790338e81c39abbd4db55c
+    status: Synced

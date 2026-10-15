@@ -1,10 +1,11 @@
 frontend:
-  image: ghcr.io/YOUR_ORG/taskboard-frontend
+  image: ghcr.io/karttikjangid/session21-frontend
 backend:
-  image: ghcr.io/YOUR_ORG/taskboard-backend
+  image: ghcr.io/karttikjangid/session21-backend
 replicaCount: 2
 ingress:
   enabled: true
-  host: taskboard.example.com
+  className: traefik
+  host: ""
 hpa:
   enabled: true

@@ -1,0 +1,4 @@
+$ bash --noprofile --norc -eo pipefail -c 'false | tee /dev/null'
+Exit code: 1
+
+The deliberate failure propagates through tee.

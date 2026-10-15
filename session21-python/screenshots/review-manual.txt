@@ -1,0 +1,32 @@
+ Container session21-capstone-review-frontend-1  Stopping
+ Container session21-capstone-review-frontend-1  Stopped
+ Container session21-capstone-review-backend-1  Stopping
+ Container session21-capstone-review-backend-1  Stopped
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+
+> taskboard-frontend@1.0.0 dev
+> vite --host 127.0.0.1 --port 5173 --strictPort
+
+INFO:     Started server process [32373]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+
+  VITE v8.3.4  ready in 218 ms
+
+  ➜  Local:   http://127.0.0.1:5173/
+INFO:     127.0.0.1:62574 - "GET /ready HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62599 - "GET /api/tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62600 - "GET /api/tasks/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62604 - "POST /api/tasks HTTP/1.1" 201 Created
+INFO:     127.0.0.1:62608 - "GET /api/tasks/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62606 - "GET /api/tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62610 - "PUT /api/tasks/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62616 - "GET /api/tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62618 - "GET /api/tasks/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62626 - "GET /api/tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62628 - "GET /api/tasks/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62632 - "DELETE /api/tasks/4 HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:62640 - "GET /api/tasks/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62638 - "GET /api/tasks HTTP/1.1" 200 OK

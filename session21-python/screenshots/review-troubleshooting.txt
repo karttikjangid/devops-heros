@@ -1,0 +1,288 @@
++ kubectl apply -f troubleshooting/broken-image.yaml
+deployment.apps/taskboard-broken-image created
++ for attempt in {1..45}
+++ kubectl -n session21 get pods -l app=broken-image -o 'jsonpath={.items[*].status.containerStatuses[*].state.waiting.reason}'
++ reason=ContainerCreating
++ [[ ContainerCreating == *ImagePullBackOff* ]]
++ [[ ContainerCreating == *ErrImagePull* ]]
++ sleep 2
++ for attempt in {1..45}
+++ kubectl -n session21 get pods -l app=broken-image -o 'jsonpath={.items[*].status.containerStatuses[*].state.waiting.reason}'
++ reason=ErrImagePull
++ [[ ErrImagePull == *ImagePullBackOff* ]]
++ [[ ErrImagePull == *ErrImagePull* ]]
++ break
++ [[ ErrImagePull == *ImagePullBackOff* ]]
++ [[ ErrImagePull == *ErrImagePull* ]]
++ kubectl -n session21 describe pods -l app=broken-image
+Name:             taskboard-broken-image-69cf75d5f5-6tnqw
+Namespace:        session21
+Priority:         0
+Service Account:  default
+Node:             chart-testing-control-plane/172.18.0.2
+Start Time:       Thu, 15 Oct 2026 13:35:31 +0000
+Labels:           app=broken-image
+                  pod-template-hash=69cf75d5f5
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.17
+IPs:
+  IP:           10.244.0.17
+Controlled By:  ReplicaSet/taskboard-broken-image-69cf75d5f5
+Containers:
+  frontend:
+    Container ID:   
+    Image:          ghcr.io/karttikjangid/session21-frontend:does-not-exist
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-pmlvg (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-pmlvg:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age   From               Message
+  ----     ------     ----  ----               -------
+  Normal   Scheduled  2s    default-scheduler  Successfully assigned session21/taskboard-broken-image-69cf75d5f5-6tnqw to chart-testing-control-plane
+  Normal   Pulling    2s    kubelet            spec.containers{frontend}: Pulling image "ghcr.io/karttikjangid/session21-frontend:does-not-exist"
+  Warning  Failed     2s    kubelet            spec.containers{frontend}: Failed to pull image "ghcr.io/karttikjangid/session21-frontend:does-not-exist": rpc error: code = NotFound desc = failed to pull and unpack image "ghcr.io/karttikjangid/session21-frontend:does-not-exist": failed to resolve reference "ghcr.io/karttikjangid/session21-frontend:does-not-exist": ghcr.io/karttikjangid/session21-frontend:does-not-exist: not found
+  Warning  Failed     2s    kubelet            spec.containers{frontend}: Error: ErrImagePull
+  Normal   BackOff    1s    kubelet            spec.containers{frontend}: Back-off pulling image "ghcr.io/karttikjangid/session21-frontend:does-not-exist"
+  Warning  Failed     1s    kubelet            spec.containers{frontend}: Error: ImagePullBackOff
++ kubectl -n session21 get events --sort-by=.lastTimestamp
+LAST SEEN   TYPE      REASON                         OBJECT                                         MESSAGE
+116s        Normal    SuccessfulCreate               replicaset/homework-frontend-764c88565c        Created pod: homework-frontend-764c88565c-62977
+116s        Normal    Scheduled                      pod/homework-frontend-764c88565c-62977         Successfully assigned session21/homework-frontend-764c88565c-62977 to chart-testing-control-plane
+116s        Normal    SuccessfulCreate               replicaset/homework-backend-576dbf7cd9         Created pod: homework-backend-576dbf7cd9-98hqr
+116s        Normal    ScalingReplicaSet              deployment/postgres                            Scaled up replica set postgres-7989d56484 from 0 to 1
+116s        Normal    ScalingReplicaSet              deployment/homework-backend                    Scaled up replica set homework-backend-576dbf7cd9 from 0 to 2
+116s        Normal    Provisioning                   persistentvolumeclaim/postgres-data            External provisioner is provisioning volume for claim "session21/postgres-data"
+116s        Normal    ExternalProvisioning           persistentvolumeclaim/postgres-data            Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+116s        Normal    Scheduled                      pod/homework-backend-576dbf7cd9-76xvf          Successfully assigned session21/homework-backend-576dbf7cd9-76xvf to chart-testing-control-plane
+116s        Normal    SuccessfulCreate               replicaset/homework-frontend-764c88565c        Created pod: homework-frontend-764c88565c-72hkp
+116s        Warning   FailedGetResourceMetric        horizontalpodautoscaler/homework-backend       failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+116s        Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/homework-backend       invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+116s        Normal    ScalingReplicaSet              deployment/homework-frontend                   Scaled up replica set homework-frontend-764c88565c from 0 to 2
+116s        Normal    Scheduled                      pod/homework-frontend-764c88565c-72hkp         Successfully assigned session21/homework-frontend-764c88565c-72hkp to chart-testing-control-plane
+116s        Normal    WaitForFirstConsumer           persistentvolumeclaim/postgres-data            waiting for first consumer to be created before binding
+116s        Normal    SuccessfulCreate               replicaset/postgres-7989d56484                 Created pod: postgres-7989d56484-dcjp5
+116s        Normal    SuccessfulCreate               replicaset/homework-backend-576dbf7cd9         Created pod: homework-backend-576dbf7cd9-76xvf
+116s        Normal    Scheduled                      pod/homework-backend-576dbf7cd9-98hqr          Successfully assigned session21/homework-backend-576dbf7cd9-98hqr to chart-testing-control-plane
+115s        Warning   FailedMount                    pod/homework-frontend-764c88565c-72hkp         MountVolume.SetUp failed for volume "kube-api-access-894h6" : failed to sync configmap cache: timed out waiting for the condition
+115s        Warning   FailedMount                    pod/homework-backend-576dbf7cd9-98hqr          MountVolume.SetUp failed for volume "kube-api-access-lhp7x" : failed to sync configmap cache: timed out waiting for the condition
+115s        Warning   FailedMount                    pod/homework-frontend-764c88565c-62977         MountVolume.SetUp failed for volume "kube-api-access-h89nn" : failed to sync configmap cache: timed out waiting for the condition
+115s        Warning   FailedMount                    pod/homework-backend-576dbf7cd9-76xvf          MountVolume.SetUp failed for volume "kube-api-access-djbvl" : failed to sync configmap cache: timed out waiting for the condition
+114s        Normal    Pulling                        pod/homework-backend-576dbf7cd9-98hqr          Pulling image "postgres:16-alpine"
+114s        Normal    Pulled                         pod/homework-frontend-764c88565c-62977         Container image "ghcr.io/karttikjangid/session21-frontend:b48655f110d63c42b61c8b12a8d11a6946ddbe23" already present on machine and can be accessed by the pod
+114s        Normal    Pulling                        pod/homework-backend-576dbf7cd9-76xvf          Pulling image "postgres:16-alpine"
+114s        Normal    Started                        pod/homework-frontend-764c88565c-72hkp         Container started
+114s        Normal    Created                        pod/homework-frontend-764c88565c-72hkp         Container created
+114s        Normal    Pulled                         pod/homework-frontend-764c88565c-72hkp         Container image "ghcr.io/karttikjangid/session21-frontend:b48655f110d63c42b61c8b12a8d11a6946ddbe23" already present on machine and can be accessed by the pod
+114s        Normal    Created                        pod/homework-frontend-764c88565c-62977         Container created
+114s        Normal    Started                        pod/homework-frontend-764c88565c-62977         Container started
+113s        Normal    ProvisioningSucceeded          persistentvolumeclaim/postgres-data            Successfully provisioned volume pvc-2d009012-99cf-42ae-8198-aa68c972a619
+112s        Normal    Pulling                        pod/postgres-7989d56484-dcjp5                  Pulling image "postgres:16-alpine"
+112s        Normal    Scheduled                      pod/postgres-7989d56484-dcjp5                  Successfully assigned session21/postgres-7989d56484-dcjp5 to chart-testing-control-plane
+112s        Normal    Created                        pod/homework-backend-576dbf7cd9-98hqr          Container created
+112s        Normal    Started                        pod/homework-backend-576dbf7cd9-76xvf          Container started
+112s        Normal    Created                        pod/homework-backend-576dbf7cd9-76xvf          Container created
+112s        Normal    Pulled                         pod/homework-backend-576dbf7cd9-76xvf          Successfully pulled image "postgres:16-alpine" in 2.534s (2.535s including waiting). Image size: 116084812 bytes.
+112s        Normal    Pulled                         pod/homework-backend-576dbf7cd9-98hqr          Successfully pulled image "postgres:16-alpine" in 119ms (2.606s including waiting). Image size: 116084812 bytes.
+111s        Normal    Started                        pod/homework-backend-576dbf7cd9-98hqr          Container started
+111s        Normal    Started                        pod/postgres-7989d56484-dcjp5                  Container started
+111s        Normal    Created                        pod/postgres-7989d56484-dcjp5                  Container created
+111s        Normal    Pulled                         pod/postgres-7989d56484-dcjp5                  Successfully pulled image "postgres:16-alpine" in 133ms (261ms including waiting). Image size: 116084812 bytes.
+99s         Normal    Pulled                         pod/homework-backend-576dbf7cd9-76xvf          Container image "ghcr.io/karttikjangid/session21-backend:b48655f110d63c42b61c8b12a8d11a6946ddbe23" already present on machine and can be accessed by the pod
+99s         Normal    Created                        pod/homework-backend-576dbf7cd9-76xvf          Container created
+99s         Normal    Created                        pod/homework-backend-576dbf7cd9-98hqr          Container created
+99s         Normal    Started                        pod/homework-backend-576dbf7cd9-76xvf          Container started
+99s         Normal    Pulled                         pod/homework-backend-576dbf7cd9-98hqr          Container image "ghcr.io/karttikjangid/session21-backend:b48655f110d63c42b61c8b12a8d11a6946ddbe23" already present on machine and can be accessed by the pod
+99s         Normal    Started                        pod/homework-backend-576dbf7cd9-98hqr          Container started
+88s         Warning   Unhealthy                      pod/homework-backend-576dbf7cd9-98hqr          Readiness probe failed: Get "http://10.244.0.10:8000/ready": dial tcp 10.244.0.10:8000: connect: connection refused
+88s         Warning   Unhealthy                      pod/homework-backend-576dbf7cd9-76xvf          Readiness probe failed: Get "http://10.244.0.9:8000/ready": dial tcp 10.244.0.9:8000: connect: connection refused
+86s         Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/homework-backend       invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+86s         Warning   FailedGetResourceMetric        horizontalpodautoscaler/homework-backend       failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+56s         Warning   FailedGetResourceMetric        horizontalpodautoscaler/homework-backend       failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+56s         Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/homework-backend       invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+48s         Normal    Scheduled                      pod/capstone-load-fnjs4                        Successfully assigned session21/capstone-load-fnjs4 to chart-testing-control-plane
+48s         Normal    SuccessfulCreate               job/capstone-load                              Created pod: capstone-load-fnjs4
+47s         Normal    Pulled                         pod/capstone-load-fnjs4                        Successfully pulled image "busybox:1.37" in 450ms (450ms including waiting). Image size: 2222118 bytes.
+47s         Normal    Pulling                        pod/capstone-load-fnjs4                        Pulling image "busybox:1.37"
+47s         Normal    Created                        pod/capstone-load-fnjs4                        Container created
+47s         Normal    Started                        pod/capstone-load-fnjs4                        Container started
+26s         Normal    SuccessfulRescale              horizontalpodautoscaler/homework-backend       New size: 4; reason: cpu resource utilization (percentage of request) above target
+26s         Normal    SuccessfulCreate               replicaset/homework-backend-576dbf7cd9         Created pod: homework-backend-576dbf7cd9-rbvj4
+26s         Normal    Pulled                         pod/homework-backend-576dbf7cd9-rbvj4          Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+26s         Normal    Scheduled                      pod/homework-backend-576dbf7cd9-rbvj4          Successfully assigned session21/homework-backend-576dbf7cd9-rbvj4 to chart-testing-control-plane
+26s         Normal    SuccessfulCreate               replicaset/homework-backend-576dbf7cd9         Created pod: homework-backend-576dbf7cd9-xrhln
+26s         Normal    Scheduled                      pod/homework-backend-576dbf7cd9-xrhln          Successfully assigned session21/homework-backend-576dbf7cd9-xrhln to chart-testing-control-plane
+26s         Normal    ScalingReplicaSet              deployment/homework-backend                    Scaled up replica set homework-backend-576dbf7cd9 from 2 to 4
+25s         Normal    Started                        pod/homework-backend-576dbf7cd9-rbvj4          Container started
+25s         Normal    Created                        pod/homework-backend-576dbf7cd9-rbvj4          Container created
+25s         Normal    Started                        pod/homework-backend-576dbf7cd9-xrhln          Container started
+25s         Normal    Created                        pod/homework-backend-576dbf7cd9-xrhln          Container created
+25s         Normal    Pulled                         pod/homework-backend-576dbf7cd9-xrhln          Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+24s         Normal    Started                        pod/homework-backend-576dbf7cd9-rbvj4          Container started
+24s         Normal    Started                        pod/homework-backend-576dbf7cd9-xrhln          Container started
+24s         Normal    Created                        pod/homework-backend-576dbf7cd9-xrhln          Container created
+24s         Normal    Pulled                         pod/homework-backend-576dbf7cd9-xrhln          Container image "ghcr.io/karttikjangid/session21-backend:b48655f110d63c42b61c8b12a8d11a6946ddbe23" already present on machine and can be accessed by the pod
+24s         Normal    Pulled                         pod/homework-backend-576dbf7cd9-rbvj4          Container image "ghcr.io/karttikjangid/session21-backend:b48655f110d63c42b61c8b12a8d11a6946ddbe23" already present on machine and can be accessed by the pod
+24s         Normal    Created                        pod/homework-backend-576dbf7cd9-rbvj4          Container created
+13s         Warning   Unhealthy                      pod/homework-backend-576dbf7cd9-xrhln          Readiness probe failed: Get "http://10.244.0.16:8000/ready": dial tcp 10.244.0.16:8000: connect: connection refused
+13s         Warning   Unhealthy                      pod/homework-backend-576dbf7cd9-rbvj4          Readiness probe failed: Get "http://10.244.0.15:8000/ready": dial tcp 10.244.0.15:8000: connect: connection refused
+2s          Normal    Killing                        pod/capstone-load-fnjs4                        Stopping container capstone-load
+2s          Normal    Scheduled                      pod/taskboard-broken-image-69cf75d5f5-6tnqw    Successfully assigned session21/taskboard-broken-image-69cf75d5f5-6tnqw to chart-testing-control-plane
+2s          Normal    Pulling                        pod/taskboard-broken-image-69cf75d5f5-6tnqw    Pulling image "ghcr.io/karttikjangid/session21-frontend:does-not-exist"
+2s          Warning   Failed                         pod/taskboard-broken-image-69cf75d5f5-6tnqw    Failed to pull image "ghcr.io/karttikjangid/session21-frontend:does-not-exist": rpc error: code = NotFound desc = failed to pull and unpack image "ghcr.io/karttikjangid/session21-frontend:does-not-exist": failed to resolve reference "ghcr.io/karttikjangid/session21-frontend:does-not-exist": ghcr.io/karttikjangid/session21-frontend:does-not-exist: not found
+2s          Warning   Failed                         pod/taskboard-broken-image-69cf75d5f5-6tnqw    Error: ErrImagePull
+2s          Normal    SuccessfulCreate               replicaset/taskboard-broken-image-69cf75d5f5   Created pod: taskboard-broken-image-69cf75d5f5-6tnqw
+2s          Normal    ScalingReplicaSet              deployment/taskboard-broken-image              Scaled up replica set taskboard-broken-image-69cf75d5f5 from 0 to 1
+1s          Normal    BackOff                        pod/taskboard-broken-image-69cf75d5f5-6tnqw    Back-off pulling image "ghcr.io/karttikjangid/session21-frontend:does-not-exist"
+1s          Warning   Failed                         pod/taskboard-broken-image-69cf75d5f5-6tnqw    Error: ImagePullBackOff
++ kubectl -n session21 set image deployment/taskboard-broken-image frontend=ghcr.io/karttikjangid/session21-frontend:b48655f110d63c42b61c8b12a8d11a6946ddbe23
+deployment.apps/taskboard-broken-image image updated
++ kubectl -n session21 rollout status deployment/taskboard-broken-image --timeout=120s
+Waiting for deployment "taskboard-broken-image" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "taskboard-broken-image" rollout to finish: 1 old replicas are pending termination...
+deployment "taskboard-broken-image" successfully rolled out
++ kubectl apply -f troubleshooting/broken-service.yaml
+service/broken-service created
++ kubectl -n session21 get endpointslices -l kubernetes.io/service-name=broken-service -o yaml
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints: null
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2026-10-15T13:35:34Z"
+    creationTimestamp: "2026-10-15T13:35:34Z"
+    generateName: broken-service-
+    generation: 1
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: broken-service
+    name: broken-service-krrjb
+    namespace: session21
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: broken-service
+      uid: d4748afe-3bde-40d6-aea4-1448118dcaa6
+    resourceVersion: "1239"
+    uid: c0281b78-b148-418c-b4e8-b3111931b581
+  ports: null
+kind: List
+metadata:
+  resourceVersion: ""
+++ kubectl -n session21 get endpointslices -l kubernetes.io/service-name=broken-service -o 'jsonpath={.items[*].endpoints[*].addresses[*]}'
++ [[ -z '' ]]
++ kubectl -n session21 get pods --show-labels
+NAME                                      READY   STATUS        RESTARTS   AGE    LABELS
+capstone-load-fnjs4                       1/1     Terminating   0          50s    batch.kubernetes.io/controller-uid=d9dd4c0a-dce2-4ace-815f-dd4a9dc50ef6,batch.kubernetes.io/job-name=capstone-load,controller-uid=d9dd4c0a-dce2-4ace-815f-dd4a9dc50ef6,job-name=capstone-load
+homework-backend-576dbf7cd9-76xvf         1/1     Running       0          118s   app=taskboard-backend,pod-template-hash=576dbf7cd9
+homework-backend-576dbf7cd9-98hqr         1/1     Running       0          118s   app=taskboard-backend,pod-template-hash=576dbf7cd9
+homework-backend-576dbf7cd9-rbvj4         1/1     Running       0          28s    app=taskboard-backend,pod-template-hash=576dbf7cd9
+homework-backend-576dbf7cd9-xrhln         1/1     Running       0          28s    app=taskboard-backend,pod-template-hash=576dbf7cd9
+homework-frontend-764c88565c-62977        1/1     Running       0          118s   app=homework-frontend,pod-template-hash=764c88565c
+homework-frontend-764c88565c-72hkp        1/1     Running       0          118s   app=homework-frontend,pod-template-hash=764c88565c
+postgres-7989d56484-dcjp5                 1/1     Running       0          118s   app=postgres,pod-template-hash=7989d56484
+taskboard-broken-image-784b895fbd-k6vbp   1/1     Running       0          2s     app=broken-image,pod-template-hash=784b895fbd
++ kubectl -n session21 patch service broken-service --type merge -p '{"spec":{"selector":{"app":"homework-frontend"}}}'
+service/broken-service patched
++ for attempt in {1..20}
+++ kubectl -n session21 get endpointslices -l kubernetes.io/service-name=broken-service -o 'jsonpath={.items[*].endpoints[*].addresses[*]}'
++ addresses='10.244.0.11 10.244.0.12'
++ [[ -n 10.244.0.11 10.244.0.12 ]]
++ break
++ [[ -n 10.244.0.11 10.244.0.12 ]]
++ kubectl -n session21 get endpointslices -l kubernetes.io/service-name=broken-service -o yaml
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.244.0.11
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: chart-testing-control-plane
+    targetRef:
+      kind: Pod
+      name: homework-frontend-764c88565c-72hkp
+      namespace: session21
+      uid: 88709d4f-4256-4bfa-8c50-05d72211eece
+  - addresses:
+    - 10.244.0.12
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: chart-testing-control-plane
+    targetRef:
+      kind: Pod
+      name: homework-frontend-764c88565c-62977
+      namespace: session21
+      uid: c052ff98-086f-45c0-93ca-2a06aec36753
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2026-10-15T13:33:50Z"
+    creationTimestamp: "2026-10-15T13:35:34Z"
+    generateName: broken-service-
+    generation: 2
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: broken-service
+    name: broken-service-krrjb
+    namespace: session21
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: broken-service
+      uid: d4748afe-3bde-40d6-aea4-1448118dcaa6
+    resourceVersion: "1246"
+    uid: c0281b78-b148-418c-b4e8-b3111931b581
+  ports:
+  - name: ""
+    port: 8080
+    protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""
++ kubectl -n session21 exec deployment/homework-frontend -- wget -qO- http://broken-service:8080/
+<!doctype html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Homework Tracker</title>  <script type="module" crossorigin src="/assets/index-D7ng9wjC.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DkMuKOF6.css">
+</head><body><div id="root"></div></body></html>
++ cleanup
++ kubectl -n session21 delete deployment/taskboard-broken-image service/broken-service --ignore-not-found
+deployment.apps "taskboard-broken-image" deleted from session21 namespace
+service "broken-service" deleted from session21 namespace

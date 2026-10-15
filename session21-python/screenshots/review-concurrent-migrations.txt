@@ -1,0 +1,31 @@
++work/review/concurrent-migrations.sh:9> docker compose -p session21-capstone-review exec -T postgres createdb -U taskboard capstone_migration_review
++work/review/concurrent-migrations.sh:10> trap 'docker compose -p session21-capstone-review exec -T postgres dropdb -U taskboard capstone_migration_review' EXIT
++work/review/concurrent-migrations.sh:11> docker compose -p session21-capstone-review exec -T -e 'DATABASE_URL=postgresql+psycopg://taskboard:taskboard@postgres:5432/capstone_migration_review' backend alembic upgrade 0001_create_tasks
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 0001_create_tasks
++work/review/concurrent-migrations.sh:12> docker compose -p session21-capstone-review exec -T postgres psql -U taskboard -d capstone_migration_review -c 'INSERT INTO tasks (title,created_at) VALUES ('\''Existing assignment'\'',NOW());'
+INSERT 0 1
++work/review/concurrent-migrations.sh:14> first=32049 
++work/review/concurrent-migrations.sh:13> docker compose -p session21-capstone-review exec -T -e 'DATABASE_URL=postgresql+psycopg://taskboard:taskboard@postgres:5432/capstone_migration_review' backend alembic upgrade head
++work/review/concurrent-migrations.sh:15> docker compose -p session21-capstone-review exec -T -e 'DATABASE_URL=postgresql+psycopg://taskboard:taskboard@postgres:5432/capstone_migration_review' backend alembic upgrade head
++work/review/concurrent-migrations.sh:16> second=32050 
++work/review/concurrent-migrations.sh:17> wait 32049
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade 0001_create_tasks -> 0002_assignment_details, Add course session and due date to assignments.
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
++work/review/concurrent-migrations.sh:18> wait 32050
++work/review/concurrent-migrations.sh:19> docker compose -p session21-capstone-review exec -T postgres psql -U taskboard -d capstone_migration_review -c 'SELECT version_num FROM alembic_version; SELECT title,session_number,due_date FROM tasks;'
+       version_num       
+-------------------------
+ 0002_assignment_details
+(1 row)
+
+        title        | session_number | due_date 
+---------------------+----------------+----------
+ Existing assignment |                | 
+(1 row)
+
++work/review/concurrent-migrations.sh:20> docker compose -p session21-capstone-review exec -T postgres dropdb -U taskboard capstone_migration_review

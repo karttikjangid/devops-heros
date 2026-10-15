@@ -1,0 +1,76 @@
+build-test-deploy	GitOps reconciliation demo	﻿2026-10-15T13:15:03.6562949Z ##[group]Run trap 'kubectl -n argocd get applications,appprojects -o yaml; kubectl -n argocd logs statefulset/argocd-application-controller --tail=100; kubectl -n session21-gitops get pods,events -o wide' ERR
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6565389Z ^[[36;1mtrap 'kubectl -n argocd get applications,appprojects -o yaml; kubectl -n argocd logs statefulset/argocd-application-controller --tail=100; kubectl -n session21-gitops get pods,events -o wide' ERR^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6566381Z ^[[36;1mkubectl create namespace argocd^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6567084Z ^[[36;1mkubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/core-install.yaml^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6567945Z ^[[36;1mkubectl -n argocd rollout status statefulset/argocd-application-controller --timeout=180s^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6568625Z ^[[36;1mkubectl -n argocd rollout status deployment/argocd-repo-server --timeout=180s^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6569126Z ^[[36;1mkubectl apply -f gitops/project.yaml^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6569601Z ^[[36;1m# Isolate this exercise from the Helm release tested above.^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6570109Z ^[[36;1msed -e 's/namespace: session21$/namespace: session21-gitops/' \^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6570756Z ^[[36;1m  -e 's/valueFiles: \[values-gitops.yaml\]/valueFiles: [values-gitops.yaml, values-ci.yaml]/' \^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6571368Z ^[[36;1m  gitops/application.yaml | kubectl apply -f -^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6572005Z ^[[36;1mkubectl -n argocd wait application/session21 --for=jsonpath='{.status.sync.status}'=Synced --timeout=300s^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6572833Z ^[[36;1mkubectl -n argocd wait application/session21 --for=jsonpath='{.status.health.status}'=Healthy --timeout=180s^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6574251Z ^[[36;1mkubectl -n session21-gitops scale deployment/homework-frontend --replicas=1^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6575004Z ^[[36;1mkubectl -n session21-gitops wait deployment/homework-frontend --for=jsonpath='{.spec.replicas}'=2 --timeout=90s^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6575792Z ^[[36;1mkubectl -n session21-gitops rollout status deployment/homework-frontend --timeout=120s^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6576488Z ^[[36;1mkubectl -n argocd get application/session21 -o yaml > screenshots/review-gitops.yaml^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6577137Z ^[[36;1mkubectl -n session21-gitops get pods,svc > screenshots/review-gitops.txt^[[0m
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6647529Z shell: /usr/bin/bash -e {0}
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6647886Z env:
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6648673Z   BACKEND: ghcr.io/karttikjangid/session21-backend:20f7daa8cf43c74abf790338e81c39abbd4db55c
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6649373Z   FRONTEND: ghcr.io/karttikjangid/session21-frontend:20f7daa8cf43c74abf790338e81c39abbd4db55c
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6649955Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6650431Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6650903Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6651327Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6651901Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6652570Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.6653484Z ##[endgroup]
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:03.7293432Z namespace/argocd created
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:04.4985736Z customresourcedefinition.apiextensions.k8s.io/applications.argoproj.io serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2104674Z customresourcedefinition.apiextensions.k8s.io/applicationsets.argoproj.io serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2315730Z customresourcedefinition.apiextensions.k8s.io/appprojects.argoproj.io serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2371887Z serviceaccount/argocd-application-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2420514Z serviceaccount/argocd-applicationset-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2476999Z serviceaccount/argocd-redis serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2525168Z serviceaccount/argocd-repo-server serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2573978Z role.rbac.authorization.k8s.io/argocd-application-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2621522Z role.rbac.authorization.k8s.io/argocd-applicationset-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2672375Z role.rbac.authorization.k8s.io/argocd-redis serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2731072Z clusterrole.rbac.authorization.k8s.io/argocd-application-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2788400Z rolebinding.rbac.authorization.k8s.io/argocd-application-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2836656Z rolebinding.rbac.authorization.k8s.io/argocd-applicationset-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2878931Z rolebinding.rbac.authorization.k8s.io/argocd-redis serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2918789Z clusterrolebinding.rbac.authorization.k8s.io/argocd-application-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.2975363Z configmap/argocd-cm serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3024491Z configmap/argocd-cmd-params-cm serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3056415Z configmap/argocd-gpg-keys-cm serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3100551Z configmap/argocd-rbac-cm serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3151857Z configmap/argocd-ssh-known-hosts-cm serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3190503Z configmap/argocd-tls-certs-cm serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3227231Z secret/argocd-secret serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3375505Z service/argocd-applicationset-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3521866Z service/argocd-metrics serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3687711Z service/argocd-redis serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.3840249Z service/argocd-repo-server serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.4267842Z deployment.apps/argocd-applicationset-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.4347156Z deployment.apps/argocd-redis serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.4985934Z deployment.apps/argocd-repo-server serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.5418070Z statefulset.apps/argocd-application-controller serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.5811187Z networkpolicy.networking.k8s.io/argocd-application-controller-network-policy serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.5908338Z networkpolicy.networking.k8s.io/argocd-applicationset-controller-network-policy serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.5986148Z networkpolicy.networking.k8s.io/argocd-redis-network-policy serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.6064385Z networkpolicy.networking.k8s.io/argocd-repo-server-network-policy serverside-applied
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:05.7143408Z Waiting for 1 pods to be ready...
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:25.4530575Z partitioned roll out complete: 1 new pods have been updated...
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:25.5245083Z Waiting for deployment "argocd-repo-server" rollout to finish: 0 of 1 updated replicas are available...
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:27.4696858Z deployment "argocd-repo-server" successfully rolled out
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:27.5972327Z appproject.argoproj.io/session21 created
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:27.6983515Z application.argoproj.io/session21 created
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:15:32.9899249Z application.argoproj.io/session21 condition met
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:16:12.7783504Z application.argoproj.io/session21 condition met
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:16:12.8396431Z deployment.apps/homework-frontend scaled
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:16:13.3327959Z deployment.apps/homework-frontend condition met
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:16:13.4348426Z Waiting for deployment "homework-frontend" rollout to finish: 1 of 2 updated replicas are available...
+build-test-deploy	GitOps reconciliation demo	2026-10-15T13:16:24.6879592Z deployment "homework-frontend" successfully rolled out

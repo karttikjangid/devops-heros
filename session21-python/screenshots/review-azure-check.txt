@@ -1,0 +1,4 @@
+$ az group exists --name session21-homework
+false
+
+Read-only check on 15 October 2026. No Azure resources were created in this review.

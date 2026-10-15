@@ -1,0 +1,11 @@
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/homework-backend-84f74c68f7-7p82q    1/1     Running   0          51s
+pod/homework-backend-84f74c68f7-crq8q    1/1     Running   0          51s
+pod/homework-frontend-695b9c6957-744hq   1/1     Running   0          12s
+pod/homework-frontend-695b9c6957-ggjp6   1/1     Running   0          51s
+pod/postgres-7989d56484-g76jb            1/1     Running   0          51s
+
+NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/backend             ClusterIP   10.96.23.99     <none>        8000/TCP   51s
+service/homework-frontend   ClusterIP   10.96.28.39     <none>        80/TCP     51s
+service/postgres            ClusterIP   10.96.139.222   <none>        5432/TCP   51s
