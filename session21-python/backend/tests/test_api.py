@@ -96,12 +96,13 @@ def test_migration_preserves_existing_assignments(tmp_path):
     import subprocess
     import sys
 
+    backend_dir = Path(__file__).resolve().parents[1]
     path = tmp_path / "migration.db"
     env = {**os.environ, "DATABASE_URL": f"sqlite:///{path}"}
-    subprocess.run([sys.executable, "-m", "alembic", "upgrade", "0001_create_tasks"], env=env, check=True)
+    subprocess.run([sys.executable, "-m", "alembic", "upgrade", "0001_create_tasks"], env=env, cwd=backend_dir, check=True)
     with sqlite3.connect(path) as connection:
         connection.execute("INSERT INTO tasks (title, created_at) VALUES ('Existing homework', '2026-10-10 00:00:00')")
-    subprocess.run([sys.executable, "-m", "alembic", "upgrade", "head"], env=env, check=True)
+    subprocess.run([sys.executable, "-m", "alembic", "upgrade", "head"], env=env, cwd=backend_dir, check=True)
     with sqlite3.connect(path) as connection:
         assert connection.execute("SELECT title, session_number, due_date FROM tasks").fetchone() == ("Existing homework", None, None)
         assert connection.execute("SELECT version_num FROM alembic_version").fetchone()[0] == "0002_assignment_details"
