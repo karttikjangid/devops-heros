@@ -47,6 +47,7 @@ jobs:
           scan-type: fs
           scan-ref: session21-python
           scanners: secret
+          format: json
           exit-code: '1'
           output: session21-python/security/secret-report.json
       - uses: actions/setup-node@v4
@@ -138,10 +139,12 @@ jobs:
           GRAFANA_PASSWORD=$(kubectl -n session21-monitoring get secret session21-grafana -o jsonpath='{.data.admin-password}' | base64 -d) NODE_PATH=/tmp/session21-browser/node_modules node scripts/capture-monitoring.cjs
       - name: GitOps reconciliation demo
         run: |
+          trap 'kubectl -n argocd get applications,appprojects -o yaml; kubectl -n argocd logs statefulset/argocd-application-controller --tail=100; kubectl -n session21-gitops get pods,events -o wide' ERR
           kubectl create namespace argocd
           kubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/core-install.yaml
           kubectl -n argocd rollout status statefulset/argocd-application-controller --timeout=180s
           kubectl -n argocd rollout status deployment/argocd-repo-server --timeout=180s
+          kubectl apply -f gitops/project.yaml
           # Isolate this exercise from the Helm release tested above.
           sed 's/namespace: session21$/namespace: session21-gitops/' gitops/application.yaml | kubectl apply -f -
           kubectl -n argocd wait application/session21 --for=jsonpath='{.status.sync.status}'=Synced --timeout=300s

@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: session21
+  namespace: argocd
+spec:
+  sourceRepos:
+    - https://github.com/karttikjangid/devops-heros.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: session21
+    - server: https://kubernetes.default.svc
+      namespace: session21-gitops
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
