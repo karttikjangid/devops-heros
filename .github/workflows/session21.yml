@@ -146,7 +146,9 @@ jobs:
           kubectl -n argocd rollout status deployment/argocd-repo-server --timeout=180s
           kubectl apply -f gitops/project.yaml
           # Isolate this exercise from the Helm release tested above.
-          sed 's/namespace: session21$/namespace: session21-gitops/' gitops/application.yaml | kubectl apply -f -
+          sed -e 's/namespace: session21$/namespace: session21-gitops/' \
+            -e 's/valueFiles: \[values-gitops.yaml\]/valueFiles: [values-gitops.yaml, values-ci.yaml]/' \
+            gitops/application.yaml | kubectl apply -f -
           kubectl -n argocd wait application/session21 --for=jsonpath='{.status.sync.status}'=Synced --timeout=300s
           kubectl -n argocd wait application/session21 --for=jsonpath='{.status.health.status}'=Healthy --timeout=180s
           kubectl -n session21-gitops scale deployment/homework-frontend --replicas=1

@@ -1,0 +1,6 @@
+# The separate GitOps rehearsal checks reconciliation through internal Services.
+# The main CI release tests Ingress through HTTP and HPA through Metrics Server.
+ingress:
+  enabled: false
+hpa:
+  enabled: false
