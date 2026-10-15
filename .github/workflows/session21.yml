@@ -91,7 +91,7 @@ jobs:
       - name: Install Ingress and CPU metrics
         run: |
           helm repo add traefik https://traefik.github.io/charts
-          helm upgrade --install traefik traefik/traefik -n ingress-system --create-namespace --wait --timeout 180s
+          helm upgrade --install traefik traefik/traefik -n ingress-system --create-namespace --set service.type=ClusterIP --wait --timeout 180s
           kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.9.0/components.yaml
           # Kind has self-signed kubelet certificates; this flag is limited to the disposable CI cluster.
           kubectl -n kube-system patch deployment metrics-server --type=json -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'

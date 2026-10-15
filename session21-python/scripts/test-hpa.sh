@@ -4,6 +4,10 @@ cleanup() { kubectl -n session21 delete job capstone-load --ignore-not-found; }
 trap cleanup EXIT
 set -x
 kubectl -n session21 get hpa,pods
+for attempt in {1..30}; do
+  if kubectl -n session21 top pods; then break; fi
+  sleep 2
+done
 kubectl -n session21 top pods
 kubectl -n session21 create job capstone-load --image=busybox:1.37 -- sh -c '
   for worker in $(seq 1 16); do
