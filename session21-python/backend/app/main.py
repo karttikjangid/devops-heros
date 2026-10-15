@@ -5,22 +5,17 @@ from sqlalchemy.orm import Session
 from prometheus_fastapi_instrumentator import Instrumentator
 
 from .config import settings
-from .db import Base, engine, get_db
+from .db import get_db
 from .models import Task
 from .schemas import StatsOut, TaskCreate, TaskOut, TaskUpdate
 
-app = FastAPI(title=settings.app_name, version="1.0.0")
+app = FastAPI(title=settings.app_name, version="1.2.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 
-@app.on_event("startup")
-def startup():
-    # Production containers run Alembic before Uvicorn; create_all keeps tests self-contained.
-    Base.metadata.create_all(bind=engine)
-
 @app.get("/")
 def root():
-    return {"service": settings.app_name, "version": "1.0.0", "docs": "/docs"}
+    return {"service": settings.app_name, "version": "1.2.0", "docs": "/docs"}
 
 @app.get("/health")
 def health():
@@ -61,7 +56,10 @@ def update_task(task_id: int, payload: TaskUpdate, db: Session = Depends(get_db)
     task = db.get(Task, task_id)
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
-    for key, value in payload.model_dump(exclude_unset=True).items():
+    changes = payload.model_dump(exclude_unset=True)
+    if any(value is None for key, value in changes.items() if key not in {"session_number", "due_date"}):
+        raise HTTPException(status_code=422, detail="Task fields cannot be null")
+    for key, value in changes.items():
         setattr(task, key, value)
     db.commit()
     db.refresh(task)

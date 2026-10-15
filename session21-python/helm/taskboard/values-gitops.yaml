@@ -1,0 +1,8 @@
+# Promote a successful pipeline's SHA tags here, then commit this file.
+frontend:
+  tag: afe53aae014bbdcee642acdd366511636c06b6ad
+backend:
+  tag: afe53aae014bbdcee642acdd366511636c06b6ad
+ingress:
+  className: traefik
+  host: ""

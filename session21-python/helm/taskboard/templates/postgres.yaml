@@ -18,6 +18,7 @@ kind: Deployment
 metadata: {name: postgres}
 spec:
   replicas: 1
+  strategy: {type: Recreate}
   selector: {matchLabels: {app: postgres}}
   template:
     metadata: {labels: {app: postgres}}

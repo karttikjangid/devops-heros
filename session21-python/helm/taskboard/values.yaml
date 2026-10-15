@@ -1,9 +1,9 @@
 frontend:
   image: ghcr.io/karttikjangid/session21-frontend
-  tag: latest
+  tag: afe53aae014bbdcee642acdd366511636c06b6ad
 backend:
   image: ghcr.io/karttikjangid/session21-backend
-  tag: latest
+  tag: afe53aae014bbdcee642acdd366511636c06b6ad
 replicaCount: 2
 postgres:
   host: postgres

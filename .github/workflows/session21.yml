@@ -10,6 +10,8 @@ on:
       - 'session21-python/terraform/**'
       - 'session21-python/k8s/**'
       - 'session21-python/scripts/**'
+      - 'session21-python/security/**'
+      - 'session21-python/gitops/**'
       - 'session21-python/docker-compose.yml'
       - '.github/workflows/session21.yml' 
   workflow_dispatch:
@@ -32,13 +34,26 @@ jobs:
           python-version: '3.12'
       - name: Backend tests
         run: |
-          pip install -r backend/requirements.txt
-          python -m pytest -v backend/tests
+          pip install -r backend/requirements-dev.txt
+          python -m pytest -v backend/tests | tee screenshots/review-tests.txt
+      - name: SAST and dependency audit
+        run: |
+          pip install -r security/requirements.txt
+          bandit -r backend/app -f json -o security/sast-report.json
+          pip-audit -r backend/requirements.txt --format json --output security/sca-report.json
+      - name: Secret scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: session21-python
+          scanners: secret
+          exit-code: '1'
+          output: session21-python/security/secret-report.json
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Frontend build
-        run: npm ci && npm run build
+        run: npm ci && npm run build && npm audit --audit-level=high
         working-directory: session21-python/frontend
       - name: Docker build
         run: |
@@ -58,6 +73,8 @@ jobs:
           severity: HIGH,CRITICAL
           exit-code: '1'
           output: session21-python/frontend-scan.txt
+      - name: Security gate
+        run: echo "Tests, SAST, dependency, secret and image scans passed."
       - name: Registry login
         uses: docker/login-action@v3
         with:
@@ -73,6 +90,7 @@ jobs:
       - uses: azure/setup-helm@v4
       - name: Deploy with Helm
         run: |
+          helm lint ./helm/taskboard
           kind load docker-image "$BACKEND" "$FRONTEND" --name chart-testing
           helm upgrade --install homework ./helm/taskboard -n session21 --create-namespace \
             --set backend.tag="${{ github.sha }}" --set frontend.tag="${{ github.sha }}" \
@@ -81,6 +99,17 @@ jobs:
           kubectl -n session21 port-forward service/backend 8000:8000 > /tmp/session21-forward.log 2>&1 &
           sleep 3
           curl --fail --retry 5 --retry-connrefused http://localhost:8000/ready
+      - name: Verify application and migration
+        run: |
+          kubectl -n session21 port-forward service/homework-frontend 3000:80 > /tmp/frontend-forward.log 2>&1 &
+          curl --fail --retry 10 --retry-connrefused http://localhost:3000/ > /dev/null
+          curl --fail http://localhost:3000/api/tasks
+          kubectl -n session21 exec deployment/postgres -- psql -U taskboard -d taskboard -c 'SELECT version_num FROM alembic_version;'
+          npm install --prefix /tmp/session21-browser playwright
+          node /tmp/session21-browser/node_modules/playwright/cli.js install --with-deps chromium
+          NODE_PATH=/tmp/session21-browser/node_modules node scripts/test-frontend.cjs
+      - name: Troubleshooting exercise
+        run: bash scripts/troubleshoot.sh 2>&1 | tee screenshots/review-troubleshooting.txt
       - name: Monitoring
         run: |
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -94,8 +123,22 @@ jobs:
           curl --fail http://localhost:8000/api/tasks
       - name: Capture monitoring evidence
         run: |
-          npm install --prefix /tmp/session21-browser playwright
           GRAFANA_PASSWORD=$(kubectl -n session21-monitoring get secret session21-grafana -o jsonpath='{.data.admin-password}' | base64 -d) NODE_PATH=/tmp/session21-browser/node_modules node scripts/capture-monitoring.cjs
+      - name: GitOps reconciliation demo
+        run: |
+          kubectl create namespace argocd
+          kubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/core-install.yaml
+          kubectl -n argocd rollout status statefulset/argocd-application-controller --timeout=180s
+          kubectl -n argocd rollout status deployment/argocd-repo-server --timeout=180s
+          # Isolate this exercise from the Helm release tested above.
+          sed 's/namespace: session21$/namespace: session21-gitops/' gitops/application.yaml | kubectl apply -f -
+          kubectl -n argocd wait application/session21 --for=jsonpath='{.status.sync.status}'=Synced --timeout=300s
+          kubectl -n argocd wait application/session21 --for=jsonpath='{.status.health.status}'=Healthy --timeout=180s
+          kubectl -n session21-gitops scale deployment/homework-frontend --replicas=1
+          kubectl -n session21-gitops wait deployment/homework-frontend --for=jsonpath='{.spec.replicas}'=2 --timeout=90s
+          kubectl -n session21-gitops rollout status deployment/homework-frontend --timeout=120s
+          kubectl -n argocd get application/session21 -o yaml > screenshots/review-gitops.yaml
+          kubectl -n session21-gitops get pods,svc > screenshots/review-gitops.txt
       - name: Save monitoring evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -109,4 +152,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: session21-scans
-          path: session21-python/*-scan.txt
+          path: |
+            session21-python/*-scan.txt
+            session21-python/security/*-report.json
+            session21-python/screenshots/review-tests.txt
+            session21-python/screenshots/review-gitops.*
+            session21-python/screenshots/review-troubleshooting.txt
+            session21-python/screenshots/review-frontend*.png

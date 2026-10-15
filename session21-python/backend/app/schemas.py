@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -10,14 +10,18 @@ class TaskCreate(BaseModel):
     description: str = ""
     priority: Priority = "MEDIUM"
     status: Status = "TODO"
-    assignee: str = "Unassigned"
+    assignee: str = Field(default="Unassigned", max_length=120)
+    session_number: int | None = Field(default=None, ge=1, le=21)
+    due_date: date | None = None
 
 class TaskUpdate(BaseModel):
     title: str | None = Field(default=None, min_length=1, max_length=200)
     description: str | None = None
     priority: Priority | None = None
     status: Status | None = None
-    assignee: str | None = None
+    assignee: str | None = Field(default=None, max_length=120)
+    session_number: int | None = Field(default=None, ge=1, le=21)
+    due_date: date | None = None
 
 class TaskOut(TaskCreate):
     id: int
