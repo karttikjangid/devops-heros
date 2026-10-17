@@ -21,4 +21,4 @@ Refresh date: 17 October 2026. Earlier outcomes and dates are preserved. No new 
 
 The separate capstone repository also has 69 Mac terminal views. Its local backend suite was re-run: 11 tests passed. The course Session 16 and 17 suites passed 5 and 8 tests respectively.
 
-Original images and transcripts were kept. The existing Podman VM and its `obperf` workload were left running; the empty temporary capture VM was removed.
+Original images and transcripts were kept. The existing local container VM was not stopped or resized; the unused temporary capture VM was removed.
