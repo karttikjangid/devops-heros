@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % view-recorded-log screenshots/recorded/ingress-tls.txt
+kubectl get ingress campus-ingress-tls
+
+INGRESS_IP=$(minikube ip)
+curl -k -v --resolve portal.campus.local:443:${INGRESS_IP} https://portal.campus.local/ 2>&1 | grep -E "Server certificate
+|HTTP/|SSL connection"
+
+secret/campus-tls-cert created
+NAME              TYPE                DATA   AGE
+campus-tls-cert   kubernetes.io/tls   2      1s
+
+* SSL connection using TLSv1.3 / AEAD-AES256-GCM-SHA384 / [blank] / UNDEF
+* Server certificate:
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://portal.campus.local/
+* [HTTP/2] [1] [:method: GET]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: portal.campus.local]
+* [HTTP/2] [1] [:path: /]
+* [HTTP/2] [1] [user-agent: curl/8.7.1]
+* [HTTP/2] [1] [accept: */*]
+> GET / HTTP/2
+< HTTP/2 200
+
+Recorded log view: ingress-tls.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % 
+
+
+
+
+
+

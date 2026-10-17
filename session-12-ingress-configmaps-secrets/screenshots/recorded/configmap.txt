@@ -1,0 +1,38 @@
+Source: Session 12 README, Task 1
+kubectl apply -f 01-configmap/app-config.yaml
+kubectl get configmap yatri-app-config
+kubectl describe configmap yatri-app-config
+kubectl get configmap yatri-app-config -o jsonpath='{.data.ENVIRONMENT}' && echo ""
+kubectl get configmap yatri-app-config -o jsonpath='{.data.LOG_LEVEL}' && echo ""
+
+configmap/yatri-app-config created
+NAME               DATA   AGE
+yatri-app-config   5      0s
+Name:         yatri-app-config
+Namespace:    default
+Labels:       app=yatri-backend
+Annotations:  <none>
+
+Data
+====
+DEFAULT_CURRENCY:
+----
+INR
+ENVIRONMENT:
+----
+production
+LOG_LEVEL:
+----
+INFO
+MAX_BOOKING_DAYS:
+----
+30
+PORT:
+----
+5000
+BinaryData
+====
+Events:  <none>
+
+production
+INFO

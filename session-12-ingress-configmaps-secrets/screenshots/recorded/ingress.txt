@@ -1,0 +1,46 @@
+Source: Session 12 README, Task 10
+kubectl apply -f 04-full-demo/frontend.yaml
+kubectl apply -f 04-full-demo/backend.yaml
+kubectl apply -f 04-full-demo/ingress.yaml
+
+kubectl get ingress yatri-ingress
+kubectl describe ingress yatri-ingress
+
+curl -s http://yatri.local/ | grep -i "<title>"
+curl -s http://yatri.local/api/
+
+deployment.apps/yatri-frontend created
+service/yatri-frontend-service created
+deployment.apps/yatri-backend unchanged
+service/yatri-backend-service unchanged
+ingress.networking.k8s.io/yatri-ingress created
+NAME            CLASS   HOSTS         ADDRESS   PORTS   AGE
+yatri-ingress   nginx   yatri.local             80      0s
+
+Name:             yatri-ingress
+Labels:           app=yatri-app
+Namespace:        default
+Address:
+Ingress Class:    nginx
+Default backend:  <default>
+Rules:
+  Host         Path  Backends
+  ----         ----  --------
+  yatri.local
+               /api(/|$)(.*)   yatri-backend-service:80 (10.244.0.29:5000,10.244.0.30:5000)
+               /               yatri-frontend-service:80 ()
+Annotations:   nginx.ingress.kubernetes.io/rewrite-target: /$2
+               nginx.ingress.kubernetes.io/ssl-redirect: false
+               nginx.ingress.kubernetes.io/use-regex: true
+
+$ curl -s http://yatri.local/ | grep -i "<title>"
+<title>Welcome to nginx!</title>
+
+$ curl -s http://yatri.local/api/
+Yatri Backend API
+=================
+ENVIRONMENT     : production
+LOG_LEVEL       : INFO
+DEFAULT_CURRENCY: INR
+POSTGRES_USER   : yatri_admin
+POSTGRES_DB     : yatri_production_db

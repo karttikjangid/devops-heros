@@ -1,6 +1,6 @@
 # Session 12: Ingress, ConfigMaps, and Secrets
 
-> Screenshots have not been added for this session yet. The recorded commands and outputs are below.
+> Screenshots added on 18 October 2026 show the existing README outputs viewed in live Mac zsh. The original run date is not recorded; Kubernetes was not re-run for these captures. [Capture details](screenshots/mac/README.md).
 
 ## Task 1: ConfigMaps
 
@@ -47,6 +47,8 @@ production
 INFO
 ```
 
+![ConfigMap values](screenshots/mac/configmap.png)
+
 ## Task 2: ConfigMap Live Update & Pod Immobility Drill
 
 ```bash
@@ -86,6 +88,8 @@ Waiting for deployment "yatri-backend" rollout to finish: 1 old replicas are pen
 deployment "yatri-backend" successfully rolled out
 ```
 
+![ConfigMap update and Pod restart](screenshots/mac/configmap-update.png)
+
 ## Task 3: Secrets & Base64 Mechanics
 
 ```bash
@@ -117,6 +121,8 @@ POSTGRES_USER:      11 bytes
 secretpassword
 yatri_admin
 ```
+
+![Classroom Secret values](screenshots/mac/secret.png)
 
 ## Task 4: Trailing Newline Secret Gotcha
 
@@ -183,6 +189,8 @@ DEFAULT_CURRENCY=INR
 ENVIRONMENT=production
 LOG_LEVEL=INFO
 ```
+
+![ConfigMap and Secret inside the Pod](screenshots/mac/pod-injection.png)
 
 ## Task 7: Ingress Resource vs Ingress Controller
 
@@ -286,6 +294,8 @@ POSTGRES_DB     : yatri_production_db
 ```
 Note: The curls above were executed by passing `Host: yatri.local` through a `minikube service` tunnel to bypass the macOS podman limitation without requiring sudo.
 
+![Ingress routing to frontend and backend](screenshots/mac/ingress.png)
+
 ## Task 11: Virtual Host-Based Routing
 
 ```bash
@@ -374,6 +384,8 @@ campus-tls-cert   kubernetes.io/tls   2      1s
 > GET / HTTP/2
 < HTTP/2 200
 ```
+
+![HTTPS through Ingress](screenshots/mac/ingress-tls.png)
 
 ## Task 14: End-to-End Automation Scripts
 

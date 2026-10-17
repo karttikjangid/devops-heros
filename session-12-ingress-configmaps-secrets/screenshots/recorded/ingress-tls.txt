@@ -1,0 +1,31 @@
+Source: Session 12 README, Task 13
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout tls.key \
+  -out tls.crt \
+  -subj "/CN=campus.local/O=CampusDevOps"
+
+kubectl create secret tls campus-tls-cert --cert=tls.crt --key=tls.key
+kubectl get secret campus-tls-cert
+
+kubectl apply -f 03-ingress/ingress-tls.yaml
+kubectl get ingress campus-ingress-tls
+
+INGRESS_IP=$(minikube ip)
+curl -k -v --resolve portal.campus.local:443:${INGRESS_IP} https://portal.campus.local/ 2>&1 | grep -E "Server certificate|HTTP/|SSL connection"
+
+secret/campus-tls-cert created
+NAME              TYPE                DATA   AGE
+campus-tls-cert   kubernetes.io/tls   2      1s
+
+* SSL connection using TLSv1.3 / AEAD-AES256-GCM-SHA384 / [blank] / UNDEF
+* Server certificate:
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://portal.campus.local/
+* [HTTP/2] [1] [:method: GET]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: portal.campus.local]
+* [HTTP/2] [1] [:path: /]
+* [HTTP/2] [1] [user-agent: curl/8.7.1]
+* [HTTP/2] [1] [accept: */*]
+> GET / HTTP/2
+< HTTP/2 200

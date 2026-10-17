@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % view-recorded-log screenshots/recorded/configmap-update
+.txt
+kubectl rollout status deployment/yatri-backend
+
+configmap/yatri-app-config patched
+ENVIRONMENT=production
+deployment.apps/yatri-backend restarted
+Waiting for deployment "yatri-backend" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "yatri-backend" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "yatri-backend" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "yatri-backend" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "yatri-backend" rollout to finish: 1 old replicas are pending termination...
+deployment "yatri-backend" successfully rolled out
+
+ENVIRONMENT=staging
+
+configmap/yatri-app-config patched
+deployment.apps/yatri-backend restarted
+Waiting for deployment "yatri-backend" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "yatri-backend" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "yatri-backend" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "yatri-backend" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "yatri-backend" rollout to finish: 1 old replicas are pending termination...
+deployment "yatri-backend" successfully rolled out
+
+Recorded log view: configmap-update.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % 
+
+
+
+
+

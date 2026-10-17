@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % view-recorded-log screenshots/recorded/configmap.txt
+====
+DEFAULT_CURRENCY:
+----
+INR
+ENVIRONMENT:
+----
+production
+LOG_LEVEL:
+----
+INFO
+MAX_BOOKING_DAYS:
+----
+30
+PORT:
+----
+5000
+BinaryData
+====
+Events:  <none>
+
+production
+INFO
+
+Recorded log view: configmap.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % 
+
+
+
+
+
+

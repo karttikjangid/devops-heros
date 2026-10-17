@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % view-recorded-log screenshots/recorded/pod-injection.tx
+t
+Source: Session 12 README, Task 6
+kubectl apply -f 04-full-demo/configmap.yaml
+kubectl apply -f 04-full-demo/secret.yaml
+kubectl apply -f 04-full-demo/backend.yaml
+kubectl rollout status deployment/yatri-backend
+
+kubectl exec -it deploy/yatri-backend -- env | grep -E "ENVIRONMENT|LOG_LEVEL|POSTGRES|DEFAULT_CURRENCY"
+
+configmap/yatri-app-config unchanged
+secret/yatri-db-secret configured
+deployment.apps/yatri-backend unchanged
+service/yatri-backend-service unchanged
+deployment "yatri-backend" successfully rolled out
+
+POSTGRES_USER=yatri_admin
+POSTGRES_PASSWORD=secretpassword
+POSTGRES_DB=yatri_production_db
+DEFAULT_CURRENCY=INR
+ENVIRONMENT=production
+LOG_LEVEL=INFO
+
+Recorded log view: pod-injection.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % 
+
+
+
+
+
+
+

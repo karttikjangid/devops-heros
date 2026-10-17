@@ -1,0 +1,152 @@
+[
+  {
+    "name": "configmap",
+    "command": "view-recorded-log screenshots/recorded/configmap.txt",
+    "started": "2026-10-17T19:01:46.694Z",
+    "finished": "2026-10-17T19:01:47.270Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-12-ingress-configmaps-secrets/screenshots/recorded/configmap.txt",
+      "sha256": "05c0d15184e75e901d50d34449672799ae0544a754c79a6e27d86fed23e6ee7b",
+      "origin": "Existing Session 12 README Task 1",
+      "readmeCommit": "318d322",
+      "readmeSha256": "eece14744441ec99ee8cfdedff36700fb7f99b22c9f2c9e12453ebb6f95f1cab"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "configmap-update",
+    "command": "view-recorded-log screenshots/recorded/configmap-update.txt",
+    "started": "2026-10-17T19:01:47.778Z",
+    "finished": "2026-10-17T19:01:48.357Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-12-ingress-configmaps-secrets/screenshots/recorded/configmap-update.txt",
+      "sha256": "87cf9934ce8d8fb82950b8a9e5acefb40b232e5838869bda9c981d91361932f9",
+      "origin": "Existing Session 12 README Task 2",
+      "readmeCommit": "318d322",
+      "readmeSha256": "eece14744441ec99ee8cfdedff36700fb7f99b22c9f2c9e12453ebb6f95f1cab"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "secret",
+    "command": "view-recorded-log screenshots/recorded/secret.txt",
+    "started": "2026-10-17T19:01:48.864Z",
+    "finished": "2026-10-17T19:01:49.414Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-12-ingress-configmaps-secrets/screenshots/recorded/secret.txt",
+      "sha256": "0e2d433b5beb40499ec9bfbb9eb3fd05eb2ea8c983145a756d0fe5b708e0a3d5",
+      "origin": "Existing Session 12 README Task 3",
+      "readmeCommit": "318d322",
+      "readmeSha256": "eece14744441ec99ee8cfdedff36700fb7f99b22c9f2c9e12453ebb6f95f1cab"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "pod-injection",
+    "command": "view-recorded-log screenshots/recorded/pod-injection.txt",
+    "started": "2026-10-17T19:01:49.920Z",
+    "finished": "2026-10-17T19:01:50.492Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-12-ingress-configmaps-secrets/screenshots/recorded/pod-injection.txt",
+      "sha256": "2f7281dec5809f486f545d7f7198b9328cd8abbad4531ad5dad56e3b8b5576d7",
+      "origin": "Existing Session 12 README Task 6",
+      "readmeCommit": "318d322",
+      "readmeSha256": "eece14744441ec99ee8cfdedff36700fb7f99b22c9f2c9e12453ebb6f95f1cab"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "ingress",
+    "command": "view-recorded-log screenshots/recorded/ingress.txt",
+    "started": "2026-10-17T19:01:50.998Z",
+    "finished": "2026-10-17T19:01:51.568Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-12-ingress-configmaps-secrets/screenshots/recorded/ingress.txt",
+      "sha256": "f3889568b53b73f4a886460e1e609087f9876dbe014fdf3fa5df937db2af580d",
+      "origin": "Existing Session 12 README Task 10",
+      "readmeCommit": "318d322",
+      "readmeSha256": "eece14744441ec99ee8cfdedff36700fb7f99b22c9f2c9e12453ebb6f95f1cab"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "ingress-tls",
+    "command": "view-recorded-log screenshots/recorded/ingress-tls.txt",
+    "started": "2026-10-17T19:01:52.074Z",
+    "finished": "2026-10-17T19:01:52.654Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-12-ingress-configmaps-secrets/screenshots/recorded/ingress-tls.txt",
+      "sha256": "1de1a740667161b4c020004d7cc8f6d5f3c345092cf9c617293fe05fb861de76",
+      "origin": "Existing Session 12 README Task 13",
+      "readmeCommit": "318d322",
+      "readmeSha256": "eece14744441ec99ee8cfdedff36700fb7f99b22c9f2c9e12453ebb6f95f1cab"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

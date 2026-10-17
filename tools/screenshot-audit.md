@@ -8,7 +8,7 @@ Refresh date: 17 October 2026. Earlier outcomes and dates are preserved. No new 
 | 9 | 6 | 6 | Recorded results viewed in Mac zsh; browser images retained |
 | 10 | 16 | 16 | Recorded results viewed in Mac zsh; browser images retained |
 | 11 | 6 | 6 | Recorded results viewed in Mac zsh; browser images retained |
-| 12 | 0 | 0 | No screenshots found in the published session |
+| 12 | 0 | 6 | Added 18 October: existing README outputs viewed in Mac zsh; original run date unknown |
 | 13 | 6 | 6 | Recorded results viewed in Mac zsh; browser images retained |
 | 14 | 9 | 9 | Recorded results viewed in Mac zsh; browser images retained |
 | 15 | 7 | 7 | Recorded results viewed in Mac zsh; browser images retained |

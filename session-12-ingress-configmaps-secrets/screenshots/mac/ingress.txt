@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % view-recorded-log screenshots/recorded/ingress.txt
+Default backend:  <default>
+Rules:
+  Host         Path  Backends
+  ----         ----  --------
+  yatri.local
+               /api(/|$)(.*)   yatri-backend-service:80 (10.244.0.29:5000,10.244.0.30:5000)
+               /               yatri-frontend-service:80 ()
+Annotations:   nginx.ingress.kubernetes.io/rewrite-target: /$2
+               nginx.ingress.kubernetes.io/ssl-redirect: false
+               nginx.ingress.kubernetes.io/use-regex: true
+
+$ curl -s http://yatri.local/ | grep -i "<title>"
+<title>Welcome to nginx!</title>
+
+$ curl -s http://yatri.local/api/
+Yatri Backend API
+=================
+ENVIRONMENT     : production
+LOG_LEVEL       : INFO
+DEFAULT_CURRENCY: INR
+POSTGRES_USER   : yatri_admin
+POSTGRES_DB     : yatri_production_db
+
+Recorded log view: ingress.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-12-ingress-configmaps-secrets % 
+
+
+
+
+
+
