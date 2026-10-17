@@ -1,0 +1,65 @@
+[
+  {
+    "name": "kubernetes-api",
+    "command": "view-recorded-log screenshots/kubernetes-api.txt",
+    "started": "2026-10-17T18:08:56.327Z",
+    "finished": "2026-10-17T18:08:56.893Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-16-github-actions/screenshots/kubernetes-api.txt",
+      "sha256": "08111f12d33b17f06a4102ccff75a4a5bbda8299cd6d47b3a6737fc240d4889a"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "pipeline",
+    "command": "view-recorded-log screenshots/pipeline.txt",
+    "started": "2026-10-17T18:08:57.399Z",
+    "finished": "2026-10-17T18:08:57.983Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-16-github-actions/screenshots/pipeline.txt",
+      "sha256": "72a61753e49973436d8afc8c9fd3a0df7803600feed1f1b081ea593034f3db4b"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "unit-tests",
+    "command": "python -m pytest -v demo/tests",
+    "started": "2026-10-17T18:08:58.489Z",
+    "finished": "2026-10-17T18:08:59.210Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "fresh-command",
+    "source": null,
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

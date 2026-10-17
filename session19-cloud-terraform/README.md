@@ -1,5 +1,7 @@
 # Session 19 - Azure Cloud & Terraform in Action
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Used Azure for this project instead of AWS. Terraform provisions one Ubuntu web-server VM, VNet, subnet, NSG, public IP, network interface and private Blob Storage. The lesson examples are also included in this folder.
 
 ## Architecture
@@ -56,21 +58,21 @@ The VM's cloud-init installs Nginx and serves the Session 19 page. Wait for star
 
 ## Output and screenshots
 
-![Terraform initialization and validation](screenshots/azure-local-checks.png)
+![Recorded output in Mac zsh: Terraform initialization and validation](screenshots/mac/azure-local-checks.png)
 
-![Terraform plan](screenshots/azure-plan.png)
+![Recorded output in Mac zsh: Terraform plan](screenshots/mac/azure-plan.png)
 
-![Terraform apply](screenshots/azure-apply.png)
+![Recorded output in Mac zsh: Terraform apply](screenshots/mac/azure-apply.png)
 
-![Azure resources and VM state](screenshots/azure-resources.png)
+![Recorded output in Mac zsh: Azure resources and VM state](screenshots/mac/azure-resources.png)
 
-![HTTP test](screenshots/azure-http.png)
+![Recorded output in Mac zsh: HTTP test](screenshots/mac/azure-http.png)
 
 ![Cloud frontend](screenshots/azure-frontend.png)
 
-![State and outputs](screenshots/azure-state.png)
+![Recorded output in Mac zsh: State and outputs](screenshots/mac/azure-state.png)
 
-![Terraform destroy](screenshots/azure-destroy.png)
+![Recorded output in Mac zsh: Terraform destroy](screenshots/mac/azure-destroy.png)
 
 Full output: [local checks](screenshots/azure-local-checks.txt), [plan](screenshots/azure-plan.txt), [apply](screenshots/azure-apply.txt), [show](screenshots/azure-show.txt), [state and outputs](screenshots/azure-state.txt), [resources](screenshots/azure-resources.txt), [HTTP](screenshots/azure-http.txt), [destroy](screenshots/azure-destroy.txt), [cleanup](screenshots/azure-cleanup.txt).
 

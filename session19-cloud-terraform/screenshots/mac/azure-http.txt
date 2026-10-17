@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % view-recorded-log screenshots/azure-http.txt
+$ curl -i --max-time 10 http://20.219.14.152
+UTC: 2026-10-10T03:49:26.870941+00:00
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    89  100    89    0     0   1158      0 --:--:-- --:--:-- --:--:--  1171
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)
+Date: Sat, 10 Oct 2026 03:49:26 GMT
+Content-Type: text/html
+Content-Length: 89
+Last-Modified: Sat, 10 Oct 2026 03:49:06 GMT
+Connection: keep-alive
+ETag: "6ac9b5b2-59"
+Accept-Ranges: bytes
+
+<h1>Session 19: Azure &amp; Terraform</h1><p>Kartik | VM provisioned with Terraform.</p>
+
+Exit code: 0
+
+Recorded log view: azure-http.txt
+Original UTC: 2026-10-10T03:49:26.870941+00:00
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % 
+
+
+
+
+
+
+

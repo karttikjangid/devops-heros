@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % view-recorded-log screenshots/azure-apply.txt
+azurerm_storage_account.homework: Still creating... [01m30s elapsed]
+azurerm_storage_account.homework: Creation complete after 1m40s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/re
+sourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970]
+azurerm_storage_container.homework: Creating...
+azurerm_storage_container.homework: Still creating... [00m10s elapsed]
+azurerm_storage_container.homework: Creation complete after 12s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/re
+sourceGroups/session19-homework/providers/Microsoft.Storage/storageAccounts/kt19demo7d2ca970/blobServices/default/containe
+rs/homework]
+
+Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+container = "homework"
+public_ip = "20.219.14.152"
+resource_group = "session19-homework"
+storage_account = "kt19demo7d2ca970"
+vnet_id = "/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session19-homework/providers/Microsoft.Netwo
+rk/virtualNetworks/session19-vnet"
+web_url = "http://20.219.14.152"
+
+Exit code: 0
+
+Recorded log view: azure-apply.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % 
+
+
+
+
+
+

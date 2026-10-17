@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/git-history.txt
+Captured: 2026-10-10T01:51:26.752114+00:00
+$ git -C /Users/kartik/Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/publish log -10 --oneline
+afe53aa Deploy Session 21 homework tracker on a small Azure VM
+eb5ff92 Verify Session 21 monitoring in the deployment pipeline
+fd45a35 Sync upstream coursework while preserving completed homework
+50d9e4c Update vulnerable frontend tiff package
+6851630 Fix backend security findings for Session 21
+a3465d4 Fix Session 21 Trivy action version
+0780c6e Add Session 21 capstone tests and deployment pipeline
+2779cb7 Simplify Session 21 homework README
+c7b4583 Complete Session 21 Docker Compose homework
+8376590 replicas from 2 to 5
+
+Exit status: 0
+
+Recorded log view: git-history.txt
+Original UTC: 2026-10-10T01:51:26.752114+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

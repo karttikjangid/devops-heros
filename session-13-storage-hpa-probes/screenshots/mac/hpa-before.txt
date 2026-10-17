@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % view-recorded-log screenshots/hpa-before.txt
+$ kubectl -n production-webapp get hpa
+NAME          REFERENCE            TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+web-app-hpa   Deployment/web-app   cpu: 10%/50%   2         5         2          2m6s
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+web-app-97ff666bf-d5sdr   1/1     Running   0          57s
+web-app-97ff666bf-z76b6   1/1     Running   0          2m6s
+
+Exit code: 0
+
+$ kubectl -n production-webapp top pods
+NAME                      CPU(cores)   MEMORY(bytes)   
+web-app-97ff666bf-d5sdr   3m           6Mi             
+web-app-97ff666bf-z76b6   1m           8Mi             
+
+Exit code: 0
+
+Recorded log view: hpa-before.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % 
+
+
+
+
+
+
+
+
+

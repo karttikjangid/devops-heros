@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % view-recorded-log screenshots/logs-health.txt
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+Found 3 pods, using pod/session20-web-6cd4549f59-98gjv
+10.244.0.1 - - [10/Oct/2026:03:19:12 +0000] "GET / HTTP/1.1" 200 896 "-" "kube-probe/1.37" "-"
+10.244.0.17 - - [10/Oct/2026:03:19:13 +0000] "GET / HTTP/1.1" 200 896 "-" "Blackbox Exporter/0.27.0" "-"
+10.244.0.1 - - [10/Oct/2026:03:19:21 +0000] "GET / HTTP/1.1" 200 896 "-" "kube-probe/1.37" "-"
+10.244.0.1 - - [10/Oct/2026:03:19:22 +0000] "GET / HTTP/1.1" 200 896 "-" "kube-probe/1.37" "-"
+127.0.0.1 - - [10/Oct/2026:03:19:27 +0000] "GET / HTTP/1.1" 200 896 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) A
+ppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36" "-"
+127.0.0.1 - - [10/Oct/2026:03:19:27 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://127.0.0.1:8081/" "Mozilla/5.0 (Maci
+ntosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36" "-"
+2026/10/10 03:19:27 [error] 30#30: *30 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), c
+lient: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1:8081", referrer: "http://127.0
+.0.1:8081/"
+127.0.0.1 - - [10/Oct/2026:03:19:27 +0000] "GET / HTTP/1.1" 200 896 "-" "curl/8.7.1" "-"
+NAME                             READY   STATUS    RESTARTS   AGE
+session20-web-6cd4549f59-98gjv   1/1     Running   0          106s
+session20-web-6cd4549f59-rqf76   1/1     Running   0          106s
+session20-web-6cd4549f59-z8dh2   1/1     Running   0          106s
+
+Exit code: 0
+
+Recorded log view: logs-health.txt
+Original UTC: 2026-10-10T03:19:27.822178+00:00
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % 
+
+
+
+
+
+

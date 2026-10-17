@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % view-recorded-log screenshots/recovery.txt
+$ kubectl -n session20-argocd get application session20-demo; kubectl -n session20 get deployment,pods; curl -fsS http://1
+27.0.0.1:9091/api/v1/alerts | python3 -m json.tool
+UTC: 2026-10-10T03:19:07.620794+00:00
+
+NAME             SYNC STATUS   HEALTH STATUS
+session20-demo   Synced        Healthy
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/session20-web   3/3     3            3           4m42s
+
+NAME                                 READY   STATUS    RESTARTS   AGE
+pod/session20-web-6cd4549f59-98gjv   1/1     Running   0          86s
+pod/session20-web-6cd4549f59-rqf76   1/1     Running   0          86s
+pod/session20-web-6cd4549f59-z8dh2   1/1     Running   0          86s
+{
+    "status": "success",
+    "data": {
+        "alerts": []
+    }
+}
+
+Exit code: 0
+
+Recorded log view: recovery.txt
+Original UTC: 2026-10-10T03:19:07.620794+00:00
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % 
+
+
+
+
+
+
+

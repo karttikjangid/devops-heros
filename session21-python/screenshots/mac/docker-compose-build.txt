@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/docker-compose-build.txt
+ backend  Built
+ frontend  Built
+ Network session21-python_default  Creating
+ Network session21-python_default  Created
+ Container session21-python-postgres-1  Creating
+ Container session21-python-postgres-1  Created
+ Container session21-python-backend-1  Creating
+ Container session21-python-backend-1  Created
+ Container session21-python-frontend-1  Creating
+ Container session21-python-frontend-1  Created
+ Container session21-python-postgres-1  Starting
+ Container session21-python-postgres-1  Started
+ Container session21-python-postgres-1  Waiting
+ Container session21-python-postgres-1  Healthy
+ Container session21-python-backend-1  Starting
+ Container session21-python-backend-1  Started
+ Container session21-python-backend-1  Waiting
+ Container session21-python-backend-1  Healthy
+ Container session21-python-frontend-1  Starting
+ Container session21-python-frontend-1  Started
+
+Exit status: 0
+
+Recorded log view: docker-compose-build.txt
+Original UTC: 2026-10-10T01:56:46.077115+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+

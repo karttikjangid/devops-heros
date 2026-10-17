@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/non-root-test.txt
+Captured: 2026-10-10T00:24:29.871393+00:00
+$ docker compose exec -T backend id; docker compose exec -T frontend id
+uid=10001(appuser) gid=10001(appuser) groups=10001(appuser)
+uid=101(nginx) gid=101(nginx) groups=101(nginx)
+
+Exit status: 0
+
+Recorded log view: non-root-test.txt
+Original UTC: 2026-10-10T00:24:29.871393+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

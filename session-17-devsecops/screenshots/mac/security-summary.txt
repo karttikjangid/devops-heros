@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-17-devsecops % view-recorded-log screenshots/security-summary.txt
+Actual reports from GitHub Actions run 38023093690
+Bandit SAST: 0 findings
+pip-audit SCA: 0 known vulnerabilities
+Gitleaks: 0 secrets
+Trivy: 0 HIGH/CRITICAL findings
+Security gate: PASS
+CI: success
+CD: success
+
+Recorded log view: security-summary.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-17-devsecops % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,12 +1,14 @@
 # Session 14 - Kubernetes Troubleshooting
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Used `session14-lab` in Minikube for this homework. Introduced each fault, checked the status, logs and events, then fixed it and tested again.
 
 ## Commands
 
 Practiced `kubectl get`, `describe`, `logs`, `exec`, `events`, `explain`, `top` and `get -o wide`. Enabled Metrics Server to check CPU and memory with `top`.
 
-![Commands and CPU/memory usage](screenshots/commands.png)
+![Recorded output in Mac zsh: Commands and CPU/memory usage](screenshots/mac/commands.png)
 
 [All command output](screenshots/commands.txt)
 

@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session9-k8s % view-recorded-log screenshots/deploy-explore.txt
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   tutorial-web-bb745df8 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  2s    deployment-controller  Scaled up replica set tutorial-web-bb745df8 from 0 to 1
+2026/10/10 12:08:25 [notice] 1#1: OS: Linux 7.1.4-200.fc44.aarch64
+2026/10/10 12:08:25 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/10/10 12:08:25 [notice] 1#1: start worker processes
+2026/10/10 12:08:25 [notice] 1#1: start worker process 30
+2026/10/10 12:08:25 [notice] 1#1: start worker process 31
+2026/10/10 12:08:25 [notice] 1#1: start worker process 32
+2026/10/10 12:08:25 [notice] 1#1: start worker process 33
+2026/10/10 12:08:25 [notice] 1#1: start worker process 34
+
+Exit code: 0
+
+Recorded log view: deploy-explore.txt
+Original UTC: 2026-10-10T12:08:25.514117+00:00
+kartik@Kartiks-MacBook-Air session9-k8s % 
+
+
+
+
+
+

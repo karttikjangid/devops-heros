@@ -7,6 +7,6 @@ Introduced this fault in `session14-lab` to practice finding and fixing it.
 - Fix: Reduced requests to the small demo requirements.
 - Verification: The replacement Pod was scheduled and became Ready.
 
-![Before and after output](../../screenshots/pending.png)
+![Recorded output in Mac zsh: Before and after output](../../screenshots/mac/pending.png)
 
 [Complete commands and output](../../screenshots/pending.txt)

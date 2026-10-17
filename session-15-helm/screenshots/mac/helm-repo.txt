@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-15-helm % view-recorded-log screenshots/helm-repo.txt
+prometheus-community    https://prometheus-community.github.io/helm-charts
+grafana                 https://grafana.github.io/helm-charts             
+metrics-server          https://kubernetes-sigs.github.io/metrics-server  
+homework-prometheus     https://prometheus-community.github.io/helm-charts
+NAME                                                    CHART VERSION   APP VERSION     DESCRIPTION                       
+                
+homework-prometheus/prometheus                          29.36.1         v3.15.0         Prometheus is a monitoring system 
+and time seri...
+homework-prometheus/prometheus                          29.36.0         v3.15.0         Prometheus is a monitoring system 
+and time seri...
+homework-prometheus/prometheus                          29.35.0         v3.15.0         Prometheus is a monitoring system 
+and time seri...
+homework-prometheus/prometheus                          29.34.0         v3.15.0         Prometheus is a monitoring system 
+and time seri...
+homework-prometheus/prometheus                          29.33.1         v3.15.0         Prometheus is a monitoring system 
+and time seri...
+homework-prometheus/prometheus                          29.33.0         v3.14.0         Prometheus is a monitoring system 
+and time seri...
+homework-prometheus/prometheus                          29.32.0         v3.14.0         Prometheus is a monitoring system 
+and time seri...
+
+Exit code: 0
+
+Recorded log view: helm-repo.txt
+Original UTC: 2026-10-10T04:12:13.849006+00:00
+kartik@Kartiks-MacBook-Air session-15-helm % 
+
+
+
+
+
+

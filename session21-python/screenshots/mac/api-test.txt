@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/api-test.txt
+ id |              title               |   status    
+----+----------------------------------+-------------
+  2 | Session 21 browser verification  | IN_PROGRESS
+  4 | Session 21 homework verification | IN_PROGRESS
+  5 | Session 21 API verification      | DONE
+(3 rows)
+
+
+$ curl -fsS -i -X DELETE http://localhost:8000/api/tasks/5
+HTTP/1.1 204 No Content
+date: Sat, 10 Oct 2026 01:46:07 GMT
+server: uvicorn
+content-type: application/json
+vary: Origin
+
+
+
+$ curl -sS -o /private/tmp/session21-deleted.json -w "%{http_code}" http://localhost:8000/api/tasks/5
+404
+{"detail":"Task not found"}
+
+Exit status: 0
+
+Recorded log view: api-test.txt
+Original UTC: 2026-10-10T01:46:05.939309+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+

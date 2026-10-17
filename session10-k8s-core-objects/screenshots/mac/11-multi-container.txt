@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/11-multi-container.txt
+2026/10/10 12:15:36 [notice] 1#1: OS: Linux 7.1.4-200.fc44.aarch64
+2026/10/10 12:15:36 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/10/10 12:15:36 [notice] 1#1: start worker processes
+2026/10/10 12:15:36 [notice] 1#1: start worker process 29
+2026/10/10 12:15:36 [notice] 1#1: start worker process 30
+2026/10/10 12:15:36 [notice] 1#1: start worker process 31
+2026/10/10 12:15:36 [notice] 1#1: start worker process 32
+2026/10/10 12:15:36 [notice] 1#1: start worker process 33
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+Sidecar is running
+
+Exit code: 0
+
+Recorded log view: 11-multi-container.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

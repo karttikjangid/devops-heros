@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/03-canary.txt
+
+Exit code: 0
+
+$ kubectl -n session10-lab get endpointslices -l kubernetes.io/service-name=myapp-canary-service
+NAME                         ADDRESSTYPE   PORTS   ENDPOINTS                                         AGE
+myapp-canary-service-dv8p6   IPv4          80      10.244.0.86,10.244.0.85,10.244.0.82 + 7 more...   13s
+
+Exit code: 0
+
+$ kubectl -n session10-lab exec client -- sh -c 'for attempt in 1 2 3 4 5 6; do wget -T 5 -qO- http://myapp-canary-service
+ && exit 0; sleep 2; done; exit 1' | grep -o 'STABLE v1\|CANARY v2'
+STABLE v1
+
+Exit code: 0
+
+$ kubectl -n session10-lab exec client -- sh -c 'for request in $(seq 1 100); do wget -T 5 -qO- http://myapp-canary-servic
+e; done' | grep -o 'STABLE v1\|CANARY v2' | sort | uniq -c
+  10 CANARY v2
+  90 STABLE v1
+
+Exit code: 0
+
+Recorded log view: 03-canary.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+
+

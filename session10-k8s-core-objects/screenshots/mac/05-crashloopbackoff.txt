@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/05-crashloopbackoff.txt
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  41s                default-scheduler  Successfully assigned session10-lab/lifecycle-crashloop to min
+ikube
+  Normal   Pulled     19s (x3 over 39s)  kubelet            spec.containers{crashing-app}: Container image "busybox:1.36" 
+already present on machine and can be accessed by the pod
+  Normal   Created    19s (x3 over 38s)  kubelet            spec.containers{crashing-app}: Container created
+  Normal   Started    19s (x3 over 38s)  kubelet            spec.containers{crashing-app}: Container started
+  Warning  BackOff    15s (x2 over 30s)  kubelet            spec.containers{crashing-app}: Back-off restarting failed cont
+ainer crashing-app in pod lifecycle-crashloop_session10-lab(6b5cdc1f-08a3-4114-8aae-f544a14a9064)
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-crashloop --all-containers --tail=12
+Application started
+Application crashed
+
+Exit code: 0
+
+Recorded log view: 05-crashloopbackoff.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

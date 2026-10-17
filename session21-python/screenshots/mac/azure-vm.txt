@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/azure-vm.txt
+Captured: 2026-10-10T01:40:48.802681+00:00
+$ az vm show -g session21-homework -n session21-homework --show-details --query "{name:name,location:location,size:hardwar
+eProfile.vmSize,state:provisioningState,power:powerState,publicIp:publicIps}" -o json
+{
+  "location": "centralindia",
+  "name": "session21-homework",
+  "power": "VM running",
+  "publicIp": "20.198.80.51",
+  "size": "Standard_B2als_v2",
+  "state": "Succeeded"
+}
+
+Exit status: 0
+
+Recorded log view: azure-vm.txt
+Original UTC: 2026-10-10T01:40:48.802681+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

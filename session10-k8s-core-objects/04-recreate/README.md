@@ -221,6 +221,6 @@ kubectl delete -f 04-recreate/deployment-v2.yaml
 
 ## Output
 
-![Strategy output](../screenshots/04-recreate.png)
+![Recorded output in Mac zsh: Strategy output](../screenshots/mac/04-recreate.png)
 
 [Full commands and output](../screenshots/04-recreate.txt)

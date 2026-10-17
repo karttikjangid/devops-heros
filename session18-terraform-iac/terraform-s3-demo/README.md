@@ -47,7 +47,7 @@ Terraform state maps configuration addresses to real AWS resources. Keep state a
 
 ## Local checks
 
-![Real Terraform initialization and validation](screenshots/local-checks.png)
+![Recorded output in Mac zsh: Real Terraform initialization and validation](../screenshots/mac/local-checks.png)
 
 [Command output](screenshots/local-checks.txt)
 

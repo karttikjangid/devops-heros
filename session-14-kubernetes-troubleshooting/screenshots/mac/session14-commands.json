@@ -1,0 +1,200 @@
+[
+  {
+    "name": "commands",
+    "command": "view-recorded-log screenshots/commands.txt",
+    "started": "2026-10-17T18:08:37.948Z",
+    "finished": "2026-10-17T18:08:38.521Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/commands.txt",
+      "sha256": "aaec898d32c7886af6e7cf096ebebbbf03ef701d3a2df25ebedaa1578c314617"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "configuration",
+    "command": "view-recorded-log screenshots/configuration.txt",
+    "started": "2026-10-17T18:08:39.029Z",
+    "finished": "2026-10-17T18:08:39.598Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/configuration.txt",
+      "sha256": "aa5b41e87f523428f94672d48129b2545dbc08bb4d3b7c1b002ee99801a78022"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "containercreating",
+    "command": "view-recorded-log screenshots/containercreating.txt",
+    "started": "2026-10-17T18:08:40.104Z",
+    "finished": "2026-10-17T18:08:40.665Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/containercreating.txt",
+      "sha256": "79926371efd869449c504edc9f2fa84a472eee13d010c61a0a99210ed0b137a1"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "crashloop",
+    "command": "view-recorded-log screenshots/crashloop.txt",
+    "started": "2026-10-17T18:08:41.170Z",
+    "finished": "2026-10-17T18:08:41.730Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/crashloop.txt",
+      "sha256": "37e12b5e968073abe5e95560b07bf4f46b79d8597b9af6875fff9e1dfa7d682e"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "dns",
+    "command": "view-recorded-log screenshots/dns.txt",
+    "started": "2026-10-17T18:08:42.236Z",
+    "finished": "2026-10-17T18:08:42.802Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/dns.txt",
+      "sha256": "58397025bd734bcfe4aed2d2f3794dd8f18a6a48c9b0b54a488ecfe949d28f63"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "imagepull",
+    "command": "view-recorded-log screenshots/imagepull.txt",
+    "started": "2026-10-17T18:08:43.306Z",
+    "finished": "2026-10-17T18:08:43.883Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/imagepull.txt",
+      "sha256": "1db28b12dd68efb1678fe9db7385c58a9462a6a999ab1c1dbcbd05c1c95b1e67"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "pending",
+    "command": "view-recorded-log screenshots/pending.txt",
+    "started": "2026-10-17T18:08:44.388Z",
+    "finished": "2026-10-17T18:08:44.947Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/pending.txt",
+      "sha256": "268c66fed9c788c9e39687ae5a0bd3e58b737299b4c3ec0c45393b5127c1c819"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "pod-networking",
+    "command": "view-recorded-log screenshots/pod-networking.txt",
+    "started": "2026-10-17T18:08:45.453Z",
+    "finished": "2026-10-17T18:08:46.015Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/pod-networking.txt",
+      "sha256": "ecaee497ffe7832ecb214f80b29f06255376476fc147ab505d72602aff1dbb80"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "service-mini-project",
+    "command": "view-recorded-log screenshots/service-mini-project.txt",
+    "started": "2026-10-17T18:08:46.521Z",
+    "finished": "2026-10-17T18:08:47.106Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-14-kubernetes-troubleshooting/screenshots/service-mini-project.txt",
+      "sha256": "dd6c07435f19a55867368a9dfa2b8f2ede1176b08b524fbd2b0b804ca13166f1"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

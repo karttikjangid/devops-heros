@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/10-init-container.txt
+Init container running
+Init complete
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/10/10 12:19:34 [notice] 1#1: using the "epoll" event method
+2026/10/10 12:19:34 [notice] 1#1: nginx/1.27.5
+2026/10/10 12:19:34 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2026/10/10 12:19:34 [notice] 1#1: OS: Linux 7.1.4-200.fc44.aarch64
+2026/10/10 12:19:34 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2026/10/10 12:19:34 [notice] 1#1: start worker processes
+2026/10/10 12:19:34 [notice] 1#1: start worker process 29
+2026/10/10 12:19:34 [notice] 1#1: start worker process 30
+2026/10/10 12:19:34 [notice] 1#1: start worker process 31
+2026/10/10 12:19:34 [notice] 1#1: start worker process 32
+2026/10/10 12:19:34 [notice] 1#1: start worker process 33
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-init -c setup
+Init container running
+Init complete
+
+Exit code: 0
+
+Recorded log view: 10-init-container.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

@@ -42,17 +42,17 @@ State maps resource addresses to Azure IDs and can contain sensitive values. Sta
 
 ## Output and screenshots
 
-![Azure initialization and validation](screenshots/azure-local-checks.png)
+![Recorded output in Mac zsh: Azure initialization and validation](../screenshots/mac/azure-local-checks.png)
 
-![Terraform plan](screenshots/azure-plan.png)
+![Recorded output in Mac zsh: Terraform plan](../screenshots/mac/azure-plan.png)
 
-![Terraform apply](screenshots/azure-apply.png)
+![Recorded output in Mac zsh: Terraform apply](../screenshots/mac/azure-apply.png)
 
-![Azure private container verification](screenshots/azure-resources.png)
+![Recorded output in Mac zsh: Azure private container verification](../screenshots/mac/azure-resources.png)
 
-![Terraform state and outputs](screenshots/azure-state.png)
+![Recorded output in Mac zsh: Terraform state and outputs](../screenshots/mac/azure-state.png)
 
-![Terraform destroy and cleanup](screenshots/azure-destroy.png)
+![Recorded output in Mac zsh: Terraform destroy and cleanup](../screenshots/mac/azure-destroy.png)
 
 Full output: [init and validation](screenshots/azure-local-checks.txt), [plan](screenshots/azure-plan.txt), [apply](screenshots/azure-apply.txt), [show](screenshots/azure-show.txt), [state and outputs](screenshots/azure-state.txt), [resource verification](screenshots/azure-resources.txt), [destroy](screenshots/azure-destroy.txt), [cleanup](screenshots/azure-cleanup.txt).
 

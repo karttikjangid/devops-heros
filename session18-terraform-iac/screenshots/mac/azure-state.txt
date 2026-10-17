@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session18-terraform-iac % view-recorded-log terraform-storage-demo/screenshots/azure-state.txt
+$ terraform -chdir=work/azure-session18 output; terraform -chdir=work/azure-session18 state list
+UTC: 2026-10-10T03:49:53.857663+00:00
+
+container = "homework"
+resource_group = "session18-homework"
+storage_account = "kt18demo9320cad9"
+azurerm_resource_group.homework
+azurerm_storage_account.homework
+azurerm_storage_container.homework
+
+Exit code: 0
+
+Recorded log view: azure-state.txt
+Original UTC: 2026-10-10T03:49:53.857663+00:00
+kartik@Kartiks-MacBook-Air session18-terraform-iac % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

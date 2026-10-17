@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % view-recorded-log screenshots/azure-destroy.txt
+azurerm_public_ip.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-....Network/publicIPAddresses/h
+omework-ip, 00m10s elapsed]
+azurerm_subnet.nodes: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...lNetworks/session19-vnet/subnets/n
+odes, 00m10s elapsed]
+azurerm_subnet.nodes: Destruction complete after 10s
+azurerm_virtual_network.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/ses
+sion19-homework/providers/Microsoft.Network/virtualNetworks/session19-vnet]
+azurerm_public_ip.homework: Destruction complete after 10s
+azurerm_virtual_network.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...Network/virtualNetwork
+s/session19-vnet, 00m10s elapsed]
+azurerm_virtual_network.homework: Destruction complete after 11s
+azurerm_resource_group.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/sess
+ion19-homework]
+azurerm_resource_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...9009/resourceGroups/ses
+sion19-homework, 00m10s elapsed]
+azurerm_resource_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...9009/resourceGroups/ses
+sion19-homework, 00m20s elapsed]
+azurerm_resource_group.homework: Destruction complete after 21s
+
+Destroy complete! Resources: 10 destroyed.
+
+Exit code: 0
+
+Recorded log view: azure-destroy.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % 
+
+
+
+
+
+

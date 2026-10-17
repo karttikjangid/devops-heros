@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/02-blue-green.txt
+Labels:                   app=myapp
+Annotations:              <none>
+Selector:                 app=myapp,slot=green
+Type:                     ClusterIP
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.109.180.108
+IPs:                      10.109.180.108
+Port:                     http  80/TCP
+TargetPort:               80/TCP
+Endpoints:                10.244.0.80:80,10.244.0.78:80,10.244.0.79:80
+Session Affinity:         None
+Internal Traffic Policy:  Cluster
+Events:                   <none>
+
+Exit code: 0
+
+$ kubectl -n session10-lab exec client -- sh -c 'for attempt in 1 2 3 4 5 6; do wget -T 5 -qO- http://myapp-service && exi
+t 0; sleep 2; done; exit 1' | grep -o 'GREEN ENVIRONMENT'
+GREEN ENVIRONMENT
+
+Exit code: 0
+
+Recorded log view: 02-blue-green.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

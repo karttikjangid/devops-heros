@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % view-recorded-log screenshots/configuration.txt
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/config-fixed-map.yaml
+configmap/settings configured
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/config --for=condition=Ready --timeout=60s
+pod/config condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec config -- sh -c 'for attempt in 1 2 3 4 5 6 7 8 9 10; do wget -qO- http://127.0.0.1:8080 >
+/dev/null 2>&1 && exit 0; sleep 1; done; exit 1'
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec config -- printenv APP_MODE
+homework
+
+Exit code: 0
+
+Recorded log view: configuration.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % 
+
+
+
+
+
+

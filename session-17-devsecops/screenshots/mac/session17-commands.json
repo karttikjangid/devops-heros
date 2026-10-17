@@ -1,0 +1,109 @@
+[
+  {
+    "name": "gates-reject-findings",
+    "command": "view-recorded-log screenshots/gates-reject-findings.txt",
+    "started": "2026-10-17T18:09:00.279Z",
+    "finished": "2026-10-17T18:09:00.860Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-17-devsecops/screenshots/gates-reject-findings.txt",
+      "sha256": "e2d9470fbd48c893f1ccb0d378e3ba2401aa042704adf43b7662b86e6f015a9e"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "kubernetes-api",
+    "command": "view-recorded-log screenshots/kubernetes-api.txt",
+    "started": "2026-10-17T18:09:01.364Z",
+    "finished": "2026-10-17T18:09:01.938Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-17-devsecops/screenshots/kubernetes-api.txt",
+      "sha256": "d153984421a7d0d60d27e795fbc67fa2fba7a4553a50ede2cbae8a023541eb6c"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "pipeline",
+    "command": "view-recorded-log screenshots/pipeline.txt",
+    "started": "2026-10-17T18:09:02.444Z",
+    "finished": "2026-10-17T18:09:03.021Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-17-devsecops/screenshots/pipeline.txt",
+      "sha256": "6b8b0ac500f0aadff5d6df39810812a2531c7c84ecda3c3d6211341053e9df72"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "security-summary",
+    "command": "view-recorded-log screenshots/security-summary.txt",
+    "started": "2026-10-17T18:09:03.526Z",
+    "finished": "2026-10-17T18:09:04.097Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-17-devsecops/screenshots/security-summary.txt",
+      "sha256": "6fa9adb1c3b1ef25cd75bc1b7975ff404de9c929d804edf84d90a06077020388"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "unit-tests",
+    "command": "python -m pytest -v demo/tests",
+    "started": "2026-10-17T18:09:04.604Z",
+    "finished": "2026-10-17T18:09:05.323Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "fresh-command",
+    "source": null,
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

@@ -1,5 +1,7 @@
 # Session 16 - CI/CD & GitHub Actions
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Used the calculator from `10-final-cicd-pipeline` and added an HTTP API. The five tests cover arithmetic operations and division by zero.
 
 ```text
@@ -56,9 +58,9 @@ docker run --rm -p 8082:8000 session16-calculator
 
 ![Successful GitHub Actions execution](screenshots/github-actions.png)
 
-![Unit tests](screenshots/unit-tests.png)
+![Live Mac zsh: Unit tests](screenshots/mac/unit-tests.png)
 
-![Two Kubernetes replicas and successful API responses](screenshots/kubernetes-api.png)
+![Recorded output in Mac zsh: Two Kubernetes replicas and successful API responses](screenshots/mac/kubernetes-api.png)
 
 [Pipeline output](screenshots/pipeline.txt) · [CI tests](screenshots/ci-unit-tests.txt) · [Deployment](screenshots/deployment.txt) · [Health response](screenshots/health.json) · [Calculator response](screenshots/api.json)
 

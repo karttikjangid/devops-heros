@@ -1,5 +1,7 @@
 # Session 9 - Kubernetes Fundamentals
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Used the existing Minikube cluster for the six Kubernetes Basics exercises. Checked the versions and cluster status first, then deployed, exposed, scaled and updated Nginx. Used images that work on my Arm-based Mac.
 
 | Module | What I did | Output |
@@ -13,17 +15,17 @@ Used the existing Minikube cluster for the six Kubernetes Basics exercises. Chec
 
 ## Screenshots
 
-![Minikube and cluster verification](screenshots/cluster.png)
+![Recorded output in Mac zsh: Minikube and cluster verification](screenshots/mac/cluster.png)
 
-![Application deployment and inspection](screenshots/deploy-explore.png)
+![Recorded output in Mac zsh: Application deployment and inspection](screenshots/mac/deploy-explore.png)
 
-![Service connectivity](screenshots/expose.png)
+![Recorded output in Mac zsh: Service connectivity](screenshots/mac/expose.png)
 
-![Public NodePort access from the Mac](screenshots/public-access.png)
+![Recorded output in Mac zsh: Public NodePort access from the Mac](screenshots/mac/public-access.png)
 
-![Scaling to three replicas](screenshots/scale.png)
+![Recorded output in Mac zsh: Scaling to three replicas](screenshots/mac/scale.png)
 
-![Updated application verified](screenshots/update-verified.png)
+![Recorded output in Mac zsh: Updated application verified](screenshots/mac/update-verified.png)
 
 A request immediately after the update timed out. A later check returned the page successfully; [the first attempt](screenshots/update.txt) is retained alongside the successful verification.
 

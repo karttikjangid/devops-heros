@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session18-terraform-iac % view-recorded-log terraform-storage-demo/screenshots/azure-destroy.tx
+t
+
+Changes to Outputs:
+  - container       = "homework" -> null
+  - resource_group  = "session18-homework" -> null
+  - storage_account = "kt18demo9320cad9" -> null
+azurerm_storage_container.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/s
+ession18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9/blobServices/default/containers/homework]
+azurerm_storage_container.homework: Destruction complete after 0s
+azurerm_storage_account.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/ses
+sion18-homework/providers/Microsoft.Storage/storageAccounts/kt18demo9320cad9]
+azurerm_storage_account.homework: Destruction complete after 4s
+azurerm_resource_group.homework: Destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/sess
+ion18-homework]
+azurerm_resource_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...9009/resourceGroups/ses
+sion18-homework, 00m10s elapsed]
+azurerm_resource_group.homework: Still destroying... [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-...9009/resourceGroups/ses
+sion18-homework, 00m20s elapsed]
+azurerm_resource_group.homework: Destruction complete after 21s
+
+Destroy complete! Resources: 3 destroyed.
+
+Exit code: 0
+
+Recorded log view: azure-destroy.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session18-terraform-iac % 
+
+
+
+
+

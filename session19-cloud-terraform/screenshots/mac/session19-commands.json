@@ -1,0 +1,178 @@
+[
+  {
+    "name": "azure-apply",
+    "command": "view-recorded-log screenshots/azure-apply.txt",
+    "started": "2026-10-17T18:09:14.495Z",
+    "finished": "2026-10-17T18:09:15.072Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session19-cloud-terraform/screenshots/azure-apply.txt",
+      "sha256": "99b89191bbcbba6d8faa65f2d112e70cd00c701fbe4d7bddb9e27ac74e274e49"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-destroy",
+    "command": "view-recorded-log screenshots/azure-destroy.txt",
+    "started": "2026-10-17T18:09:15.577Z",
+    "finished": "2026-10-17T18:09:16.156Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session19-cloud-terraform/screenshots/azure-destroy.txt",
+      "sha256": "f8050723e3adbe2a294f2e76049c78194cb6a207019fc5a3a2cfaf98597b71d5"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-http",
+    "command": "view-recorded-log screenshots/azure-http.txt",
+    "started": "2026-10-17T18:09:16.662Z",
+    "finished": "2026-10-17T18:09:17.230Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session19-cloud-terraform/screenshots/azure-http.txt",
+      "sha256": "a705645e0ff7a8335c1ba9f85faa3453443e6bc58b12a783af741d6b2299dfe0"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-local-checks",
+    "command": "view-recorded-log screenshots/azure-local-checks.txt",
+    "started": "2026-10-17T18:09:17.736Z",
+    "finished": "2026-10-17T18:09:18.334Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session19-cloud-terraform/screenshots/azure-local-checks.txt",
+      "sha256": "c6d1e6c1155fa46677796064881db4afde13016de284d34bc61dc6df9796c530"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-plan",
+    "command": "view-recorded-log screenshots/azure-plan.txt",
+    "started": "2026-10-17T18:09:18.840Z",
+    "finished": "2026-10-17T18:09:19.421Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session19-cloud-terraform/screenshots/azure-plan.txt",
+      "sha256": "e3ea5d32652d4f2a5b6b3057100ba38a87ce1bb1366efc405c1163b640fed7b8"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-resources",
+    "command": "view-recorded-log screenshots/azure-resources.txt",
+    "started": "2026-10-17T18:09:19.926Z",
+    "finished": "2026-10-17T18:09:20.493Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session19-cloud-terraform/screenshots/azure-resources.txt",
+      "sha256": "596904fb08f975c5ec03afca120cc0a1066b33f74c35ca4541b8229805d17041"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-state",
+    "command": "view-recorded-log screenshots/azure-state.txt",
+    "started": "2026-10-17T18:09:20.999Z",
+    "finished": "2026-10-17T18:09:21.569Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session19-cloud-terraform/screenshots/azure-state.txt",
+      "sha256": "ddc5af3500dd25167c2e1889b0e85c4924c81ce5a82059bab083e95f94fdebf1"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "local-checks",
+    "command": "view-recorded-log screenshots/local-checks.txt",
+    "started": "2026-10-17T18:09:22.074Z",
+    "finished": "2026-10-17T18:09:22.649Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session19-cloud-terraform/screenshots/local-checks.txt",
+      "sha256": "76b5c13a3b634044879a7cc00cdf1d785df1f2e0810bf9acbf7d2e0a69439d06"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % view-recorded-log screenshots/alert-firing.txt
+        "alerts": [
+            {
+                "labels": {
+                    "alertname": "ApplicationUnavailable",
+                    "instance": "http://session20-web.session20.svc.cluster.local",
+                    "job": "application",
+                    "severity": "warning"
+                },
+                "annotations": {
+                    "summary": "Session 20 application is unavailable"
+                },
+                "state": "firing",
+                "activeAt": "2026-10-10T03:16:48.970640515Z",
+                "value": "0e+00"
+            }
+        ]
+    }
+}
+NAME            READY   UP-TO-DATE   AVAILABLE   AGE
+session20-web   0/0     0            0           2m57s
+
+Exit code: 0
+
+Recorded log view: alert-firing.txt
+Original UTC: 2026-10-10T03:17:22.021927+00:00
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % 
+
+
+
+
+
+

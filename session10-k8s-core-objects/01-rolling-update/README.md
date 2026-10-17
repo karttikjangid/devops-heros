@@ -204,6 +204,6 @@ kubectl delete -f 01-rolling-update/deployment-v1.yaml
 
 ## Output
 
-![Strategy output](../screenshots/01-rolling-update.png)
+![Recorded output in Mac zsh: Strategy output](../screenshots/mac/01-rolling-update.png)
 
 [Full commands and output](../screenshots/01-rolling-update.txt)

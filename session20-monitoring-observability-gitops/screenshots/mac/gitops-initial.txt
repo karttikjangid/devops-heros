@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % view-recorded-log screenshots/gitops-initial.txt
+$ kubectl -n session20-argocd get application session20-demo; kubectl -n session20 get deployment,pods,service; kubectl -n
+ session20-argocd get application session20-demo -o jsonpath="{.status.sync.revision}"
+UTC: 2026-10-10T03:15:00.864373+00:00
+
+NAME             SYNC STATUS   HEALTH STATUS
+session20-demo   Synced        Healthy
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/session20-web   2/2     2            2           35s
+
+NAME                                 READY   STATUS    RESTARTS   AGE
+pod/session20-web-6cd4549f59-2p8mv   1/1     Running   0          35s
+pod/session20-web-6cd4549f59-tqjdl   1/1     Running   0          35s
+
+NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/session20-web   ClusterIP   10.107.160.123   <none>        80/TCP    35s
+40fbb1461faff1b5e3793cd6f1a4e33ccfec03b0
+Exit code: 0
+
+Recorded log view: gitops-initial.txt
+Original UTC: 2026-10-10T03:15:00.864373+00:00
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % 
+
+
+
+
+
+
+
+
+
+
+

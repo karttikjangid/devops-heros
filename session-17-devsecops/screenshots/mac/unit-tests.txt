@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-17-devsecops % python -m pytest -v demo/tests
+================================================== test session starts ===================================================
+platform darwin -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /Users/kartik/Documents/Codex/2026-10-10/then-show-the-re
+levant-screenshot-running/work/cicd-venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/kartik/Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/mac-terminal-review/sessi
+on-17-devsecops/demo
+configfile: pytest.ini
+plugins: platformdirs-4.12.4
+collected 8 items                                                                                                        
+
+demo/tests/test_app.py::test_home PASSED                                                                           [ 12%]
+demo/tests/test_app.py::test_health PASSED                                                                         [ 25%]
+demo/tests/test_app.py::test_greet PASSED                                                                          [ 37%]
+demo/tests/test_app.py::test_add_numbers PASSED                                                                    [ 50%]
+demo/tests/test_app.py::test_add_numbers_missing_fields PASSED                                                     [ 62%]
+demo/tests/test_app.py::test_calculator_multiply PASSED                                                            [ 75%]
+demo/tests/test_app.py::test_calculator_divide_by_zero PASSED                                                      [ 87%]
+demo/tests/test_app.py::test_status PASSED                                                                         [100%]
+
+=================================================== 8 passed in 0.08s ====================================================
+kartik@Kartiks-MacBook-Air session-17-devsecops % 
+
+
+
+
+
+
+
+
+
+
+

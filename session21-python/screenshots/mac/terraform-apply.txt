@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/terraform-apply.txt
+azurerm_network_interface.homework: Creation complete after 7s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/res
+ourceGroups/session21-homework/providers/Microsoft.Network/networkInterfaces/homework-nic]
+azurerm_network_interface_security_group_association.homework: Creating...
+azurerm_network_interface_security_group_association.homework: Creation complete after 3s [id=/subscriptions/2f111b0c-fed8
+-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/networkInterfaces/homework-nic|/subs
+criptions/2f111b0c-fed8-4dd0-8ec8-8ade2e139009/resourceGroups/session21-homework/providers/Microsoft.Network/networkSecuri
+tyGroups/homework-nsg]
+azurerm_linux_virtual_machine.homework: Creating...
+azurerm_linux_virtual_machine.homework: Still creating... [00m10s elapsed]
+azurerm_linux_virtual_machine.homework: Still creating... [00m20s elapsed]
+azurerm_linux_virtual_machine.homework: Still creating... [00m31s elapsed]
+azurerm_linux_virtual_machine.homework: Still creating... [00m41s elapsed]
+azurerm_linux_virtual_machine.homework: Creation complete after 50s [id=/subscriptions/2f111b0c-fed8-4dd0-8ec8-8ade2e13900
+9/resourceGroups/session21-homework/providers/Microsoft.Compute/virtualMachines/session21-homework]
+
+Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+public_ip = "20.198.80.51"
+resource_group = "session21-homework"
+
+Recorded log view: terraform-apply.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+
+

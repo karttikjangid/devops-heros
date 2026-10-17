@@ -202,6 +202,6 @@ kubectl delete -f 02-blue-green/deployment-green.yaml
 
 ## Output
 
-![Strategy output](../screenshots/02-blue-green.png)
+![Recorded output in Mac zsh: Strategy output](../screenshots/mac/02-blue-green.png)
 
 [Full commands and output](../screenshots/02-blue-green.txt)

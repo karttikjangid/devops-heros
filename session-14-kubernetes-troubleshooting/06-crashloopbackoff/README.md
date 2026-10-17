@@ -230,4 +230,4 @@ Always investigate instead of simply restarting the Pod.
 
 ## Homework output
 
-[Commands and output](../screenshots/crashloop.txt) · [Screenshot](../screenshots/crashloop.png)
+[Commands and output](../screenshots/crashloop.txt) · [Screenshot](../screenshots/mac/crashloop.png)

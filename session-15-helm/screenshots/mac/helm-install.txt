@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-15-helm % view-recorded-log screenshots/helm-install.txt
+DESCRIPTION: Install complete
+RESOURCES:
+==> v1/ConfigMap
+NAME         DATA   AGE
+notes-page   1      2s
+
+==> v1/Service
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+notes   ClusterIP   10.110.66.254   <none>        80/TCP    2s
+
+==> v1/Deployment
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+notes   1/1     1            1           2s
+
+==> v1/Pod(related)
+NAME                    READY   STATUS    RESTARTS   AGE
+notes-6499c475b-bnqn4   1/1     Running   0          2s
+
+
+TEST SUITE: None
+
+Exit code: 0
+
+Recorded log view: helm-install.txt
+Original UTC: 2026-10-10T04:12:16.411451+00:00
+kartik@Kartiks-MacBook-Air session-15-helm % 
+
+
+
+
+
+

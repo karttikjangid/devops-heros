@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/06-imagepullbackoff.txt
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age   From               Message
+  ----     ------     ----  ----               -------
+  Normal   Scheduled  41s   default-scheduler  Successfully assigned session10-lab/lifecycle-image-error to minikube
+  Normal   Pulling    39s   kubelet            spec.containers{broken-image}: Pulling image "jakwehrgkaejw:kahsdfgkhj"
+  Warning  Failed     8s    kubelet            spec.containers{broken-image}: Failed to pull image "jakwehrgkaejw:kahsdfgk
+hj": failed to pull and unpack image "docker.io/library/jakwehrgkaejw:kahsdfgkhj": failed to resolve reference "docker.io/
+library/jakwehrgkaejw:kahsdfgkhj": failed to do request: Head "https://registry-1.docker.io/v2/library/jakwehrgkaejw/manif
+ests/kahsdfgkhj": dial tcp: lookup registry-1.docker.io on 192.168.49.1:53: no such host
+  Warning  Failed     8s    kubelet            spec.containers{broken-image}: Error: ErrImagePull
+  Normal   BackOff    7s    kubelet            spec.containers{broken-image}: Back-off pulling image "jakwehrgkaejw:kahsdf
+gkhj"
+  Warning  Failed     7s    kubelet            spec.containers{broken-image}: Error: ImagePullBackOff
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-image-error --all-containers --tail=12
+Error from server (BadRequest): container "broken-image" in pod "lifecycle-image-error" is waiting to start: image can't b
+e pulled
+
+Exit code: 1
+
+Recorded log view: 06-imagepullbackoff.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

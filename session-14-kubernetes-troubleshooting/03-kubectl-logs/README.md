@@ -165,4 +165,4 @@ Logs are often the first place to look when an application is crashing or behavi
 
 ## Homework output
 
-[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)
+[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/mac/commands.png)

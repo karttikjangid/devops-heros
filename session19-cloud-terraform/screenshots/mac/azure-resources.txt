@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % view-recorded-log screenshots/azure-resources.txt
+
+Name
+----------------------------------------------------
+homework-ip
+homework-nsg
+session19-vnet
+kt19demo7d2ca970
+homework-nic
+session19-web
+session19-web_disk1_9a311614c0c04f1ca666b4569634b059
+{
+  "name": "session19-web",
+  "publicIp": "20.219.14.152",
+  "size": "Standard_B2als_v2",
+  "state": "VM running"
+}
+{
+  "name": "homework",
+  "publicAccess": "None"
+}
+
+Exit code: 0
+
+Recorded log view: azure-resources.txt
+Original UTC: 2026-10-10T03:50:30.741008+00:00
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % 
+
+
+
+
+
+

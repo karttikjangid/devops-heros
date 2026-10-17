@@ -220,6 +220,6 @@ kubectl delete -f 03-canary/deployment-stable.yaml
 
 ## Output
 
-![Strategy output](../screenshots/03-canary.png)
+![Recorded output in Mac zsh: Strategy output](../screenshots/mac/03-canary.png)
 
 [Full commands and output](../screenshots/03-canary.txt)

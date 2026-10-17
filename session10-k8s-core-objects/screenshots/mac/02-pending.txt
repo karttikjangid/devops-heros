@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/02-pending.txt
+Volumes:
+  kube-api-access-466xg:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                From               Message
+  ----     ------            ----               ----               -------
+  Warning  FailedScheduling  4s (x17 over 42s)  default-scheduler  0/1 nodes are available: 1 Insufficient memory. preempt
+ion: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-pending --all-containers --tail=12
+
+Exit code: 0
+
+Recorded log view: 02-pending.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

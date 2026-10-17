@@ -1,0 +1,134 @@
+[
+  {
+    "name": "hpa-before",
+    "command": "view-recorded-log screenshots/hpa-before.txt",
+    "started": "2026-10-17T18:08:30.864Z",
+    "finished": "2026-10-17T18:08:31.449Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-13-storage-hpa-probes/screenshots/hpa-before.txt",
+      "sha256": "1aabee86da1278e11cdeefc03638b3baa1325bf77dc73a7fa32af429c8004911"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "hpa-load",
+    "command": "view-recorded-log screenshots/hpa-load.txt",
+    "started": "2026-10-17T18:08:31.957Z",
+    "finished": "2026-10-17T18:08:32.534Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-13-storage-hpa-probes/screenshots/hpa-load.txt",
+      "sha256": "e5303dbc42a4472810a5a316670fd404778b4bd55ab8203d4497c7c69c3a5267"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "hpa-recovery",
+    "command": "view-recorded-log screenshots/hpa-recovery.txt",
+    "started": "2026-10-17T18:08:33.040Z",
+    "finished": "2026-10-17T18:08:33.616Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-13-storage-hpa-probes/screenshots/hpa-recovery.txt",
+      "sha256": "45ed07d283efe07c2a65632017c63ad1d437f66fe570611bc4d8fa47e358ef61"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "persistence",
+    "command": "view-recorded-log screenshots/persistence.txt",
+    "started": "2026-10-17T18:08:34.122Z",
+    "finished": "2026-10-17T18:08:34.712Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-13-storage-hpa-probes/screenshots/persistence.txt",
+      "sha256": "f89edaedbf8cd01e2ffff9f643532a1233982ca0eac7ad25f4255423fd7feb77"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "storage-probes",
+    "command": "view-recorded-log screenshots/storage-probes.txt",
+    "started": "2026-10-17T18:08:35.217Z",
+    "finished": "2026-10-17T18:08:35.802Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-13-storage-hpa-probes/screenshots/storage-probes.txt",
+      "sha256": "30267aa01e10559d2b3cf6fc633883f3cdc3818f54a1a82af849ae0a0316e332"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "volumes",
+    "command": "view-recorded-log screenshots/volumes.txt",
+    "started": "2026-10-17T18:08:36.307Z",
+    "finished": "2026-10-17T18:08:36.879Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-13-storage-hpa-probes/screenshots/volumes.txt",
+      "sha256": "7ea28e1ce8fff54b0831d134f6b20f939b3fd9817f10758af053a0f91f824930"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

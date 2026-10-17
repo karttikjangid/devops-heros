@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % view-recorded-log screenshots/self-healing.txt
+$ kubectl -n session20 scale deployment session20-web --replicas=1; kubectl -n session20 get deployment session20-web -o c
+ustom-columns=NAME:.metadata.name,DESIRED:.spec.replicas,READY:.status.readyReplicas; kubectl -n session20 wait deployment
+/session20-web --for=jsonpath="{.spec.replicas}"=3 --timeout=60s; kubectl -n session20 rollout status deployment/session20
+-web --timeout=60s; kubectl -n session20 get deployment session20-web; kubectl -n session20-argocd get application session
+20-demo
+UTC: 2026-10-10T03:16:04.258975+00:00
+
+deployment.apps/session20-web scaled
+NAME            DESIRED   READY
+session20-web   1         3
+deployment.apps/session20-web condition met
+Waiting for deployment "session20-web" rollout to finish: 1 of 3 updated replicas are available...
+Waiting for deployment "session20-web" rollout to finish: 2 of 3 updated replicas are available...
+deployment "session20-web" successfully rolled out
+NAME            READY   UP-TO-DATE   AVAILABLE   AGE
+session20-web   3/3     3            3           99s
+NAME             SYNC STATUS   HEALTH STATUS
+session20-demo   Synced        Progressing
+
+Exit code: 0
+
+Recorded log view: self-healing.txt
+Original UTC: 2026-10-10T03:16:04.258975+00:00
+kartik@Kartiks-MacBook-Air session20-monitoring-observability-gitops % 
+
+
+
+
+
+
+
+

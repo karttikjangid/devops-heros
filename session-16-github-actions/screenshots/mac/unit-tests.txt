@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-16-github-actions % python -m pytest -v demo/tests
+================================================== test session starts ===================================================
+platform darwin -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /Users/kartik/Documents/Codex/2026-10-10/then-show-the-re
+levant-screenshot-running/work/cicd-venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/kartik/Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/mac-terminal-review/sessi
+on-16-github-actions/demo
+configfile: pytest.ini
+plugins: platformdirs-4.12.4
+collected 5 items                                                                                                        
+
+demo/tests/test_calculator.py::test_add PASSED                                                                     [ 20%]
+demo/tests/test_calculator.py::test_subtract PASSED                                                                [ 40%]
+demo/tests/test_calculator.py::test_multiply PASSED                                                                [ 60%]
+demo/tests/test_calculator.py::test_divide PASSED                                                                  [ 80%]
+demo/tests/test_calculator.py::test_divide_by_zero PASSED                                                          [100%]
+
+=================================================== 5 passed in 0.01s ====================================================
+kartik@Kartiks-MacBook-Air session-16-github-actions % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

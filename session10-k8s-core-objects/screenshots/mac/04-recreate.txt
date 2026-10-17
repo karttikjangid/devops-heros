@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/04-recreate.txt
+      cpu:         30m
+      memory:      32Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  app-recreate-6c78cb55bb (0/0 replicas created)
+NewReplicaSet:   app-recreate-7bd8d89b8b (3/3 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  5s    deployment-controller  Scaled up replica set app-recreate-6c78cb55bb from 0 to 3
+  Normal  ScalingReplicaSet  3s    deployment-controller  Scaled down replica set app-recreate-6c78cb55bb from 3 to 0
+  Normal  ScalingReplicaSet  2s    deployment-controller  Scaled up replica set app-recreate-7bd8d89b8b from 0 to 3
+
+Exit code: 0
+
+Recorded log view: 04-recreate.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

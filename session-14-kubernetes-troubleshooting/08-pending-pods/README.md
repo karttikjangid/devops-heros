@@ -202,4 +202,4 @@ and especially the **Events** section.
 
 ## Homework output
 
-[Commands and output](../screenshots/pending.txt) · [Screenshot](../screenshots/pending.png)
+[Commands and output](../screenshots/pending.txt) · [Screenshot](../screenshots/mac/pending.png)

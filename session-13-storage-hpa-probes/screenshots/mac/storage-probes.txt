@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % view-recorded-log screenshots/storage-probes.txt
+Capacity:      500Mi
+Access Modes:  RWO
+VolumeMode:    Filesystem
+Used By:       web-app-97ff666bf-bcw6z
+               web-app-97ff666bf-z76b6
+Conditions:
+  Type     Status  LastProbeTime                     LastTransitionTime                Reason        Message
+  ----     ------  -----------------                 ------------------                ------        -------
+  Unused   False   Mon, 01 Jan 0001 00:00:00 +0000   Sat, 10 Oct 2026 09:54:09 +0530   PodUsingPVC   A pod is currently re
+ferencing this PVC
+Events:
+  Type    Reason                 Age   From                                                                    Message
+  ----    ------                 ----  ----                                                                    -------
+  Normal  ExternalProvisioning   68s   persistentvolume-controller                                             Waiting for
+ a volume to be created either by the external provisioner 'k8s.io/minikube-hostpath' or manually by the system administra
+tor. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+  Normal  Provisioning           68s   k8s.io/minikube-hostpath_minikube_f8fdf4f1-520d-4056-afcf-5986f0950c23  External pr
+ovisioner is provisioning volume for claim "production-webapp/web-data"
+  Normal  ProvisioningSucceeded  68s   k8s.io/minikube-hostpath_minikube_f8fdf4f1-520d-4056-afcf-5986f0950c23  Successfull
+y provisioned volume pvc-d06677b1-c644-48c3-b9a4-4a26289cd596
+
+Exit code: 0
+
+Recorded log view: storage-probes.txt
+Original UTC: 2026-10-10T04:25:17.706743+00:00
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % 
+
+
+
+
+
+

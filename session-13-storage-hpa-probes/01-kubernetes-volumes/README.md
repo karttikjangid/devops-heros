@@ -21,13 +21,13 @@ Pod → volumeMount → PVC → PV → backing storage
 
 [emptyDir + hostPath example](volume-demo.yaml) was executed in `production-webapp`. I wrote one file to each volume, deleted the Pod and recreated it. The emptyDir file disappeared; the hostPath file remained.
 
-![Volume lifetime test](../screenshots/volumes.png)
+![Recorded output in Mac zsh: Volume lifetime test](../screenshots/mac/volumes.png)
 
 [Complete commands and output](../screenshots/volumes.txt)
 
 The [mini-project PVC](../mini-project/pvc.yaml) requested 500Mi from Minikube's `standard` StorageClass. The provisioner dynamically created a PV and the claim became Bound. A file written to `/data` survived deletion and replacement of the application Pod.
 
-![PVC persistence test](../screenshots/persistence.png)
+![Recorded output in Mac zsh: PVC persistence test](../screenshots/mac/persistence.png)
 
 [Persistence output](../screenshots/persistence.txt)
 

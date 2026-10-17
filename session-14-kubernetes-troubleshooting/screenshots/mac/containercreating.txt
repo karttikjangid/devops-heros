@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % view-recorded-log screenshots/containercreating.txt
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/mount-fix-configmap.yaml
+configmap/missing-page created
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/mount --for=condition=Ready --timeout=60s
+pod/mount condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec mount -- sh -c 'for attempt in 1 2 3 4 5 6 7 8 9 10; do wget -qO- http://127.0.0.1:8080 >/
+dev/null 2>&1 && exit 0; sleep 1; done; exit 1'
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec mount -- wget -qO- http://127.0.0.1:8080
+<h1>Session 14 volume fixed</h1>
+Exit code: 0
+
+Recorded log view: containercreating.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % 
+
+
+
+
+
+
+

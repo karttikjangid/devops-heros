@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-17-devsecops % view-recorded-log screenshots/kubernetes-api.txt
+Real GitHub Actions CD output
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/session17-app   2/2     2            2           1s
+
+NAME                                 READY   STATUS    RESTARTS   AGE
+pod/session17-app-8595ff9cfb-wxxjt   1/1     Running   0          1s
+pod/session17-app-8595ff9cfb-x7wzz   1/1     Running   0          1s
+
+NAME                    TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+service/session17-app   ClusterIP   10.96.10.15   <none>        80/TCP    1s
+
+GET /health
+{"status":"healthy"}
+
+Calculator API: 6 multiply 3
+{"result":18.0}
+
+Recorded log view: kubernetes-api.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-17-devsecops % 
+
+
+
+
+
+
+
+
+
+
+
+

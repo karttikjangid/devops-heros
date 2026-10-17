@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-15-helm % view-recorded-log screenshots/helm-upgrade.txt
+pod/notes-6499c475b-bnqn4    0/1     Completed   0          25s
+pod/notes-67cb4f7f8c-g644f   1/1     Running     0          11s
+pod/notes-67cb4f7f8c-k4sjq   1/1     Running     0          22s
+apiVersion: v1
+data:
+  index.html: |
+    <h1>Session 15 Notes v2</h1>
+    <p>Kartik | development</p>
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: notes
+    meta.helm.sh/release-namespace: session15-lab
+  creationTimestamp: "2026-10-10T04:12:14Z"
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: notes-page
+  namespace: session15-lab
+  resourceVersion: "450794"
+  uid: 488f2a2f-3e7d-4db4-8262-27fc7ef06e16
+
+Exit code: 0
+
+Recorded log view: helm-upgrade.txt
+Original UTC: 2026-10-10T04:12:39.718574+00:00
+kartik@Kartiks-MacBook-Air session-15-helm % 
+
+
+
+
+
+

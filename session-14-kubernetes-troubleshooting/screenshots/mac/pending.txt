@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % view-recorded-log screenshots/pending.txt
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  1s    default-scheduler  0/1 nodes are available: 1 Insufficient cpu. preemption: 0/1 nodes a
+re available: 1 Preemption is not helpful for scheduling.
+
+Exit code: 0
+
+$ kubectl -n session14-lab delete pod pending --grace-period=1 --wait=false
+pod "pending" deleted from session14-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/pending-fixed.yaml
+pod/pending created
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/pending --for=condition=Ready --timeout=60s
+pod/pending condition met
+
+Exit code: 0
+
+Recorded log view: pending.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % 
+
+
+
+
+
+

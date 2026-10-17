@@ -1,0 +1,134 @@
+[
+  {
+    "name": "cluster",
+    "command": "view-recorded-log screenshots/cluster.txt",
+    "started": "2026-10-17T18:07:58.059Z",
+    "finished": "2026-10-17T18:07:59.407Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session9-k8s/screenshots/cluster.txt",
+      "sha256": "a545503a331846c686cdbbc13b169889629b3872bdbd29b9ac6c848d14214445"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "deploy-explore",
+    "command": "view-recorded-log screenshots/deploy-explore.txt",
+    "started": "2026-10-17T18:07:59.914Z",
+    "finished": "2026-10-17T18:08:00.496Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session9-k8s/screenshots/deploy-explore.txt",
+      "sha256": "146be8fb5bd46873f50e557928109b2e6c820d2038c4f0211902615d98bbea7a"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "expose",
+    "command": "view-recorded-log screenshots/expose.txt",
+    "started": "2026-10-17T18:08:01.002Z",
+    "finished": "2026-10-17T18:08:01.576Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session9-k8s/screenshots/expose.txt",
+      "sha256": "79a6972dcf00ad6e37eea70f165be1fd6669ecf2e47d3b1646362bc31bffe7fc"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "public-access",
+    "command": "view-recorded-log screenshots/public-access.txt",
+    "started": "2026-10-17T18:08:02.083Z",
+    "finished": "2026-10-17T18:08:02.656Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session9-k8s/screenshots/public-access.txt",
+      "sha256": "b46eb9e2db96ad84421492a71a0935e397c5611129f7e6d89495c222744941f9"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "scale",
+    "command": "view-recorded-log screenshots/scale.txt",
+    "started": "2026-10-17T18:08:03.163Z",
+    "finished": "2026-10-17T18:08:03.741Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session9-k8s/screenshots/scale.txt",
+      "sha256": "da3aab549b619b4259ffc6a779cc8e3029a071ee6cddfd56e81e78ddcd6e9a6b"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "update-verified",
+    "command": "view-recorded-log screenshots/update-verified.txt",
+    "started": "2026-10-17T18:08:04.247Z",
+    "finished": "2026-10-17T18:08:04.827Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session9-k8s/screenshots/update-verified.txt",
+      "sha256": "b26846d8ebabfaae4aeae59bb212a4f0ad8186e20b3c02b2fabc5ad09a2c1081"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

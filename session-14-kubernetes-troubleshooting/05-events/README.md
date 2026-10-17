@@ -166,4 +166,4 @@ What Kubernetes tried to do and what happened
 
 ## Homework output
 
-[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)
+[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/mac/commands.png)

@@ -1,5 +1,7 @@
 # Session 11 - Kubernetes Networking & Services
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Deployed the five Service types in `session11-lab` using Nginx. Tested internal access from a client Pod and used a Minikube tunnel to access the LoadBalancer from my Mac.
 
 ## Services
@@ -27,15 +29,15 @@ ExternalName points to a controlled Service FQDN for this reproducible exercise.
 
 Used port 8086 for the LoadBalancer to avoid binding to a privileged port. The tunnel asked for sudo for other Ingress objects, but the LoadBalancer page worked on 8086 without it.
 
-![ClusterIP connectivity](screenshots/clusterip.png)
+![Recorded output in Mac zsh: ClusterIP connectivity](screenshots/mac/clusterip.png)
 
-![NodePort connectivity](screenshots/nodeport.png)
+![Recorded output in Mac zsh: NodePort connectivity](screenshots/mac/nodeport.png)
 
-![LoadBalancer external endpoint](screenshots/loadbalancer.png)
+![Recorded output in Mac zsh: LoadBalancer external endpoint](screenshots/mac/loadbalancer.png)
 
-![ExternalName CNAME and HTTP](screenshots/externalname.png)
+![Recorded output in Mac zsh: ExternalName CNAME and HTTP](screenshots/mac/externalname.png)
 
-![Headless DNS and connectivity](screenshots/headless.png)
+![Recorded output in Mac zsh: Headless DNS and connectivity](screenshots/mac/headless.png)
 
 ## Deployment vs ReplicaSet
 
@@ -70,7 +72,7 @@ A ReplicaSet maintains Pod count and replaces missing Pods. A Service supplies a
 
 [FQDN documentation](fqdn/README.md) · [CoreDNS notes and configuration](coredns/README.md)
 
-![CoreDNS configuration and successful lookup](screenshots/coredns.png)
+![Recorded output in Mac zsh: CoreDNS configuration and successful lookup](screenshots/mac/coredns.png)
 
 ## Cleanup
 

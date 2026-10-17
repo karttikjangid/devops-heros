@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % view-recorded-log screenshots/commands.txt
+64s         Normal   Scheduled           Pod/client                  Successfully assigned session14-lab/client to minikub
+e
+64s         Normal   Pulled              Pod/client                  Container image "busybox:1.36" already present on mac
+hine and can be accessed by the pod
+64s         Normal   Created             Pod/client                  Container created
+64s         Normal   Started             Pod/client                  Container started
+64s         Normal   Started             Pod/web-656bd54747-84x2n    Container started
+
+Exit code: 0
+
+$ kubectl top pods -n session14-lab
+NAME                   CPU(cores)   MEMORY(bytes)   
+client                 2m           0Mi             
+web-656bd54747-84x2n   2m           5Mi             
+
+Exit code: 0
+
+$ kubectl top nodes
+NAME       CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+minikube   211m         4%       972Mi           50%         
+
+Exit code: 0
+
+Recorded log view: commands.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % 
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-15-helm % view-recorded-log screenshots/helm-create.txt
+$ helm create work/session15/generated-chart
+UTC: 2026-10-10T04:12:09.325300+00:00
+
+Creating work/session15/generated-chart
+
+Exit code: 0
+
+Recorded log view: helm-create.txt
+Original UTC: 2026-10-10T04:12:09.325300+00:00
+kartik@Kartiks-MacBook-Air session-15-helm % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

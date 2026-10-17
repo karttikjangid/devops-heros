@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/backend-tests.txt
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+../../../../Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/manual-venv/lib/python3.12/site-pack
+ages/fastapi/applications.py:4745
+  /Users/kartik/Documents/Codex/2026-10-10/then-show-the-relevant-screenshot-running/work/manual-venv/lib/python3.12/site-
+packages/fastapi/applications.py:4745: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)  # ty: ignore[deprecated]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 5 passed, 3 warnings in 0.96s =========================
+
+Exit status: 0
+
+Recorded log view: backend-tests.txt
+Original UTC: 2026-10-10T00:32:21.699704+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % view-recorded-log screenshots/azure-plan.txt
+      + resource_group_name            = "session19-homework"
+      + subnet                         = (known after apply)
+    }
+
+Plan: 10 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + container       = "homework"
+  + public_ip       = (known after apply)
+  + resource_group  = "session19-homework"
+  + storage_account = "kt19demo7d2ca970"
+  + vnet_id         = (known after apply)
+  + web_url         = (known after apply)
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: demo.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "demo.tfplan"
+
+Exit code: 0
+
+Recorded log view: azure-plan.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session19-cloud-terraform % 
+
+
+
+
+
+

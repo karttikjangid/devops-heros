@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/07-readiness.txt
+  Normal  Pulled     39s   kubelet            spec.containers{nginx}: Container image "nginx:1.27" already present on mach
+ine and can be accessed by the pod
+  Normal  Created    38s   kubelet            spec.containers{nginx}: Container created
+  Normal  Started    38s   kubelet            spec.containers{nginx}: Container started
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-readiness --all-containers --tail=12
+2026/10/10 12:15:36 [notice] 1#1: start worker process 30
+2026/10/10 12:15:36 [notice] 1#1: start worker process 31
+2026/10/10 12:15:36 [notice] 1#1: start worker process 32
+2026/10/10 12:15:36 [notice] 1#1: start worker process 33
+2026/10/10 12:15:36 [notice] 1#1: start worker process 34
+10.244.0.1 - - [10/Oct/2026:12:15:41 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
+10.244.0.1 - - [10/Oct/2026:12:15:46 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
+10.244.0.1 - - [10/Oct/2026:12:15:51 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
+10.244.0.1 - - [10/Oct/2026:12:15:56 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
+10.244.0.1 - - [10/Oct/2026:12:16:01 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
+10.244.0.1 - - [10/Oct/2026:12:16:06 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
+10.244.0.1 - - [10/Oct/2026:12:16:11 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.37" "-"
+
+Exit code: 0
+
+Recorded log view: 07-readiness.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

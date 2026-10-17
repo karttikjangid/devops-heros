@@ -1,0 +1,156 @@
+[
+  {
+    "name": "local-checks",
+    "command": "view-recorded-log terraform-s3-demo/screenshots/local-checks.txt",
+    "started": "2026-10-17T18:09:06.388Z",
+    "finished": "2026-10-17T18:09:06.967Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session18-terraform-iac/terraform-s3-demo/screenshots/local-checks.txt",
+      "sha256": "21a0724b11111d9c5e992b0fc183b3b94b0228401d85eb26228637d15b537329"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-apply",
+    "command": "view-recorded-log terraform-storage-demo/screenshots/azure-apply.txt",
+    "started": "2026-10-17T18:09:07.472Z",
+    "finished": "2026-10-17T18:09:08.056Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session18-terraform-iac/terraform-storage-demo/screenshots/azure-apply.txt",
+      "sha256": "a86954de54b36c6e007c2e38cc36542b04e7888ce0e477da218c5b83e91fafa6"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-destroy",
+    "command": "view-recorded-log terraform-storage-demo/screenshots/azure-destroy.txt",
+    "started": "2026-10-17T18:09:08.562Z",
+    "finished": "2026-10-17T18:09:09.138Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session18-terraform-iac/terraform-storage-demo/screenshots/azure-destroy.txt",
+      "sha256": "d8bac8d7e7d1ab42fe4e9a9498571c83ea914ad052b5252b14756f86c750c742"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-local-checks",
+    "command": "view-recorded-log terraform-storage-demo/screenshots/azure-local-checks.txt",
+    "started": "2026-10-17T18:09:09.643Z",
+    "finished": "2026-10-17T18:09:10.219Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session18-terraform-iac/terraform-storage-demo/screenshots/azure-local-checks.txt",
+      "sha256": "c6eb5b20e4169ab3b702945a33eb635e91e342a14c2eff8df45740e6dff70bb6"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-plan",
+    "command": "view-recorded-log terraform-storage-demo/screenshots/azure-plan.txt",
+    "started": "2026-10-17T18:09:10.725Z",
+    "finished": "2026-10-17T18:09:11.300Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session18-terraform-iac/terraform-storage-demo/screenshots/azure-plan.txt",
+      "sha256": "49bbc0ece707585909c61d3f4a71d123f9ee33f52cc5790440c99e17313d6d07"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-resources",
+    "command": "view-recorded-log terraform-storage-demo/screenshots/azure-resources.txt",
+    "started": "2026-10-17T18:09:11.809Z",
+    "finished": "2026-10-17T18:09:12.377Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session18-terraform-iac/terraform-storage-demo/screenshots/azure-resources.txt",
+      "sha256": "174d9cac43317b9703eb85bd3ec031f5a06045c91b143ed7e3f4be1324f72941"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-state",
+    "command": "view-recorded-log terraform-storage-demo/screenshots/azure-state.txt",
+    "started": "2026-10-17T18:09:12.883Z",
+    "finished": "2026-10-17T18:09:13.442Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session18-terraform-iac/terraform-storage-demo/screenshots/azure-state.txt",
+      "sha256": "72c69581d187d6c4b9a3a9414d20054b4aa0d07279b49e66fff0328a34f3e1b5"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

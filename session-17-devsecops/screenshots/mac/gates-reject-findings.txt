@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-17-devsecops % view-recorded-log screenshots/gates-reject-findings.txt
+Code scanned:
+        Total lines of code: 2
+        Total lines skipped (#nosec): 0
+        Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+        Total issues (by severity):
+                Undefined: 0
+                Low: 1
+                Medium: 0
+                High: 1
+        Total issues (by confidence):
+                Undefined: 0
+                Low: 0
+                Medium: 0
+                High: 2
+Files skipped (0):
+9:46AM INF scanned ~110 bytes (110 bytes) in 8.53ms
+9:46AM WRN leaks found: 1
+PASS: both security gates rejected the unsafe fixtures
+
+Exit code: 0
+
+Recorded log view: gates-reject-findings.txt
+Original UTC: 2026-10-10T04:16:02.770703+00:00
+kartik@Kartiks-MacBook-Air session-17-devsecops % 
+
+
+
+
+
+

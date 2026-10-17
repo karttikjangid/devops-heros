@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session18-terraform-iac % view-recorded-log terraform-storage-demo/screenshots/azure-plan.txt
+      + metadata                          = (known after apply)
+      + name                              = "homework"
+      + resource_manager_id               = (known after apply)
+      + storage_account_id                = (known after apply)
+      + url                               = (known after apply)
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + container       = "homework"
+  + resource_group  = "session18-homework"
+  + storage_account = "kt18demo9320cad9"
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: demo.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "demo.tfplan"
+
+Exit code: 0
+
+Recorded log view: azure-plan.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session18-terraform-iac % 
+
+
+
+
+
+

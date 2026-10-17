@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/cloud-database.txt
+Captured: 2026-10-10T01:38:15.953838+00:00
+$ kubectl -n session21 exec deployment/postgres -- psql -U taskboard -d taskboard -c "SELECT id,title,status,assignee FROM
+ tasks;"
+ id |            title            |   status    | assignee 
+----+-----------------------------+-------------+----------
+  1 | Azure Session 21 assignment | IN_PROGRESS | Kartik
+(1 row)
+
+
+Exit status: 0
+
+Recorded log view: cloud-database.txt
+Original UTC: 2026-10-10T01:38:15.953838+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

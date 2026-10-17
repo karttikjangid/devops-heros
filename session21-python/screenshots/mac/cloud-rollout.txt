@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/cloud-rollout.txt
+Captured: 2026-10-10T01:44:34.147173+00:00
+$ helm upgrade homework ./helm/taskboard -n session21 --set backend.tag=afe53aae014bbdcee642acdd366511636c06b6ad --set fro
+ntend.tag=afe53aae014bbdcee642acdd366511636c06b6ad --set ingress.className=traefik --set ingress.host="" --wait --timeout 
+180s; kubectl -n session21 rollout status deployment/homework-frontend --timeout=180s
+Release "homework" has been upgraded. Happy Helming!
+NAME: homework
+LAST DEPLOYED: Sat Oct 10 07:14:34 2026
+NAMESPACE: session21
+STATUS: deployed
+REVISION: 2
+DESCRIPTION: Upgrade complete
+TEST SUITE: None
+deployment "homework-frontend" successfully rolled out
+
+Exit status: 0
+
+Recorded log view: cloud-rollout.txt
+Original UTC: 2026-10-10T01:44:34.147173+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+
+
+
+
+
+
+
+

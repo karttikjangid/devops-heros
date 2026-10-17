@@ -1,5 +1,7 @@
 # Session 20 - Monitoring, Observability & GitOps
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Used the local Minikube cluster for monitoring and GitOps. Ran Nginx with Prometheus, Grafana, Node Exporter, Blackbox Exporter and Argo CD Core.
 
 ```text
@@ -72,13 +74,13 @@ The saved dashboard shows CPU **22.25%**, memory **48.99%**, application health 
 
 Committed zero replicas to test the alert. The HTTP probe failed and `ApplicationUnavailable` started firing. Committed three replicas again; the application recovered and the alert cleared.
 
-![Firing alert and zero replicas](screenshots/alert-firing.png)
+![Recorded output in Mac zsh: Firing alert and zero replicas](screenshots/mac/alert-firing.png)
 
-![Recovered deployment and cleared alert](screenshots/recovery.png)
+![Recorded output in Mac zsh: Recovered deployment and cleared alert](screenshots/mac/recovery.png)
 
 [Alert output](screenshots/alert-firing.txt) · [Recovery output](screenshots/recovery.txt)
 
-![Application HTTP response and request logs](screenshots/logs-health.png)
+![Recorded output in Mac zsh: Application HTTP response and request logs](screenshots/mac/logs-health.png)
 
 [HTTP and log output](screenshots/logs-health.txt) · [Browser screenshot](screenshots/application.png)
 
@@ -133,11 +135,11 @@ Argo CD restored three replicas because that was the value in Git. Tested the al
 
 Started with two replicas in Git, changed them to three and pushed. Argo CD applied the change. Then manually scaled to one; it restored three again without running `kubectl apply` on the workload files.
 
-![Initial Git sync with two replicas](screenshots/gitops-initial.png)
+![Recorded output in Mac zsh: Initial Git sync with two replicas](screenshots/mac/gitops-initial.png)
 
-![Git change synchronized to three replicas](screenshots/gitops-synced.png)
+![Recorded output in Mac zsh: Git change synchronized to three replicas](screenshots/mac/gitops-synced.png)
 
-![Manual drift repaired by Argo CD](screenshots/self-healing.png)
+![Recorded output in Mac zsh: Manual drift repaired by Argo CD](screenshots/mac/self-healing.png)
 
 [Initial sync](screenshots/gitops-initial.txt) · [Three-replica sync](screenshots/gitops-synced.txt) · [Self-healing output](screenshots/self-healing.txt)
 

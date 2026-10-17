@@ -1,5 +1,7 @@
 # Session 13 - Kubernetes Storage, HPA & Probes
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Deployed the Nginx mini project in `production-webapp`. Added persistent storage, a Service, HPA and startup/readiness/liveness probes.
 
 [Volume documentation and examples](01-kubernetes-volumes/README.md) · [Mini-project manifests](mini-project/) · [HPA YAML](mini-project/hpa.yml) · [Load generator](mini-project/load-generator.yaml)
@@ -37,11 +39,11 @@ kubectl -n production-webapp delete pod load-generator
 
 The generator runs eight HTTP workers with a 300m CPU limit. The captured output shows increased CPU utilization, an HPA SuccessfulRescale event and scaling from two to four application replicas. After stopping load, the deployment returned to two ready replicas.
 
-![Before load](screenshots/hpa-before.png)
+![Recorded output in Mac zsh: Before load](screenshots/mac/hpa-before.png)
 
-![CPU load and HPA scaling](screenshots/hpa-load.png)
+![Recorded output in Mac zsh: CPU load and HPA scaling](screenshots/mac/hpa-load.png)
 
-![Scale-down after stopping load](screenshots/hpa-recovery.png)
+![Recorded output in Mac zsh: Scale-down after stopping load](screenshots/mac/hpa-recovery.png)
 
 [Before output](screenshots/hpa-before.txt) · [Load/scaling output](screenshots/hpa-load.txt) · [Recovery output](screenshots/hpa-recovery.txt)
 
@@ -49,11 +51,11 @@ The generator runs eight HTTP workers with a 300m CPU limit. The captured output
 
 The PVC became Bound through dynamic provisioning. I wrote `Student: Kartik`, deleted that application Pod, waited for its new replacement and read the same file from `/data/student.txt`.
 
-![Data persisted in a replacement Pod](screenshots/persistence.png)
+![Recorded output in Mac zsh: Data persisted in a replacement Pod](screenshots/mac/persistence.png)
 
 Startup probes allow initialization to finish before other checks run. Readiness determines whether a Pod receives Service traffic. Liveness restarts an unhealthy container. The deployment defines all three HTTP probes; ready Pods and successful Service requests were verified.
 
-![Storage and configured probes](screenshots/storage-probes.png)
+![Recorded output in Mac zsh: Storage and configured probes](screenshots/mac/storage-probes.png)
 
 [Storage/probe output](screenshots/storage-probes.txt) · [Final Service and Pod checks](screenshots/final-verification.txt)
 

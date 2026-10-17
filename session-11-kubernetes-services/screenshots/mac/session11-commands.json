@@ -1,0 +1,134 @@
+[
+  {
+    "name": "clusterip",
+    "command": "view-recorded-log screenshots/clusterip.txt",
+    "started": "2026-10-17T18:08:23.817Z",
+    "finished": "2026-10-17T18:08:24.388Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-11-kubernetes-services/screenshots/clusterip.txt",
+      "sha256": "a6a1265ff5fd39c1a70764f25b2dc4566e8f468fda61c9e533e0abb9fa5845da"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "coredns",
+    "command": "view-recorded-log screenshots/coredns.txt",
+    "started": "2026-10-17T18:08:24.893Z",
+    "finished": "2026-10-17T18:08:25.472Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-11-kubernetes-services/screenshots/coredns.txt",
+      "sha256": "ed1ce195b47bb4b91527f251c240cedba906f4202b2993fbc2fcbba294acf2c2"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "externalname",
+    "command": "view-recorded-log screenshots/externalname.txt",
+    "started": "2026-10-17T18:08:25.977Z",
+    "finished": "2026-10-17T18:08:26.555Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-11-kubernetes-services/screenshots/externalname.txt",
+      "sha256": "60c3380cccbe6bfd86a25b0c23294fd263a7ac87afdf9a183ed254e2b98762ea"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "headless",
+    "command": "view-recorded-log screenshots/headless.txt",
+    "started": "2026-10-17T18:08:27.060Z",
+    "finished": "2026-10-17T18:08:27.640Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-11-kubernetes-services/screenshots/headless.txt",
+      "sha256": "7dfdb0c1189d5551952755cfff5cdf4acbc99f731adb07ba4f2014f8e4a46100"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "loadbalancer",
+    "command": "view-recorded-log screenshots/loadbalancer.txt",
+    "started": "2026-10-17T18:08:28.145Z",
+    "finished": "2026-10-17T18:08:28.720Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-11-kubernetes-services/screenshots/loadbalancer.txt",
+      "sha256": "6f9f6df67254fdc48e1984b4a44cdd76b2079cabceee4e8e48dcf1b426f2c15f"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "nodeport",
+    "command": "view-recorded-log screenshots/nodeport.txt",
+    "started": "2026-10-17T18:08:29.226Z",
+    "finished": "2026-10-17T18:08:29.810Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-11-kubernetes-services/screenshots/nodeport.txt",
+      "sha256": "d51d6f7988ec0d434cd8057b1b41e252281c3c6f71debffa87d556360f7a765b"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

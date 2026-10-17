@@ -7,6 +7,6 @@ Introduced this fault in `session14-lab` to practice finding and fixing it.
 - Fix: Recreated the Pod with the default ClusterFirst DNS policy.
 - Verification: The Kubernetes service name resolved and HTTP to web succeeded.
 
-![Before and after output](../../screenshots/dns.png)
+![Recorded output in Mac zsh: Before and after output](../../screenshots/mac/dns.png)
 
 [Complete commands and output](../../screenshots/dns.txt)

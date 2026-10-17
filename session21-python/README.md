@@ -1,5 +1,7 @@
 # Session 21 capstone - Homework Tracker
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 A course-assignment tracker with a React frontend, FastAPI backend and PostgreSQL database. Assignments have a course session, due date, assignee, priority and status. The UI supports creating, filtering, advancing and deleting assignments.
 
 Based on the instructor's [TaskBoard starter](https://github.com/Nency-Ravaliya/devops-heros/tree/main/session21-python). The assignment fields, second migration, validation tests, save-error handling and delivery checks extend that reference. See [submission checks](SUBMISSION.md) and the [evidence index](screenshots/README.md).
@@ -72,11 +74,11 @@ docker compose ps
 
 I used Docker CLI/Compose with the installed Podman engine on macOS. [Runtime versions](screenshots/runtime.txt).
 
-![Build and startup](screenshots/docker-compose-build.png)
+![Recorded output in Mac zsh: Build and startup](screenshots/mac/docker-compose-build.png)
 
 [Full build output](screenshots/docker-compose-build.txt) · [Clean shutdown](screenshots/clean-down.txt) · [Readiness](screenshots/services-ready.txt)
 
-![docker compose ps](screenshots/docker-compose-ps.png)
+![Recorded output in Mac zsh: docker compose ps](screenshots/mac/docker-compose-ps.png)
 
 ## Application and API tests
 
@@ -106,7 +108,7 @@ curl -fsS -i -X DELETE "http://localhost:8000/api/tasks/$TASK_ID"
 
 [Exact executed commands and responses](screenshots/api-test.txt): POST 201, GET/PUT 200, DELETE 204, then 404 for the deleted task.
 
-![API results](screenshots/api-test.png)
+![Recorded output in Mac zsh: API results](screenshots/mac/api-test.png)
 
 The review has eleven API and migration tests. Each API test starts with clean SQLite tables; the migration test upgrades an existing assignment without losing its data:
 
@@ -117,7 +119,7 @@ python -m pytest -v tests
 
 [Review test output](screenshots/review-tests.txt). The older five-test output is retained as historical evidence.
 
-![Non-root application containers](screenshots/non-root-test.png)
+![Recorded output in Mac zsh: Non-root application containers](screenshots/mac/non-root-test.png)
 
 ## Kubernetes and Helm
 
@@ -135,11 +137,11 @@ helm list -n session21
 
 For Swagger through a connected cluster, run `kubectl -n session21 port-forward svc/backend 8000:8000` and open [localhost:8000/docs](http://localhost:8000/docs).
 
-![Azure Kubernetes deployment](screenshots/cloud-kubernetes.png)
+![Recorded output in Mac zsh: Azure Kubernetes deployment](screenshots/mac/cloud-kubernetes.png)
 
 ![Azure frontend](screenshots/cloud-frontend.png)
 
-![PostgreSQL contains the assignment created through the Azure frontend](screenshots/cloud-database.png)
+![Recorded output in Mac zsh: PostgreSQL contains the assignment created through the Azure frontend](screenshots/mac/cloud-database.png)
 
 [Helm output](screenshots/cloud-deploy.txt) · [Cloud browser test](screenshots/cloud-browser-test.txt) · [Cloud API output](screenshots/cloud-api.txt)
 
@@ -160,15 +162,15 @@ terraform apply
 terraform destroy
 ```
 
-![Terraform plan](screenshots/terraform-plan.png)
+![Recorded output in Mac zsh: Terraform plan](screenshots/mac/terraform-plan.png)
 
-![Terraform apply](screenshots/terraform-apply.png)
+![Recorded output in Mac zsh: Terraform apply](screenshots/mac/terraform-apply.png)
 
-![Azure VM state](screenshots/azure-vm.png)
+![Recorded output in Mac zsh: Azure VM state](screenshots/mac/azure-vm.png)
 
 The screenshot shows the VM state from Azure CLI. A portal screenshot is not included.
 
-![Terraform destroy](screenshots/terraform-destroy.png)
+![Recorded output in Mac zsh: Terraform destroy](screenshots/mac/terraform-destroy.png)
 
 [Destroy output](screenshots/terraform-destroy.txt) · [Cleanup verification](screenshots/azure-cleanup.txt)
 
@@ -295,4 +297,4 @@ GitHub reports non-blocking action-runtime deprecation and checkout-cleanup warn
 
 Started Compose from a clean state and checked the frontend, API CRUD and PostgreSQL data. The then-current five tests, CI scans, Helm deployment and monitoring checks passed on 10 October. Destroyed the cloud resources after the demo and checked the README links and screenshots before pushing.
 
-[Final local checks](screenshots/final-verification.txt) · [Cloud checks](screenshots/cloud-final.txt) · [Commit history](screenshots/git-history.png)
+[Final local checks](screenshots/final-verification.txt) · [Cloud checks](screenshots/cloud-final.txt) · [Commit history](screenshots/mac/git-history.png)

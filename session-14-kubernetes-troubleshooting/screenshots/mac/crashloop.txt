@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % view-recorded-log screenshots/crashloop.txt
+Exit code: 0
+
+$ kubectl -n session14-lab delete pod crash --grace-period=1 --wait=false
+pod "crash" deleted from session14-lab namespace
+
+Exit code: 0
+
+$ kubectl apply -f work/publish/session-14-kubernetes-troubleshooting/homework/crash-fixed.yaml
+pod/crash created
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/crash --for=condition=Ready --timeout=60s
+pod/crash condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab get pod crash
+NAME    READY   STATUS    RESTARTS   AGE
+crash   1/1     Running   0          2s
+
+Exit code: 0
+
+Recorded log view: crashloop.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % 
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % view-recorded-log screenshots/pod-networking.txt
+pod/network created
+
+Exit code: 0
+
+$ kubectl -n session14-lab wait pod/network --for=condition=Ready --timeout=60s
+pod/network condition met
+
+Exit code: 0
+
+$ kubectl -n session14-lab exec network -- sh -c 'for attempt in 1 2 3 4 5 6 7 8 9 10; do wget -qO- http://127.0.0.1:8080 
+>/dev/null 2>&1 && exit 0; sleep 1; done; exit 1'
+
+Exit code: 0
+
+$ kubectl -n session14-lab get pod network -o jsonpath="{.status.podIP}"
+10.244.0.31
+Exit code: 0
+
+$ kubectl -n session14-lab exec client -- wget -T 3 -qO- http://10.244.0.31:8080
+Session 14 network test
+
+Exit code: 0
+
+Recorded log view: pod-networking.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-14-kubernetes-troubleshooting % 
+
+
+
+
+
+

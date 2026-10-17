@@ -180,4 +180,4 @@ ImagePullBackOff
 
 ## Homework output
 
-[Commands and output](../screenshots/imagepull.txt) · [Screenshot](../screenshots/imagepull.png)
+[Commands and output](../screenshots/imagepull.txt) · [Screenshot](../screenshots/mac/imagepull.png)

@@ -7,6 +7,6 @@ Introduced this fault in `session14-lab` to practice finding and fixing it.
 - Fix: Used the existing valid image tag and recreated the Pod.
 - Verification: The image was found and the Pod became Ready.
 
-![Before and after output](../../screenshots/imagepull.png)
+![Recorded output in Mac zsh: Before and after output](../../screenshots/mac/imagepull.png)
 
 [Complete commands and output](../../screenshots/imagepull.txt)

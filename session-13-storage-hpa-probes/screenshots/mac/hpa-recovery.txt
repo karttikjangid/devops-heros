@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % view-recorded-log screenshots/hpa-recovery.txt
+  ScalingLimited  True    TooFewReplicas    the desired replica count is less than the minimum replica count
+  ScaledToZero    False   NotScaledToZero   the HPA controller did not scale the workload to zero
+Events:
+  Type     Reason                        Age                   From                       Message
+  ----     ------                        ----                  ----                       -------
+  Warning  FailedGetResourceMetric       5m3s (x4 over 5m48s)  horizontal-pod-autoscaler  failed to get cpu utilization: u
+nable to get metrics for resource cpu: no metrics returned from resource metrics API
+  Warning  FailedComputeMetricsReplicas  5m3s (x4 over 5m48s)  horizontal-pod-autoscaler  invalid metrics (1 invalid out o
+f 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for re
+source cpu: no metrics returned from resource metrics API
+  Warning  FailedGetResourceMetric       4m3s (x4 over 4m48s)  horizontal-pod-autoscaler  failed to get cpu utilization: d
+id not receive metrics for targeted pods (pods might be unready)
+  Warning  FailedComputeMetricsReplicas  4m3s (x4 over 4m48s)  horizontal-pod-autoscaler  invalid metrics (1 invalid out o
+f 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: did not receive metrics for 
+targeted pods (pods might be unready)
+  Normal   SuccessfulRescale             2m47s                 horizontal-pod-autoscaler  New size: 4; reason: cpu resourc
+e utilization (percentage of request) above target
+  Normal   SuccessfulRescale             32s                   horizontal-pod-autoscaler  New size: 2; reason: All metrics
+ below target
+
+Exit code: 0
+
+Recorded log view: hpa-recovery.txt
+Original UTC: 2026-10-10T04:29:57.089565+00:00
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % 
+
+
+
+
+
+
+

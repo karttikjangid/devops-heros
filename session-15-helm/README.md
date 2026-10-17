@@ -1,5 +1,7 @@
 # Session 15 - Helm Homework
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Packaged the Notes app as a Helm chart and deployed it in `session15-lab`. Used values to change the replicas and page content, then rolled back to the first revision.
 
 [Chart](mini-project/notes-chart/) · [Development values](mini-project/notes-chart/values.yaml) · [Production values](mini-project/notes-chart/values-prod.yaml)
@@ -28,13 +30,13 @@ Upgrade again: revision 3, 3 replicas, v3 production page
 Rollback to revision 1: new revision 4, 1 replica, v1 page restored
 ```
 
-![Installation](screenshots/helm-install.png)
+![Recorded output in Mac zsh: Installation](screenshots/mac/helm-install.png)
 
-![First upgrade](screenshots/helm-upgrade.png)
+![Recorded output in Mac zsh: First upgrade](screenshots/mac/helm-upgrade.png)
 
-![Second upgrade](screenshots/helm-upgrade-again.png)
+![Recorded output in Mac zsh: Second upgrade](screenshots/mac/helm-upgrade-again.png)
 
-![Rollback history and restored page](screenshots/rollback-verified.png)
+![Recorded output in Mac zsh: Rollback history and restored page](screenshots/mac/rollback-verified.png)
 
 A rollback creates a new release revision. It restores earlier configuration while retaining release history.
 
@@ -44,7 +46,7 @@ The Notes chart renders its page from a ConfigMap. A checksum annotation rolls t
 
 One HTTP check initially used `localhost`, which resolved to IPv6 while this Nginx configuration listened on IPv4. The explicit `127.0.0.1` check succeeded. The failed attempt remains in the raw rollback transcript.
 
-[Mini-project commands and manifests](mini-project/README.md) · [Create screenshot](screenshots/helm-create.png) · [Repository/search screenshot](screenshots/helm-repo.png) · [Get output](screenshots/helm-get.txt)
+[Mini-project commands and manifests](mini-project/README.md) · [Create screenshot](screenshots/mac/helm-create.png) · [Repository/search screenshot](screenshots/mac/helm-repo.png) · [Get output](screenshots/helm-get.txt)
 
 Uninstalled the demo release and removed its namespace after testing.
 

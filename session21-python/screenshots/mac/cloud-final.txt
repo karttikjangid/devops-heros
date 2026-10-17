@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/cloud-final.txt
+
+NAME                                                   REFERENCE                     TARGETS       MINPODS   MAXPODS   REP
+LICAS   AGE
+horizontalpodautoscaler.autoscaling/homework-backend   Deployment/homework-backend   cpu: 6%/60%   2         4         2  
+        16m
+
+NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAG
+ECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/postgres-data   Bound    pvc-30b1af7e-67e2-4a82-a0b9-026b0318116f   1Gi        RWO            local-
+path     <unset>                 16m
+NAME                                           READY   STATUS    RESTARTS   AGE
+session21-grafana-7475ff949d-dn5mg             1/1     Running   0          14m
+session21-prometheus-server-66575b87cb-zn7hw   2/2     Running   0          14m
+[{"title":"Azure Session 21 assignment","description":"Created through the real frontend and stored in PostgreSQL.","prior
+ity":"LOW","status":"IN_PROGRESS","assignee":"Kartik","id":1,"created_at":"2026-10-10T01:37:00.114032Z"}] id |            
+title            |   status    
+----+-----------------------------+-------------
+  1 | Azure Session 21 assignment | IN_PROGRESS
+(1 row)
+
+
+Exit status: 0
+
+Recorded log view: cloud-final.txt
+Original UTC: 2026-10-10T01:45:32.495095+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+

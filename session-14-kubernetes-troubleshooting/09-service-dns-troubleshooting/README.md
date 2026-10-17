@@ -459,4 +459,4 @@ The official DNS troubleshooting guide also recommends checking DNS resolution f
 
 ## Homework output
 
-[Commands and output](../screenshots/service-mini-project.txt) · [Screenshot](../screenshots/service-mini-project.png)
+[Commands and output](../screenshots/service-mini-project.txt) · [Screenshot](../screenshots/mac/service-mini-project.png)

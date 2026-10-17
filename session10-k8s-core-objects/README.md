@@ -1,5 +1,7 @@
 # Session 10 - Pods, ReplicaSets & Deployments
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Ran the four deployment strategies and all twelve Pod lifecycle examples in `session10-lab`. The commands, outputs and screenshots are below.
 
 ## Deployment strategies
@@ -11,13 +13,13 @@ Ran the four deployment strategies and all twelve Pod lifecycle examples in `ses
 | Canary | Nine stable Pods and one canary shared a Service; requests reached both versions | [Output](screenshots/03-canary.txt) |
 | Recreate | Old Pods terminated before replacement v2 Pods started | [Output](screenshots/04-recreate.txt) |
 
-![Rolling update](screenshots/01-rolling-update.png)
+![Recorded output in Mac zsh: Rolling update](screenshots/mac/01-rolling-update.png)
 
-![Blue-green traffic switch](screenshots/02-blue-green.png)
+![Recorded output in Mac zsh: Blue-green traffic switch](screenshots/mac/02-blue-green.png)
 
-![Canary traffic sample](screenshots/03-canary.png)
+![Recorded output in Mac zsh: Canary traffic sample](screenshots/mac/03-canary.png)
 
-![Recreate ordering](screenshots/04-recreate.png)
+![Recorded output in Mac zsh: Recreate ordering](screenshots/mac/04-recreate.png)
 
 The 100-request canary sample returned 90 stable and 10 canary responses. Pod ratio approximates traffic distribution; a fixed percentage is not guaranteed for every sample. The runtime copies use ClusterIP Services for in-cluster testing and preserve the supplied Pod labels and update strategies.
 

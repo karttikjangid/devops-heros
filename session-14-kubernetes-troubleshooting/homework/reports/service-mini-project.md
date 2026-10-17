@@ -7,6 +7,6 @@ Introduced this fault in `session14-lab` to practice finding and fixing it.
 - Fix: Matched app=web, then changed targetPort to 8080.
 - Verification: The client received the Nginx page through the Service.
 
-![Before and after output](../../screenshots/service-mini-project.png)
+![Recorded output in Mac zsh: Before and after output](../../screenshots/mac/service-mini-project.png)
 
 [Complete commands and output](../../screenshots/service-mini-project.txt)

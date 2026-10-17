@@ -1,0 +1,134 @@
+[
+  {
+    "name": "alert-firing",
+    "command": "view-recorded-log screenshots/alert-firing.txt",
+    "started": "2026-10-17T18:09:23.703Z",
+    "finished": "2026-10-17T18:09:24.279Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session20-monitoring-observability-gitops/screenshots/alert-firing.txt",
+      "sha256": "364dd3d96e83f4a83b2faaedb096dab756c367b0bed3ba1f3c54ca8b5d04bc67"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "gitops-initial",
+    "command": "view-recorded-log screenshots/gitops-initial.txt",
+    "started": "2026-10-17T18:09:24.787Z",
+    "finished": "2026-10-17T18:09:25.359Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session20-monitoring-observability-gitops/screenshots/gitops-initial.txt",
+      "sha256": "cf18ae8038fd683c6d639a2a7b2c109bfc0ead8d74f2b9f8c995599e2281aefe"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "gitops-synced",
+    "command": "view-recorded-log screenshots/gitops-synced.txt",
+    "started": "2026-10-17T18:09:25.864Z",
+    "finished": "2026-10-17T18:09:26.445Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session20-monitoring-observability-gitops/screenshots/gitops-synced.txt",
+      "sha256": "5b3343b15039656ab532e15c925d166639dbea05677251e4b269752c81f5724a"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "logs-health",
+    "command": "view-recorded-log screenshots/logs-health.txt",
+    "started": "2026-10-17T18:09:26.950Z",
+    "finished": "2026-10-17T18:09:27.536Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session20-monitoring-observability-gitops/screenshots/logs-health.txt",
+      "sha256": "24a5146a720c4d08ff5475651aad466db19c2a8ec3b6820407d9d3f1420257fb"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "recovery",
+    "command": "view-recorded-log screenshots/recovery.txt",
+    "started": "2026-10-17T18:09:28.040Z",
+    "finished": "2026-10-17T18:09:28.629Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session20-monitoring-observability-gitops/screenshots/recovery.txt",
+      "sha256": "2234179f64101d95dee1d875485e3eb06590da0850eb51050e55b4425dc1ba34"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "self-healing",
+    "command": "view-recorded-log screenshots/self-healing.txt",
+    "started": "2026-10-17T18:09:29.136Z",
+    "finished": "2026-10-17T18:09:29.716Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session20-monitoring-observability-gitops/screenshots/self-healing.txt",
+      "sha256": "0961594a340d2dc16b1596fad0a64a253e998c6bdd42e288111afd28d9842136"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/09-startup.txt
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age               From               Message
+  ----     ------     ----              ----               -------
+  Normal   Scheduled  35s               default-scheduler  Successfully assigned session10-lab/lifecycle-startup to miniku
+be
+  Normal   Pulled     35s               kubelet            spec.containers{slow-app}: Container image "busybox:1.36" alrea
+dy present on machine and can be accessed by the pod
+  Normal   Created    35s               kubelet            spec.containers{slow-app}: Container created
+  Normal   Started    35s               kubelet            spec.containers{slow-app}: Container started
+  Warning  Unhealthy  5s (x6 over 29s)  kubelet            spec.containers{slow-app}: Startup probe failed:
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-startup --all-containers --tail=12
+Application starting...
+Application started
+
+Exit code: 0
+
+Recorded log view: 09-startup.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

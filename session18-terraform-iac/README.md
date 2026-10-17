@@ -1,5 +1,7 @@
 # Session 18 - Terraform & Infrastructure as Code
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Used Azure for the cloud exercises in this session.
 
 - [Terraform object-storage demo, screenshots and cleanup](terraform-storage-demo/README.md)

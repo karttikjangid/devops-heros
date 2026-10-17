@@ -195,4 +195,4 @@ It gives us the current state of Kubernetes resources.
 
 ## Homework output
 
-[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/commands.png)
+[Commands and output](../screenshots/commands.txt) · [Screenshot](../screenshots/mac/commands.png)

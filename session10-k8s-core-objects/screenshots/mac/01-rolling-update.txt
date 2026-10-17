@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/01-rolling-update.txt
+  Normal  ScalingReplicaSet  5m8s                 deployment-controller  Scaled up replica set app-rolling-86d7d44d5b from
+ 0 to 4
+  Normal  ScalingReplicaSet  4m49s                deployment-controller  Scaled down replica set app-rolling-86d7d44d5b fr
+om 3 to 2
+  Normal  ScalingReplicaSet  4m43s                deployment-controller  Scaled down replica set app-rolling-86d7d44d5b fr
+om 2 to 1
+  Normal  ScalingReplicaSet  4m43s                deployment-controller  Scaled up replica set app-rolling-56bff6d88c from
+ 3 to 4
+  Normal  ScalingReplicaSet  4m37s                deployment-controller  Scaled down replica set app-rolling-86d7d44d5b fr
+om 1 to 0
+  Normal  ScalingReplicaSet  33s (x2 over 5m2s)   deployment-controller  Scaled up replica set app-rolling-56bff6d88c from
+ 0 to 1
+  Normal  ScalingReplicaSet  26s (x2 over 4m55s)  deployment-controller  Scaled down replica set app-rolling-86d7d44d5b fr
+om 4 to 3
+  Normal  ScalingReplicaSet  26s (x2 over 4m55s)  deployment-controller  Scaled up replica set app-rolling-56bff6d88c from
+ 1 to 2
+  Normal  ScalingReplicaSet  14s (x2 over 4m49s)  deployment-controller  Scaled up replica set app-rolling-56bff6d88c from
+ 2 to 3
+  Normal  ScalingReplicaSet  1s (x12 over 68s)    deployment-controller  (combined from similar events): Scaled down repli
+ca set app-rolling-86d7d44d5b from 1 to 0
+
+Exit code: 0
+
+Recorded log view: 01-rolling-update.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

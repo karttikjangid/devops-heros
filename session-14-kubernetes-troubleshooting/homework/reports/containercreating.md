@@ -7,6 +7,6 @@ Introduced this fault in `session14-lab` to practice finding and fixing it.
 - Fix: Created the missing ConfigMap containing index.html.
 - Verification: The page returned Session 14 volume fixed.
 
-![Before and after output](../../screenshots/containercreating.png)
+![Recorded output in Mac zsh: Before and after output](../../screenshots/mac/containercreating.png)
 
 [Complete commands and output](../../screenshots/containercreating.txt)

@@ -1,0 +1,376 @@
+[
+  {
+    "name": "api-test",
+    "command": "view-recorded-log screenshots/api-test.txt",
+    "started": "2026-10-17T18:09:30.776Z",
+    "finished": "2026-10-17T18:09:31.347Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/api-test.txt",
+      "sha256": "193ac47a0de94ca0c5cc8deb6213a613caff33928d85b143e07f3d6a4f36bbff"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "azure-vm",
+    "command": "view-recorded-log screenshots/azure-vm.txt",
+    "started": "2026-10-17T18:09:31.853Z",
+    "finished": "2026-10-17T18:09:32.429Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/azure-vm.txt",
+      "sha256": "8aa59bd8fbe7520f0bcdad56d2a90124e9322cc51bce55a9a20127c1039fa77c"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "backend-tests",
+    "command": "view-recorded-log screenshots/backend-tests.txt",
+    "started": "2026-10-17T18:09:32.934Z",
+    "finished": "2026-10-17T18:09:33.517Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/backend-tests.txt",
+      "sha256": "ad1b1b2c7d19d839ce50a96f3d07bd1342f7e40de7e0f22f1e229277f5ef7b75"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "cloud-api",
+    "command": "view-recorded-log screenshots/cloud-api.txt",
+    "started": "2026-10-17T18:09:34.023Z",
+    "finished": "2026-10-17T18:09:34.596Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/cloud-api.txt",
+      "sha256": "2b12e0a54b999c76dfb872b3af2f7cb19bc53956ac1eaf81972ac10226c7d9db"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "cloud-database",
+    "command": "view-recorded-log screenshots/cloud-database.txt",
+    "started": "2026-10-17T18:09:35.103Z",
+    "finished": "2026-10-17T18:09:35.680Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/cloud-database.txt",
+      "sha256": "44429b503f98cb963876595b5f5dec7fc59fd9b34457328d75c7b9ceb2191bec"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "cloud-deploy",
+    "command": "view-recorded-log screenshots/cloud-deploy.txt",
+    "started": "2026-10-17T18:09:36.186Z",
+    "finished": "2026-10-17T18:09:36.759Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/cloud-deploy.txt",
+      "sha256": "17469b922886257f3a92b1fec23115ab752035cd3df34947f960cb439cdae210"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "cloud-final",
+    "command": "view-recorded-log screenshots/cloud-final.txt",
+    "started": "2026-10-17T18:09:37.265Z",
+    "finished": "2026-10-17T18:09:37.831Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/cloud-final.txt",
+      "sha256": "26f6ae06d5b116687f4bf6b75fabd3dc8c74433d43192536d60ca7e60dc9a3fa"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "cloud-kubernetes",
+    "command": "view-recorded-log screenshots/cloud-kubernetes.txt",
+    "started": "2026-10-17T18:09:38.336Z",
+    "finished": "2026-10-17T18:09:38.922Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/cloud-kubernetes.txt",
+      "sha256": "34d6ccd36216c48268c89ece2c9280c7f64c68d335b0305fa46a553d0d18f35b"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "cloud-rollout",
+    "command": "view-recorded-log screenshots/cloud-rollout.txt",
+    "started": "2026-10-17T18:09:39.428Z",
+    "finished": "2026-10-17T18:09:39.998Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/cloud-rollout.txt",
+      "sha256": "66b5e7e13fba32a0437cb6373b2edcd55af5743a3dd799dd518b096750d9877c"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "database-test",
+    "command": "view-recorded-log screenshots/database-test.txt",
+    "started": "2026-10-17T18:09:40.504Z",
+    "finished": "2026-10-17T18:09:41.061Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/database-test.txt",
+      "sha256": "1ffa45924f9e6ae08e135b1cadb8f7c377b4e87c2c5f979fdb7b0f52d25bc031"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "docker-compose-build",
+    "command": "view-recorded-log screenshots/docker-compose-build.txt",
+    "started": "2026-10-17T18:09:41.566Z",
+    "finished": "2026-10-17T18:09:42.131Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/docker-compose-build.txt",
+      "sha256": "3111318e4c864575627cad5ef58e7d808054113a0f8986e2c475779dc3dc2a65"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "docker-compose-ps",
+    "command": "view-recorded-log screenshots/docker-compose-ps.txt",
+    "started": "2026-10-17T18:09:42.637Z",
+    "finished": "2026-10-17T18:09:43.215Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/docker-compose-ps.txt",
+      "sha256": "0ec93f475b7242c0f507c9b26d7f13626651ac55754531cecd811878184ee64a"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "git-history",
+    "command": "view-recorded-log screenshots/git-history.txt",
+    "started": "2026-10-17T18:09:43.721Z",
+    "finished": "2026-10-17T18:09:44.296Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/git-history.txt",
+      "sha256": "4aedcde2f0fca10bd819a33ff8707353f7bc29b630aabea5bf296ed293d3e73f"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "non-root-test",
+    "command": "view-recorded-log screenshots/non-root-test.txt",
+    "started": "2026-10-17T18:09:44.801Z",
+    "finished": "2026-10-17T18:09:45.373Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/non-root-test.txt",
+      "sha256": "7f5895480e31967324110601d8abf5fc159968511b9de1c752161d66e3731210"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "terraform-apply",
+    "command": "view-recorded-log screenshots/terraform-apply.txt",
+    "started": "2026-10-17T18:09:45.877Z",
+    "finished": "2026-10-17T18:09:46.476Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/terraform-apply.txt",
+      "sha256": "e6141ceed6087fba94808063c812cad69d676813a70ccd1e9ee440e0466c6ece"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "terraform-destroy",
+    "command": "view-recorded-log screenshots/terraform-destroy.txt",
+    "started": "2026-10-17T18:09:46.981Z",
+    "finished": "2026-10-17T18:09:47.558Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/terraform-destroy.txt",
+      "sha256": "185ea99869bfda9857fbde1884d30b81cf2666a4858192b8494d2c9963f8b3a6"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "terraform-plan",
+    "command": "view-recorded-log screenshots/terraform-plan.txt",
+    "started": "2026-10-17T18:09:48.063Z",
+    "finished": "2026-10-17T18:09:48.630Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session21-python/screenshots/terraform-plan.txt",
+      "sha256": "f811acca55c2f6cea2f665a406daaedbc8605186ad8d73a783e55e69be31ae4c"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

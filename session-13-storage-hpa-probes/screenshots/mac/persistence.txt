@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % view-recorded-log screenshots/persistence.txt
+
+$ kubectl -n production-webapp delete pod web-app-97ff666bf-bcw6z --grace-period=1 --wait=true --timeout=30s
+pod "web-app-97ff666bf-bcw6z" deleted from production-webapp namespace
+
+Exit code: 0
+
+$ kubectl -n production-webapp wait pod/web-app-97ff666bf-d5sdr --for=condition=Ready --timeout=60s
+pod/web-app-97ff666bf-d5sdr condition met
+
+Exit code: 0
+
+$ kubectl -n production-webapp exec web-app-97ff666bf-d5sdr -- cat /data/student.txt
+Student: Kartik
+
+Exit code: 0
+
+$ kubectl -n production-webapp get pods -o wide
+NAME                      READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+web-app-97ff666bf-d5sdr   1/1     Running   0          9s    10.244.0.34   minikube   <none>           <none>
+web-app-97ff666bf-z76b6   1/1     Running   0          78s   10.244.0.33   minikube   <none>           <none>
+
+Exit code: 0
+
+Recorded log view: persistence.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % 
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % view-recorded-log screenshots/12-termination.txt
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-termination --all-containers --tail=12
+Application running
+
+Exit code: 0
+
+$ kubectl -n session10-lab delete pod lifecycle-termination --wait=false
+pod "lifecycle-termination" deleted from session10-lab namespace
+
+Exit code: 0
+
+$ kubectl -n session10-lab get pod lifecycle-termination
+NAME                    READY   STATUS        RESTARTS   AGE
+lifecycle-termination   1/1     Terminating   0          4m4s
+
+Exit code: 0
+
+$ kubectl -n session10-lab logs lifecycle-termination -f
+Application running
+SIGTERM received; cleaning up...
+Cleanup complete
+
+Recorded log view: 12-termination.txt
+Original transcript retained; commands are not re-run by this viewer.
+kartik@Kartiks-MacBook-Air session10-k8s-core-objects % 
+
+
+
+
+
+

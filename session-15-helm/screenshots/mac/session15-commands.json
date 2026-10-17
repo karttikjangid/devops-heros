@@ -1,0 +1,156 @@
+[
+  {
+    "name": "helm-create",
+    "command": "view-recorded-log screenshots/helm-create.txt",
+    "started": "2026-10-17T18:08:48.170Z",
+    "finished": "2026-10-17T18:08:48.783Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-15-helm/screenshots/helm-create.txt",
+      "sha256": "d3130e77ba96851a308f57a72fe32492e4465578d7a3a75447644a6b243841eb"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "helm-install",
+    "command": "view-recorded-log screenshots/helm-install.txt",
+    "started": "2026-10-17T18:08:49.289Z",
+    "finished": "2026-10-17T18:08:49.872Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-15-helm/screenshots/helm-install.txt",
+      "sha256": "bb7ed77630fcdcc008ff4d24e953d66c29c43f47a96e1643d411ca6be1777db4"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "helm-repo",
+    "command": "view-recorded-log screenshots/helm-repo.txt",
+    "started": "2026-10-17T18:08:50.380Z",
+    "finished": "2026-10-17T18:08:50.954Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-15-helm/screenshots/helm-repo.txt",
+      "sha256": "4b983fcc8a0921b0c2d4988c94d7e39205cb8d725254c0de6fad4e0b93d3dd78"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "helm-uninstall",
+    "command": "view-recorded-log screenshots/helm-uninstall.txt",
+    "started": "2026-10-17T18:08:51.460Z",
+    "finished": "2026-10-17T18:08:52.032Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-15-helm/screenshots/helm-uninstall.txt",
+      "sha256": "8c9cefdb9b29197fe83edc215120e3a748aabd8af209a488dbb6548164782af2"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "helm-upgrade-again",
+    "command": "view-recorded-log screenshots/helm-upgrade-again.txt",
+    "started": "2026-10-17T18:08:52.538Z",
+    "finished": "2026-10-17T18:08:53.105Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-15-helm/screenshots/helm-upgrade-again.txt",
+      "sha256": "4c5b67615cf8cb889d060e7d1bb8bb2138fcb028bb638a01b969586ceec995ac"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "helm-upgrade",
+    "command": "view-recorded-log screenshots/helm-upgrade.txt",
+    "started": "2026-10-17T18:08:53.610Z",
+    "finished": "2026-10-17T18:08:54.188Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-15-helm/screenshots/helm-upgrade.txt",
+      "sha256": "9af80284002c91b8fba7431bc38beaa8268e6eaa2e49b8854a18655d811ae4e2"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  },
+  {
+    "name": "rollback-verified",
+    "command": "view-recorded-log screenshots/rollback-verified.txt",
+    "started": "2026-10-17T18:08:54.695Z",
+    "finished": "2026-10-17T18:08:55.270Z",
+    "exitCode": 0,
+    "expected": 0,
+    "host": "Kartiks-MacBook-Air.local",
+    "user": "kartik",
+    "platform": "darwin",
+    "shell": "/bin/zsh",
+    "client": "Live browser terminal",
+    "kind": "recorded-log-view",
+    "source": {
+      "path": "session-15-helm/screenshots/rollback-verified.txt",
+      "sha256": "506fa9f5a9150e68acf9bb7d0afdfcef6b65817e24bd3a4b4f9b5150de90ac68"
+    },
+    "dimensions": {
+      "cols": 122,
+      "rows": 33
+    }
+  }
+]

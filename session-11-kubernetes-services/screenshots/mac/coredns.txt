@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-11-kubernetes-services % view-recorded-log screenshots/coredns.txt
+        reload
+        loadbalance
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2026-09-08T12:01:52Z"
+  name: coredns
+  namespace: kube-system
+  resourceVersion: "286"
+  uid: e92f7086-5c54-4038-ab95-1118e6aa1214
+search session11-lab.svc.cluster.local svc.cluster.local cluster.local dns.podman
+nameserver 10.96.0.10
+options ndots:5
+Server:         10.96.0.10
+Address:        10.96.0.10:53
+
+
+Name:   web-clusterip.session11-lab.svc.cluster.local
+Address: 10.101.205.90
+
+
+Exit code: 0
+
+Recorded log view: coredns.txt
+Original UTC: 2026-10-10T12:13:49.096974+00:00
+kartik@Kartiks-MacBook-Air session-11-kubernetes-services % 
+
+
+
+
+
+

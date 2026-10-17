@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session21-python % view-recorded-log screenshots/database-test.txt
+Captured: 2026-10-10T00:12:49.338444+00:00
+$ docker compose exec -T postgres psql -U taskboard -d taskboard -c "SELECT id, title, status, assignee FROM tasks ORDER B
+Y id;"
+ id |              title              |   status    | assignee 
+----+---------------------------------+-------------+----------
+  2 | Session 21 browser verification | IN_PROGRESS | Kartik
+(1 row)
+
+
+Exit status: 0
+
+Recorded log view: database-test.txt
+Original UTC: 2026-10-10T00:12:49.338444+00:00
+kartik@Kartiks-MacBook-Air session21-python % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

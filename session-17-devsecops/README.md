@@ -1,5 +1,7 @@
 # Session 17 - Complete CI/CD & DevSecOps
 
+Screenshot refresh (17 October 2026): terminal images now use live Mac zsh views of the recorded results. Original logs and dates are retained; test re-runs are marked separately. [Capture details](screenshots/mac/README.md).
+
 Used the Flask starter to make a calculator. The form sends requests to the API, and GitHub Actions builds, tests, scans and deploys the application.
 
 ```text
@@ -47,13 +49,13 @@ docker run --rm -p 5001:5001 session17-devsecops
 
 ![Successful GitHub Actions execution](screenshots/github-actions.png)
 
-![Eight unit tests](screenshots/unit-tests.png)
+![Live Mac zsh: Eight unit tests](screenshots/mac/unit-tests.png)
 
-![Security scan results](screenshots/security-summary.png)
+![Recorded output in Mac zsh: Security scan results](screenshots/mac/security-summary.png)
 
-![Unsafe fixtures rejected by the gates](screenshots/gates-reject-findings.png)
+![Recorded output in Mac zsh: Unsafe fixtures rejected by the gates](screenshots/mac/gates-reject-findings.png)
 
-![Kubernetes deployment and API tests](screenshots/kubernetes-api.png)
+![Recorded output in Mac zsh: Kubernetes deployment and API tests](screenshots/mac/kubernetes-api.png)
 
 ![Working calculator](screenshots/application.png)
 

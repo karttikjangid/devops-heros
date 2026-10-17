@@ -1,0 +1,33 @@
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % view-recorded-log screenshots/volumes.txt
+$ kubectl apply -f work/publish/session-13-storage-hpa-probes/01-kubernetes-volumes/volume-demo.yaml; kubectl -n productio
+n-webapp wait pod/volume-demo --for=condition=Ready --timeout=60s; kubectl -n production-webapp exec volume-demo -- sh -c 
+"echo ephemeral > /cache/note.txt; echo node-persistent > /node/note.txt; cat /cache/note.txt /node/note.txt"; kubectl -n 
+production-webapp delete pod volume-demo --grace-period=1 --wait=true --timeout=30s; kubectl apply -f work/publish/session
+-13-storage-hpa-probes/01-kubernetes-volumes/volume-demo.yaml; kubectl -n production-webapp wait pod/volume-demo --for=con
+dition=Ready --timeout=60s; kubectl -n production-webapp exec volume-demo -- sh -c "test ! -e /cache/note.txt && echo empt
+yDir-reset; cat /node/note.txt"
+UTC: 2026-10-10T04:27:09.920374+00:00
+
+pod/volume-demo created
+pod/volume-demo condition met
+ephemeral
+node-persistent
+pod "volume-demo" deleted from production-webapp namespace
+pod/volume-demo created
+pod/volume-demo condition met
+emptyDir-reset
+node-persistent
+
+Exit code: 0
+
+Recorded log view: volumes.txt
+Original UTC: 2026-10-10T04:27:09.920374+00:00
+kartik@Kartiks-MacBook-Air session-13-storage-hpa-probes % 
+
+
+
+
+
+
+
+
